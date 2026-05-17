@@ -4,6 +4,10 @@ Interactive portfolio website that simulates a Kali Linux XFCE desktop experienc
 
 This project includes boot -> login -> desktop flow, draggable windows, app launcher, terminal emulator, file manager, Mousepad-like editor, and portfolio content integrated as desktop apps.
 
+## Live Demo
+
+- https://me.zis3c.dev/
+
 ## Live Concept
 
 - Kali/XFCE-inspired UI and panel behavior
