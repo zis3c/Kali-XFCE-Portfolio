@@ -1,91 +1,96 @@
-# kali-xfce-portfolio
+# Kali XFCE Portfolio
 
-Interactive portfolio website that simulates a Kali Linux XFCE desktop experience in the browser.
+![Next.js](https://img.shields.io/badge/Next.js-12-black?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-17-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.x-3178C6?logo=typescript&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-State-764ABC?logo=redux&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-This project includes boot -> login -> desktop flow, draggable windows, app launcher, terminal emulator, file manager, Mousepad-like editor, and portfolio content integrated as desktop apps.
+<p align="center">
+  <img src="public/about/5.png" alt="Kali XFCE Portfolio Preview" width="900">
+</p>
 
-## Live Demo
+Live Demo: **[https://me.zis3c.dev/](https://me.zis3c.dev/)**
 
-- https://me.zis3c.dev/
+Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. Includes boot flow, login screen, draggable windows, terminal emulator, file manager, Mousepad editor, and app launcher behavior.
 
-## Live Concept
+> [!WARNING]
+> This project is a simulation for portfolio and educational use. It is not a real operating system.
 
-- Kali/XFCE-inspired UI and panel behavior
-- Desktop app icons and window management
-- Session actions (logout/restart)
-- Virtual filesystem for portfolio files and project notes
+## Features
 
-## Main Features
+- Kali/XFCE-inspired desktop UI and workflow
+- Boot -> login -> desktop sequence
+- Login validation (`1234`)
+- Workspace switcher and top panel app indicators
+- Terminal emulator with custom commands
+- Thunar-style file manager with virtual filesystem ops:
+  - new folder
+  - rename
+  - delete (non-empty protection)
+- Mousepad-style editor:
+  - editable content
+  - find / next / previous
+  - replace mode
+  - shortcuts: `Ctrl+S`, `Ctrl+F`, `Ctrl+H`
+- Chrome-like in-app browser shell:
+  - tab bar look
+  - address bar history
+  - back/forward navigation
+- Notification daemon and panel context actions
 
-- Boot and login flow
-  - Boot screen sequence
-  - Login screen with password check (`1234`)
-
-- Desktop environment
-  - Workspace switcher
-  - Top panel with app icons for running windows
-  - App menu and system tray interactions
-
-- Apps
-  - Terminal emulator with custom commands
-  - Thunar-style file manager
-    - new folder
-    - rename
-    - delete (safe guard on non-empty folders)
-  - Mousepad-style editor
-    - editable text
-    - find / prev / next
-    - replace toggle
-    - shortcuts: `Ctrl+S`, `Ctrl+F`, `Ctrl+H`
-  - Chrome-like browser shell with URL bar history and iframe content
-
-- Portfolio data integration
-  - About, skills, contact, projects presented as OS files/apps
-  - Notifications for system/app actions
-
-## Tech Stack
+## Stack
 
 - Next.js
 - React
 - TypeScript
 - Redux
 - styled-components
-- MongoDB (for likes/comments/contact/news APIs)
+- MongoDB (API routes: likes/comments/contact/news)
 
-## Project Structure (high level)
+## Installation
 
-- `components/` UI, desktop environment, apps
-- `pages/` Next.js pages and API routes
-- `backend/` controllers/models/config for API logic
-- `store/` Redux reducers/actions
-- `utils/` virtual filesystem and helpers
-- `public/` icons, wallpapers, assets
+1. **Clone repository**
+   ```bash
+   git clone <your-private-repo-url>
+   cd Kali-XFCE-Portfolio
+   ```
 
-## Getting Started
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### 1. Install dependencies
+3. **Create environment file**
 
-```bash
-npm install
+   `.env.local`
+   ```env
+   DB_URI=your_mongodb_connection_string
+   ```
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+5. Open:
+   - `http://localhost:8888`
+
+## Project Structure
+
+```text
+Kali-XFCE-Portfolio/
++-- backend/                 # Controllers, models, DB helpers
++-- components/              # Desktop, apps, portfolio UI
++-- design-system/           # Theme tokens and global styles
++-- pages/                   # Next.js pages + API routes
++-- public/                  # Icons, images, wallpapers
++-- store/                   # Redux reducers and action creators
++-- utils/                   # Virtual filesystem + helpers
++-- README.md
++-- package.json
 ```
-
-### 2. Environment variables
-
-Create `.env.local` and set database URI for API routes:
-
-```env
-DB_URI=your_mongodb_connection_string
-```
-
-### 3. Run development server
-
-```bash
-npm run dev
-```
-
-Open:
-
-- `http://localhost:8888`
 
 ## Scripts
 
@@ -97,14 +102,15 @@ npm run lint
 npm run test
 ```
 
-## Login Credentials
+## Login
 
 - Password: `1234`
 
 ## Notes
 
-- Files edited in Mousepad are stored in virtual in-memory filesystem and reset after refresh/restart.
-- Some features are simulation-first for realism and portfolio storytelling.
+- Virtual filesystem writes are in-memory only.
+- Mousepad edits reset after refresh/restart.
+- Build on Vercel configured to skip lint/type blocking during production build.
 
 ## License
 
