@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 <p align="center">
-  <img src="public/about/5.png" alt="Kali XFCE Portfolio Preview" width="900">
+  <img src="public/about/2.png" alt="Kali XFCE Portfolio Preview" width="900">
 </p>
 
 Live Demo: **[https://me.zis3c.dev/](https://me.zis3c.dev/)**
