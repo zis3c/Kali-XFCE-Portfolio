@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #1a1a2e;
+  color: rgba(220, 230, 240, 0.92);
+}
+
+a {
+  color: #63d0ff;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Monospace utility class for terminal elements */
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
