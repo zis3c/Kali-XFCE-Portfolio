@@ -33,7 +33,7 @@ Backend:     Node.js, Express, FastAPI, PostgreSQL, MongoDB
 DevOps:      Docker, Linux, Git, CI/CD, Nginx, DigitalOcean
 Automation:  Telegram Bots, Web Scraping, Async I/O, CLIs`;
 
-const contactTxt = `Email:      radzizamri@proton.me
+const contactTxt = `Email:      I24107504@student.usas.edu.my
 GitHub:     https://github.com/zis3c
 LinkedIn:   https://www.linkedin.com/in/radzizamri/
 Instagram:  https://www.instagram.com/radz.z_/

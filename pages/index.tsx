@@ -192,6 +192,7 @@ const Home: NextPage<ServerProps> = ({ title }) => {
 
       if (action === 'restart') {
         setBootCycle((prev) => prev + 1);
+        setMode('chooser');
         setPhase('boot');
       }
     };

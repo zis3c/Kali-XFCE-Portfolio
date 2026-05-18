@@ -269,16 +269,16 @@ const LoginForm = styled.form`
 `;
 
 const InputRow = styled.label`
-  display: grid;
-  grid-template-columns: 76px 1fr;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
 `;
 
 const InputLabel = styled.span`
   font-size: 11px;
   color: rgba(188, 197, 208, 0.92);
-  text-align: right;
+  text-align: left;
 `;
 
 const baseControl = `
@@ -313,7 +313,7 @@ const Actions = styled.div`
 `;
 
 const ErrorText = styled.div`
-  margin-left: 84px;
+  margin-left: 0;
   margin-top: 2px;
   font-size: 10px;
   color: #ff8f8f;
