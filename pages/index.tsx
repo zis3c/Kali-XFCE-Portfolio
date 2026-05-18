@@ -1025,8 +1025,8 @@ const ProjectsSection = styled.section`
 `;
 
 const ProjectCard = styled.article<{ accentColor: string; isFocused: boolean }>`
-  border: 1px solid ${({ isFocused }) => (isFocused ? '#22c55e' : 'var(--panel-border)')};
-  border-left: 3px solid ${({ accentColor }) => accentColor};
+  border: 1px solid var(--panel-border);
+  border-left: 1px solid var(--panel-border);
   border-radius: 12px;
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
   padding: 22px;
@@ -1038,7 +1038,11 @@ const ProjectCard = styled.article<{ accentColor: string; isFocused: boolean }>`
   &:hover {
     transform: translateY(-4px) rotateX(2deg) rotateY(-1deg);
     border-color: ${({ accentColor }) => accentColor};
-    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.18);
+    border-left-color: ${({ accentColor }) => accentColor};
+    box-shadow:
+      0 18px 30px rgba(0, 0, 0, 0.18),
+      0 0 0 1px ${({ accentColor }) => `${accentColor}AA`},
+      0 0 20px ${({ accentColor }) => `${accentColor}66`};
   }
 
   @keyframes projectReveal {
