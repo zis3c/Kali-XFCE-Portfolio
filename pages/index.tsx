@@ -479,7 +479,7 @@ const Home: NextPage<ServerProps> = ({ title }) => {
                 automation/tooling projects built from curiosity and hobby exploration.
               </HeroText>
               <SocialGrid>
-                <SocialButton href="mailto:radzizamri@proton.me" bg="#ea4335" hoverBg="#d33426">
+                <SocialButton href="mailto:i24107504@usas.student.edu.my" bg="#ea4335" hoverBg="#d33426">
                   <FaEnvelope /> Email
                 </SocialButton>
                 <SocialButton href="https://github.com/zis3c" target="_blank" rel="noopener noreferrer" bg="#24292e" hoverBg="#1b1f23">
@@ -488,10 +488,10 @@ const Home: NextPage<ServerProps> = ({ title }) => {
                 <SocialButton href="https://linkedin.com/in/radzizamri" target="_blank" rel="noopener noreferrer" bg="#0a66c2" hoverBg="#004182">
                   <FaLinkedin /> LinkedIn
                 </SocialButton>
-                <SocialButton href="https://youtube.com/@radzizamri" target="_blank" rel="noopener noreferrer" bg="#ff0000" hoverBg="#cc0000">
+                <SocialButton href="https://www.youtube.com/@zis3c" target="_blank" rel="noopener noreferrer" bg="#ff0000" hoverBg="#cc0000">
                   <FaYoutube /> YouTube
                 </SocialButton>
-                <SocialButton href="https://instagram.com/radzizamri" target="_blank" rel="noopener noreferrer" bg="linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" hoverBg="linear-gradient(45deg, #d3812c 0%, #cc5c34 25%, #c2213a 50%, #b31e59 75%, #a61578 100%)">
+                <SocialButton href="https://www.instagram.com/radz.z_/" target="_blank" rel="noopener noreferrer" bg="linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" hoverBg="linear-gradient(45deg, #d3812c 0%, #cc5c34 25%, #c2213a 50%, #b31e59 75%, #a61578 100%)">
                   <FaInstagram /> Instagram
                 </SocialButton>
               </SocialGrid>

@@ -37,9 +37,9 @@ const Resume = (): JSX.Element => {
               github.com/zis3c
             </Styled.ContactLink>
 
-            <Styled.ContactLink href="mailto:radzizamri@proton.me">
+            <Styled.ContactLink href="mailto:i24107504@usas.student.edu.my">
               <FiMail />
-              radzizamri@proton.me
+              i24107504@usas.student.edu.my
             </Styled.ContactLink>
             <p>Perak, Malaysia ðŸ‡²ðŸ‡¾</p>
           </Styled.ContactInfo>
@@ -85,7 +85,7 @@ const Resume = (): JSX.Element => {
                 <FiGithub className={'social-media-icon'} />
                 GitHub
               </Styled.SocialMediaLink>
-              <Styled.SocialMediaLink href="mailto:radzizamri@proton.me">
+              <Styled.SocialMediaLink href="mailto:i24107504@usas.student.edu.my">
                 <FiMail className={'social-media-icon'} />
                 Email
               </Styled.SocialMediaLink>
