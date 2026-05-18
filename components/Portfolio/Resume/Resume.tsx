@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import * as Styled from './Resume.styles';
 import TextList from '../TextList/TextList';
 
@@ -41,7 +41,7 @@ const Resume = (): JSX.Element => {
               <FiMail />
               radzizamri@proton.me
             </Styled.ContactLink>
-            <p>Perak, Malaysia 🇲🇾</p>
+            <p>Perak, Malaysia ðŸ‡²ðŸ‡¾</p>
           </Styled.ContactInfo>
 
           <TextList
@@ -64,7 +64,7 @@ const Resume = (): JSX.Element => {
               Radzi <span>Zamri</span>
             </Styled.Name>
             <Styled.Title>
-              Cybersecurity Student | Purple Team | Developer
+              Cybersecurity Student | Purple Team | Automation & Security Tooling
             </Styled.Title>
 
             {/*SOCIAL MEDIA LINKS*/}
@@ -99,7 +99,7 @@ const Resume = (): JSX.Element => {
                 margin={'0'}
                 paragraphText={`Cybersecurity student at Universiti Sultan Azlan Shah (USAS)
               with hands-on experience in offensive and defensive security,
-              web application development, and automation. Purple Team operator
+              automation, and practical security tooling. Purple Team operator
               with skills spanning penetration testing, SIEM log analysis,
               incident response, and secure coding. Passionate about building
               security tools, automating workflows, and competing in CTFs.`}
@@ -116,7 +116,7 @@ const Resume = (): JSX.Element => {
           <PortfolioParagraph
             margin={'0'}
             paragraphText={
-              'Built multiple production applications and security tools. Active in CTF competitions and cybersecurity communities.'
+              'Built practical tools and applications for learning and real use. Active in CTF competitions and cybersecurity communities.'
             }
             withDarkColor={true}
             variant={'medium'}
@@ -135,8 +135,9 @@ const Resume = (): JSX.Element => {
               <Link href={'https://github.com/zis3c'}>
                 github.com/zis3c
               </Link>{' '}
-              — including FinVault, Certclaim, STEM-Telebot, Polyglot-File,
-              and more.
+              - including FinVault, Certclaim, STEM Telebot, Tgsortreact,
+              USAS Launcher, Assignment Notifier, QRBot, Qrtendify, and
+              Polyglot Files.
             </p>
           </Styled.Projects>
 
@@ -152,10 +153,12 @@ const Resume = (): JSX.Element => {
               Universiti Sultan Azlan Shah (USAS)
             </Styled.University>
           </Styled.EducationDetails>
-        </Styled.RightColumn>tColumn>
+        </Styled.RightColumn>
       </Styled.ResumeWrapper>
     </Styled.Container>
   );
 };
 
 export default Resume;
+
+

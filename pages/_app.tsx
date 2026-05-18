@@ -19,7 +19,7 @@ const WrappedApp: FC<AppProps> = ({
   return (
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <Head>
-        <title>zis3c@kali</title>
+        <title>Radzi Zamri</title>
       </Head>
       <GlobalStyles />
       <CRTEffect />

@@ -118,11 +118,11 @@ export const professionalExperience: IProfessionalExperience[] = [
   },
   {
     variant: 'withResponsibilities',
-    company: 'Full-Stack Development',
+    company: 'Application Projects',
     companyImg: '/assets/portfolio/skills/react-original.svg',
-    role: 'Developer',
+    role: 'Builder',
     shortSummary:
-      'Designs and builds production web applications with modern tech stacks. Focus on secure coding practices, API design, and responsive UIs.',
+      'Builds practical apps from curiosity and hobby exploration with secure coding in mind. Focused on solving real problems and learning by shipping.',
     timeFrame: '2025-Present',
     responsibilities: [
       {

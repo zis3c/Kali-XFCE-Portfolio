@@ -36,7 +36,7 @@ const DesktopLayout: FC<Props> = ({
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="theme-color" content="#0e0e1a" />
-        <title>{title}</title>
+        <title>Radzi Zamri</title>
         <meta
           name="description"
           content="zis3c Portfolio — Kali Linux Xfce Desktop Experience"
