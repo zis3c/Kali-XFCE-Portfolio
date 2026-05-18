@@ -12,6 +12,7 @@ import LoginScreen from '../components/LoginScreen/LoginScreen';
 import { SESSION_ACTION_EVENT, SessionAction } from '../utils/session-actions';
 import styled from 'styled-components';
 import { FaEnvelope, FaGithub, FaLinkedin, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FiPower, FiSun, FiMoon } from 'react-icons/fi';
 
 interface ServerProps {
   title: string;
@@ -114,6 +115,10 @@ const CHARS = '!<>-_\\/[]{}—=+*^?#________';
 const GlitchText = ({ words }: { words: string[] }) => {
   const [text, setText] = useState(words[0]);
   const [wordIndex, setWordIndex] = useState(0);
+  const longestWord = words.reduce(
+    (max, current) => (current.length > max.length ? current : max),
+    words[0] || ''
+  );
 
   useEffect(() => {
     const nextWord = words[(wordIndex + 1) % words.length];
@@ -150,7 +155,12 @@ const GlitchText = ({ words }: { words: string[] }) => {
     };
   }, [wordIndex, words]);
 
-  return <span style={{ fontFamily: '"JetBrains Mono", "Fira Code", "Consolas", monospace' }}>{text}</span>;
+  return (
+    <GlitchWrap>
+      <GlitchGhost>{longestWord}</GlitchGhost>
+      <GlitchLive>{text}</GlitchLive>
+    </GlitchWrap>
+  );
 };
 
 /**
@@ -454,11 +464,21 @@ const Home: NextPage<ServerProps> = ({ title }) => {
                 onClick={() =>
                   setSimpleTheme((prev) => (prev === 'terminal' ? 'paper' : 'terminal'))
                 }
+                aria-label={simpleTheme === 'terminal' ? 'Switch to paper light theme' : 'Switch to terminal dark theme'}
+                title={simpleTheme === 'terminal' ? 'Paper Light' : 'Terminal Dark'}
               >
-                {simpleTheme === 'terminal' ? 'Paper Light' : 'Terminal Dark'}
+                {simpleTheme === 'terminal' ? <FiSun /> : <FiMoon />}
+                <span className="btn-label">
+                  {simpleTheme === 'terminal' ? 'Paper Light' : 'Terminal Dark'}
+                </span>
               </ThemeToggle>
-              <BackButton onClick={() => setMode('chooser')}>
-                System Boot Menu
+              <BackButton
+                onClick={() => setMode('chooser')}
+                aria-label="Open system boot menu"
+                title="System Boot Menu"
+              >
+                <FiPower />
+                <span className="btn-label">System Boot Menu</span>
               </BackButton>
             </NavActions>
           </PortfolioNav>
@@ -763,6 +783,13 @@ const PortfolioNav = styled.div`
   position: sticky;
   top: 0;
   z-index: 10;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
 `;
 
 const Brand = styled.div`
@@ -770,15 +797,29 @@ const Brand = styled.div`
   font-weight: 800;
   letter-spacing: 0.5px;
   color: var(--text);
+
+  @media (max-width: 700px) {
+    font-size: 17px;
+    text-align: center;
+  }
 `;
 
 const NavActions = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    gap: 8px;
+  }
 `;
 
 const ThemeToggle = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   border: 1px solid var(--panel-border);
   background: var(--chip-bg);
   color: var(--text);
@@ -786,9 +827,22 @@ const ThemeToggle = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
+
+  @media (max-width: 700px) {
+    flex: 1;
+    min-height: 38px;
+
+    .btn-label {
+      display: none;
+    }
+  }
 `;
 
 const BackButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   border: 1px solid #ffffff;
   background: #ffffff;
   color: #000000;
@@ -803,12 +857,25 @@ const BackButton = styled.button`
     background: #eaeaea;
     color: #000000;
   }
+
+  @media (max-width: 700px) {
+    flex: 1;
+    min-height: 38px;
+
+    .btn-label {
+      display: none;
+    }
+  }
 `;
 
 const PortfolioMain = styled.main`
   max-width: 1000px;
   margin: 0 auto;
   padding: 80px 24px;
+
+  @media (max-width: 700px) {
+    padding: 30px 14px 44px;
+  }
 `;
 
 const HeroSection = styled.div`
@@ -816,6 +883,7 @@ const HeroSection = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 60px;
+  width: 100%;
 `;
 
 const HeroBadge = styled.div`
@@ -833,15 +901,11 @@ const HeroBadge = styled.div`
 
 const HeroTitle = styled.h2`
   margin: 0;
-  font-size: 56px;
+  font-size: clamp(28px, 8.5vw, 56px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -1.5px;
   color: var(--text);
-
-  @media (max-width: 600px) {
-    font-size: 40px;
-  }
 `;
 
 const HeroText = styled.p`
@@ -854,6 +918,7 @@ const HeroText = styled.p`
 
   @media (max-width: 600px) {
     font-size: 17px;
+    text-align: left;
   }
 `;
 
@@ -862,6 +927,10 @@ const StatsStrip = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 24px;
+
+  @media (max-width: 700px) {
+    gap: 8px;
+  }
 `;
 
 const StatPill = styled.div`
@@ -871,6 +940,11 @@ const StatPill = styled.div`
   background: var(--chip-bg);
   padding: 7px 10px;
   border-radius: 999px;
+
+  @media (max-width: 700px) {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
 `;
 
 
@@ -955,6 +1029,11 @@ const SocialGrid = styled.div`
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 20px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    gap: 8px;
+  }
 `;
 
 const SocialButton = styled.a<{ bg: string; hoverBg: string }>`
@@ -976,6 +1055,14 @@ const SocialButton = styled.a<{ bg: string; hoverBg: string }>`
     background: ${({ hoverBg }) => hoverBg};
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 700px) {
+    flex: 1 1 calc(50% - 6px);
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 12px;
   }
 `;
 
@@ -1001,6 +1088,10 @@ const FilterRow = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 24px;
+
+  @media (max-width: 700px) {
+    gap: 8px;
+  }
 `;
 
 const FilterChip = styled.button<{ isActive: boolean }>`
@@ -1011,6 +1102,11 @@ const FilterChip = styled.button<{ isActive: boolean }>`
   border-radius: 999px;
   font-size: 12px;
   cursor: pointer;
+
+  @media (max-width: 700px) {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
 `;
 
 const ProjectsSection = styled.section`
@@ -1142,4 +1238,33 @@ const PaletteItem = styled.div<{ isActive: boolean }>`
   color: var(--text);
   padding: 9px 10px;
   font-size: 13px;
+`;
+
+const GlitchWrap = styled.span`
+  display: inline-grid;
+  position: relative;
+  max-width: 100%;
+`;
+
+const GlitchGhost = styled.span`
+  visibility: hidden;
+  white-space: nowrap;
+  grid-area: 1 / 1;
+
+  @media (max-width: 700px) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+`;
+
+const GlitchLive = styled.span`
+  grid-area: 1 / 1;
+  white-space: nowrap;
+
+  @media (max-width: 700px) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 `;
