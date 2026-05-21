@@ -101,7 +101,7 @@ export const useTerminalCommands = (): {
     xfconf-query --version
 
   echo <text>         Print text
-  sudo <cmd>          Nice try`;
+  sudo <cmd>          Run command as root (password: 1234)`;
 
   const executeCommand = (
     cmd: string,
@@ -223,7 +223,7 @@ export const useTerminalCommands = (): {
         }
         if (app === 'projects') {
           openWindow({
-            windowName: 'File Manager — ~/Projects',
+            windowName: 'File Manager',
             isOpen: true,
             windowIcon: 'KALI_FILEMANAGER',
             size: { width: 700, height: 450 },
@@ -280,7 +280,7 @@ export const useTerminalCommands = (): {
         }
         if (app === 'terminal') {
           openWindow({
-            windowName: 'Terminal — zis3c@kali:~',
+            windowName: 'Terminal - zis3c@kali:~',
             isOpen: true,
             windowIcon: 'KALI_TERMINAL',
             size: { width: 640, height: 420 },
@@ -290,7 +290,7 @@ export const useTerminalCommands = (): {
         }
         if (app === 'files' || app === 'filemanager' || app === 'thunar') {
           openWindow({
-            windowName: 'File Manager — /home/zis3c',
+            windowName: 'File Manager',
             isOpen: true,
             windowIcon: 'KALI_FILEMANAGER',
             size: { width: 700, height: 450 },
@@ -370,6 +370,25 @@ Compiled with: nmap-liblua-5.4.6 openssl-3.1.4 nmap-libssh2-1.11.0 libz-1.3 nmap
             isError: false,
           };
         }
+        if (args[0]) {
+          const target = args[0];
+          const openPorts = [
+            '22/tcp   open  ssh',
+            '80/tcp   open  http',
+            '443/tcp  open  https',
+          ];
+          return {
+            output: `Starting Nmap 7.94SVN ( https://nmap.org ) at ${new Date().toISOString().replace('T', ' ').slice(0, 19)}
+Nmap scan report for ${target}
+Host is up (0.032s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+${openPorts.join('\n')}
+
+Nmap done: 1 IP address (1 host up) scanned in 2.31 seconds`,
+            isError: false,
+          };
+        }
         return { output: 'Usage: nmap [Scan Type(s)] [Options] {target specification}\nTry "nmap --version" for version info.', isError: false };
 
       case 'wireshark':
@@ -410,10 +429,7 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         };
 
       case 'sudo':
-        return {
-          output: `[sudo] password for zis3c: \nSorry, this is a portfolio, not a real system.`,
-          isError: false,
-        };
+        return { output: '[sudo] password for zis3c:', isError: false };
 
       case 'rm':
         return {
@@ -457,6 +473,45 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         };
 
       case 'man':
+        if (args[0] === 'sudo') {
+          return {
+            output: `SUDO(8)
+NAME
+    sudo - execute a command as another user
+
+DESCRIPTION
+    sudo allows a permitted user to execute a command as the superuser.
+    In this simulation, password is: 1234.
+`,
+            isError: false,
+          };
+        }
+        if (args[0] === 'nmap') {
+          return {
+            output: `NMAP(1)
+NAME
+    nmap - Network exploration tool and security scanner
+
+SYNOPSIS
+    nmap [Scan Type(s)] [Options] {target specification}
+
+EXAMPLE
+    nmap scanme.nmap.org`,
+            isError: false,
+          };
+        }
+        if (args[0] === 'ls') {
+          return {
+            output: `LS(1)
+NAME
+    ls - list directory contents
+
+SYNOPSIS
+    ls [OPTION]... [FILE]...
+    ls -la`,
+            isError: false,
+          };
+        }
         return {
           output: `What manual page do you want?\nFor example, try 'man man'.`,
           isError: false,
@@ -574,8 +629,17 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
           return { output: extraResult, isError: isErr };
         }
 
+        const known = [
+          'nmap', 'sudo', 'ls', 'cat', 'cd', 'pwd', 'help', 'man', 'grep',
+          'find', 'echo', 'history', 'whoami', 'hostname', 'neofetch',
+        ];
+        const suggestion =
+          known.find((k) => k.startsWith(command[0] || '')) ||
+          known.find((k) => k.includes(command.slice(0, 2)));
         return {
-          output: `command not found: ${command}`,
+          output: suggestion
+            ? `command not found: ${command}\nDid you mean: ${suggestion}`
+            : `command not found: ${command}`,
           isError: true,
         };
       }
@@ -584,3 +648,5 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
 
   return { executeCommand };
 };
+
+

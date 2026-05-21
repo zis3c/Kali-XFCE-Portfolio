@@ -200,6 +200,7 @@ export const fsTree: FsNode = {
     { name: 'dev', type: 'dir', children: [] },
     { name: 'etc', type: 'dir', children: [
       { name: 'hostname', type: 'file', content: 'kali' },
+      { name: 'motd', type: 'file', content: 'Kali GNU/Linux rolling\nAuthorized simulation environment only.' },
       { name: 'os-release', type: 'file', content: 'PRETTY_NAME="Kali GNU/Linux Rolling"\nNAME="Kali GNU/Linux"\nVERSION_ID="2024.1"\nVERSION="2024.1"\nID=kali' },
       { name: 'passwd', type: 'file', content: 'root:x:0:0:root:/root:/usr/bin/zsh\nzis3c:x:1000:1000:zis3c,,,:/home/zis3c:/usr/bin/zsh' },
     ]},
@@ -380,7 +381,28 @@ This is getting out of hand. Time to look into Pi-hole or something.
     { name: 'mnt', type: 'dir', children: [] },
     { name: 'opt', type: 'dir', children: [] },
     { name: 'proc', type: 'dir', children: [] },
-    { name: 'root', type: 'dir', children: [] },
+    {
+      name: 'root',
+      type: 'dir',
+      children: [
+        {
+          name: 'mystery',
+          type: 'dir',
+          children: [
+            {
+              name: 'README.txt',
+              type: 'file',
+              content: `Woah woah rilex!
+
+This is just simulation.
+No real privilege escalation happened.
+This portfolio terminal is a frontend sandbox for demo only.`,
+              size: 138,
+            },
+          ],
+        },
+      ],
+    },
     { name: 'tmp', type: 'dir', children: [] },
     { name: 'usr', type: 'dir', children: [
       { name: 'bin', type: 'dir', children: [] },

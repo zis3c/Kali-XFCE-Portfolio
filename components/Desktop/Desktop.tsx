@@ -24,7 +24,7 @@ const Desktop = (): JSX.Element => {
       if (e.ctrlKey && e.altKey && e.key === 't') {
         e.preventDefault();
         openWindow({
-          windowName: 'Terminal — zis3c@kali:~',
+          windowName: 'Terminal - zis3c@kali:~',
           isOpen: true,
           windowIcon: 'KALI_TERMINAL',
           size: { width: 640, height: 420 },
@@ -59,3 +59,4 @@ const Desktop = (): JSX.Element => {
 };
 
 export default Desktop;
+

@@ -21,6 +21,7 @@ import FileManager from '../Apps/FileManager/FileManager';
 import TextViewer from '../Apps/TextViewer/TextViewer';
 import GoogleSearch from '../Apps/GoogleSearch/GoogleSearch';
 import { readFile } from '../../utils/filesystem';
+import { SESSION_ACTION_EVENT } from '../../utils/session-actions';
 
 interface MenuApp {
   id: number;
@@ -85,7 +86,7 @@ const AppCenter = (): JSX.Element => {
       category: ['Favorites', 'System', 'Recently Used'],
       action: () =>
         openApp(
-          'File Manager - /home/zis3c',
+          'File Manager',
           <FileManager />,
           'KALI_FILEMANAGER'
         ),
@@ -137,7 +138,7 @@ const AppCenter = (): JSX.Element => {
       category: ['Favorites', 'Development', 'Recently Used'],
       action: () =>
         openApp(
-          'File Manager - ~/Projects',
+          'File Manager',
           <FileManager startPath="/home/zis3c/Projects" />,
           'KALI_FOLDER'
         ),
@@ -274,6 +275,28 @@ const AppCenter = (): JSX.Element => {
 
       <Styled.MenuFooter>
         <Styled.FooterUser>zis3c</Styled.FooterUser>
+        <Styled.FooterActions>
+          <Styled.FooterButton
+            onClick={() => {
+              window.dispatchEvent(
+                new CustomEvent(SESSION_ACTION_EVENT, { detail: 'logout' })
+              );
+              toggleAppCenterModal();
+            }}
+          >
+            Log Out
+          </Styled.FooterButton>
+          <Styled.FooterButton
+            onClick={() => {
+              window.dispatchEvent(
+                new CustomEvent(SESSION_ACTION_EVENT, { detail: 'restart' })
+              );
+              toggleAppCenterModal();
+            }}
+          >
+            Restart
+          </Styled.FooterButton>
+        </Styled.FooterActions>
       </Styled.MenuFooter>
     </Styled.Container>
   );

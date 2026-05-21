@@ -78,9 +78,31 @@ const DesktopButton = ({
   const { iconsSize } = useTypedSelector((state) => state.ui);
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
+  const isFileManagerWindow = useCallback((): boolean => {
+    if (iconSrc === 'KALI_FILEMANAGER' || iconSrc === 'KALI_FOLDER') return true;
+    if (
+      iconSrc.includes('user-folder') ||
+      iconSrc.includes('recycle-bin') ||
+      iconSrc.includes('this_pc')
+    ) {
+      return true;
+    }
+    if (React.isValidElement(willOpenWindowWith)) {
+      const elementType = willOpenWindowWith.type as
+        | { name?: string; displayName?: string }
+        | string;
+      if (typeof elementType !== 'string') {
+        const compName = elementType.displayName || elementType.name || '';
+        return compName === 'FileManager';
+      }
+    }
+    return false;
+  }, [iconSrc, willOpenWindowWith]);
+
   const handleOpenWindow = useCallback(() => {
+    const normalizedWindowName = isFileManagerWindow() ? 'File Manager' : text;
     openWindow({
-      windowName: text,
+      windowName: normalizedWindowName,
       isOpen: true,
       windowIcon: iconSrc,
       size: {
@@ -89,7 +111,7 @@ const DesktopButton = ({
       },
       windowContent: willOpenWindowWith,
     });
-  }, [openWindow, iconSrc, text, willOpenWindowWith]);
+  }, [openWindow, iconSrc, text, willOpenWindowWith, isFileManagerWindow]);
 
   const handleOpenContextMenu = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

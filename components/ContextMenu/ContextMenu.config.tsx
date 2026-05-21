@@ -41,7 +41,7 @@ export const useContextMenuConfig = (): {
 
   const openTerminal = () => {
     openWindow({
-      windowName: 'Terminal — zis3c@kali:~',
+      windowName: 'Terminal - zis3c@kali:~',
       isOpen: true,
       windowIcon: 'KALI_TERMINAL',
       size: {
@@ -159,3 +159,4 @@ export const useContextMenuConfig = (): {
 
   return { desktopContextMenuContent, systemTrayContextMenuContent };
 };
+

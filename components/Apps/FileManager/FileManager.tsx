@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useActions } from '../../../hooks/useActions';
 import {
@@ -34,6 +34,11 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
   const [historyIndex, setHistoryIndex] = useState(0);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [status, setStatus] = useState('Ready');
+  const [inlineAction, setInlineAction] = useState<null | 'new' | 'rename'>(
+    null
+  );
+  const [inlineInput, setInlineInput] = useState('');
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const sidebarItems = [
     { name: 'Home', icon: <HomeIcon size={14} />, path: '/home/zis3c' },
@@ -113,35 +118,47 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     currentPath === '/' ? `/${name}` : `${currentPath}/${name}`;
 
   const handleNewFolder = () => {
-    const folderName = window.prompt('New folder name:', 'New Folder');
-    if (!folderName) return;
+    const folderName = inlineInput.trim();
+    if (!folderName) {
+      setStatus('Folder name cannot be empty');
+      return;
+    }
     const ok = createDir(makeFullPath(folderName));
     setStatus(ok ? `Folder created: ${folderName}` : 'Create folder failed');
     notifyDesktop({
       title: 'Thunar File Manager',
       message: ok ? `Created folder '${folderName}'` : 'Failed to create folder',
     });
+    if (ok) {
+      setInlineAction(null);
+      setInlineInput('');
+    }
     refreshCurrent();
   };
 
   const handleRename = () => {
     if (!selectedFile) return;
-    const nextName = window.prompt('Rename to:', selectedFile);
-    if (!nextName || nextName === selectedFile) return;
+    const nextName = inlineInput.trim();
+    if (!nextName || nextName === selectedFile) {
+      setStatus('Rename canceled');
+      return;
+    }
     const ok = renameNode(makeFullPath(selectedFile), nextName);
     setStatus(ok ? `Renamed to: ${nextName}` : 'Rename failed');
     notifyDesktop({
       title: 'Thunar File Manager',
       message: ok ? `Renamed to '${nextName}'` : 'Rename failed',
     });
-    if (ok) setSelectedFile(nextName);
+    if (ok) {
+      setSelectedFile(nextName);
+      setInlineAction(null);
+      setInlineInput('');
+    }
     refreshCurrent();
   };
 
   const handleDelete = () => {
     if (!selectedFile) return;
-    const yes = window.confirm(`Delete '${selectedFile}'?`);
-    if (!yes) return;
     const ok = deleteNode(makeFullPath(selectedFile));
     setStatus(ok ? `Deleted: ${selectedFile}` : 'Delete failed (non-empty folder?)');
     notifyDesktop({
@@ -155,8 +172,61 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
   const currentNode = findNode(currentPath);
   const items = currentNode?.type === 'dir' && currentNode.children ? currentNode.children : [];
 
+  useEffect(() => {
+    rootRef.current?.focus();
+  }, [currentPath, inlineAction]);
+
+  const openSelected = useCallback(() => {
+    if (!selectedFile) return;
+    const node = items.find((n) => n.name === selectedFile);
+    if (!node) return;
+    handleFileAction(node, makeFullPath(node.name));
+  }, [items, selectedFile]);
+
+  const handleFileManagerKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (inlineAction) return;
+
+      if (e.key === 'Delete' && selectedFile) {
+        e.preventDefault();
+        handleDelete();
+        return;
+      }
+
+      if (e.key === 'F2' && selectedFile) {
+        e.preventDefault();
+        setInlineAction('rename');
+        setInlineInput(selectedFile);
+        return;
+      }
+
+      if (e.key === 'Enter' && selectedFile) {
+        e.preventDefault();
+        openSelected();
+        return;
+      }
+
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        goUp();
+        return;
+      }
+
+      if (e.ctrlKey && e.shiftKey && (e.key === 'N' || e.key === 'n')) {
+        e.preventDefault();
+        setInlineAction('new');
+        setInlineInput('New Folder');
+      }
+    },
+    [inlineAction, selectedFile, openSelected, goUp]
+  );
+
   return (
-    <Container>
+    <Container
+      ref={rootRef}
+      tabIndex={0}
+      onKeyDown={handleFileManagerKeyDown}
+    >
       <FmMenuBar>
         <FmMenuItem>File</FmMenuItem>
         <FmMenuItem>Edit</FmMenuItem>
@@ -175,11 +245,67 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
         <NavButton onClick={() => navigateTo('/home/zis3c')} title="Home">
           <HomeIcon size={14} />
         </NavButton>
-        <ActionButton onClick={handleNewFolder}>New Folder</ActionButton>
-        <ActionButton onClick={handleRename} disabled={!selectedFile}>Rename</ActionButton>
+        <ActionButton
+          onClick={() => {
+            setInlineAction('new');
+            setInlineInput('New Folder');
+          }}
+        >
+          New Folder
+        </ActionButton>
+        <ActionButton
+          onClick={() => {
+            if (!selectedFile) return;
+            setInlineAction('rename');
+            setInlineInput(selectedFile);
+          }}
+          disabled={!selectedFile}
+        >
+          Rename
+        </ActionButton>
         <ActionButton onClick={handleDelete} disabled={!selectedFile}>Delete</ActionButton>
         <PathBar>{currentPath}</PathBar>
       </Toolbar>
+      {inlineAction && (
+        <InlineEditorBar>
+          <InlineLabel>
+            {inlineAction === 'new' ? 'New folder name:' : 'Rename to:'}
+          </InlineLabel>
+          <InlineInput
+            value={inlineInput}
+            onChange={(e) => setInlineInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                if (inlineAction === 'new') handleNewFolder();
+                if (inlineAction === 'rename') handleRename();
+              }
+              if (e.key === 'Escape') {
+                setInlineAction(null);
+                setInlineInput('');
+                setStatus('Ready');
+              }
+            }}
+            autoFocus
+          />
+          <InlineActionButton
+            onClick={() => {
+              if (inlineAction === 'new') handleNewFolder();
+              if (inlineAction === 'rename') handleRename();
+            }}
+          >
+            OK
+          </InlineActionButton>
+          <InlineActionButton
+            onClick={() => {
+              setInlineAction(null);
+              setInlineInput('');
+              setStatus('Ready');
+            }}
+          >
+            Cancel
+          </InlineActionButton>
+        </InlineEditorBar>
+      )}
 
       <Body>
         <Sidebar>
@@ -432,4 +558,40 @@ const StatusBar = styled.div`
   border-top: 1px solid ${({ theme }) => theme.kali.fileManager.borderColor};
   font-size: 10px;
   color: rgba(160, 170, 180, 0.6);
+`;
+
+const InlineEditorBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: rgba(14, 18, 24, 0.9);
+  border-top: 1px solid rgba(90, 102, 120, 0.35);
+  border-bottom: 1px solid rgba(90, 102, 120, 0.35);
+`;
+
+const InlineLabel = styled.span`
+  font-size: 10px;
+  color: rgba(185, 194, 205, 0.85);
+`;
+
+const InlineInput = styled.input`
+  flex: 1;
+  height: 22px;
+  padding: 0 8px;
+  background: rgba(12, 14, 19, 0.92);
+  border: 1px solid rgba(98, 112, 132, 0.55);
+  color: rgba(208, 216, 226, 0.95);
+  font-size: 11px;
+  outline: none;
+`;
+
+const InlineActionButton = styled.button`
+  height: 22px;
+  padding: 0 8px;
+  font-size: 10px;
+  color: rgba(200, 210, 220, 0.95);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(105, 118, 136, 0.45);
+  cursor: pointer;
 `;

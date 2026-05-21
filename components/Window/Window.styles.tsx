@@ -39,23 +39,24 @@ export const TitleBar = styled.div<{ isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 26px;
-  min-height: 26px;
-  padding: 0 3px 0 8px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0 2px 0 7px;
   background: ${({ isActive }) =>
     isActive
-      ? 'linear-gradient(180deg, #3d4f64 0%, #2d3f56 100%)'
-      : 'linear-gradient(180deg, #2a2a3a 0%, #222233 100%)'};
+      ? 'linear-gradient(180deg, #486181 0%, #36506d 100%)'
+      : 'linear-gradient(180deg, #30343d 0%, #252a31 100%)'};
   border-bottom: 1px solid rgba(40, 40, 55, 0.8);
   cursor: default;
   user-select: none;
 `;
 
 export const WindowTitle = styled.span`
-  font-family: 'Inter', 'Noto Sans', sans-serif;
-  font-size: 10.5px;
-  font-weight: 400;
-  color: rgba(190, 195, 200, 0.85);
+  font-family: 'Noto Sans', 'Cantarell', 'Segoe UI', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05px;
+  color: rgba(212, 216, 224, 0.92);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -65,7 +66,7 @@ export const WindowTitle = styled.span`
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 0;
   flex-shrink: 0;
 `;
 
@@ -77,21 +78,25 @@ export const WinButton = styled.button<BtnProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 16px;
   padding: 0;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
   cursor: pointer;
   border-radius: 0;
-  color: rgba(160, 165, 170, 0.7);
+  color: rgba(198, 204, 212, 0.76);
 
   &:hover {
     background: ${({ variant }) =>
       variant === 'close'
-        ? 'rgba(200, 50, 50, 0.7)'
-        : 'rgba(255, 255, 255, 0.08)'};
+        ? 'rgba(186, 62, 62, 0.88)'
+        : 'rgba(255, 255, 255, 0.09)'};
+    border-color: ${({ variant }) =>
+      variant === 'close'
+        ? 'rgba(110, 20, 20, 0.65)'
+        : 'rgba(180, 188, 198, 0.2)'};
     ${({ variant }) =>
       variant === 'close' &&
       css`
