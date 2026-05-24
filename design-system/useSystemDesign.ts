@@ -15,4 +15,3 @@ export const useSystemDesign = (): {
 } => {
   return { darkTheme, lightTheme };
 };
-

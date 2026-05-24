@@ -54,7 +54,9 @@ class ErrorBoundary extends Component<Props, State> {
             textAlign: 'center',
           }}
         >
-          <div style={{ fontSize: '16px', marginBottom: '8px', color: '#e84040' }}>
+          <div
+            style={{ fontSize: '16px', marginBottom: '8px', color: '#e84040' }}
+          >
             Something went wrong
           </div>
           <div style={{ marginBottom: '16px', opacity: 0.7 }}>

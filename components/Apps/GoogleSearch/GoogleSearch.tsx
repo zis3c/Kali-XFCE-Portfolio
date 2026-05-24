@@ -42,7 +42,11 @@ const GoogleSearch = ({ searchQuery }: Props): JSX.Element => {
   const suggestions = useMemo(() => {
     const q = inputValue.toLowerCase();
     if (!q) return [];
-    return Array.from(new Set(history.filter((h) => h.toLowerCase().includes(q)))).slice(-6).reverse();
+    return Array.from(
+      new Set(history.filter((h) => h.toLowerCase().includes(q)))
+    )
+      .slice(-6)
+      .reverse();
   }, [history, inputValue]);
 
   return (
@@ -182,7 +186,8 @@ const NavBtn = styled.button<{ disabled?: boolean }>`
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: ${({ disabled }) => (disabled ? 'rgba(180,185,195,0.35)' : 'rgba(215,220,226,0.88)')};
+  color: ${({ disabled }) =>
+    disabled ? 'rgba(180,185,195,0.35)' : 'rgba(215,220,226,0.88)'};
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 

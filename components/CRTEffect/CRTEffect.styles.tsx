@@ -32,7 +32,7 @@ export const CRTWrapper = styled.div`
   z-index: 999999;
   pointer-events: none; /* CRITICAL: Must not block clicks */
   overflow: hidden;
-  
+
   /* Flicker: subtle and slow to prevent eye strain */
   animation: ${flickerAnimation} 4s infinite;
 `;
@@ -41,10 +41,7 @@ export const Scanlines = styled.div`
   position: absolute;
   inset: 0;
   /* Scanlines: clear but moderated horizontal lines */
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.18) 50%
-  );
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%);
   background-size: 100% 3px;
   opacity: 0.85;
   animation: ${scanlineRoll} 12s linear infinite;
@@ -54,8 +51,7 @@ export const VignetteAndCurve = styled.div`
   position: absolute;
   inset: 0;
   /* Vignette: moderate curved edge shadow and glass border reflection */
-  box-shadow: 
-    inset 0 0 110px rgba(0, 0, 0, 0.65),
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, 0.65),
     inset 0 0 3px rgba(255, 255, 255, 0.06);
 `;
 

@@ -64,16 +64,16 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
    └──────────────┴──────────────┴──────────────┘
 ```
 
-| Layer | Responsibility |
-|-------|---------------|
-| `pages/` | Next.js routing, SSR/ISR data fetching, API routes |
-| `components/` | Presentational + container components (Desktop, Apps, Widgets) |
-| `store/` | Redux state management with `next-redux-wrapper` for SSR hydration |
-| `backend/` | Mongoose models and controller logic (contact, news) |
-| `utils/` | Pure functions: virtual filesystem, logger, retry, error handling |
-| `hooks/` | Custom React hooks: intersection observer, click-outside, reduced motion |
-| `middleware/` | API middleware: rate limiting, error catching, correlation IDs, security headers |
-| `design-system/` | Theme tokens (colors, spacing, typography, XFCE component tokens) |
+| Layer            | Responsibility                                                                   |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `pages/`         | Next.js routing, SSR/ISR data fetching, API routes                               |
+| `components/`    | Presentational + container components (Desktop, Apps, Widgets)                   |
+| `store/`         | Redux state management with `next-redux-wrapper` for SSR hydration               |
+| `backend/`       | Mongoose models and controller logic (contact, news)                             |
+| `utils/`         | Pure functions: virtual filesystem, logger, retry, error handling                |
+| `hooks/`         | Custom React hooks: intersection observer, click-outside, reduced motion         |
+| `middleware/`    | API middleware: rate limiting, error catching, correlation IDs, security headers |
+| `design-system/` | Theme tokens (colors, spacing, typography, XFCE component tokens)                |
 
 ## Stack
 
@@ -90,12 +90,14 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
 ## Installation
 
 1. **Clone repository**
+
    ```bash
    git clone <your-private-repo-url>
    cd Kali-XFCE-Portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -103,6 +105,7 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
 3. **Create environment file**
 
    `.env.local`
+
    ```env
    DB_URI=your_mongodb_connection_string
    SENDGRID_API_KEY=your_sendgrid_key
@@ -110,12 +113,14 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
    ```
 
    Optional:
+
    ```env
    NEWS_API_KEY=your_news_api_key
    NEXT_PUBLIC_DEMO_PASSWORD=1234
    ```
 
 4. **Run development server**
+
    ```bash
    npm run dev
    ```
@@ -126,17 +131,17 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run tsc` | TypeScript type check |
-| `npm run test` | Run Jest unit tests |
+| Command                 | Description                    |
+| ----------------------- | ------------------------------ |
+| `npm run dev`           | Start development server       |
+| `npm run build`         | Production build               |
+| `npm run start`         | Start production server        |
+| `npm run lint`          | Run ESLint                     |
+| `npm run tsc`           | TypeScript type check          |
+| `npm run test`          | Run Jest unit tests            |
 | `npm run test:coverage` | Run tests with coverage report |
-| `npm run storybook` | Start Storybook |
-| `npm run cm` | Commit with Commitizen |
+| `npm run storybook`     | Start Storybook                |
+| `npm run cm`            | Commit with Commitizen         |
 
 ## Testing
 

@@ -23,11 +23,8 @@ export const useContextMenuConfig = (): {
   desktopContextMenuContent: IContextMenuItem[];
   systemTrayContextMenuContent: IContextMenuItem[];
 } => {
-  const {
-    sortDesktopIcons,
-    openWindow,
-    undoLastDeleteDesktopApp,
-  } = useActions();
+  const { sortDesktopIcons, openWindow, undoLastDeleteDesktopApp } =
+    useActions();
 
   const sortIconsBy = (way: IconSortVariant) => sortDesktopIcons(way);
 
@@ -151,4 +148,3 @@ export const useContextMenuConfig = (): {
 
   return { desktopContextMenuContent, systemTrayContextMenuContent };
 };
-

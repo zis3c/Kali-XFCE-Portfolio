@@ -74,9 +74,9 @@ describe('validateContactBody', () => {
   });
 
   it('rejects missing email', () => {
-    expect(
-      validateContactBody({ name: 'Radzi', message: 'Hi' })
-    ).toBe('Email is required.');
+    expect(validateContactBody({ name: 'Radzi', message: 'Hi' })).toBe(
+      'Email is required.'
+    );
   });
 
   it('rejects invalid email format', () => {
@@ -90,9 +90,9 @@ describe('validateContactBody', () => {
   });
 
   it('rejects missing message', () => {
-    expect(
-      validateContactBody({ name: 'Radzi', email: 'a@b.com' })
-    ).toBe('Message is required.');
+    expect(validateContactBody({ name: 'Radzi', email: 'a@b.com' })).toBe(
+      'Message is required.'
+    );
   });
 
   it('rejects message over 5000 characters', () => {
@@ -165,12 +165,18 @@ describe('rateLimiter', () => {
     const res = mockRes();
 
     const req1 = mockReq({ headers: { 'x-forwarded-for': '10.10.10.10' } });
-    expect(rateLimiter(req1, res, { maxRequests: 2, windowMs: 60000 })).toBe(true);
+    expect(rateLimiter(req1, res, { maxRequests: 2, windowMs: 60000 })).toBe(
+      true
+    );
 
     const req2 = mockReq({ headers: { 'x-forwarded-for': '10.10.10.10' } });
-    expect(rateLimiter(req2, res, { maxRequests: 2, windowMs: 60000 })).toBe(true);
+    expect(rateLimiter(req2, res, { maxRequests: 2, windowMs: 60000 })).toBe(
+      true
+    );
 
     const req3 = mockReq({ headers: { 'x-forwarded-for': '10.10.10.10' } });
-    expect(rateLimiter(req3, res, { maxRequests: 2, windowMs: 60000 })).toBe(false);
+    expect(rateLimiter(req3, res, { maxRequests: 2, windowMs: 60000 })).toBe(
+      false
+    );
   });
 });

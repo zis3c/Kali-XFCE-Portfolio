@@ -221,7 +221,10 @@ const Terminal = (): JSX.Element => {
       selectedTheme,
       previousUserPath,
     };
-    window.localStorage.setItem(getTabStorageKey(activeTabId), JSON.stringify(toSave));
+    window.localStorage.setItem(
+      getTabStorageKey(activeTabId),
+      JSON.stringify(toSave)
+    );
     window.localStorage.setItem(TAB_META_KEY, JSON.stringify(tabs));
   }, [
     history,
@@ -316,7 +319,12 @@ const Terminal = (): JSX.Element => {
         const target = resolvePath(path, arg);
         if (target === blockedExact || target.startsWith('/root')) {
           return {
-            lines: [{ type: 'error', content: `${command}: ${arg}: Permission denied` }],
+            lines: [
+              {
+                type: 'error',
+                content: `${command}: ${arg}: Permission denied`,
+              },
+            ],
             newPath: path,
           };
         }
@@ -325,14 +333,22 @@ const Terminal = (): JSX.Element => {
         const target = resolvePath(path, arg);
         if (target.startsWith('/root')) {
           return {
-            lines: [{ type: 'error', content: `${command}: cannot access '${arg}': Permission denied` }],
+            lines: [
+              {
+                type: 'error',
+                content: `${command}: cannot access '${arg}': Permission denied`,
+              },
+            ],
             newPath: path,
           };
         }
       }
     }
 
-    if (cmd === 'cat ~/.bash_history' || cmd === 'cat /home/zis3c/.bash_history') {
+    if (
+      cmd === 'cat ~/.bash_history' ||
+      cmd === 'cat /home/zis3c/.bash_history'
+    ) {
       const historyText = [...commandHistory]
         .slice()
         .reverse()
@@ -410,10 +426,13 @@ const Terminal = (): JSX.Element => {
       }
     }
 
-    if (cmd === 'sudo' || cmd === 'sudo -i' || cmd === 'sudo su' || cmd === 'su') {
-      appendHistory([
-        { type: 'input', content: cmd, promptPath: currentPath },
-      ]);
+    if (
+      cmd === 'sudo' ||
+      cmd === 'sudo -i' ||
+      cmd === 'sudo su' ||
+      cmd === 'su'
+    ) {
+      appendHistory([{ type: 'input', content: cmd, promptPath: currentPath }]);
       setIsAwaitingSudoPassword(true);
       setSudoPasswordBuffer('');
       setInputValue('');
@@ -599,14 +618,63 @@ const Terminal = (): JSX.Element => {
 
       // Known commands for first-word completion
       const knownCommands = [
-        'help', 'clear', 'pwd', 'whoami', 'hostname', 'date', 'uname',
-        'uptime', 'echo', 'history', 'ls', 'cd', 'cat', 'open', 'skills',
-        'projects', 'neofetch', 'fastfetch', 'free', 'df', 'who',
-        'lsb_release', 'nmap', 'wireshark', 'msfconsole', 'aircrack-ng',
-        'tree', 'sudo', 'exit', 'id', 'ifconfig', 'ip', 'ping', 'man',
-        'which', 'type', 'alias', 'env', 'export', 'ps', 'grep', 'find',
-        'wc', 'head', 'tail', 'sort', 'chmod', 'chown', 'file', 'stat',
-        'du', 'mount', 'touch', 'mkdir', 'rm', 'cp', 'mv',
+        'help',
+        'clear',
+        'pwd',
+        'whoami',
+        'hostname',
+        'date',
+        'uname',
+        'uptime',
+        'echo',
+        'history',
+        'ls',
+        'cd',
+        'cat',
+        'open',
+        'skills',
+        'projects',
+        'neofetch',
+        'fastfetch',
+        'free',
+        'df',
+        'who',
+        'lsb_release',
+        'nmap',
+        'wireshark',
+        'msfconsole',
+        'aircrack-ng',
+        'tree',
+        'sudo',
+        'exit',
+        'id',
+        'ifconfig',
+        'ip',
+        'ping',
+        'man',
+        'which',
+        'type',
+        'alias',
+        'env',
+        'export',
+        'ps',
+        'grep',
+        'find',
+        'wc',
+        'head',
+        'tail',
+        'sort',
+        'chmod',
+        'chown',
+        'file',
+        'stat',
+        'du',
+        'mount',
+        'touch',
+        'mkdir',
+        'rm',
+        'cp',
+        'mv',
       ];
 
       const parts = val.split(/\s+/);
@@ -641,9 +709,7 @@ const Terminal = (): JSX.Element => {
           const matches = cleaned.filter((name) => name.startsWith(filePart));
 
           if (matches.length === 1) {
-            const isDirectory = entries.find(
-              (e) => e === matches[0] + '/'
-            );
+            const isDirectory = entries.find((e) => e === matches[0] + '/');
             const completion = dirPart + matches[0] + (isDirectory ? '/' : ' ');
             parts[parts.length - 1] = completion;
             setInputValue(parts.join(' '));
@@ -685,7 +751,10 @@ const Terminal = (): JSX.Element => {
 
   const addNewTab = () => {
     const nextId = tabs.length ? Math.max(...tabs.map((t) => t.id)) + 1 : 1;
-    const nextTab: TerminalTab = { id: nextId, label: `Tab ${tabs.length + 1}` };
+    const nextTab: TerminalTab = {
+      id: nextId,
+      label: `Tab ${tabs.length + 1}`,
+    };
     setTabs((prev) => [...prev, nextTab]);
     setActiveTabId(nextId);
     resetSession();
@@ -750,7 +819,9 @@ const Terminal = (): JSX.Element => {
                 <Styled.PromptPath>
                   {line.promptPath ?? currentPath}
                 </Styled.PromptPath>
-                <Styled.PromptDollar>{line.promptChar || '$ '}</Styled.PromptDollar>
+                <Styled.PromptDollar>
+                  {line.promptChar || '$ '}
+                </Styled.PromptDollar>
                 <Styled.Command>{line.content}</Styled.Command>
               </>
             )}
@@ -789,8 +860,14 @@ const Terminal = (): JSX.Element => {
       </Styled.Container>
       <Styled.StatusBar>
         <span>UTF-8</span>
-        <span>{`rows ${Math.max(24, Math.floor((containerRef.current?.clientHeight || 432) / 18))}`}</span>
-        <span>{`cols ${Math.max(80, Math.floor((containerRef.current?.clientWidth || 720) / 8))}`}</span>
+        <span>{`rows ${Math.max(
+          24,
+          Math.floor((containerRef.current?.clientHeight || 432) / 18)
+        )}`}</span>
+        <span>{`cols ${Math.max(
+          80,
+          Math.floor((containerRef.current?.clientWidth || 720) / 8)
+        )}`}</span>
         <span>100%</span>
       </Styled.StatusBar>
     </Styled.TerminalWrapper>

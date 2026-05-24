@@ -320,8 +320,7 @@ const borderRadii = { main: '2px' };
 /* Box Shadows */
 const boxShadows = {
   appBtn: '0 1px 2px rgba(0, 0, 0, 0.3)',
-  window:
-    '0 2px 8px rgba(0, 0, 0, 0.4), 0 0 1px rgba(54, 123, 240, 0.2)',
+  window: '0 2px 8px rgba(0, 0, 0, 0.4), 0 0 1px rgba(54, 123, 240, 0.2)',
 };
 
 export type IBoxShadows = typeof boxShadows;

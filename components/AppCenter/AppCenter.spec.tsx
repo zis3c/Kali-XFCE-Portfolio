@@ -3,7 +3,6 @@ import React from 'react';
 import { withReduxAndStyledProviders } from '../../test/testUtils';
 import AppCenter from './AppCenter';
 
-
 import * as Styled from './AppCenter.styles';
 
 /**

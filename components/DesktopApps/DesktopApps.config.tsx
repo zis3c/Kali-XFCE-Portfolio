@@ -90,31 +90,31 @@ export const useDesktopApps = (): {
       },
     ];
 
-  const compressedAppsList = [...initialDesktopAppsList]
-    .filter((app) => compressedApps.includes(app.text))
-    .map((compressedApp) => ({
-      ...compressedApp,
-      text: compressedApp.text + '.tar.gz',
-      iconSrc: '/assets/icons/Desktop/zip.png',
-      willOpenWindowWith: null,
-      action: null,
-      id: compressedApp.id + 777,
-    }));
+    const compressedAppsList = [...initialDesktopAppsList]
+      .filter((app) => compressedApps.includes(app.text))
+      .map((compressedApp) => ({
+        ...compressedApp,
+        text: compressedApp.text + '.tar.gz',
+        iconSrc: '/assets/icons/Desktop/zip.png',
+        willOpenWindowWith: null,
+        action: null,
+        id: compressedApp.id + 777,
+      }));
 
-  const desktopAppsList = [
-    ...initialDesktopAppsList,
-    ...compressedAppsList,
-  ].filter((app) => !removedApps.includes(app.text));
+    const desktopAppsList = [
+      ...initialDesktopAppsList,
+      ...compressedAppsList,
+    ].filter((app) => !removedApps.includes(app.text));
 
-  const appsInTrashBin = [...initialDesktopAppsList].filter((app) =>
-    removedApps.includes(app.text)
-  );
+    const appsInTrashBin = [...initialDesktopAppsList].filter((app) =>
+      removedApps.includes(app.text)
+    );
 
-  const sortedAlphabetically = [...desktopAppsList].sort((a, b) =>
-    a.text.toLowerCase().localeCompare(b.text.toLowerCase())
-  );
-  const sortedBySize = [...desktopAppsList];
-  const sortedByDate = [...desktopAppsList].sort((a, b) => b.id - a.id);
+    const sortedAlphabetically = [...desktopAppsList].sort((a, b) =>
+      a.text.toLowerCase().localeCompare(b.text.toLowerCase())
+    );
+    const sortedBySize = [...desktopAppsList];
+    const sortedByDate = [...desktopAppsList].sort((a, b) => b.id - a.id);
 
     return {
       sortedAlphabetically,

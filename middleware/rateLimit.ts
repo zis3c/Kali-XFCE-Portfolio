@@ -38,7 +38,9 @@ export const rateLimiter = (
     logger.warn('Rate limit exceeded', { ip, count: entry.count });
     res.status(429).json({
       success: false,
-      message: `Too many requests. Try again in ${Math.ceil((entry.resetAt - now) / 1000)}s.`,
+      message: `Too many requests. Try again in ${Math.ceil(
+        (entry.resetAt - now) / 1000
+      )}s.`,
     });
     return false;
   }
@@ -65,7 +67,9 @@ if (typeof setInterval !== 'undefined') {
  * Validate contact form body fields.
  * Returns an error message string, or null if valid.
  */
-export const validateContactBody = (body: Record<string, unknown>): string | null => {
+export const validateContactBody = (
+  body: Record<string, unknown>
+): string | null => {
   const { name, email, message } = body;
 
   if (!name || typeof name !== 'string' || name.trim().length === 0) {

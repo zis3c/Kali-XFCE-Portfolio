@@ -21,7 +21,10 @@ function mockReq(overrides: Partial<NextApiRequest> = {}): NextApiRequest {
   } as NextApiRequest;
 }
 
-function mockRes(): NextApiResponse & { _getStatusCode(): number; _getJSONData(): unknown } {
+function mockRes(): NextApiResponse & {
+  _getStatusCode(): number;
+  _getJSONData(): unknown;
+} {
   const res: Record<string, unknown> = {
     statusCode: 200,
     _statusCode: 200,
@@ -43,7 +46,10 @@ function mockRes(): NextApiResponse & { _getStatusCode(): number; _getJSONData()
     setHeader: jest.fn(),
     getHeader: jest.fn(),
   };
-  return res as unknown as NextApiResponse & { _getStatusCode(): number; _getJSONData(): unknown };
+  return res as unknown as NextApiResponse & {
+    _getStatusCode(): number;
+    _getJSONData(): unknown;
+  };
 }
 
 describe('catchErrorsFrom', () => {
@@ -63,7 +69,9 @@ describe('catchErrorsFrom', () => {
   });
 
   it('catches errors and returns 500 with error message', async () => {
-    const controller = jest.fn().mockRejectedValue(new Error('DB connection failed'));
+    const controller = jest
+      .fn()
+      .mockRejectedValue(new Error('DB connection failed'));
     const req = mockReq();
     const res = mockRes();
 
@@ -78,7 +86,9 @@ describe('catchErrorsFrom', () => {
   });
 
   it('logs the error via structured logger', async () => {
-    const controller = jest.fn().mockRejectedValue(new Error('Something broke'));
+    const controller = jest
+      .fn()
+      .mockRejectedValue(new Error('Something broke'));
     const req = mockReq();
     const res = mockRes();
 

@@ -9,4 +9,9 @@ export default {
 const Template: Story<TaskbarProps> = (args) => <Taskbar {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { activeWorkspace: 1, onWorkspaceChange: () => { console.log('workspace changed'); } };
+Primary.args = {
+  activeWorkspace: 1,
+  onWorkspaceChange: () => {
+    console.log('workspace changed');
+  },
+};

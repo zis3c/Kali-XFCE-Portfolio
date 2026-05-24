@@ -7,14 +7,24 @@ type SimpleTheme = 'terminal' | 'paper';
 /* ------------------------------------------------------------------ */
 
 export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
-  --bg: ${({ themeMode }) => (themeMode === 'terminal' ? '#000000' : '#f4f5f7')};
-  --text: ${({ themeMode }) => (themeMode === 'terminal' ? '#ffffff' : '#16181d')};
-  --muted: ${({ themeMode }) => (themeMode === 'terminal' ? '#a1a1aa' : '#4b5563')};
-  --panel: ${({ themeMode }) => (themeMode === 'terminal' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.9)')};
-  --panel-border: ${({ themeMode }) => (themeMode === 'terminal' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.12)')};
-  --card-bg: ${({ themeMode }) => (themeMode === 'terminal' ? '#0a0a0a' : '#ffffff')};
-  --card-border: ${({ themeMode }) => (themeMode === 'terminal' ? '#1f1f1f' : '#d1d5db')};
-  --chip-bg: ${({ themeMode }) => (themeMode === 'terminal' ? 'rgba(255,255,255,0.04)' : '#eef2f7')};
+  --bg: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#000000' : '#f4f5f7'};
+  --text: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#ffffff' : '#16181d'};
+  --muted: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#a1a1aa' : '#4b5563'};
+  --panel: ${({ themeMode }) =>
+    themeMode === 'terminal'
+      ? 'rgba(0, 0, 0, 0.8)'
+      : 'rgba(255, 255, 255, 0.9)'};
+  --panel-border: ${({ themeMode }) =>
+    themeMode === 'terminal' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.12)'};
+  --card-bg: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#0a0a0a' : '#ffffff'};
+  --card-border: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#1f1f1f' : '#d1d5db'};
+  --chip-bg: ${({ themeMode }) =>
+    themeMode === 'terminal' ? 'rgba(255,255,255,0.04)' : '#eef2f7'};
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
@@ -224,7 +234,11 @@ export const Cards = styled.div`
   }
 `;
 
-export const Card = styled.article<{ accentColor?: string; colSpan?: number; rowSpan?: number }>`
+export const Card = styled.article<{
+  accentColor?: string;
+  colSpan?: number;
+  rowSpan?: number;
+}>`
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-top: 2px solid ${({ accentColor }) => accentColor || '#333'};
@@ -249,14 +263,22 @@ export const Card = styled.article<{ accentColor?: string; colSpan?: number; row
   &::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 100px;
-    background: linear-gradient(180deg, ${({ accentColor }) => accentColor ? `${accentColor}1A` : 'transparent'}, transparent);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(
+      180deg,
+      ${({ accentColor }) =>
+        accentColor ? `${accentColor}1A` : 'transparent'},
+      transparent
+    );
     pointer-events: none;
   }
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px -10px ${({ accentColor }) => accentColor ? `${accentColor}33` : 'rgba(0,0,0,0.5)'};
+    box-shadow: 0 12px 30px -10px ${({ accentColor }) => (accentColor ? `${accentColor}33` : 'rgba(0,0,0,0.5)')};
   }
 `;
 
@@ -365,8 +387,10 @@ export const FilterRow = styled.div`
 `;
 
 export const FilterChip = styled.button<{ isActive: boolean }>`
-  border: 1px solid ${({ isActive }) => (isActive ? '#22c55e' : 'var(--panel-border)')};
-  background: ${({ isActive }) => (isActive ? 'rgba(34,197,94,0.2)' : 'var(--chip-bg)')};
+  border: 1px solid
+    ${({ isActive }) => (isActive ? '#22c55e' : 'var(--panel-border)')};
+  background: ${({ isActive }) =>
+    isActive ? 'rgba(34,197,94,0.2)' : 'var(--chip-bg)'};
   color: var(--text);
   padding: 7px 12px;
   border-radius: 999px;
@@ -390,14 +414,22 @@ export const ProjectsSection = styled.section`
   }
 `;
 
-export const ProjectCard = styled.article<{ accentColor: string; isFocused: boolean }>`
+export const ProjectCard = styled.article<{
+  accentColor: string;
+  isFocused: boolean;
+}>`
   border: 1px solid var(--panel-border);
   border-left: 1px solid var(--panel-border);
   border-radius: 12px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.015)
+  );
   padding: 22px;
   backdrop-filter: blur(4px);
-  transition: transform 0.25s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.2s ease,
+    box-shadow 0.25s ease;
   animation: projectReveal 0.5s ease both;
   transform-origin: center;
 
@@ -405,8 +437,7 @@ export const ProjectCard = styled.article<{ accentColor: string; isFocused: bool
     transform: translateY(-4px) rotateX(2deg) rotateY(-1deg);
     border-color: ${({ accentColor }) => accentColor};
     border-left-color: ${({ accentColor }) => accentColor};
-    box-shadow:
-      0 18px 30px rgba(0, 0, 0, 0.18),
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.18),
       0 0 0 1px ${({ accentColor }) => `${accentColor}AA`},
       0 0 20px ${({ accentColor }) => `${accentColor}66`};
   }
@@ -508,7 +539,8 @@ export const PaletteItem = styled.div<{ isActive: boolean }>`
   text-align: left;
   border: 1px solid ${({ isActive }) => (isActive ? '#22c55e' : 'transparent')};
   border-radius: 8px;
-  background: ${({ isActive }) => (isActive ? 'rgba(34,197,94,0.16)' : 'transparent')};
+  background: ${({ isActive }) =>
+    isActive ? 'rgba(34,197,94,0.16)' : 'transparent'};
   color: var(--text);
   padding: 9px 10px;
   font-size: 13px;

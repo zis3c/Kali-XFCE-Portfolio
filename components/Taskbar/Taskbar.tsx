@@ -60,8 +60,7 @@ const WsBox = styled.button<{ isActive: boolean }>`
   border: 1px solid
     ${({ isActive }) =>
       isActive ? 'rgba(54, 123, 240, 0.6)' : 'rgba(255,255,255,0.08)'};
-  color: ${({ isActive }) =>
-    isActive ? '#d0d5dc' : 'rgba(160,170,180,0.5)'};
+  color: ${({ isActive }) => (isActive ? '#d0d5dc' : 'rgba(160,170,180,0.5)')};
   cursor: pointer;
   outline: none;
   border-radius: 0;
@@ -93,7 +92,10 @@ const VolumePopup = () => {
         height: '100%',
       }}
     >
-      <TrayButton onClick={() => setIsOpen(!isOpen)} title={`Volume: ${volume}%`}>
+      <TrayButton
+        onClick={() => setIsOpen(!isOpen)}
+        title={`Volume: ${volume}%`}
+      >
         <VolumeIcon size={14} color="rgba(180, 185, 190, 0.9)" />
       </TrayButton>
       {isOpen && (
@@ -126,7 +128,9 @@ const PowerMenu = () => {
   });
 
   const triggerSessionAction = (action: SessionAction) => {
-    window.dispatchEvent(new CustomEvent(SESSION_ACTION_EVENT, { detail: action }));
+    window.dispatchEvent(
+      new CustomEvent(SESSION_ACTION_EVENT, { detail: action })
+    );
     if (action === 'logout') {
       notifyDesktop({ title: 'Session', message: 'Logging out to greeter...' });
     }

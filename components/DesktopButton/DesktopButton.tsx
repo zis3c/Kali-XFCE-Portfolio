@@ -79,7 +79,8 @@ const DesktopButton = ({
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
   const isFileManagerWindow = useCallback((): boolean => {
-    if (iconSrc === 'KALI_FILEMANAGER' || iconSrc === 'KALI_FOLDER') return true;
+    if (iconSrc === 'KALI_FILEMANAGER' || iconSrc === 'KALI_FOLDER')
+      return true;
     if (
       iconSrc.includes('user-folder') ||
       iconSrc.includes('recycle-bin') ||
@@ -130,7 +131,7 @@ const DesktopButton = ({
   const kaliIcon = getKaliIcon(iconSrc, iconSize.width);
 
   const clickAction = action !== null ? action : handleOpenWindow;
-  
+
   return (
     <Styled.Wrapper>
       <Styled.ButtonContainer

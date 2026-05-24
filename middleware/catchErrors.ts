@@ -26,7 +26,10 @@ export default function catchErrorsFrom(controller: NextController) {
       });
       return res
         .status(500)
-        .json({ success: 'fail', error: error instanceof Error ? error.message : String(error) });
+        .json({
+          success: 'fail',
+          error: error instanceof Error ? error.message : String(error),
+        });
     });
   };
 }

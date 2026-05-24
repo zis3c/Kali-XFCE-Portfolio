@@ -8,7 +8,11 @@ import Taskbar from './Taskbar';
  * @returns {JSX.Element} ShallowWrapper
  */
 const setup = () => {
-  return shallow(withReduxAndStyledProviders(<Taskbar activeWorkspace={1} onWorkspaceChange={() => undefined} />));
+  return shallow(
+    withReduxAndStyledProviders(
+      <Taskbar activeWorkspace={1} onWorkspaceChange={() => undefined} />
+    )
+  );
 };
 
 describe('Taskbar', () => {

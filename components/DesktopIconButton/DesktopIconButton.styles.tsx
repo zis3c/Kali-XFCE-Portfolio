@@ -18,11 +18,15 @@ const DesktopIconButtonStyles = css<DesktopBtnProps>`
   width: 80px;
   text-align: center;
   border-radius: 4px;
-  background: ${({ isSelected }) => (isSelected ? 'rgba(54, 123, 240, 0.4)' : 'transparent')};
-  border: 1px solid ${({ isSelected }) => (isSelected ? 'rgba(54, 123, 240, 0.6)' : 'transparent')};
+  background: ${({ isSelected }) =>
+    isSelected ? 'rgba(54, 123, 240, 0.4)' : 'transparent'};
+  border: 1px solid
+    ${({ isSelected }) =>
+      isSelected ? 'rgba(54, 123, 240, 0.6)' : 'transparent'};
 
   :hover {
-    background: ${({ isSelected }) => (isSelected ? 'rgba(54, 123, 240, 0.5)' : 'rgba(255, 255, 255, 0.08)')};
+    background: ${({ isSelected }) =>
+      isSelected ? 'rgba(54, 123, 240, 0.5)' : 'rgba(255, 255, 255, 0.08)'};
   }
 `;
 const systemTrayButtonStyles = css`
@@ -119,8 +123,9 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   user-select: none;
-  
-  img, svg {
+
+  img,
+  svg {
     pointer-events: none;
   }
 `;

@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import styled from 'styled-components';
 import { useActions } from '../../../hooks/useActions';
 import {
@@ -27,7 +33,9 @@ interface FileManagerProps {
   startPath?: string;
 }
 
-const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Element => {
+const FileManager = ({
+  startPath = '/home/zis3c',
+}: FileManagerProps): JSX.Element => {
   const { openWindow } = useActions();
   const [currentPath, setCurrentPath] = useState(startPath);
   const [history, setHistory] = useState<string[]>([startPath]);
@@ -42,12 +50,32 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
 
   const sidebarItems = [
     { name: 'Home', icon: <HomeIcon size={14} />, path: '/home/zis3c' },
-    { name: 'Desktop', icon: <DesktopIcon size={14} />, path: '/home/zis3c/Desktop' },
-    { name: 'Documents', icon: <DocumentIcon size={14} />, path: '/home/zis3c/Documents' },
-    { name: 'Downloads', icon: <DownloadIcon size={14} />, path: '/home/zis3c/Downloads' },
-    { name: 'Projects', icon: <FolderIcon size={14} />, path: '/home/zis3c/Projects' },
+    {
+      name: 'Desktop',
+      icon: <DesktopIcon size={14} />,
+      path: '/home/zis3c/Desktop',
+    },
+    {
+      name: 'Documents',
+      icon: <DocumentIcon size={14} />,
+      path: '/home/zis3c/Documents',
+    },
+    {
+      name: 'Downloads',
+      icon: <DownloadIcon size={14} />,
+      path: '/home/zis3c/Downloads',
+    },
+    {
+      name: 'Projects',
+      icon: <FolderIcon size={14} />,
+      path: '/home/zis3c/Projects',
+    },
     { name: 'File System', icon: <FolderIcon size={14} />, path: '/' },
-    { name: 'Trash', icon: <FolderIcon size={14} />, path: '/home/zis3c/.local/share/Trash' },
+    {
+      name: 'Trash',
+      icon: <FolderIcon size={14} />,
+      path: '/home/zis3c/.local/share/Trash',
+    },
   ];
 
   const navigateTo = useCallback(
@@ -120,7 +148,8 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
 
   const getIcon = (node: FsNode) => {
     if (node.type === 'dir') return <FolderIcon size={32} color="#c4a661" />;
-    if (node.name.endsWith('.pdf')) return <PdfFileIcon size={32} color="#aa5555" />;
+    if (node.name.endsWith('.pdf'))
+      return <PdfFileIcon size={32} color="#aa5555" />;
     return <TextFileIcon size={32} color="#8899aa" />;
   };
 
@@ -140,7 +169,9 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     setStatus(ok ? `Folder created: ${folderName}` : 'Create folder failed');
     notifyDesktop({
       title: 'Thunar File Manager',
-      message: ok ? `Created folder '${folderName}'` : 'Failed to create folder',
+      message: ok
+        ? `Created folder '${folderName}'`
+        : 'Failed to create folder',
     });
     if (ok) {
       setInlineAction(null);
@@ -173,10 +204,14 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
   const handleDelete = useCallback(() => {
     if (!selectedFile) return;
     const ok = deleteNode(makeFullPath(selectedFile));
-    setStatus(ok ? `Deleted: ${selectedFile}` : 'Delete failed (non-empty folder?)');
+    setStatus(
+      ok ? `Deleted: ${selectedFile}` : 'Delete failed (non-empty folder?)'
+    );
     notifyDesktop({
       title: 'Thunar File Manager',
-      message: ok ? `Deleted '${selectedFile}'` : 'Delete failed (folder not empty?)',
+      message: ok
+        ? `Deleted '${selectedFile}'`
+        : 'Delete failed (folder not empty?)',
     });
     if (ok) setSelectedFile(null);
     refreshCurrent();
@@ -241,11 +276,7 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
   );
 
   return (
-    <Container
-      ref={rootRef}
-      tabIndex={0}
-      onKeyDown={handleFileManagerKeyDown}
-    >
+    <Container ref={rootRef} tabIndex={0} onKeyDown={handleFileManagerKeyDown}>
       <FmMenuBar>
         <FmMenuItem>File</FmMenuItem>
         <FmMenuItem>Edit</FmMenuItem>
@@ -255,7 +286,11 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
       </FmMenuBar>
 
       <Toolbar>
-        <NavButton onClick={goBack} title="Go back" disabled={historyIndex <= 0}>
+        <NavButton
+          onClick={goBack}
+          title="Go back"
+          disabled={historyIndex <= 0}
+        >
           <ArrowLeftIcon size={14} />
         </NavButton>
         <NavButton onClick={goUp} title="Go up" disabled={currentPath === '/'}>
@@ -282,7 +317,9 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
         >
           Rename
         </ActionButton>
-        <ActionButton onClick={handleDelete} disabled={!selectedFile}>Delete</ActionButton>
+        <ActionButton onClick={handleDelete} disabled={!selectedFile}>
+          Delete
+        </ActionButton>
         <PathBar>{currentPath}</PathBar>
       </Toolbar>
       {inlineAction && (
@@ -364,8 +401,12 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
       </Body>
 
       <StatusBar>
-        <span>{items.length} item{items.length !== 1 ? 's' : ''}</span>
-        <span>{status} | {toTildePath(currentPath)}</span>
+        <span>
+          {items.length} item{items.length !== 1 ? 's' : ''}
+        </span>
+        <span>
+          {status} | {toTildePath(currentPath)}
+        </span>
       </StatusBar>
     </Container>
   );
@@ -436,7 +477,8 @@ const ActionButton = styled.button<{ disabled?: boolean }>`
   height: 22px;
   padding: 0 8px;
   font-size: 10px;
-  color: ${({ disabled }) => (disabled ? 'rgba(180,185,195,0.45)' : 'rgba(200,205,215,0.95)')};
+  color: ${({ disabled }) =>
+    disabled ? 'rgba(180,185,195,0.45)' : 'rgba(200,205,215,0.95)'};
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(100, 120, 140, 0.35);
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -548,7 +590,9 @@ const FileEntry = styled.div<{ isSelected?: boolean }>`
 
   &:hover {
     background: ${({ isSelected, theme }) =>
-      isSelected ? 'rgba(54, 123, 240, 0.4)' : theme.kali.fileManager.fileHover};
+      isSelected
+        ? 'rgba(54, 123, 240, 0.4)'
+        : theme.kali.fileManager.fileHover};
   }
 `;
 

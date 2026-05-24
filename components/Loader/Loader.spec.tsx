@@ -8,7 +8,13 @@ import * as Styled from './Loader.styles';
  * @returns {JSX.Element} ShallowWrapper
  */
 const setup = () => {
-  return shallow(<Loader isOnScreen={true} loadingDuration={500} onBootComplete={() => undefined} />);
+  return shallow(
+    <Loader
+      isOnScreen={true}
+      loadingDuration={500}
+      onBootComplete={() => undefined}
+    />
+  );
 };
 
 describe('Loader component', () => {

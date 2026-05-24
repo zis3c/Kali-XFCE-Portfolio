@@ -26,7 +26,9 @@ interface CommandResult {
 // Boot timestamp for uptime calculation
 const bootTime = Date.now();
 
-export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
+export const useTerminalCommands = (
+  TerminalComponent?: React.ComponentType
+): {
   executeCommand: (cmd: string, currentPath: string) => CommandResult | null;
 } => {
   const { openWindow } = useActions();
@@ -35,7 +37,10 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1920;
     const h = typeof window !== 'undefined' ? window.innerHeight : 1080;
     const uptimeMin = Math.floor((Date.now() - bootTime) / 60000);
-    const uptimeStr = uptimeMin < 1 ? 'less than a minute' : `${uptimeMin} min${uptimeMin > 1 ? 's' : ''}`;
+    const uptimeStr =
+      uptimeMin < 1
+        ? 'less than a minute'
+        : `${uptimeMin} min${uptimeMin > 1 ? 's' : ''}`;
     const memUsed = Math.floor(Math.random() * 800 + 1200);
 
     return `       ..,,;;;::;,..          zis3c@kali
@@ -142,14 +147,31 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
 
       case 'ls': {
         if (args[0] === '-la' || args[0] === '-l' || args[0] === '-al') {
-          const targetPath = args[1] ? resolvePath(currentPath, args[1]) : absPath;
+          const targetPath = args[1]
+            ? resolvePath(currentPath, args[1])
+            : absPath;
           const result = listDirLong(targetPath);
-          if (!result) return { output: `ls: cannot access '${args[1] || '.'}': No such file or directory`, isError: true };
+          if (!result)
+            return {
+              output: `ls: cannot access '${
+                args[1] || '.'
+              }': No such file or directory`,
+              isError: true,
+            };
           return { output: result, isError: false };
         }
-        const targetPath = args[0] && !args[0].startsWith('-') ? resolvePath(currentPath, args[0]) : absPath;
+        const targetPath =
+          args[0] && !args[0].startsWith('-')
+            ? resolvePath(currentPath, args[0])
+            : absPath;
         const items = listDir(targetPath);
-        if (!items) return { output: `ls: cannot access '${args[0] || '.'}': No such file or directory`, isError: true };
+        if (!items)
+          return {
+            output: `ls: cannot access '${
+              args[0] || '.'
+            }': No such file or directory`,
+            isError: true,
+          };
         return { output: items.join('  '), isError: false };
       }
 
@@ -160,7 +182,11 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
         }
         const newAbsPath = resolvePath(currentPath, target);
         if (isDir(newAbsPath)) {
-          return { output: '', isError: false, newPath: toTildePath(newAbsPath) };
+          return {
+            output: '',
+            isError: false,
+            newPath: toTildePath(newAbsPath),
+          };
         }
         return {
           output: `bash: cd: ${target}: No such file or directory`,
@@ -198,14 +224,23 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
           const content = readFile('/home/zis3c/skills.txt');
           return { output: content || '', isError: false };
         }
-        return { output: `skills: unknown option '${args[0] || ''}'`, isError: true };
+        return {
+          output: `skills: unknown option '${args[0] || ''}'`,
+          isError: true,
+        };
 
       case 'projects':
         if (args[0] === '--list') {
           const items = listDir('/home/zis3c/Projects');
-          return { output: items ? items.join('\n') : 'No projects found', isError: false };
+          return {
+            output: items ? items.join('\n') : 'No projects found',
+            isError: false,
+          };
         }
-        return { output: `projects: unknown option '${args[0] || ''}'`, isError: true };
+        return {
+          output: `projects: unknown option '${args[0] || ''}'`,
+          isError: true,
+        };
 
       case 'open': {
         if (!args[0]) {
@@ -281,7 +316,10 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
             windowIcon: 'KALI_TEXTFILE',
             size: { width: 560, height: 420 },
             windowContent: (
-              <TextViewer content={resumeContent || 'resume.pdf — binary file'} filename="resume.pdf" />
+              <TextViewer
+                content={resumeContent || 'resume.pdf — binary file'}
+                filename="resume.pdf"
+              />
             ),
           });
           return { output: 'Opening resume.pdf...', isError: false };
@@ -317,14 +355,17 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
 
       case 'uname':
         return {
-          output: 'Linux kali 6.8.11-amd64 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux',
+          output:
+            'Linux kali 6.8.11-amd64 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux',
           isError: false,
         };
 
       case 'uptime': {
         const mins = Math.floor((Date.now() - bootTime) / 60000);
         const now = new Date();
-        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(
+          now.getMinutes()
+        ).padStart(2, '0')}`;
         return {
           output: ` ${timeStr} up ${mins} min,  1 user,  load average: 0.12, 0.08, 0.03`,
           isError: false,
@@ -334,7 +375,9 @@ export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
       case 'free':
         return {
           output: `               total        used        free      shared  buff/cache   available
-Mem:           8192        ${1200 + Math.floor(Math.random() * 600)}        ${4200 + Math.floor(Math.random() * 800)}          42        2748        6544
+Mem:           8192        ${1200 + Math.floor(Math.random() * 600)}        ${
+            4200 + Math.floor(Math.random() * 800)
+          }          42        2748        6544
 Swap:          2048           0        2048`,
           isError: false,
         };
@@ -350,7 +393,10 @@ tmpfs            4096000        0   4096000   0% /dev/shm
 
       case 'who':
         return {
-          output: `zis3c    tty7         ${new Date().toISOString().slice(0, 16).replace('T', ' ')} (:0)`,
+          output: `zis3c    tty7         ${new Date()
+            .toISOString()
+            .slice(0, 16)
+            .replace('T', ' ')} (:0)`,
           isError: false,
         };
 
@@ -386,7 +432,10 @@ Compiled with: nmap-liblua-5.4.6 openssl-3.1.4 nmap-libssh2-1.11.0 libz-1.3 nmap
             '443/tcp  open  https',
           ];
           return {
-            output: `Starting Nmap 7.94SVN ( https://nmap.org ) at ${new Date().toISOString().replace('T', ' ').slice(0, 19)}
+            output: `Starting Nmap 7.94SVN ( https://nmap.org ) at ${new Date()
+              .toISOString()
+              .replace('T', ' ')
+              .slice(0, 19)}
 Nmap scan report for ${target}
 Host is up (0.032s latency).
 Not shown: 997 filtered tcp ports (no-response)
@@ -397,7 +446,11 @@ Nmap done: 1 IP address (1 host up) scanned in 2.31 seconds`,
             isError: false,
           };
         }
-        return { output: 'Usage: nmap [Scan Type(s)] [Options] {target specification}\nTry "nmap --version" for version info.', isError: false };
+        return {
+          output:
+            'Usage: nmap [Scan Type(s)] [Options] {target specification}\nTry "nmap --version" for version info.',
+          isError: false,
+        };
 
       case 'wireshark':
         if (args[0] === '--version') {
@@ -407,7 +460,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
             isError: false,
           };
         }
-        return { output: 'Try "wireshark --version" for version info.', isError: false };
+        return {
+          output: 'Try "wireshark --version" for version info.',
+          isError: false,
+        };
 
       case 'msfconsole':
         if (args[0] === '--version') {
@@ -416,7 +472,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
             isError: false,
           };
         }
-        return { output: 'Try "msfconsole --version" for version info.', isError: false };
+        return {
+          output: 'Try "msfconsole --version" for version info.',
+          isError: false,
+        };
 
       case 'aircrack-ng':
         if (args[0] === '--version') {
@@ -425,7 +484,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
             isError: false,
           };
         }
-        return { output: 'Try "aircrack-ng --version" for version info.', isError: false };
+        return {
+          output: 'Try "aircrack-ng --version" for version info.',
+          isError: false,
+        };
 
       case 'echo':
         return { output: args.join(' '), isError: false };
@@ -447,7 +509,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         if (deleteNode(rmPath)) {
           return { output: '', isError: false };
         }
-        return { output: `rm: cannot remove '${args[0]}': No such file or non-empty directory`, isError: true };
+        return {
+          output: `rm: cannot remove '${args[0]}': No such file or non-empty directory`,
+          isError: true,
+        };
       }
 
       case 'mkdir': {
@@ -458,7 +523,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         if (createDir(mkdirPath)) {
           return { output: '', isError: false };
         }
-        return { output: `mkdir: cannot create directory '${args[0]}': File or directory exists`, isError: true };
+        return {
+          output: `mkdir: cannot create directory '${args[0]}': File or directory exists`,
+          isError: true,
+        };
       }
 
       case 'touch': {
@@ -469,7 +537,10 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         if (createFile(touchPath, '')) {
           return { output: '', isError: false };
         }
-        return { output: `touch: cannot touch '${args[0]}': File exists or path invalid`, isError: true };
+        return {
+          output: `touch: cannot touch '${args[0]}': File exists or path invalid`,
+          isError: true,
+        };
       }
 
       case 'vfs-reset':
@@ -483,15 +554,18 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
         }
         const filePath = resolvePath(currentPath, args[0]);
         const filename = args[0].split('/').pop() || 'untitled';
-        
+
         let node = findNode(filePath);
         if (!node) {
           createFile(filePath, '');
           node = findNode(filePath);
         }
-        
+
         if (node && node.type === 'dir') {
-          return { output: `mousepad: '${args[0]}': Is a directory`, isError: true };
+          return {
+            output: `mousepad: '${args[0]}': Is a directory`,
+            isError: true,
+          };
         }
 
         const fileContent = node?.content || '';
@@ -531,7 +605,11 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
 
       case 'ping':
         return {
-          output: `PING ${args[0] || 'localhost'}: 56 data bytes\n64 bytes: icmp_seq=1 ttl=64 time=0.042 ms\n--- ${args[0] || 'localhost'} ping statistics ---\n1 packets transmitted, 1 received, 0% packet loss`,
+          output: `PING ${
+            args[0] || 'localhost'
+          }: 56 data bytes\n64 bytes: icmp_seq=1 ttl=64 time=0.042 ms\n--- ${
+            args[0] || 'localhost'
+          } ping statistics ---\n1 packets transmitted, 1 received, 0% packet loss`,
           isError: false,
         };
 
@@ -610,34 +688,37 @@ SYNOPSIS
       default: {
         // Additional realistic commands
         const extraCommands: Record<string, string> = {
-          'which': args[0]
-            ? `/usr/bin/${args[0]}`
-            : 'which: missing argument',
-          'type': args[0]
+          which: args[0] ? `/usr/bin/${args[0]}` : 'which: missing argument',
+          type: args[0]
             ? `${args[0]} is /usr/bin/${args[0]}`
             : 'type: missing argument',
-          'alias': "alias ll='ls -la'\nalias la='ls -A'\nalias l='ls -CF'\nalias grep='grep --color=auto'",
-          'env': `USER=zis3c\nHOME=/home/zis3c\nSHELL=/usr/bin/zsh\nLOGNAME=zis3c\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\nLANG=en_US.UTF-8\nTERM=xterm-256color\nXDG_SESSION_TYPE=x11\nXDG_CURRENT_DESKTOP=XFCE\nDISPLAY=:0\nEDITOR=mousepad`,
-          'export': 'Usage: export NAME=VALUE',
-          'ps': `  PID TTY          TIME CMD\n    1 ?        00:00:01 systemd\n  842 ?        00:00:00 xfce4-session\n  856 ?        00:00:02 xfwm4\n  860 ?        00:00:01 xfce4-panel\n  865 ?        00:00:00 Thunar\n  912 pts/0    00:00:00 zsh\n  ${1000 + Math.floor(Math.random() * 200)} pts/0    00:00:00 ps`,
-          'top': 'top - use Ctrl+C to exit\n\nTasks: 142 total,   1 running, 141 sleeping,   0 stopped\n%Cpu(s):  2.3 us,  0.8 sy,  0.0 ni, 96.4 id\nMiB Mem :   8192.0 total,   4521.3 free,   1842.7 used,   1828.0 buff\n\n  PID USER      PR  NI    VIRT    RES  COMMAND\n  856 zis3c     20   0  248912  42120  xfwm4\n  860 zis3c     20   0  312456  38904  xfce4-panel\n  842 zis3c     20   0  186240  22456  xfce4-session',
-          'grep': args.length > 0
-            ? `Usage: grep [OPTION]... PATTERNS [FILE]...\nTry 'grep --help' for more information.`
-            : `Usage: grep [OPTION]... PATTERNS [FILE]...`,
-          'find': args.length > 0
-            ? `find: '${args[0]}': simulated filesystem only`
-            : 'Usage: find [path] [expression]',
-          'wc': args[0]
+          alias:
+            "alias ll='ls -la'\nalias la='ls -A'\nalias l='ls -CF'\nalias grep='grep --color=auto'",
+          env: `USER=zis3c\nHOME=/home/zis3c\nSHELL=/usr/bin/zsh\nLOGNAME=zis3c\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\nLANG=en_US.UTF-8\nTERM=xterm-256color\nXDG_SESSION_TYPE=x11\nXDG_CURRENT_DESKTOP=XFCE\nDISPLAY=:0\nEDITOR=mousepad`,
+          export: 'Usage: export NAME=VALUE',
+          ps: `  PID TTY          TIME CMD\n    1 ?        00:00:01 systemd\n  842 ?        00:00:00 xfce4-session\n  856 ?        00:00:02 xfwm4\n  860 ?        00:00:01 xfce4-panel\n  865 ?        00:00:00 Thunar\n  912 pts/0    00:00:00 zsh\n  ${
+            1000 + Math.floor(Math.random() * 200)
+          } pts/0    00:00:00 ps`,
+          top: 'top - use Ctrl+C to exit\n\nTasks: 142 total,   1 running, 141 sleeping,   0 stopped\n%Cpu(s):  2.3 us,  0.8 sy,  0.0 ni, 96.4 id\nMiB Mem :   8192.0 total,   4521.3 free,   1842.7 used,   1828.0 buff\n\n  PID USER      PR  NI    VIRT    RES  COMMAND\n  856 zis3c     20   0  248912  42120  xfwm4\n  860 zis3c     20   0  312456  38904  xfce4-panel\n  842 zis3c     20   0  186240  22456  xfce4-session',
+          grep:
+            args.length > 0
+              ? `Usage: grep [OPTION]... PATTERNS [FILE]...\nTry 'grep --help' for more information.`
+              : `Usage: grep [OPTION]... PATTERNS [FILE]...`,
+          find:
+            args.length > 0
+              ? `find: '${args[0]}': simulated filesystem only`
+              : 'Usage: find [path] [expression]',
+          wc: args[0]
             ? `  12  48 280 ${args[0]}`
             : 'Usage: wc [OPTION]... [FILE]...',
-          'head': args[0]
+          head: args[0]
             ? (() => {
                 const content = readFile(resolvePath(currentPath, args[0]));
                 if (content) return content.split('\n').slice(0, 10).join('\n');
                 return `head: cannot open '${args[0]}' for reading: No such file or directory`;
               })()
             : 'Usage: head [OPTION]... [FILE]...',
-          'tail': args[0]
+          tail: args[0]
             ? (() => {
                 const content = readFile(resolvePath(currentPath, args[0]));
                 if (content) {
@@ -647,40 +728,49 @@ SYNOPSIS
                 return `tail: cannot open '${args[0]}' for reading: No such file or directory`;
               })()
             : 'Usage: tail [OPTION]... [FILE]...',
-          'sort': 'Usage: sort [OPTION]... [FILE]...',
-          'chmod': 'chmod: cannot change permissions: Read-only file system',
-          'chown': 'chown: cannot change ownership: Read-only file system',
-          'file': args[0]
+          sort: 'Usage: sort [OPTION]... [FILE]...',
+          chmod: 'chmod: cannot change permissions: Read-only file system',
+          chown: 'chown: cannot change ownership: Read-only file system',
+          file: args[0]
             ? `${args[0]}: UTF-8 Unicode text`
             : 'Usage: file [OPTION...] [FILE...]',
-          'stat': args[0]
-            ? `  File: ${args[0]}\n  Size: 420       \tBlocks: 8          IO Block: 4096   regular file\nDevice: 801h/2049d\tInode: 131074     Links: 1\nAccess: (0644/-rw-r--r--)  Uid: ( 1000/  zis3c)   Gid: ( 1000/  zis3c)\nModify: ${new Date().toISOString()}`
+          stat: args[0]
+            ? `  File: ${
+                args[0]
+              }\n  Size: 420       \tBlocks: 8          IO Block: 4096   regular file\nDevice: 801h/2049d\tInode: 131074     Links: 1\nAccess: (0644/-rw-r--r--)  Uid: ( 1000/  zis3c)   Gid: ( 1000/  zis3c)\nModify: ${new Date().toISOString()}`
             : "stat: missing operand\nTry 'stat --help' for more information.",
-          'du': args[0] === '-h' || args[0] === '-sh'
-            ? '124M\t.'
-            : `4.0K\t./Desktop\n8.0K\t./Documents\n0\t./Downloads\n36K\t./Projects\n124K\t.`,
-          'mount': '/dev/sda1 on / type ext4 (rw,relatime)\ntmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)\n/dev/sda2 on /home type ext4 (rw,relatime)',
-          'cp': 'cp: cannot copy: Read-only file system',
-          'mv': 'mv: cannot move: Read-only file system',
-          'wget': args[0]
+          du:
+            args[0] === '-h' || args[0] === '-sh'
+              ? '124M\t.'
+              : `4.0K\t./Desktop\n8.0K\t./Documents\n0\t./Downloads\n36K\t./Projects\n124K\t.`,
+          mount:
+            '/dev/sda1 on / type ext4 (rw,relatime)\ntmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)\n/dev/sda2 on /home type ext4 (rw,relatime)',
+          cp: 'cp: cannot copy: Read-only file system',
+          mv: 'mv: cannot move: Read-only file system',
+          wget: args[0]
             ? `Connecting to ${args[0]}...\nHTTP request sent, awaiting response...\nNote: This is a simulated environment. No actual download performed.`
             : 'Usage: wget [OPTION]... [URL]...',
-          'curl': args[0]
+          curl: args[0]
             ? `curl: (7) Couldn't connect to server — simulated environment`
             : 'Usage: curl [options...] <url>',
-          'ssh': args[0]
+          ssh: args[0]
             ? `ssh: connect to host ${args[0]} port 22: Connection refused\n(Simulated environment — no network access)`
             : 'usage: ssh [-o option] [-p port] [user@]hostname',
-          'scp': 'scp: simulated environment — no network access',
-          'systemctl': args[0] === 'status'
-            ? `● kali.service - Kali Desktop Session\n     Loaded: loaded\n     Active: active (running)\n   Main PID: 842 (xfce4-session)\n      Tasks: 24\n     Memory: 142.8M`
-            : args[0] === 'list-units'
-            ? `UNIT                      LOAD   ACTIVE SUB     DESCRIPTION\nsystemd-logind.service    loaded active running Login Service\nNetworkManager.service    loaded active running Network Manager\nxfce4-session.service     loaded active running Xfce Session`
-            : 'Usage: systemctl [OPTIONS...] COMMAND ...',
-          'journalctl': 'May 17 12:00:01 kali systemd[1]: Started Xfce Session.\nMay 17 12:00:02 kali xfwm4[856]: Window manager started.\nMay 17 12:00:03 kali xfce4-panel[860]: Panel loaded.',
-          'dpkg': args[0] === '-l'
-            ? 'Desired=Unknown/Install/Remove\n| Status=Not/Inst/Conf-files\n||/ Name                    Version          Description\n+++-=======================-================-==================\nii  nmap                    7.94+git-1       Network exploration tool\nii  wireshark               4.2.0-1          Network protocol analyzer\nii  aircrack-ng             1:1.7-5          Wireless network security tools\nii  metasploit-framework    6.4.0-dev        Penetration testing framework'
-            : `dpkg-query: ${args.length > 0 ? args.join(' ') : 'no packages found'}`,
+          scp: 'scp: simulated environment — no network access',
+          systemctl:
+            args[0] === 'status'
+              ? `● kali.service - Kali Desktop Session\n     Loaded: loaded\n     Active: active (running)\n   Main PID: 842 (xfce4-session)\n      Tasks: 24\n     Memory: 142.8M`
+              : args[0] === 'list-units'
+              ? `UNIT                      LOAD   ACTIVE SUB     DESCRIPTION\nsystemd-logind.service    loaded active running Login Service\nNetworkManager.service    loaded active running Network Manager\nxfce4-session.service     loaded active running Xfce Session`
+              : 'Usage: systemctl [OPTIONS...] COMMAND ...',
+          journalctl:
+            'May 17 12:00:01 kali systemd[1]: Started Xfce Session.\nMay 17 12:00:02 kali xfwm4[856]: Window manager started.\nMay 17 12:00:03 kali xfce4-panel[860]: Panel loaded.',
+          dpkg:
+            args[0] === '-l'
+              ? 'Desired=Unknown/Install/Remove\n| Status=Not/Inst/Conf-files\n||/ Name                    Version          Description\n+++-=======================-================-==================\nii  nmap                    7.94+git-1       Network exploration tool\nii  wireshark               4.2.0-1          Network protocol analyzer\nii  aircrack-ng             1:1.7-5          Wireless network security tools\nii  metasploit-framework    6.4.0-dev        Penetration testing framework'
+              : `dpkg-query: ${
+                  args.length > 0 ? args.join(' ') : 'no packages found'
+                }`,
           'xdg-open': args[0]
             ? `Opening ${args[0]}...`
             : 'Usage: xdg-open <file|url>',
@@ -688,13 +778,30 @@ SYNOPSIS
 
         const extraResult = extraCommands[command];
         if (extraResult !== undefined) {
-          const isErr = extraResult.includes('cannot') || extraResult.includes('error') || extraResult.includes('missing') || extraResult.includes('refused');
+          const isErr =
+            extraResult.includes('cannot') ||
+            extraResult.includes('error') ||
+            extraResult.includes('missing') ||
+            extraResult.includes('refused');
           return { output: extraResult, isError: isErr };
         }
 
         const known = [
-          'nmap', 'sudo', 'ls', 'cat', 'cd', 'pwd', 'help', 'man', 'grep',
-          'find', 'echo', 'history', 'whoami', 'hostname', 'neofetch',
+          'nmap',
+          'sudo',
+          'ls',
+          'cat',
+          'cd',
+          'pwd',
+          'help',
+          'man',
+          'grep',
+          'find',
+          'echo',
+          'history',
+          'whoami',
+          'hostname',
+          'neofetch',
         ];
         const suggestion =
           known.find((k) => k.startsWith(command[0] || '')) ||
@@ -711,5 +818,3 @@ SYNOPSIS
 
   return { executeCommand };
 };
-
-
