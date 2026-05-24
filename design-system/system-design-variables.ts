@@ -73,11 +73,6 @@ const darkPrimaryColors = {
   text: 'rgba(220, 230, 240, 0.92)',
 };
 
-const lightPrimaryColors: IPrimaryColors = {
-  background: '#1a1a2e',
-  text: 'rgba(220, 230, 240, 0.92)',
-};
-
 export type IPrimaryColors = typeof darkPrimaryColors;
 
 const darkGrayColors = {
@@ -86,11 +81,6 @@ const darkGrayColors = {
   lightest: '#3a3a50',
 };
 
-const lightGrayColors: IGrayColors = {
-  dark: 'rgba(40, 42, 54, 0.85)',
-  light: '#2a2a3e',
-  lightest: '#3a3a50',
-};
 export type IGrayColors = typeof darkGrayColors;
 
 const darkUtilityColors = {
@@ -138,7 +128,11 @@ const darkUtilityColors = {
 
 export type IUtilityColors = typeof darkUtilityColors;
 
-/* Kali is dark-only, light theme maps to dark */
+// Kali is intentionally dark-only. Both themes point to the same dark palette
+// because the Kali XFCE simulation has no light mode.
+// The light theme exports exist to satisfy the ThemeProvider interface shape.
+const lightPrimaryColors: IPrimaryColors = darkPrimaryColors;
+const lightGrayColors: IGrayColors = darkGrayColors;
 const lightUtilityColors: IUtilityColors = { ...darkUtilityColors };
 
 /*=====  End of Colors  ======*/

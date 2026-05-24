@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import Loader from './Loader';
-import Logo from '../Portfolio/Logo/Logo';
 import * as Styled from './Loader.styles';
 
 /**
@@ -9,7 +8,7 @@ import * as Styled from './Loader.styles';
  * @returns {JSX.Element} ShallowWrapper
  */
 const setup = () => {
-  return shallow(<Loader isOnScreen={true} loadingDuration={500} />);
+  return shallow(<Loader isOnScreen={true} loadingDuration={500} onBootComplete={() => undefined} />);
 };
 
 describe('Loader component', () => {
@@ -20,12 +19,12 @@ describe('Loader component', () => {
     expect(wrap.length).toBe(1);
   });
 
-  it('should render logo', () => {
-    const logo = wrap.find(Logo);
-    expect(logo.length).toBe(1);
+  it('should render container', () => {
+    const container = wrap.find(Styled.Container);
+    expect(container.length).toBe(1);
   });
-  it('should render scroll text', () => {
-    const scrollText = wrap.find(Styled.ScrollText);
-    expect(scrollText.length).toBe(1);
+  it('should render boot screen', () => {
+    const bootScreen = wrap.find(Styled.BootScreen);
+    expect(bootScreen.length).toBe(1);
   });
 });

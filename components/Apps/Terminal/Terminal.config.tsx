@@ -2,7 +2,6 @@ import { useActions } from '../../../hooks/useActions';
 import React from 'react';
 import TextViewer from '../TextViewer/TextViewer';
 import FileManager from '../FileManager/FileManager';
-import Terminal from './Terminal';
 import {
   resolvePath,
   findNode,
@@ -11,6 +10,10 @@ import {
   readFile,
   isDir,
   toTildePath,
+  createFile,
+  createDir,
+  deleteNode,
+  resetVfs,
 } from '../../../utils/filesystem';
 
 interface CommandResult {
@@ -23,7 +26,7 @@ interface CommandResult {
 // Boot timestamp for uptime calculation
 const bootTime = Date.now();
 
-export const useTerminalCommands = (): {
+export const useTerminalCommands = (TerminalComponent?: React.ComponentType): {
   executeCommand: (cmd: string, currentPath: string) => CommandResult | null;
 } => {
   const { openWindow } = useActions();
@@ -86,6 +89,11 @@ export const useTerminalCommands = (): {
     cd <dir>          Change directory
     cd ..             Go to parent directory
     cat <file>        Display file contents
+    touch <file>      Create an empty file
+    mkdir <dir>       Create a directory
+    rm <file/dir>     Remove a file or empty directory
+    mousepad <file>   Open file in Mousepad editor
+    vfs-reset         Reset filesystem to defaults
     clear             Clear terminal (or Ctrl+L)
 
   Portfolio:
@@ -284,7 +292,7 @@ export const useTerminalCommands = (): {
             isOpen: true,
             windowIcon: 'KALI_TERMINAL',
             size: { width: 640, height: 420 },
-            windowContent: <Terminal />,
+            windowContent: TerminalComponent ? <TerminalComponent /> : <div />,
           });
           return { output: 'Opening new terminal...', isError: false };
         }
@@ -431,23 +439,78 @@ Compiled (64-bit) using GCC 13.2.0, with GLib 2.78.1, with Qt 6.6.1`,
       case 'sudo':
         return { output: '[sudo] password for zis3c:', isError: false };
 
-      case 'rm':
-        return {
-          output: 'rm: cannot remove: Read-only file system',
-          isError: true,
-        };
+      case 'rm': {
+        if (!args[0]) {
+          return { output: 'rm: missing operand', isError: true };
+        }
+        const rmPath = resolvePath(currentPath, args[0]);
+        if (deleteNode(rmPath)) {
+          return { output: '', isError: false };
+        }
+        return { output: `rm: cannot remove '${args[0]}': No such file or non-empty directory`, isError: true };
+      }
 
-      case 'mkdir':
-        return {
-          output: 'mkdir: cannot create directory: Read-only file system',
-          isError: true,
-        };
+      case 'mkdir': {
+        if (!args[0]) {
+          return { output: 'mkdir: missing operand', isError: true };
+        }
+        const mkdirPath = resolvePath(currentPath, args[0]);
+        if (createDir(mkdirPath)) {
+          return { output: '', isError: false };
+        }
+        return { output: `mkdir: cannot create directory '${args[0]}': File or directory exists`, isError: true };
+      }
 
-      case 'touch':
-        return {
-          output: 'touch: cannot touch: Read-only file system',
-          isError: true,
-        };
+      case 'touch': {
+        if (!args[0]) {
+          return { output: 'touch: missing operand', isError: true };
+        }
+        const touchPath = resolvePath(currentPath, args[0]);
+        if (createFile(touchPath, '')) {
+          return { output: '', isError: false };
+        }
+        return { output: `touch: cannot touch '${args[0]}': File exists or path invalid`, isError: true };
+      }
+
+      case 'vfs-reset':
+        resetVfs();
+        return { output: 'Resetting virtual filesystem...', isError: false };
+
+      case 'mousepad':
+      case 'nano': {
+        if (!args[0]) {
+          return { output: 'Usage: mousepad <filename>', isError: true };
+        }
+        const filePath = resolvePath(currentPath, args[0]);
+        const filename = args[0].split('/').pop() || 'untitled';
+        
+        let node = findNode(filePath);
+        if (!node) {
+          createFile(filePath, '');
+          node = findNode(filePath);
+        }
+        
+        if (node && node.type === 'dir') {
+          return { output: `mousepad: '${args[0]}': Is a directory`, isError: true };
+        }
+
+        const fileContent = node?.content || '';
+
+        openWindow({
+          windowName: `${filename} — Mousepad`,
+          isOpen: true,
+          windowIcon: 'KALI_TEXTFILE',
+          size: { width: 560, height: 420 },
+          windowContent: (
+            <TextViewer
+              content={fileContent}
+              filename={filename}
+              filepath={filePath}
+            />
+          ),
+        });
+        return { output: `Opening ${filename} in Mousepad...`, isError: false };
+      }
 
       case 'apt':
       case 'apt-get':

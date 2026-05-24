@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { AnyAction, applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';

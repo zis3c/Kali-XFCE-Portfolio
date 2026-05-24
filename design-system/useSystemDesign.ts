@@ -1,22 +1,5 @@
 import { DefaultTheme } from 'styled-components';
-import {
-  allGradients,
-  borderRadii,
-  boxShadows,
-  darkGrayColors,
-  darkPrimaryColors,
-  darkUtilityColors,
-  fontSizes,
-  fontWeights,
-  kaliTokens,
-  lightGrayColors,
-  lightPrimaryColors,
-  lightUtilityColors,
-  portfolioStyles,
-  responsiveBreakPoints,
-  spacing,
-  zIndexes,
-} from './system-design-variables';
+import { darkTheme, lightTheme } from './themes';
 
 /**
  * Custom hook used to get app's themes used by styled component's theme provider to locally style all app's components
@@ -30,41 +13,6 @@ export const useSystemDesign = (): {
   darkTheme: DefaultTheme;
   lightTheme: DefaultTheme;
 } => {
-  const darkTheme: DefaultTheme = {
-    mode: 'dark',
-    primary: darkPrimaryColors,
-    gray: darkGrayColors,
-    colors: darkUtilityColors,
-    gradients: allGradients,
-    boxShadow: boxShadows,
-    borderRadius: borderRadii.main,
-    zIndex: zIndexes,
-    fontSize: fontSizes,
-    fontWeight: fontWeights,
-    space: spacing,
-    media: responsiveBreakPoints,
-
-    portfolio: portfolioStyles,
-    kali: kaliTokens,
-  };
-
-  /* Kali is dark-only — light theme mirrors dark */
-  const lightTheme: DefaultTheme = {
-    mode: 'light',
-    primary: lightPrimaryColors,
-    gray: lightGrayColors,
-    colors: lightUtilityColors,
-    gradients: allGradients,
-    boxShadow: boxShadows,
-    borderRadius: borderRadii.main,
-    zIndex: zIndexes,
-    fontSize: fontSizes,
-    fontWeight: fontWeights,
-    space: spacing,
-    media: responsiveBreakPoints,
-
-    portfolio: portfolioStyles,
-    kali: kaliTokens,
-  };
   return { darkTheme, lightTheme };
 };
+

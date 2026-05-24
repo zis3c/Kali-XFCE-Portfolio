@@ -8,6 +8,8 @@ import { windowsReducer } from '../windowsReducer';
 
 const initialState: WindowsState = {
   openedWindows: [],
+  activeWindowName: null,
+  activeWorkspace: 1,
 };
 
 test('when previous state is undefined, returns initial state', () => {
@@ -31,19 +33,46 @@ describe('Open windows correctly', () => {
     });
     expect(newState).toStrictEqual({
       ...initialState,
-      openedWindows: [dummyWindowContent],
+      openedWindows: [
+        {
+          ...dummyWindowContent,
+          isMinimized: false,
+          workspace: 1,
+        },
+      ],
+      activeWindowName: '🍅 TOMATO 🍅',
     });
   });
 });
+
 describe('Closes windows correctly', () => {
-  test('add newly opened window to state, thereby rendering it on OPEN_WINDOW', () => {
-    const newState = windowsReducer(initialState, {
+  test('closes opened window correctly', () => {
+    const openedState: WindowsState = {
+      openedWindows: [
+        {
+          ...dummyWindowContent,
+          isMinimized: false,
+          workspace: 1,
+        },
+      ],
+      activeWindowName: '🍅 TOMATO 🍅',
+      activeWorkspace: 1,
+    };
+    const newState = windowsReducer(openedState, {
       type: WindowsActionTypes.CLOSE_WINDOW,
       payload: '🍅 TOMATO 🍅',
     });
     expect(newState).toStrictEqual({
-      ...initialState,
-      openedWindows: [],
+      ...openedState,
+      openedWindows: [
+        {
+          ...dummyWindowContent,
+          isMinimized: false,
+          workspace: 1,
+          isOpen: false,
+        },
+      ],
+      activeWindowName: null,
     });
   });
 });

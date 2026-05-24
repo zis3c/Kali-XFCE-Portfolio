@@ -18,74 +18,77 @@ export const useDesktopApps = (): {
   const aboutContent = readFile('/home/zis3c/about.txt') || '';
   const contactContent = readFile('/home/zis3c/contact.txt') || '';
 
-  const initialDesktopAppsList: IDesktopApp[] = [
-    {
-      id: 1,
-      text: 'Home',
-      willOpenWindowWith: <FileManager />,
-      variant: 'desktop',
-      iconSrc: '/assets/icons/Desktop/user-folder.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-    {
-      id: 2,
-      text: 'Terminal',
-      willOpenWindowWith: <Terminal />,
-      variant: 'desktop',
-      iconSrc: '/assets/icons/taskbar/bash.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-    {
-      id: 3,
-      text: 'about.txt',
-      willOpenWindowWith: (
-        <TextViewer
-          content={aboutContent}
-          filename="about.txt"
-          filepath="/home/zis3c/about.txt"
-        />
-      ),
-      variant: 'desktop',
-      iconSrc: '/assets/icons/Desktop/comments.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-    {
-      id: 4,
-      text: 'projects',
-      willOpenWindowWith: <FileManager startPath="/home/zis3c/Projects" />,
-      variant: 'desktop',
-      iconSrc: '/assets/icons/Desktop/user-folder.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-    {
-      id: 5,
-      text: 'contact.txt',
-      willOpenWindowWith: (
-        <TextViewer
-          content={contactContent}
-          filename="contact.txt"
-          filepath="/home/zis3c/contact.txt"
-        />
-      ),
-      variant: 'desktop',
-      iconSrc: '/assets/icons/Desktop/comment.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-    {
-      id: 6,
-      text: 'Trash',
-      willOpenWindowWith: <FileManager startPath="/home/zis3c/.local/share/Trash" />,
-      variant: 'desktop',
-      iconSrc: '/assets/icons/Desktop/recycle-bin-empty.png',
-      iconSize: { width: 32, height: 32 },
-      action: null,
-    },
-  ];
+  return React.useMemo(() => {
+    const initialDesktopAppsList: IDesktopApp[] = [
+      {
+        id: 1,
+        text: 'Home',
+        willOpenWindowWith: <FileManager />,
+        variant: 'desktop',
+        iconSrc: '/assets/icons/Desktop/user-folder.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+      {
+        id: 2,
+        text: 'Terminal',
+        willOpenWindowWith: <Terminal />,
+        variant: 'desktop',
+        iconSrc: '/assets/icons/taskbar/bash.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+      {
+        id: 3,
+        text: 'about.txt',
+        willOpenWindowWith: (
+          <TextViewer
+            content={aboutContent}
+            filename="about.txt"
+            filepath="/home/zis3c/about.txt"
+          />
+        ),
+        variant: 'desktop',
+        iconSrc: '/assets/icons/Desktop/comments.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+      {
+        id: 4,
+        text: 'projects',
+        willOpenWindowWith: <FileManager startPath="/home/zis3c/Projects" />,
+        variant: 'desktop',
+        iconSrc: '/assets/icons/Desktop/user-folder.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+      {
+        id: 5,
+        text: 'contact.txt',
+        willOpenWindowWith: (
+          <TextViewer
+            content={contactContent}
+            filename="contact.txt"
+            filepath="/home/zis3c/contact.txt"
+          />
+        ),
+        variant: 'desktop',
+        iconSrc: '/assets/icons/Desktop/comment.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+      {
+        id: 6,
+        text: 'Trash',
+        willOpenWindowWith: (
+          <FileManager startPath="/home/zis3c/.local/share/Trash" />
+        ),
+        variant: 'desktop',
+        iconSrc: '/assets/icons/Desktop/recycle-bin-empty.png',
+        iconSize: { width: 32, height: 32 },
+        action: null,
+      },
+    ];
 
   const compressedAppsList = [...initialDesktopAppsList]
     .filter((app) => compressedApps.includes(app.text))
@@ -113,10 +116,11 @@ export const useDesktopApps = (): {
   const sortedBySize = [...desktopAppsList];
   const sortedByDate = [...desktopAppsList].sort((a, b) => b.id - a.id);
 
-  return {
-    sortedAlphabetically,
-    sortedByDate,
-    sortedBySize,
-    appsInTrashBin,
-  };
+    return {
+      sortedAlphabetically,
+      sortedByDate,
+      sortedBySize,
+      appsInTrashBin,
+    };
+  }, [aboutContent, compressedApps, contactContent, removedApps]);
 };

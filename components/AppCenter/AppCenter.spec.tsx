@@ -2,11 +2,9 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { withReduxAndStyledProviders } from '../../test/testUtils';
 import AppCenter from './AppCenter';
-import SearchBar from '../SearchBar/SearchBar';
 
-import Avatar from '../Avatar/Avatar';
-import PinnedApps from '../PinnedApps/PinnedApps';
-import Recommended from '../Recommended/Recommended';
+
+import * as Styled from './AppCenter.styles';
 
 /**
  * Setup function for the component
@@ -24,20 +22,16 @@ describe('AppCenter', () => {
     expect(wrap.length).toBe(1);
   });
 
-  it('should render search bar', () => {
-    const searchBar = wrap.find(SearchBar);
-    expect(searchBar.length).toBe(1);
+  it('should render search input', () => {
+    const searchInput = wrap.find(Styled.SearchInput);
+    expect(searchInput.length).toBe(1);
   });
-  it('should render avatar', () => {
-    const avatar = wrap.find(Avatar);
-    expect(avatar.length).toBe(1);
+  it('should render category sidebar', () => {
+    const sidebar = wrap.find(Styled.CategorySidebar);
+    expect(sidebar.length).toBe(1);
   });
-  it('should render pinned apps', () => {
-    const pinnedApps = wrap.find(PinnedApps);
-    expect(pinnedApps.length).toBe(1);
-  });
-  it('should render recommended apps', () => {
-    const recommendedApps = wrap.find(Recommended);
-    expect(recommendedApps.length).toBe(1);
+  it('should render app list', () => {
+    const appList = wrap.find(Styled.AppList);
+    expect(appList.length).toBe(1);
   });
 });

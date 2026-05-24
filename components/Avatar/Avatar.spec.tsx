@@ -9,7 +9,7 @@ const avatarProps: Props = {
   lastName: 'doe',
   isActive: false,
   hasBadge: false,
-  src: '/images/avatar.png',
+  src: '/assets/avatars/memoji-zi.jpg',
   width: '50px',
 };
 

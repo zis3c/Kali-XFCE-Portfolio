@@ -24,13 +24,8 @@ export const mockReduxStore: LocalRootState = {
   },
   windows: {
     openedWindows: [],
-  },
-  likes: {
-    likesCount: 1,
-    isLikePersisted: false,
-    areLikesFetching: false,
-    isLoading: false,
-    error: null,
+    activeWindowName: null,
+    activeWorkspace: 1,
   },
   contact: {
     isEmailSending: false,
@@ -41,21 +36,6 @@ export const mockReduxStore: LocalRootState = {
   news: {
     newsArticles: [],
     areNewsLoading: false,
-    error: null,
-  },
-  comments: {
-    comments: [],
-    commentsCount: 0,
-    error: null,
-    isCommentPersisted: false,
-    isLoading: false,
-  },
-
-  articles: {
-    articles: [],
-    areArticlesLoading: false,
-    filterOptions: [],
-    sortArticlesBy: 'date',
     error: null,
   },
 };

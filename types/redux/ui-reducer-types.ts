@@ -21,7 +21,6 @@ export interface UIstate {
 
 export enum UIactionTypes {
   CHANGE_THEME = 'CHANGE_THEME',
-  THEME_WAS_CHANGED = 'THEME_WAS_CHANGED',
 
   OPEN_WIDGETS_MODAL = 'OPEN_WIDGETS_MODAL',
   CLOSE_WIDGETS_MODAL = 'CLOSE_WIDGETS_MODAL',
@@ -60,7 +59,6 @@ export enum UIactionTypes {
 
 export type UIaction =
   | { type: UIactionTypes.CHANGE_THEME }
-  | { type: UIactionTypes.THEME_WAS_CHANGED }
   | { type: UIactionTypes.OPEN_WIDGETS_MODAL }
   | { type: UIactionTypes.CLOSE_WIDGETS_MODAL }
   | { type: UIactionTypes.OPEN_APP_CENTER_MODAL }

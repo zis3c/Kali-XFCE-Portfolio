@@ -1,12 +1,20 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+interface Props {
+  searchQuery?: string;
+}
+
 const DEFAULT_URL = 'https://www.google.com/webhp?igu=1';
 
-const GoogleSearch = (): JSX.Element => {
-  const [history, setHistory] = useState<string[]>([DEFAULT_URL]);
+const GoogleSearch = ({ searchQuery }: Props): JSX.Element => {
+  const initialUrl = searchQuery
+    ? `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`
+    : DEFAULT_URL;
+
+  const [history, setHistory] = useState<string[]>([initialUrl]);
   const [historyIndex, setHistoryIndex] = useState(0);
-  const [inputValue, setInputValue] = useState(DEFAULT_URL);
+  const [inputValue, setInputValue] = useState(initialUrl);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const currentUrl = history[historyIndex];

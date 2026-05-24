@@ -110,7 +110,7 @@ const Terminal = (): JSX.Element => {
   const [activeTabId, setActiveTabId] = useState(1);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { executeCommand } = useTerminalCommands();
+  const { executeCommand } = useTerminalCommands(Terminal);
 
   const getTabStorageKey = useCallback(
     (tabId: number) => `${STORAGE_KEY}_tab_${tabId}`,
@@ -372,7 +372,7 @@ const Terminal = (): JSX.Element => {
           content: '',
           promptPath: '',
           promptUser: '',
-          promptChar: '',
+          promptChar: '$ ' as const,
         },
       ]);
       if (sudoPasswordBuffer === '1234') {

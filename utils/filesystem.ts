@@ -506,15 +506,51 @@ export function readFile(absPath: string): string | null {
   return node.content ?? `${node.name}: binary file`;
 }
 
+function saveVfs() {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('kali_vfs', JSON.stringify(fsTree));
+    } catch (e) {
+      console.error('Failed to save VFS to localStorage', e);
+    }
+  }
+}
+
+// Load from localStorage if available
+if (typeof window !== 'undefined') {
+  try {
+    const saved = localStorage.getItem('kali_vfs');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && parsed.type === 'dir' && Array.isArray(parsed.children)) {
+        fsTree.children = parsed.children;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to load VFS from localStorage', e);
+  }
+}
+
+export function resetVfs(): void {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.removeItem('kali_vfs');
+      window.location.reload();
+    } catch (e) {
+      console.error('Failed to reset VFS', e);
+    }
+  }
+}
+
 /**
- * Write file content in virtual FS (in-memory only).
- * Data resets on hard refresh/restart.
+ * Write file content in virtual FS.
  */
 export function writeFile(absPath: string, content: string): boolean {
   const node = findNode(absPath);
   if (!node || node.type !== 'file') return false;
   node.content = content;
   node.size = content.length;
+  saveVfs();
   return true;
 }
 
@@ -526,6 +562,18 @@ function splitParent(absPath: string): { parentPath: string; name: string } {
   return { parentPath: parentPath === '' ? '/' : parentPath, name };
 }
 
+export function createFile(absPath: string, content: string = ''): boolean {
+  const { parentPath, name } = splitParent(absPath);
+  if (!name) return false;
+  const parent = findNode(parentPath);
+  if (!parent || parent.type !== 'dir') return false;
+  parent.children = parent.children || [];
+  if (parent.children.some((c) => c.name === name)) return false;
+  parent.children.push({ name, type: 'file', content, size: content.length });
+  saveVfs();
+  return true;
+}
+
 export function createDir(absPath: string): boolean {
   const { parentPath, name } = splitParent(absPath);
   if (!name) return false;
@@ -534,6 +582,7 @@ export function createDir(absPath: string): boolean {
   parent.children = parent.children || [];
   if (parent.children.some((c) => c.name === name)) return false;
   parent.children.push({ name, type: 'dir', children: [] });
+  saveVfs();
   return true;
 }
 
@@ -547,6 +596,7 @@ export function renameNode(absPath: string, newName: string): boolean {
   const node = parent.children.find((c) => c.name === name);
   if (!node) return false;
   node.name = safeName;
+  saveVfs();
   return true;
 }
 
@@ -560,6 +610,7 @@ export function deleteNode(absPath: string): boolean {
     return false;
   }
   parent.children = parent.children.filter((c) => c.name !== name);
+  saveVfs();
   return true;
 }
 

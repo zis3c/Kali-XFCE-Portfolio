@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 import FormikTextField, { Props } from './FormikTextField';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 
 export default {
   title: 'Portfolio/Form/text-field',
@@ -13,9 +13,9 @@ const Template: Story<Props> = (args) => (
     initialValues={{ name: '', email: '', password: '' }}
     onSubmit={() => console.log('boom')}
   >
-    <Form>
+    <form>
       <FormikTextField {...args} />
-    </Form>
+    </form>
   </Formik>
 );
 export const TextControl = Template.bind({});

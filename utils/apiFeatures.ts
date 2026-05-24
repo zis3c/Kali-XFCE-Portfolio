@@ -1,20 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type MongooseQuery = any;
 
 /**
  * APIfeatures class, enhances mongoose query with additional filtering, sorting, limiting and pagination functionality
  * @class APIfeatures
  * @param  {queryString} query in NextApiRequest
  * @param  {query} query
- * @returns {query} - filtered, sorted , limited aor  paginated query. If this will be specified in URL
+ * @returns {query} - filtered, sorted , limited or paginated query. If this will be specified in URL
  */
 export class APIfeatures {
   queryString: {
     [key: string]: string;
   };
-  query: any;
+  query: MongooseQuery;
 
   constructor(
-    query: any,
+    query: MongooseQuery,
     queryString: {
       [key: string]: string;
     }

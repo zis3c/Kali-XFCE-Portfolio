@@ -1,8 +1,8 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState, ReactNode } from 'react';
 import { Rnd } from 'react-rnd';
 import * as Styled from './Window.styles';
 import { MinimizeIcon, MaximizeIcon, CloseIcon } from '../icons/KaliIcons';
-import { generateRandomNumberInRange } from '../../utils/helper-functions';
+import { random } from '../../utils';
 
 export interface Props {
   windowName: string;
@@ -13,6 +13,7 @@ export interface Props {
   closeWindow: () => void;
   focusWindow: () => void;
   minimizeWindow: () => void;
+  children?: ReactNode;
 }
 
 const panelHeight = 28;
@@ -29,11 +30,9 @@ const Window: FC<Props> = ({
   closeWindow,
   focusWindow,
   minimizeWindow,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  windowIcon,
 }) => {
-  const shiftOnX = generateRandomNumberInRange(-100, 80);
-  const shiftOnY = generateRandomNumberInRange(0, 60);
+  const shiftOnX = random(-100, 80);
+  const shiftOnY = random(0, 60);
   const [isWindowExpanded, setIsWindowExpanded] = useState(false);
   const [clientWidth, setClientWidth] = useState(800);
   const [clientHeight, setClientHeight] = useState(600);

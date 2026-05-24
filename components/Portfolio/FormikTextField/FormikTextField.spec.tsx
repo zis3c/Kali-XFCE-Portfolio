@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import FormikTextField from './FormikTextField';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { withReduxAndStyledProviders } from '../../../test/testUtils';
 
 describe('Formik text control component', () => {
@@ -11,13 +11,13 @@ describe('Formik text control component', () => {
         initialValues={{ email: '' }}
         onSubmit={() => console.log('boom')}
       >
-        <Form>
+        <form>
           <FormikTextField
             placeholder={'email'}
             name={'email'}
             type={'email'}
           />
-        </Form>
+        </form>
       </Formik>
     )
   );

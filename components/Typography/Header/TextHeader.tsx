@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import * as Styled from './TextHeader.styles';
 
 export interface Props {
   margin: string;
   isBold: boolean;
+  children?: ReactNode;
 }
 
 /**

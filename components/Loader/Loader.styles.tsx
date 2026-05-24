@@ -1,9 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const blink = keyframes`
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-`;
+import styled from 'styled-components';
 
 export const Container = styled.section`
   position: fixed;

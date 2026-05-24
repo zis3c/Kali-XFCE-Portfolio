@@ -34,8 +34,6 @@ export const sendEmailViaSendgrid = (contactFormData: ContactFormData) => {
  * @CLEAR email state
  * @CLEAR operation statuses
  */
-export const clearEmailState = () => {
-  return async (dispatch: Dispatch<ContactAction>): Promise<void> => {
-    dispatch({ type: ContactActionTypes.CLEAR_EMAIL_STATE });
-  };
-};
+export const clearEmailState = (): ContactAction => ({
+  type: ContactActionTypes.CLEAR_EMAIL_STATE,
+});

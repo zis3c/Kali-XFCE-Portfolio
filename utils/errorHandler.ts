@@ -10,6 +10,7 @@ class ErrorHandler extends Error {
 
   constructor(message: string, statusCode: number) {
     super(message);
+    this.name = 'ErrorHandler';
     this.statusCode = statusCode;
     Error.captureStackTrace(this, this.constructor);
   }

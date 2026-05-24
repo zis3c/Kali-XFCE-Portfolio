@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import * as Styled from './WidgetCard.styles';
 import Image from 'next/image';
 import { FiMoreHorizontal } from 'react-icons/fi';
@@ -8,6 +8,7 @@ export interface Props {
   cardHeader: string;
   headerIcon: string;
   iconSize: { height: number; width: number };
+  children?: ReactNode;
 }
 
 /**

@@ -6,37 +6,26 @@ import { todosReducer } from './todosReducer';
 import { TodosState } from '../../types/redux/todos-reducer-types';
 import { windowsReducer } from './windowsReducer';
 import { WindowsState } from '../../types/redux/windows-reducer-types';
-import { likesReducer } from './likesReducer';
-import { LikesState } from '../../types/redux/likes-reducer-types';
 import { contactReducer } from './contactReducer';
 import { ContactState } from '../../types/redux/contact-reducer-types';
 import { newsReducer } from './newsReducer';
 import { NewsReducerState } from '../../types/redux/news-reducer-types';
-import { commentsReducer } from './commentsReducer';
-import { CommentsState } from '../../types/redux/comments-reducer-types';
-import { articlesReducer } from './articlesReducer';
-import { ArticlesReducerState } from '../../types/redux/articles-reducer-types';
+
 
 export const rootReducer = combineReducers({
   ui: uiReducer,
   todos: todosReducer,
   windows: windowsReducer,
-  likes: likesReducer,
   contact: contactReducer,
   news: newsReducer,
-  comments: commentsReducer,
-  articles: articlesReducer,
 });
 
 export type State = {
   ui: UIstate;
   todos: TodosState;
   windows: WindowsState;
-  likes: LikesState;
   contact: ContactState;
   news: NewsReducerState;
-  comments: CommentsState;
-  articles: ArticlesReducerState;
 };
 
 // https://stackoverflow.com/questions/64139344/how-to-use-typescript-next-redux-wrapper-getserversideprops

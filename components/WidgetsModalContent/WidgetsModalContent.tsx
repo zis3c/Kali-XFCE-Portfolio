@@ -69,17 +69,23 @@ const WidgetsModalContent = (): JSX.Element => {
               article.url !== null
           )
           .slice(0, 15)
-          .map((article, id) => (
-            <NewsWidget
-              key={`${article.title}${article.publishedAt}`}
-              className={`grid-card-${id + 1}`}
-              newsHeader={article.title!}
-              newsSource={article.source.name}
-              newsLink={article.url!}
-              backgroundImg={article.urlToImage!}
-              cardGradientColor={'rgba(3, 21, 41, 1)'}
-            />
-          ))}
+          .map((article, id) => {
+            if (!article.title || !article.url || !article.urlToImage) {
+              return null;
+            }
+
+            return (
+              <NewsWidget
+                key={`${article.title}${article.publishedAt}`}
+                className={`grid-card-${id + 1}`}
+                newsHeader={article.title}
+                newsSource={article.source.name}
+                newsLink={article.url}
+                backgroundImg={article.urlToImage}
+                cardGradientColor={'rgba(3, 21, 41, 1)'}
+              />
+            );
+          })}
       </Styled.NewsGridWrapper>
     </Styled.Container>
   );

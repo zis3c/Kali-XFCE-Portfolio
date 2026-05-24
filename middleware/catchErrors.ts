@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { logger } from '../utils/logger';
 
 /**
  * Custom Error Handling Middleware for catching errors in api route controllers
@@ -19,10 +20,13 @@ export default function catchErrorsFrom(controller: NextController) {
     res: NextApiResponse
   ): Promise<unknown> => {
     return controller(req, res).catch((error) => {
-      console.error(error);
+      logger.error('Unhandled controller error', {
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       return res
         .status(500)
-        .json({ success: 'fail', error: error.message || error });
+        .json({ success: 'fail', error: error instanceof Error ? error.message : String(error) });
     });
   };
 }

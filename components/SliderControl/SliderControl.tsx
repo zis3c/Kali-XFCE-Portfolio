@@ -30,7 +30,7 @@ const SliderControl = ({ variant, withChevron }: Props): JSX.Element => {
     if (variant === 'brightnessControl') {
       changeScreenBrightness(rangeValue);
     }
-  }, [rangeValue, variant]);
+  }, [changeScreenBrightness, rangeValue, variant]);
 
   return (
     <Styled.Container>

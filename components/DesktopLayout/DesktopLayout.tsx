@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import * as Styled from './DesktopLayout.styles';
 import Head from 'next/head';
 import SystemTray from '../SystemTray/SystemTray';
@@ -9,6 +9,7 @@ import NotificationDaemon from '../NotificationDaemon/NotificationDaemon';
 export interface Props {
   title: string;
   entranceAnimationDelay: number;
+  children?: ReactNode;
 }
 
 /**
@@ -36,7 +37,7 @@ const DesktopLayout: FC<Props> = ({
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="theme-color" content="#0e0e1a" />
-        <title>Radzi Zamri</title>
+        <title>{title}</title>
         <meta
           name="description"
           content="zis3c Portfolio — Kali Linux Xfce Desktop Experience"

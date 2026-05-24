@@ -30,13 +30,20 @@ const DesktopApps = (): JSX.Element => {
     isSelecting: boolean;
   } | null>(null);
 
-  const [selectedAppIds, setSelectedAppIds] = useState<string[]>([]);
+  const [selectedAppIds, setSelectedAppIds] = useState<number[]>([]);
 
   useEffect(() => {
     if (sortDesktopIconsBy === 'name') setDisplayedDesktopApps(sortedAlphabetically);
     if (sortDesktopIconsBy === 'date') setDisplayedDesktopApps(sortedByDate);
     if (sortDesktopIconsBy === 'size') setDisplayedDesktopApps(sortedBySize);
-  }, [sortDesktopIconsBy, removedApps.length, compressedApps.length]);
+  }, [
+    sortDesktopIconsBy,
+    removedApps.length,
+    compressedApps.length,
+    sortedAlphabetically,
+    sortedByDate,
+    sortedBySize,
+  ]);
 
   // Initial layout calculation
   useEffect(() => {
@@ -142,7 +149,7 @@ const DesktopApps = (): JSX.Element => {
           const right = Math.max(selectionBox.startX, currentX);
           const bottom = Math.max(selectionBox.startY, currentY);
 
-          const newlySelected: string[] = [];
+          const newlySelected: number[] = [];
           displayedDesktopApps.forEach((app) => {
              const pos = positions[app.id];
              if (!pos) return;
@@ -198,7 +205,7 @@ const DesktopApps = (): JSX.Element => {
 
                 // Find if any other app is already occupying this target grid location
                 const occupyingAppId = Object.keys(prev).find(
-                  id => id !== app.id && prev[id].x === targetX && prev[id].y === targetY
+                  id => String(Number(id)) !== String(app.id) && prev[id].x === targetX && prev[id].y === targetY
                 );
 
                 if (occupyingAppId) {

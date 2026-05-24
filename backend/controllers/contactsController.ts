@@ -20,7 +20,11 @@ const sendEmail = catchErrors(
   async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     const { name, email, message } = req.body;
 
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+    const apiKey = process.env.SENDGRID_API_KEY;
+    if (!apiKey) {
+      throw new Error('SENDGRID_API_KEY is not configured');
+    }
+    sgMail.setApiKey(apiKey);
 
     const msg: MailDataRequired = {
       to: process.env.GOOGLE_EMAIL_ADDRESS!,

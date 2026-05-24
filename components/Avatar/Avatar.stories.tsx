@@ -13,7 +13,7 @@ export const ImgAndNotActive = Template.bind({});
 ImgAndNotActive.args = {
   hasBadge: false,
   isActive: false,
-  src: '/assets/avatar.jpeg',
+  src: '/assets/avatars/memoji-zi.jpg',
   firstName: 'John',
   lastName: 'Doe',
 };
@@ -21,7 +21,7 @@ export const ImgAndActive = Template.bind({});
 ImgAndActive.args = {
   hasBadge: false,
   isActive: true,
-  src: '/images/avatar.png',
+  src: '/assets/avatars/memoji-zi.jpg',
   firstName: 'John',
   lastName: 'Doe',
 };
@@ -29,7 +29,7 @@ export const ImgAndActiveAndBadge = Template.bind({});
 ImgAndActiveAndBadge.args = {
   hasBadge: true,
   isActive: true,
-  src: '/images/avatar.png',
+  src: '/assets/avatars/memoji-zi.jpg',
   firstName: 'John',
   lastName: 'Doe',
 };

@@ -2,9 +2,6 @@ import { mount } from 'enzyme';
 import React from 'react';
 import Window, { Props } from './Window';
 import * as Styled from './Window.styles';
-import { NavButton } from './Window.styles';
-import Paragraph from '../Typography/Paragraph/Paragraph';
-import Image from 'next/image';
 import { withReduxAndStyledProviders } from '../../test/testUtils';
 
 /**
@@ -23,6 +20,9 @@ describe('Window', () => {
       windowName: 'Open Window',
       closeWindow: () => console.log('CLOSE'),
       isOpen: true,
+      isActive: true,
+      focusWindow: () => undefined,
+      minimizeWindow: () => undefined,
     });
 
     it('should render with no errors', () => {
@@ -31,22 +31,13 @@ describe('Window', () => {
     });
 
     it('should render specified window name', () => {
-      const windowName = wrap.find(Styled.WindowInfo).find(Paragraph);
+      const windowName = wrap.find(Styled.WindowTitle);
       expect(windowName.text()).toBe('Open Window');
     });
 
-    it('should render correct window icon', () => {
-      const icon = wrap.find(Styled.WindowInfo).find(Image);
-
-      expect(icon.prop('height')).toBe(20);
-      expect(icon.prop('width')).toBe(20);
-      expect(icon.prop('alt')).toBe('Open Window');
-      expect(icon.prop('src')).toBe('/icon.svg');
-    });
-
     it('should render control buttons', () => {
-      const ctrlBtn = wrap.find(NavButton);
-      expect(ctrlBtn.length).toBe(2);
+      const ctrlBtn = wrap.find(Styled.WinButton);
+      expect(ctrlBtn.length).toBe(3);
     });
   });
 });

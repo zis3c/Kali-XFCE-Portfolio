@@ -20,8 +20,8 @@ describe('TrashBin', () => {
     expect(wrap.length).toBe(1);
   });
 
-  it('should render correct trash bin content === angular', () => {
+  it('should render empty trash bin initially', () => {
     const binContent = wrap.find(DesktopButton);
-    expect(binContent.length).toBe(1);
+    expect(binContent.length).toBe(0);
   });
 });

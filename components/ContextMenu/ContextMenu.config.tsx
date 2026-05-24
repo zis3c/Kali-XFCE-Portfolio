@@ -1,15 +1,13 @@
 import React from 'react';
 import { IContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { useRouter } from 'next/router';
 import { useActions } from '../../hooks/useActions';
-import { IconSize, IconSortVariant } from '../../types/redux/ui-reducer-types';
+import { IconSortVariant } from '../../types/redux/ui-reducer-types';
 import Terminal from '../Apps/Terminal/Terminal';
 import {
   FiFilter,
   FiGrid,
   FiInfo,
   FiMonitor,
-  FiPlay,
   FiRefreshCw,
   FiRotateCw,
   FiTrello,
@@ -25,19 +23,13 @@ export const useContextMenuConfig = (): {
   desktopContextMenuContent: IContextMenuItem[];
   systemTrayContextMenuContent: IContextMenuItem[];
 } => {
-  const router = useRouter();
   const {
     sortDesktopIcons,
-    changeDesktopIconSize,
     openWindow,
     undoLastDeleteDesktopApp,
   } = useActions();
 
-  const reloadPage = () => router.reload();
-
   const sortIconsBy = (way: IconSortVariant) => sortDesktopIcons(way);
-
-  const changeSizeTo = (variant: IconSize) => changeDesktopIconSize(variant);
 
   const openTerminal = () => {
     openWindow({

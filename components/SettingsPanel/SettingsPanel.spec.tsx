@@ -20,13 +20,13 @@ describe('SettingsPanel', () => {
     expect(wrap.length).toBe(1);
   });
 
-  it('should render system tray', () => {
-    const tray = wrap.find(Styled.Tray);
-    expect(tray.length).toBe(1);
+  it('should render container', () => {
+    const container = wrap.find(Styled.Container);
+    expect(container.length).toBe(1);
   });
 
-  it('should render settings section', () => {
-    const settings = wrap.find(Styled.Settings);
-    expect(settings.length).toBe(1);
+  it('should render battery tray icon', () => {
+    const trayIcon = wrap.find(Styled.TrayIcon);
+    expect(trayIcon.length).toBe(1);
   });
 });

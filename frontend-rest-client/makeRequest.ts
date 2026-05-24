@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+
+type ApiResponse<T = unknown> = T;
 
 /**
  *This function handles all api calls.
@@ -7,12 +8,12 @@ import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
  *@param {AxiosRequestConfig} object - API request configuration
  *@returns {AxiosPromise} - axios promise
  */
-export const makeRequest = ({
+export const makeRequest = <T = unknown>({
   url = '/',
   method = 'GET',
   params = {},
   data = {},
   headers = {},
-}: AxiosRequestConfig): AxiosPromise<any> => {
+}: AxiosRequestConfig): AxiosPromise<ApiResponse<T>> => {
   return axios({ url, method, params, data, headers });
 };

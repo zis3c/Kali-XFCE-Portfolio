@@ -8,20 +8,15 @@ import {
 import { State } from '../reducers';
 
 /**
- *@UI async action creator, will dispatch action to change color theme and persist this change to localStorage
+ *@UI action creator, will dispatch action to change color theme and persist this change to localStorage.
+ * Side effect (localStorage) is intentional here as a synchronous persistence concern.
  *@function changeTheme
  *@returns {function} - Redux thunk function
  */
 export const changeTheme = () => {
-  return async (
-    dispatch: Dispatch<UIaction>,
-    getState: () => State
-  ): Promise<void> => {
+  return (dispatch: Dispatch<UIaction>, getState: () => State) => {
     dispatch({ type: UIactionTypes.CHANGE_THEME });
-
     localStorage.setItem('theme', getState().ui.theme);
-
-    dispatch({ type: UIactionTypes.THEME_WAS_CHANGED });
   };
 };
 /**

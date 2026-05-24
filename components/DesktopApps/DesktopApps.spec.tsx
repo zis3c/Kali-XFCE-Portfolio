@@ -22,11 +22,11 @@ describe('DesktopApps', () => {
   });
 
   it('should render list with apps', () => {
-    const list = wrap.find(Styled.UL);
+    const list = wrap.find(Styled.DesktopContainer);
     expect(list.length).toBe(1);
   });
   it('should render correct number of desktop apps', () => {
     const desktopApps = wrap.find(DesktopButton);
-    expect(desktopApps.length).toBe(11);
+    expect(desktopApps.length).toBe(6);
   });
 });

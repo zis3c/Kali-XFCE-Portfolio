@@ -11,6 +11,7 @@ interface Props {
  * Kali LightDM-style login screen
  */
 const LoginScreen = ({ isVisible, onLoginComplete }: Props): JSX.Element => {
+  const DEMO_PASSWORD = process.env.NEXT_PUBLIC_DEMO_PASSWORD || '1234';
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState<'idle' | 'authenticating' | 'starting'>(
     'idle'
@@ -48,7 +49,7 @@ const LoginScreen = ({ isVisible, onLoginComplete }: Props): JSX.Element => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (status !== 'idle') return;
-    if (password !== '1234') {
+    if (password !== DEMO_PASSWORD) {
       setLoginError('Authentication failed. Hint: 1234');
       return;
     }

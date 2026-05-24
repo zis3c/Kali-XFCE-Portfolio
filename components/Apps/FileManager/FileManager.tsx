@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { useActions } from '../../../hooks/useActions';
 import {
@@ -64,7 +64,7 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     [historyIndex]
   );
 
-  const refreshCurrent = () => setCurrentPath((p) => `${p}`);
+  const refreshCurrent = useCallback(() => setCurrentPath((p) => `${p}`), []);
 
   const goBack = useCallback(() => {
     if (historyIndex > 0) {
@@ -79,34 +79,44 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     if (parent) navigateTo(parent);
   }, [currentPath, navigateTo]);
 
-  const openFileContent = (name: string, content: string, fullPath: string) => {
-    openWindow({
-      windowName: `${name} - Mousepad`,
-      isOpen: true,
-      windowIcon: 'KALI_TEXTFILE',
-      size: { width: 560, height: 420 },
-      windowContent: (
-        <TextViewerComponent content={content} filename={name} filepath={fullPath} />
-      ),
-    });
-  };
+  const openFileContent = useCallback(
+    (name: string, content: string, fullPath: string) => {
+      openWindow({
+        windowName: `${name} - Mousepad`,
+        isOpen: true,
+        windowIcon: 'KALI_TEXTFILE',
+        size: { width: 560, height: 420 },
+        windowContent: (
+          <TextViewerComponent
+            content={content}
+            filename={name}
+            filepath={fullPath}
+          />
+        ),
+      });
+    },
+    [openWindow]
+  );
 
-  const handleFileAction = (node: FsNode, fullPath: string) => {
-    if (node.type === 'dir') {
-      navigateTo(fullPath);
-      return;
-    }
-    const name = node.name;
-    if (node.content) {
-      openFileContent(name, node.content, fullPath);
-    } else if (name === 'resume.pdf') {
-      openFileContent(
-        name,
-        'resume.pdf - binary file\nUse "open resume" in terminal or double-click in Thunar to view.',
-        fullPath
-      );
-    }
-  };
+  const handleFileAction = useCallback(
+    (node: FsNode, fullPath: string) => {
+      if (node.type === 'dir') {
+        navigateTo(fullPath);
+        return;
+      }
+      const name = node.name;
+      if (node.content) {
+        openFileContent(name, node.content, fullPath);
+      } else if (name === 'resume.pdf') {
+        openFileContent(
+          name,
+          'resume.pdf - binary file\nUse "open resume" in terminal or double-click in Thunar to view.',
+          fullPath
+        );
+      }
+    },
+    [navigateTo, openFileContent]
+  );
 
   const getIcon = (node: FsNode) => {
     if (node.type === 'dir') return <FolderIcon size={32} color="#c4a661" />;
@@ -114,8 +124,11 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     return <TextFileIcon size={32} color="#8899aa" />;
   };
 
-  const makeFullPath = (name: string) =>
-    currentPath === '/' ? `/${name}` : `${currentPath}/${name}`;
+  const makeFullPath = useCallback(
+    (name: string) =>
+      currentPath === '/' ? `/${name}` : `${currentPath}/${name}`,
+    [currentPath]
+  );
 
   const handleNewFolder = () => {
     const folderName = inlineInput.trim();
@@ -157,7 +170,7 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     refreshCurrent();
   };
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     if (!selectedFile) return;
     const ok = deleteNode(makeFullPath(selectedFile));
     setStatus(ok ? `Deleted: ${selectedFile}` : 'Delete failed (non-empty folder?)');
@@ -167,10 +180,16 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     });
     if (ok) setSelectedFile(null);
     refreshCurrent();
-  };
+  }, [makeFullPath, refreshCurrent, selectedFile]);
 
-  const currentNode = findNode(currentPath);
-  const items = currentNode?.type === 'dir' && currentNode.children ? currentNode.children : [];
+  const currentNode = useMemo(() => findNode(currentPath), [currentPath]);
+  const items = useMemo(
+    () =>
+      currentNode?.type === 'dir' && currentNode.children
+        ? currentNode.children
+        : [],
+    [currentNode]
+  );
 
   useEffect(() => {
     rootRef.current?.focus();
@@ -181,7 +200,7 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
     const node = items.find((n) => n.name === selectedFile);
     if (!node) return;
     handleFileAction(node, makeFullPath(node.name));
-  }, [items, selectedFile]);
+  }, [items, selectedFile, handleFileAction, makeFullPath]);
 
   const handleFileManagerKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -218,7 +237,7 @@ const FileManager = ({ startPath = '/home/zis3c' }: FileManagerProps): JSX.Eleme
         setInlineInput('New Folder');
       }
     },
-    [inlineAction, selectedFile, openSelected, goUp]
+    [inlineAction, selectedFile, openSelected, goUp, handleDelete]
   );
 
   return (

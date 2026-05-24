@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import * as Styled from './Paragraph.styles';
 
 export interface Props {
   margin: string;
+  children?: ReactNode;
 }
 
 /**

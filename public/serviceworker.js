@@ -7,8 +7,6 @@ const FONTS = [
   'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2',
   'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLBT5Z1JlFd2JQEl8qw.woff2',
   'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLBT5Z1xlFd2JQEk.woff2',
-  '/fonts/SegoeUIVariable.woff',
-  '/fonts/SegoeUIVariable.woff2',
 ];
 
 const STATIC_ASSETS = ['/', ...FONTS, 'init-sw.js', 'favicon.ico'];

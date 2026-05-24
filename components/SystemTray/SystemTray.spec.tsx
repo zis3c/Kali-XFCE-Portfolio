@@ -2,8 +2,9 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { withReduxAndStyledProviders } from '../../test/testUtils';
 import SystemTray from './SystemTray';
-import DesktopButton from '../DesktopButton/DesktopButton';
 import Taskbar from '../Taskbar/Taskbar';
+
+import * as Styled from './SystemTray.styles';
 
 /**
  * Setup function for the component
@@ -21,9 +22,9 @@ describe('SystemTray', () => {
     expect(wrap.length).toBe(1);
   });
 
-  it('should render all specified tray buttons', () => {
-    const trayBtn = wrap.find(DesktopButton);
-    expect(trayBtn.length).toBe(38);
+  it('should render Applications button', () => {
+    const appsBtn = wrap.find(Styled.ApplicationsButton);
+    expect(appsBtn.length).toBe(1);
   });
 
   it('should render Taskbar', () => {

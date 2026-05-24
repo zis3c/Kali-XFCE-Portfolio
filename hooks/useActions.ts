@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -17,5 +18,8 @@ import {
  */
 export const useActions = (): CombinedActionsType => {
   const dispatch = useDispatch();
-  return bindActionCreators(CombinedActionCreators, dispatch);
+  return useMemo(
+    () => bindActionCreators(CombinedActionCreators, dispatch),
+    [dispatch]
+  );
 };

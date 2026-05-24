@@ -11,7 +11,7 @@ import {
 } from '../../utils/session-actions';
 import { notifyDesktop } from '../../utils/notifications';
 
-interface TaskbarProps {
+export interface TaskbarProps {
   activeWorkspace: number;
   onWorkspaceChange: (workspace: number) => void;
 }
@@ -137,10 +137,10 @@ const PowerMenu = () => {
   };
 
   const menuItems = [
-    { label: 'Lock Screen', action: () => {}, isDisabled: true },
+    { label: 'Lock Screen', action: () => undefined, isDisabled: true },
     { label: 'Log Out...', action: () => triggerSessionAction('logout') },
     { label: 'Restart...', action: () => triggerSessionAction('restart') },
-    { label: 'Shut Down...', action: () => {}, isDisabled: true },
+    { label: 'Shut Down...', action: () => undefined, isDisabled: true },
   ];
 
   return (

@@ -4,6 +4,7 @@ import { IconSize } from '../../types/redux/ui-reducer-types';
 interface Props {
   variant: 'desktop' | 'systemTray' | 'pinnedApp' | 'recommendedApp';
   iconSize: IconSize;
+  isSelected?: boolean;
 }
 
 interface DesktopBtnProps {
@@ -65,7 +66,7 @@ export const ButtonContainer = styled.div<Props>`
   background: transparent;
   border: 0;
 
-  ${({ variant, isSelected }) => variant === 'desktop' && desktopButtonStyles};
+  ${({ variant }) => variant === 'desktop' && desktopButtonStyles};
   ${({ variant }) => variant === 'systemTray' && systemTrayButtonStyles};
   ${({ variant }) => variant === 'pinnedApp' && pinnedAppButtonStyles};
   ${({ variant }) =>

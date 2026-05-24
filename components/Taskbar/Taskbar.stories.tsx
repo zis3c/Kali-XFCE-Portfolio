@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react';
-import Taskbar from './Taskbar';
+import Taskbar, { TaskbarProps } from './Taskbar';
 
 export default {
   title: 'UI/Taskbar',
   component: Taskbar,
 };
 
-const Template: Story = (args) => <Taskbar {...args} />;
+const Template: Story<TaskbarProps> = (args) => <Taskbar {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = { activeWorkspace: 1, onWorkspaceChange: () => { console.log('workspace changed'); } };

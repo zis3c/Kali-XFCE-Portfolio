@@ -5,7 +5,7 @@ import DesktopButton from '../DesktopButton/DesktopButton';
 import { useSearchModalConfig } from './SearchModalContent.config';
 import Paragraph from '../Typography/Paragraph/Paragraph';
 import { useActions } from '../../hooks/useActions';
-import Bing from '../Apps/Bing/Bing';
+import GoogleSearch from '../Apps/GoogleSearch/GoogleSearch';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useCloseModalIfClickedOutside } from '../../hooks/useCloseIfClickedOutside';
 
@@ -23,9 +23,9 @@ const SearchModalContent = (): JSX.Element => {
 
   const handlePerformSearch = (term: string) => {
     openWindow({
-      windowName: 'Bing',
-      windowContent: <Bing searchQuery={term} />,
-      windowIcon: '/assets/icons/startmenu/icons8-microsoft-edge.svg',
+      windowName: 'Google Chrome',
+      windowContent: <GoogleSearch searchQuery={term} />,
+      windowIcon: '/assets/icons/startmenu/chrome.svg',
       size: {
         width: 0.8 * window.innerWidth,
         height: 0.8 * window.innerHeight,

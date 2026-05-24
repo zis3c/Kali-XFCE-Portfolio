@@ -12,11 +12,10 @@ import {
  *@returns {function} - Redux thunk function
  */
 
-export const openWindow = (windowParams: IWindow) => {
-  return async (dispatch: Dispatch<WindowsAction>): Promise<void> => {
-    dispatch({ type: WindowsActionTypes.OPEN_WINDOW, payload: windowParams });
-  };
-};
+export const openWindow = (windowParams: IWindow): WindowsAction => ({
+  type: WindowsActionTypes.OPEN_WINDOW,
+  payload: windowParams,
+});
 
 /**
  *@Action creator, will sequentially dispatch actions to close a window and to remove a window from the list of opened windows, thereby removing it from the screen
@@ -44,29 +43,17 @@ export const closeOpenedWindow = (windowName: string) => {
   };
 };
 
-export const toggleMinimizeWindow = (windowName: string) => {
-  return async (dispatch: Dispatch<WindowsAction>): Promise<void> => {
-    dispatch({
-      type: WindowsActionTypes.TOGGLE_MINIMIZE_WINDOW,
-      payload: windowName,
-    });
-  };
-};
+export const toggleMinimizeWindow = (windowName: string): WindowsAction => ({
+  type: WindowsActionTypes.TOGGLE_MINIMIZE_WINDOW,
+  payload: windowName,
+});
 
-export const focusWindow = (windowName: string) => {
-  return async (dispatch: Dispatch<WindowsAction>): Promise<void> => {
-    dispatch({
-      type: WindowsActionTypes.FOCUS_WINDOW,
-      payload: windowName,
-    });
-  };
-};
+export const focusWindow = (windowName: string): WindowsAction => ({
+  type: WindowsActionTypes.FOCUS_WINDOW,
+  payload: windowName,
+});
 
-export const setActiveWorkspace = (workspace: number) => {
-  return async (dispatch: Dispatch<WindowsAction>): Promise<void> => {
-    dispatch({
-      type: WindowsActionTypes.SET_ACTIVE_WORKSPACE,
-      payload: workspace,
-    });
-  };
-};
+export const setActiveWorkspace = (workspace: number): WindowsAction => ({
+  type: WindowsActionTypes.SET_ACTIVE_WORKSPACE,
+  payload: workspace,
+});

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, ReactNode } from 'react';
 import * as Styled from './SettingsButton.styles';
 import { FiChevronRight } from 'react-icons/fi';
 import Paragraph from '../Typography/Paragraph/Paragraph';
@@ -8,6 +8,7 @@ export interface Props extends React.ComponentPropsWithoutRef<'button'> {
   isTurnedOn: boolean;
   text: string;
   btnAction: (() => void) | null;
+  children?: ReactNode;
 }
 
 /**

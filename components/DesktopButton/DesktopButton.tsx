@@ -17,7 +17,7 @@ import {
   TextFileIcon,
 } from '../icons/KaliIcons';
 
-export interface Props extends React.ComponentPropsWithoutRef<'button'> {
+export interface Props {
   variant: 'desktop' | 'systemTray' | 'pinnedApp' | 'recommendedApp';
   willOpenWindowWith: ReactNode | null;
   iconSrc: string;

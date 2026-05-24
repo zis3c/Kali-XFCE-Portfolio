@@ -3,7 +3,7 @@ import React from 'react';
 import { withReduxAndStyledProviders } from '../../test/testUtils';
 import TimePanel from './TimePanel';
 import Clock from '../Clock/Clock';
-import CurrentDate from '../CurrentDate/CurrentDate';
+import * as Styled from './TimePanel.styles';
 
 /**
  * Setup function for the component
@@ -26,8 +26,8 @@ describe('Time Panel', () => {
     expect(clock.length).toBe(1);
   });
 
-  it('should render date', () => {
-    const date = wrap.find(CurrentDate);
-    expect(date.length).toBe(1);
+  it('should render date text', () => {
+    const dateText = wrap.find(Styled.DateText);
+    expect(dateText.length).toBe(1);
   });
 });
