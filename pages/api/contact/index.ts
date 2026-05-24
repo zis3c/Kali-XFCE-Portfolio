@@ -67,4 +67,19 @@ handler.post(async (req, res) => {
   return sendEmail(req, res);
 });
 
+handler.all((req, res) => {
+  const accepts = req.headers.accept ?? '';
+  const wantsHtml = accepts.includes('text/html');
+
+  if (wantsHtml) {
+    res.redirect('/404');
+    return;
+  }
+
+  res.status(404).json({
+    success: false,
+    message: 'Not found.',
+  });
+});
+
 export default handler;

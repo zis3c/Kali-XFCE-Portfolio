@@ -36,6 +36,14 @@ export function onError(
     error = new ErrorHandler(message, 400);
   }
 
+  const accepts = req.headers.accept ?? '';
+  const wantsHtml = accepts.includes('text/html');
+
+  if (wantsHtml) {
+    res.redirect('/500');
+    return;
+  }
+
   res.status(mongooseErr.statusCode).json({
     success: false,
     error,
