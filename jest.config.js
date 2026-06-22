@@ -28,6 +28,7 @@ module.exports = {
       statements: 37,
     },
   },
+  // Enzyme stays here as a compatibility layer for the existing component specs.
   setupFiles: ['<rootDir>/enzyme.js'],
   preset: 'ts-jest',
   testPathIgnorePatterns: [

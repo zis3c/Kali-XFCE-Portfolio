@@ -10,19 +10,18 @@ import Head from 'next/head';
 import { useSystemDesign } from '../design-system/useSystemDesign';
 import CRTEffect from '../components/CRTEffect/CRTEffect';
 import { validateEnv } from '../utils/env';
+import { logger } from '../utils/logger';
 
 // Validate environment at module load time (server-side only)
 if (typeof window === 'undefined') {
   const envResult = validateEnv();
   if (!envResult.valid) {
-    // eslint-disable-next-line no-console
-    console.error(
+    logger.error(
       `[ENV] Missing required variables: ${envResult.missing.join(', ')}`
     );
   }
   if (envResult.warnings.length > 0) {
-    // eslint-disable-next-line no-console
-    console.warn(`[ENV] ${envResult.warnings.join('\n[ENV] ')}`);
+    logger.warn(`[ENV] ${envResult.warnings.join('\n[ENV] ')}`);
   }
 }
 

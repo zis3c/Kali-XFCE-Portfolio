@@ -4,6 +4,13 @@
  * 100% frontend-only — no real file access.
  */
 
+/**
+ * Simulated Linux filesystem for the Kali Xfce portfolio OS.
+ *
+ * Seed tree only. Runtime state lives in memory and is persisted to
+ * localStorage for the demo shell and file manager.
+ */
+
 export interface FsNode {
   name: string;
   type: 'file' | 'dir';
@@ -186,24 +193,46 @@ Basic IoT cloud infrastructure for KSC6493. Automated lab setup featuring Traefi
 - Traefik + Node-RED
 - Mosquitto MQTT`;
 
-
 /** The full virtual filesystem tree */
 export const fsTree: FsNode = {
   name: '/',
   type: 'dir',
   children: [
     { name: 'bin', type: 'dir', children: [] },
-    { name: 'boot', type: 'dir', children: [
-      { name: 'vmlinuz-6.8.11-amd64', type: 'file', size: 12400000 },
-      { name: 'initrd.img-6.8.11-amd64', type: 'file', size: 58000000 },
-    ]},
+    {
+      name: 'boot',
+      type: 'dir',
+      children: [
+        { name: 'vmlinuz-6.8.11-amd64', type: 'file', size: 12400000 },
+        { name: 'initrd.img-6.8.11-amd64', type: 'file', size: 58000000 },
+      ],
+    },
     { name: 'dev', type: 'dir', children: [] },
-    { name: 'etc', type: 'dir', children: [
-      { name: 'hostname', type: 'file', content: 'kali' },
-      { name: 'motd', type: 'file', content: 'Kali GNU/Linux rolling\nAuthorized simulation environment only.' },
-      { name: 'os-release', type: 'file', content: 'PRETTY_NAME="Kali GNU/Linux Rolling"\nNAME="Kali GNU/Linux"\nVERSION_ID="2024.1"\nVERSION="2024.1"\nID=kali' },
-      { name: 'passwd', type: 'file', content: 'root:x:0:0:root:/root:/usr/bin/zsh\nzis3c:x:1000:1000:zis3c,,,:/home/zis3c:/usr/bin/zsh' },
-    ]},
+    {
+      name: 'etc',
+      type: 'dir',
+      children: [
+        { name: 'hostname', type: 'file', content: 'kali' },
+        {
+          name: 'motd',
+          type: 'file',
+          content:
+            'Kali GNU/Linux rolling\nAuthorized simulation environment only.',
+        },
+        {
+          name: 'os-release',
+          type: 'file',
+          content:
+            'PRETTY_NAME="Kali GNU/Linux Rolling"\nNAME="Kali GNU/Linux"\nVERSION_ID="2024.1"\nVERSION="2024.1"\nID=kali',
+        },
+        {
+          name: 'passwd',
+          type: 'file',
+          content:
+            'root:x:0:0:root:/root:/usr/bin/zsh\nzis3c:x:1000:1000:zis3c,,,:/home/zis3c:/usr/bin/zsh',
+        },
+      ],
+    },
     {
       name: 'home',
       type: 'dir',
@@ -213,12 +242,27 @@ export const fsTree: FsNode = {
           type: 'dir',
           children: [
             { name: '.bashrc', type: 'file', content: bashrc, size: 420 },
-            { name: '.zshrc', type: 'file', content: '# zsh config\nsource ~/.bashrc', size: 32 },
+            {
+              name: '.zshrc',
+              type: 'file',
+              content: '# zsh config\nsource ~/.bashrc',
+              size: 32,
+            },
             { name: 'about.txt', type: 'file', content: aboutTxt, size: 280 },
             { name: 'skills.txt', type: 'file', content: skillsTxt, size: 310 },
-            { name: 'contact.txt', type: 'file', content: contactTxt, size: 180 },
+            {
+              name: 'contact.txt',
+              type: 'file',
+              content: contactTxt,
+              size: 180,
+            },
             { name: 'notes.md', type: 'file', content: notesMd, size: 340 },
-            { name: 'resume.pdf', type: 'file', content: resumeContent, size: 2048 },
+            {
+              name: 'resume.pdf',
+              type: 'file',
+              content: resumeContent,
+              size: 2048,
+            },
             {
               name: 'Desktop',
               type: 'dir',
@@ -247,94 +291,174 @@ export const fsTree: FsNode = {
                   name: 'FinVault',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: finvaultReadme, size: 280 },
-                    { name: 'package.json', type: 'file', content: '{ "name": "finvault", "version": "1.0.0" }', size: 42 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: finvaultReadme,
+                      size: 280,
+                    },
+                    {
+                      name: 'package.json',
+                      type: 'file',
+                      content: '{ "name": "finvault", "version": "1.0.0" }',
+                      size: 42,
+                    },
                   ],
                 },
                 {
                   name: 'Certclaim',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: certclaimReadme, size: 320 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: certclaimReadme,
+                      size: 320,
+                    },
                   ],
                 },
                 {
                   name: 'STEM-Telebot',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: stemTelebotReadme, size: 240 },
-                    { name: 'bot.py', type: 'file', content: '# STEM Telebot main entry', size: 2400 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: stemTelebotReadme,
+                      size: 240,
+                    },
+                    {
+                      name: 'bot.py',
+                      type: 'file',
+                      content: '# STEM Telebot main entry',
+                      size: 2400,
+                    },
                   ],
                 },
                 {
                   name: 'QRBot',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: qrbotReadme, size: 260 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: qrbotReadme,
+                      size: 260,
+                    },
                   ],
                 },
                 {
                   name: 'Polyglot-File',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: polyglotReadme, size: 280 },
-                    { name: 'polyglot.py', type: 'file', content: '# Polyglot file generator', size: 1800 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: polyglotReadme,
+                      size: 280,
+                    },
+                    {
+                      name: 'polyglot.py',
+                      type: 'file',
+                      content: '# Polyglot file generator',
+                      size: 1800,
+                    },
                   ],
                 },
                 {
                   name: 'CTF-Writeups',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: ctfWriteupsReadme, size: 220 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: ctfWriteupsReadme,
+                      size: 220,
+                    },
                   ],
                 },
                 {
                   name: 'Compilation-and-RE-Process',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: compilationREReadme, size: 300 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: compilationREReadme,
+                      size: 300,
+                    },
                   ],
                 },
                 {
                   name: 'Tgreactsort',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: tgreactsortReadme, size: 260 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: tgreactsortReadme,
+                      size: 260,
+                    },
                   ],
                 },
                 {
                   name: 'Google-Form-Spammer',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: googleFormSpammerReadme, size: 280 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: googleFormSpammerReadme,
+                      size: 280,
+                    },
                   ],
                 },
                 {
                   name: 'USAS-Launcher',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: usasLauncherReadme, size: 240 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: usasLauncherReadme,
+                      size: 240,
+                    },
                   ],
                 },
                 {
                   name: 'USAS-Assignment-Notifier',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: usasNotifierReadme, size: 220 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: usasNotifierReadme,
+                      size: 220,
+                    },
                   ],
                 },
                 {
                   name: 'Codex-notifier-vscode',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: codexNotifierReadme, size: 240 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: codexNotifierReadme,
+                      size: 240,
+                    },
                   ],
                 },
                 {
                   name: 'basic-iot-cloud-setup',
                   type: 'dir',
                   children: [
-                    { name: 'README.md', type: 'file', content: iotCloudReadme, size: 300 },
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: iotCloudReadme,
+                      size: 300,
+                    },
                   ],
                 },
               ],
@@ -351,7 +475,10 @@ export const fsTree: FsNode = {
                       name: 'Trash',
                       type: 'dir',
                       children: [
-                        { name: 'youtube-ads.txt', type: 'file', content: `YouTube Ads Rant
+                        {
+                          name: 'youtube-ads.txt',
+                          type: 'file',
+                          content: `YouTube Ads Rant
 ================
 
 I have ads on YouTube. It's too much ads on YouTube.
@@ -365,7 +492,9 @@ And now they're putting ads when you PAUSE the video too??
 
 This is getting out of hand. Time to look into Pi-hole or something.
 
-- zis3c`, size: 420 },
+- zis3c`,
+                          size: 420,
+                        },
                       ],
                     },
                   ],
@@ -404,15 +533,23 @@ This portfolio terminal is a frontend sandbox for demo only.`,
       ],
     },
     { name: 'tmp', type: 'dir', children: [] },
-    { name: 'usr', type: 'dir', children: [
-      { name: 'bin', type: 'dir', children: [] },
-      { name: 'lib', type: 'dir', children: [] },
-      { name: 'share', type: 'dir', children: [] },
-    ]},
-    { name: 'var', type: 'dir', children: [
-      { name: 'log', type: 'dir', children: [] },
-      { name: 'tmp', type: 'dir', children: [] },
-    ]},
+    {
+      name: 'usr',
+      type: 'dir',
+      children: [
+        { name: 'bin', type: 'dir', children: [] },
+        { name: 'lib', type: 'dir', children: [] },
+        { name: 'share', type: 'dir', children: [] },
+      ],
+    },
+    {
+      name: 'var',
+      type: 'dir',
+      children: [
+        { name: 'log', type: 'dir', children: [] },
+        { name: 'tmp', type: 'dir', children: [] },
+      ],
+    },
   ],
 };
 
@@ -422,13 +559,13 @@ This portfolio terminal is a frontend sandbox for demo only.`,
 export function resolvePath(cwd: string, target: string): string {
   // Expand ~
   let resolved = target.replace(/^~/, '/home/zis3c');
-  
+
   // If relative, join with cwd
   if (!resolved.startsWith('/')) {
     const base = cwd.replace(/^~/, '/home/zis3c');
     resolved = base + '/' + resolved;
   }
-  
+
   // Normalize .. and .
   const parts = resolved.split('/').filter(Boolean);
   const stack: string[] = [];
@@ -447,17 +584,17 @@ export function resolvePath(cwd: string, target: string): string {
  */
 export function findNode(absPath: string): FsNode | null {
   if (absPath === '/') return fsTree;
-  
+
   const parts = absPath.split('/').filter(Boolean);
   let current: FsNode = fsTree;
-  
+
   for (const part of parts) {
     if (current.type !== 'dir' || !current.children) return null;
     const child = current.children.find((c) => c.name === part);
     if (!child) return null;
     current = child;
   }
-  
+
   return current;
 }
 
@@ -467,7 +604,9 @@ export function findNode(absPath: string): FsNode | null {
 export function listDir(absPath: string): string[] | null {
   const node = findNode(absPath);
   if (!node || node.type !== 'dir') return null;
-  return (node.children || []).map((c) => c.name + (c.type === 'dir' ? '/' : ''));
+  return (node.children || []).map(
+    (c) => c.name + (c.type === 'dir' ? '/' : '')
+  );
 }
 
 /**
@@ -478,19 +617,30 @@ export function listDirLong(absPath: string): string | null {
   if (!node || node.type !== 'dir' || !node.children) return null;
 
   const now = new Date();
-  const dateStr = `${now.toLocaleString('en-US', { month: 'short' })} ${String(now.getDate()).padStart(2, ' ')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-  
+  const dateStr = `${now.toLocaleString('en-US', { month: 'short' })} ${String(
+    now.getDate()
+  ).padStart(2, ' ')} ${String(now.getHours()).padStart(2, '0')}:${String(
+    now.getMinutes()
+  ).padStart(2, '0')}`;
+
   const lines: string[] = [`total ${node.children.length * 4}`];
   // . and ..
-  lines.push(`drwxr-xr-x  ${node.children.length + 2} zis3c zis3c 4096 ${dateStr} .`);
+  lines.push(
+    `drwxr-xr-x  ${node.children.length + 2} zis3c zis3c 4096 ${dateStr} .`
+  );
   lines.push(`drwxr-xr-x  3 zis3c zis3c 4096 ${dateStr} ..`);
 
   for (const child of node.children) {
     if (child.type === 'dir') {
       const nChildren = (child.children?.length || 0) + 2;
-      lines.push(`drwxr-xr-x  ${nChildren} zis3c zis3c 4096 ${dateStr} ${child.name}`);
+      lines.push(
+        `drwxr-xr-x  ${nChildren} zis3c zis3c 4096 ${dateStr} ${child.name}`
+      );
     } else {
-      const sz = String(child.size || (child.content?.length || 0)).padStart(5, ' ');
+      const sz = String(child.size || child.content?.length || 0).padStart(
+        5,
+        ' '
+      );
       lines.push(`-rw-r--r--  1 zis3c zis3c ${sz} ${dateStr} ${child.name}`);
     }
   }
@@ -506,7 +656,7 @@ export function readFile(absPath: string): string | null {
   return node.content ?? `${node.name}: binary file`;
 }
 
-function saveVfs() {
+function persistVfsToStorage() {
   if (typeof window !== 'undefined') {
     try {
       localStorage.setItem('kali_vfs', JSON.stringify(fsTree));
@@ -516,20 +666,27 @@ function saveVfs() {
   }
 }
 
-// Load from localStorage if available
-if (typeof window !== 'undefined') {
+function hydrateVfsFromStorage() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   try {
     const saved = localStorage.getItem('kali_vfs');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed && parsed.type === 'dir' && Array.isArray(parsed.children)) {
-        fsTree.children = parsed.children;
-      }
+    if (!saved) {
+      return;
+    }
+
+    const parsed = JSON.parse(saved);
+    if (parsed && parsed.type === 'dir' && Array.isArray(parsed.children)) {
+      fsTree.children = parsed.children;
     }
   } catch (e) {
     console.error('Failed to load VFS from localStorage', e);
   }
 }
+
+hydrateVfsFromStorage();
 
 export function resetVfs(): void {
   if (typeof window !== 'undefined') {
@@ -550,7 +707,7 @@ export function writeFile(absPath: string, content: string): boolean {
   if (!node || node.type !== 'file') return false;
   node.content = content;
   node.size = content.length;
-  saveVfs();
+  persistVfsToStorage();
   return true;
 }
 
@@ -570,7 +727,7 @@ export function createFile(absPath: string, content: string = ''): boolean {
   parent.children = parent.children || [];
   if (parent.children.some((c) => c.name === name)) return false;
   parent.children.push({ name, type: 'file', content, size: content.length });
-  saveVfs();
+  persistVfsToStorage();
   return true;
 }
 
@@ -582,7 +739,7 @@ export function createDir(absPath: string): boolean {
   parent.children = parent.children || [];
   if (parent.children.some((c) => c.name === name)) return false;
   parent.children.push({ name, type: 'dir', children: [] });
-  saveVfs();
+  persistVfsToStorage();
   return true;
 }
 
@@ -596,7 +753,7 @@ export function renameNode(absPath: string, newName: string): boolean {
   const node = parent.children.find((c) => c.name === name);
   if (!node) return false;
   node.name = safeName;
-  saveVfs();
+  persistVfsToStorage();
   return true;
 }
 
@@ -610,7 +767,7 @@ export function deleteNode(absPath: string): boolean {
     return false;
   }
   parent.children = parent.children.filter((c) => c.name !== name);
-  saveVfs();
+  persistVfsToStorage();
   return true;
 }
 
@@ -627,6 +784,7 @@ export function isDir(absPath: string): boolean {
  */
 export function toTildePath(absPath: string): string {
   if (absPath === '/home/zis3c') return '~';
-  if (absPath.startsWith('/home/zis3c/')) return '~/' + absPath.slice('/home/zis3c/'.length);
+  if (absPath.startsWith('/home/zis3c/'))
+    return '~/' + absPath.slice('/home/zis3c/'.length);
   return absPath;
 }
