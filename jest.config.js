@@ -50,7 +50,7 @@ module.exports = {
   },
 
   transform: {
-    '.(js|ts|tsx)': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
