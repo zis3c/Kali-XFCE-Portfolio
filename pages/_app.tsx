@@ -12,8 +12,10 @@ import CRTEffect from '../components/CRTEffect/CRTEffect';
 import { validateEnv } from '../utils/env';
 import { logger } from '../utils/logger';
 
-// Validate environment at module load time (server-side only)
-if (typeof window === 'undefined') {
+// Validate environment only when the app is actually running on the server.
+// `next build` does not need app runtime secrets, so skip noisy build-time logs.
+const isProductionBuild = process.env.NEXT_PHASE === 'phase-production-build';
+if (typeof window === 'undefined' && !isProductionBuild) {
   const envResult = validateEnv();
   if (!envResult.valid) {
     logger.error(
