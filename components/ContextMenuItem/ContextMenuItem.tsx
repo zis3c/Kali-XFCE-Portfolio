@@ -48,7 +48,7 @@ const ContextMenuItem = ({
       >
         <Styled.TextIconWrapper>
           {withIcon}
-          <p>{text}</p>
+          <span className="label">{text}</span>
         </Styled.TextIconWrapper>
 
         {hoverMenuItems !== undefined && <FiChevronRight className={'icon'} />}

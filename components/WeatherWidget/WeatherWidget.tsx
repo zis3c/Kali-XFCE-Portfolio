@@ -38,7 +38,7 @@ const WeatherWidget = ({
           width={60}
           height={60}
           quality={100}
-          objectFit={'contain'}
+          style={{ objectFit: 'contain' }}
           alt={`In ${location} ${forecastDetails} is expected. Temperature ${temperature}. Humidity ${humidity}`}
         />
       </Styled.ImageWrapper>
@@ -53,10 +53,10 @@ const WeatherWidget = ({
 
         <Styled.Forecast>
           <Styled.Temperature>
-            <p>
+            <span>
               {temperature}
               <span>F</span>
-            </p>
+            </span>
           </Styled.Temperature>
           <Styled.ForecastDetails>
             <Paragraph margin={'0'}>{forecastDetails}</Paragraph>

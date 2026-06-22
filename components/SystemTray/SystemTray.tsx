@@ -31,7 +31,7 @@ const renderWindowIcon = (iconSrc: string) => {
         alt=""
         width={16}
         height={16}
-        objectFit="contain"
+        style={{ objectFit: 'contain' }}
         quality={100}
       />
     );

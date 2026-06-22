@@ -22,7 +22,7 @@ describe('ContextMenuItem', () => {
     });
 
     it('should render correct text content', () => {
-      const contextItemText = wrap.find('p');
+      const contextItemText = wrap.find('span.label');
       expect(contextItemText.text()).toBe('TOMATO');
     });
     it('should not render chevron icon with no hoverMenuItems', () => {
@@ -49,7 +49,7 @@ describe('ContextMenuItem', () => {
     });
 
     it('should render correct text content', () => {
-      const contextItemText = wrap.find('p');
+      const contextItemText = wrap.find('span.label');
       expect(contextItemText.text()).toBe('ASPARAGUS');
     });
     it('should not render chevron icon with no hoverMenuItems', () => {

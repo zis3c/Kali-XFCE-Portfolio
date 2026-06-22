@@ -116,7 +116,7 @@ const LoginScreen = ({ isVisible, onLoginComplete }: Props): JSX.Element => {
             alt="User avatar"
             width={62}
             height={62}
-            objectFit="cover"
+            style={{ objectFit: 'cover' }}
           />
         </Avatar>
         <Username>zis3c</Username>

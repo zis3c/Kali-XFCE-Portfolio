@@ -29,7 +29,7 @@ export const Forecast = styled.div`
   justify-content: space-between;
   margin: 1rem 0;
 `;
-export const Temperature = styled.p`
+export const Temperature = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
 

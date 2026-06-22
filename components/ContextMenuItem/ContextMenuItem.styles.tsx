@@ -18,7 +18,7 @@ export const Container = styled.li<ContainerProps>`
     background: #3e445e;
   }
 
-  p {
+  .label {
     font-size: 11px;
     color: #d0d5dc;
     font-family: 'Inter', 'Noto Sans', sans-serif;

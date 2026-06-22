@@ -36,7 +36,7 @@ const WidgetCard: FC<Props> = ({
             width={iconSize.width}
             alt={cardHeader}
             quality={100}
-            objectFit={'contain'}
+            style={{ objectFit: 'contain' }}
           />
         </Styled.Wrapper>
 

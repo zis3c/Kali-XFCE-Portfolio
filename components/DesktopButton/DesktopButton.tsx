@@ -157,7 +157,7 @@ const DesktopButton = ({
                 alt={text}
                 height={iconSize.height}
                 width={iconSize.width}
-                objectFit={'contain'}
+                style={{ objectFit: 'contain' }}
                 quality={100}
               />
             )}

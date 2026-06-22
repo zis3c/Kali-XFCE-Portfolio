@@ -17,7 +17,7 @@ const TechWidget = (): JSX.Element => {
           src={'/assets/portfolio/skills/react-original.svg'}
           height={60}
           width={60}
-          objectFit={'contain'}
+          style={{ objectFit: 'contain' }}
           alt={'Build with React'}
         />
       </Styled.ReactFigure>

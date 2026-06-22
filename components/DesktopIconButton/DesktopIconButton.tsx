@@ -167,11 +167,11 @@ const DesktopIconButton = ({
                   alt={text}
                   height={iconSize.height}
                   width={iconSize.width}
-                  objectFit={'contain'}
                   quality={100}
                   loading={variant === 'desktop' ? 'lazy' : 'eager'}
                   onLoadingComplete={() => setIsImageLoaded(true)}
                   style={{
+                    objectFit: 'contain',
                     opacity: isImageLoaded ? 1 : 0,
                     transition: 'opacity 160ms ease',
                   }}

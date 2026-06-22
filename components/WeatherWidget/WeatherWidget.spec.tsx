@@ -43,7 +43,7 @@ describe('WeatherWidget', () => {
     expect(text.length).toBe(1);
   });
   it('should render specified temperature', () => {
-    const temperature = wrap.find(Styled.Temperature).find('p');
+    const temperature = wrap.find(Styled.Temperature).find('span').first();
     expect(temperature.text()).toBe('72F');
   });
   it('should render specified humidity', () => {
