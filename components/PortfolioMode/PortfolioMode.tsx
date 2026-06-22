@@ -228,60 +228,30 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
     setFocusedProjectIndex(0);
   }, [projectFilter]);
 
-  // Smooth scroll (inertia-like) for desktop
+  // Manage body / html scrolling and styling for Portfolio Mode
   useEffect(() => {
-    const prevHtml = document.documentElement.style.scrollBehavior;
-    const prevBody = document.body.style.scrollBehavior;
+    const prevHtmlScrollBehavior =
+      document.documentElement.style.scrollBehavior;
+    const prevBodyScrollBehavior = document.body.style.scrollBehavior;
+    const prevHtmlHeight = document.documentElement.style.height;
+    const prevBodyHeight = document.body.style.height;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+
     document.documentElement.style.scrollBehavior = 'smooth';
     document.body.style.scrollBehavior = 'smooth';
+    document.documentElement.style.height = 'auto';
+    document.body.style.height = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
 
-    const isTouchDevice =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) {
-      return () => {
-        document.documentElement.style.scrollBehavior = prevHtml;
-        document.body.style.scrollBehavior = prevBody;
-      };
-    }
-
-    let targetY = window.scrollY;
-    let currentY = window.scrollY;
-    let rafId = 0;
-
-    const animate = () => {
-      currentY += (targetY - currentY) * 0.14;
-      if (Math.abs(targetY - currentY) < 0.4) {
-        currentY = targetY;
-      }
-      window.scrollTo(0, currentY);
-      if (currentY !== targetY) {
-        rafId = window.requestAnimationFrame(animate);
-      } else {
-        rafId = 0;
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
-      e.preventDefault();
-      const maxY = Math.max(
-        0,
-        document.documentElement.scrollHeight - window.innerHeight
-      );
-      targetY = Math.min(maxY, Math.max(0, targetY + e.deltaY));
-      if (!rafId) {
-        rafId = window.requestAnimationFrame(animate);
-      }
-    };
-
-    window.addEventListener('wheel', onWheel, { passive: false });
     return () => {
-      window.removeEventListener('wheel', onWheel);
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-      }
-      document.documentElement.style.scrollBehavior = prevHtml;
-      document.body.style.scrollBehavior = prevBody;
+      document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
+      document.body.style.scrollBehavior = prevBodyScrollBehavior;
+      document.documentElement.style.height = prevHtmlHeight;
+      document.body.style.height = prevBodyHeight;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
     };
   }, []);
 

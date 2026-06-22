@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_DEMO_PASSWORD: '1234'
+          DB_URI: 'mongodb://localhost:27017/portfolio'
+          SENDGRID_API_KEY: 'SG.fake_key'
+          GOOGLE_EMAIL_ADDRESS: 'fake@example.com'
+
+      - name: Run Tests
+        run: npm run test

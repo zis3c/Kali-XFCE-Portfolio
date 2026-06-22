@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import React, { FC } from 'react';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { wrapper } from '../store';
@@ -25,7 +26,7 @@ if (typeof window === 'undefined') {
   }
 }
 
-const WrappedApp: FC<AppProps> = ({
+const AppContent: FC<AppProps> = ({
   Component,
   pageProps,
 }: AppProps): JSX.Element => {
@@ -44,4 +45,14 @@ const WrappedApp: FC<AppProps> = ({
   );
 };
 
-export default wrapper.withRedux(WrappedApp);
+const WrappedApp: FC<AppProps> = (props): JSX.Element => {
+  const { store, props: wrappedProps } = wrapper.useWrappedStore(props);
+
+  return (
+    <Provider store={store}>
+      <AppContent {...wrappedProps} />
+    </Provider>
+  );
+};
+
+export default WrappedApp;
