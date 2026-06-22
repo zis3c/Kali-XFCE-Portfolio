@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import React, { useState, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Desktop from '../components/Desktop/Desktop';
 import DesktopLayout from '../components/DesktopLayout/DesktopLayout';
 import { wrapper } from '../store';
@@ -23,15 +24,20 @@ type AppPhase = 'boot' | 'login' | 'desktop';
 type ExperienceMode = 'chooser' | 'kali' | 'portfolio';
 
 /* ------------------------------------------------------------------ */
-/*  Home — thin mode/phase orchestrator                                */
+/*  Home                                                               */
 /* ------------------------------------------------------------------ */
 
 const Home: NextPage<ServerProps> = ({ title }) => {
+  const dispatch = useDispatch();
   const [mode, setMode] = useState<ExperienceMode>('chooser');
   const [phase, setPhase] = useState<AppPhase>('boot');
   const [bootCycle, setBootCycle] = useState(0);
   const [selectedBootIndex, setSelectedBootIndex] = useState(0);
-  const [bootHint, setBootHint] = useState('Use ↑ ↓ and Enter to choose.');
+  const [bootHint, setBootHint] = useState('Use up/down and Enter to choose.');
+
+  useEffect(() => {
+    void dispatch(loadLatestNews());
+  }, [dispatch]);
 
   const handleBootComplete = useCallback(() => {
     setPhase('login');
@@ -59,7 +65,10 @@ const Home: NextPage<ServerProps> = ({ title }) => {
       }
     };
 
-    window.addEventListener(SESSION_ACTION_EVENT, onSessionAction as EventListener);
+    window.addEventListener(
+      SESSION_ACTION_EVENT,
+      onSessionAction as EventListener
+    );
     return () =>
       window.removeEventListener(
         SESSION_ACTION_EVENT,
@@ -83,11 +92,11 @@ const Home: NextPage<ServerProps> = ({ title }) => {
       }
       if (e.key === 'F2') {
         e.preventDefault();
-        setBootHint('F2: BIOS Setup is protected in this demo.');
+        setBootHint('F2: BIOS setup is protected in this demo.');
       }
       if (e.key === 'F8') {
         e.preventDefault();
-        setBootHint('F8: Advanced Boot Options opened (simulated).');
+        setBootHint('F8: Advanced boot options opened (simulated).');
       }
     };
 
@@ -111,14 +120,13 @@ const Home: NextPage<ServerProps> = ({ title }) => {
 
   const handleBackToChooser = () => {
     setMode('chooser');
-    setBootHint('Use ↑ ↓ and Enter to choose.');
+    setBootHint('Use up/down and Enter to choose.');
   };
 
   /* ---- Render ---- */
 
   return (
     <>
-      {/* Boot menu */}
       {mode === 'chooser' && (
         <BootChooser
           bootHint={bootHint}
@@ -129,7 +137,6 @@ const Home: NextPage<ServerProps> = ({ title }) => {
         />
       )}
 
-      {/* Kali desktop experience */}
       {mode === 'kali' && (
         <ErrorBoundary>
           <Loader
@@ -150,7 +157,6 @@ const Home: NextPage<ServerProps> = ({ title }) => {
         </ErrorBoundary>
       )}
 
-      {/* Standalone scroll portfolio */}
       {mode === 'portfolio' && (
         <PortfolioMode onBackToChooser={handleBackToChooser} />
       )}
@@ -162,17 +168,11 @@ const Home: NextPage<ServerProps> = ({ title }) => {
 /*  Data fetching                                                      */
 /* ------------------------------------------------------------------ */
 
-export const getStaticProps = wrapper.getStaticProps(
-  (store) => async () => {
-    await store.dispatch(loadLatestNews());
-
-    return {
-      props: {
-        title: 'zis3c@kali',
-      },
-      revalidate: 3600,
-    };
-  }
-);
+export const getStaticProps = wrapper.getStaticProps(() => async () => ({
+  props: {
+    title: 'zis3c@kali',
+  },
+  revalidate: 3600,
+}));
 
 export default Home;
