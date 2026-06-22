@@ -15,6 +15,8 @@ const CACHE_NAME = {
   ASSETS: 'assets-v2',
 };
 
+const offlineResponse = () => new Response('Offline', { status: 503 });
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME.ASSETS).then((cache) => {
@@ -40,20 +42,21 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Navigation requests get a simple offline fallback.
   if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => new Response('Offline', { status: 503 }))
-    );
+    event.respondWith(fetch(event.request).catch(() => offlineResponse()));
     return;
   }
 
+  // Subresource requests must also resolve to a Response object.
+  // If network fails, return cache when possible and never reject.
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
         return response;
       }
 
-      return fetch(event.request);
+      return fetch(event.request).catch(() => offlineResponse());
     })
   );
 });
