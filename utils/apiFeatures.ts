@@ -1,5 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type MongooseQuery = any;
+type QueryLike = {
+  find: (filter: Record<string, unknown>) => QueryLike;
+  sort: (sortBy: string) => QueryLike;
+  select: (fields: string) => QueryLike;
+  skip: (count: number) => QueryLike;
+  limit: (count: number) => QueryLike;
+};
 
 /**
  * APIfeatures class, enhances mongoose query with additional filtering, sorting, limiting and pagination functionality
@@ -12,10 +17,10 @@ export class APIfeatures {
   queryString: {
     [key: string]: string;
   };
-  query: MongooseQuery;
+  query: QueryLike;
 
   constructor(
-    query: MongooseQuery,
+    query: QueryLike,
     queryString: {
       [key: string]: string;
     }

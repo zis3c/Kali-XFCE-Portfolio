@@ -2,7 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 import { sendEmail } from '../../../backend/controllers/contactsController';
 import { onError } from '../../../middleware/onError';
-import { rateLimiter, validateContactBody } from '../../../middleware/rateLimit';
+import {
+  rateLimiter,
+  validateContactBody,
+} from '../../../middleware/rateLimit';
 import { withCorrelationId } from '../../../middleware/requestId';
 import { setSecurityHeaders } from '../../../middleware/securityHeaders';
 import { logger } from '../../../utils/logger';
@@ -27,6 +30,34 @@ const ALLOWED_ORIGINS = [
   'https://me.zis3c.dev',
 ].filter(Boolean);
 
+const parseRequestOrigin = (
+  value: string | string[] | undefined
+): string | null => {
+  if (!value) {
+    return null;
+  }
+
+  const rawValue = Array.isArray(value) ? value[0] : value;
+
+  try {
+    return new URL(rawValue).origin;
+  } catch {
+    return null;
+  }
+};
+
+export const isAllowedContactRequest = (req: NextApiRequest): boolean => {
+  const requestOrigin =
+    parseRequestOrigin(req.headers.origin) ??
+    parseRequestOrigin(req.headers.referer);
+
+  if (!requestOrigin) {
+    return true;
+  }
+
+  return ALLOWED_ORIGINS.includes(requestOrigin);
+};
+
 handler.post(async (req, res) => {
   // Attach correlation ID
   const correlationId = withCorrelationId(req, res);
@@ -35,8 +66,10 @@ handler.post(async (req, res) => {
   setSecurityHeaders(req, res);
 
   // CSRF: reject cross-origin POSTs without valid origin
-  const origin = req.headers.origin;
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  const origin =
+    parseRequestOrigin(req.headers.origin) ??
+    parseRequestOrigin(req.headers.referer);
+  if (origin && !isAllowedContactRequest(req)) {
     logger.warn('Blocked cross-origin request', { origin, correlationId });
     return res.status(403).json({
       success: false,

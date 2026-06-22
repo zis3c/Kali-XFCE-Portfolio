@@ -14,6 +14,10 @@ import { logger } from '../../utils/logger';
  */
 export const loadLatestNews = () => {
   return async (dispatch: Dispatch<NewsReducerAction>): Promise<void> => {
+    if (!process.env.NEWS_URL_QUERY || !process.env.NEWS_API_KEY) {
+      return;
+    }
+
     dispatch({ type: NewsReducerActionTypes.LOAD_NEWS_ARTICLES });
     try {
       const { data } = await getLatestNews();

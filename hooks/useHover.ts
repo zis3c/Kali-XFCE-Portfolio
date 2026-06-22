@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Custom hook to detect whether the mouse is hovering an element.
@@ -10,15 +10,14 @@ import { useEffect, useState } from 'react';
 export default function useHover(ref: React.RefObject<HTMLElement>): boolean {
   const [isHovering, setIsHovering] = useState(false);
 
-  const on = () => setIsHovering(true);
-  const off = () => setIsHovering(false);
+  const on = useCallback(() => setIsHovering(true), []);
+  const off = useCallback(() => setIsHovering(false), []);
 
   useEffect(() => {
-    if (!ref.current) {
+    const node = ref.current;
+    if (!node) {
       return;
     }
-
-    const node = ref.current;
 
     node.addEventListener('mouseenter', on);
     node.addEventListener('mousemove', on);
@@ -29,9 +28,7 @@ export default function useHover(ref: React.RefObject<HTMLElement>): boolean {
       node.removeEventListener('mousemove', on);
       node.removeEventListener('mouseleave', off);
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [off, on, ref]);
 
   return isHovering;
 }

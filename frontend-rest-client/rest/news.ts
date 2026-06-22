@@ -17,6 +17,12 @@ export { getLatestNews };
  * @returns {object} - promise with news articles
  */
 const getLatestNews = (): Promise<AxiosResponse<INewsApiResponse>> => {
+  if (!process.env.NEWS_URL_QUERY || !process.env.NEWS_API_KEY) {
+    return Promise.reject(
+      new Error('News API is not configured for this environment')
+    );
+  }
+
   return withRetry(
     () =>
       makeRequest<INewsApiResponse>({

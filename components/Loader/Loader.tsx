@@ -1,6 +1,23 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as Styled from './Loader.styles';
 
+const BOOT_SEQUENCE = [
+  '[0.000000] Linux version 6.8.11-amd64',
+  '[0.018392] Command line: BOOT_IMAGE=/boot/vmlinuz root=/dev/sda1 quiet',
+  '[  OK  ] Started Load Kernel Modules.',
+  '[  OK  ] Mounted /home.',
+  '[  OK  ] Started udev Kernel Device Manager.',
+  '[  OK  ] Started Network Manager.',
+  '[  OK  ] Started Accounts Service.',
+  '[  OK  ] Started D-Bus System Message Bus.',
+  '[  OK  ] Started Light Display Manager.',
+  '[  OK  ] Reached target Graphical Interface.',
+  'Starting Kali GNU/Linux...',
+  'Initializing xfce4-session...',
+  'Loading profile: zis3c',
+  'Starting display manager...',
+];
+
 export interface Props {
   isOnScreen: boolean;
   loadingDuration: number;
@@ -19,24 +36,6 @@ const Loader = ({
   const [bootLines, setBootLines] = useState<string[]>([]);
   const bootRef = useRef<HTMLDivElement>(null);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const bootSequence = [
-    '[0.000000] Linux version 6.8.11-amd64',
-    '[0.018392] Command line: BOOT_IMAGE=/boot/vmlinuz root=/dev/sda1 quiet',
-    '[  OK  ] Started Load Kernel Modules.',
-    '[  OK  ] Mounted /home.',
-    '[  OK  ] Started udev Kernel Device Manager.',
-    '[  OK  ] Started Network Manager.',
-    '[  OK  ] Started Accounts Service.',
-    '[  OK  ] Started D-Bus System Message Bus.',
-    '[  OK  ] Started Light Display Manager.',
-    '[  OK  ] Reached target Graphical Interface.',
-    'Starting Kali GNU/Linux...',
-    'Initializing xfce4-session...',
-    'Loading profile: zis3c',
-    'Starting display manager...'
-  ];
-
   useEffect(() => {
     if (!isOnScreen) return;
 
@@ -47,10 +46,10 @@ const Loader = ({
     window.addEventListener('keydown', handleSkip);
     window.addEventListener('click', handleSkip);
 
-    const lineDelay = (loadingDuration - 400) / bootSequence.length;
+    const lineDelay = (loadingDuration - 400) / BOOT_SEQUENCE.length;
     const timeouts: NodeJS.Timeout[] = [];
 
-    bootSequence.forEach((line, index) => {
+    BOOT_SEQUENCE.forEach((line, index) => {
       const t = setTimeout(() => {
         setBootLines((prev) => [...prev, line]);
         if (bootRef.current) {
@@ -70,8 +69,7 @@ const Loader = ({
       window.removeEventListener('click', handleSkip);
       timeouts.forEach(clearTimeout);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOnScreen]);
+  }, [isOnScreen, loadingDuration, onBootComplete]);
 
   if (!isOnScreen) return <></>;
 
@@ -83,7 +81,7 @@ const Loader = ({
             const rest = line.slice(8);
             return (
               <Styled.BootLine key={index}>
-                [  <Styled.OkToken>OK</Styled.OkToken>  ]{rest}
+                [ <Styled.OkToken>OK</Styled.OkToken> ]{rest}
               </Styled.BootLine>
             );
           }
