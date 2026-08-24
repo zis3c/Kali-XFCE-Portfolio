@@ -69,6 +69,7 @@ export default class MyDocument extends Document {
           <meta property="og:site_name" content="zis3c" />
           <meta property="og:type" content="website" />
 
+          <meta name="google-site-verification" content="IkQFE-anyjedF1rjjNylVxgL6b7ckBIIoSIotY1t4Ds" />
           <meta name="keywords" content="Radzi Zamri, Cybersecurity, Portfolio, Dot Zero, Purple Team, zis3c, Kali Linux, Web Development, InfoSec, Security" />
           <meta name="robots" content="index, follow" />
           <meta name="language" content="English" />
