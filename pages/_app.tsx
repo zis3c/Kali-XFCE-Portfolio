@@ -38,6 +38,7 @@ const AppContent: FC<AppProps> = ({
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <Head>
         <title>Radzi Zamri</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <GlobalStyles />
       <CRTEffect />

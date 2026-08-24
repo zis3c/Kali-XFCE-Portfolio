@@ -67,6 +67,15 @@ export default class MyDocument extends Document {
 
           <meta property="og:url" content="https://github.com/zis3c" />
           <meta property="og:site_name" content="zis3c" />
+          <meta property="og:type" content="website" />
+
+          <meta name="keywords" content="Radzi Zamri, Cybersecurity, Portfolio, Dot Zero, Purple Team, zis3c, Kali Linux, Web Development, InfoSec, Security" />
+          <meta name="robots" content="index, follow" />
+          <meta name="language" content="English" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Radzi Zamri" />
+          <meta name="twitter:description" content="Radzi Zamri | Cybersecurity Student | Purple Team | Dot Zero" />
           <script src="/init-sw.js" defer></script>
         </Head>
 
