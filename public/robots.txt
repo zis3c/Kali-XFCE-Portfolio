@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://me.zis3c.dev/sitemap.xml

@@ -52,6 +52,7 @@ export default class MyDocument extends Document {
           <link rel="icon" href="/tab-header.png" />
           <link rel="apple-touch-icon" href="/tab-header.png" />
           <link rel="manifest" href="/app.webmanifest" />
+          <link rel="canonical" href="https://me.zis3c.dev/" />
 
           <meta property="og:title" content="Radzi Zamri" />
           <meta name="author" content="Radzi Zamri" />
@@ -65,7 +66,7 @@ export default class MyDocument extends Document {
             content="Radzi Zamri | Cybersecurity Student | Purple Team | Dot Zero"
           />
 
-          <meta property="og:url" content="https://github.com/zis3c" />
+          <meta property="og:url" content="https://me.zis3c.dev/" />
           <meta property="og:site_name" content="zis3c" />
           <meta property="og:type" content="website" />
 
