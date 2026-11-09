@@ -44,7 +44,10 @@ export function onError(
     return;
   }
 
-  res.status(mongooseErr.statusCode).json({
+  const statusCode =
+    error instanceof ErrorHandler ? error.statusCode : mongooseErr.statusCode;
+
+  res.status(statusCode).json({
     success: false,
     error,
     message: error.message,

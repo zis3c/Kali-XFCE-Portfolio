@@ -1,5 +1,11 @@
-import { sendEmailViaSendgrid, clearEmailState } from '../contact-action-creators';
-import { ContactActionTypes, ContactFormData } from '../../../types/redux/contact-reducer-types';
+import {
+  sendEmailViaSendgrid,
+  clearEmailState,
+} from '../contact-action-creators';
+import {
+  ContactActionTypes,
+  ContactFormData,
+} from '../../../types/redux/contact-reducer-types';
 import { sendEmailWith } from '../../../frontend-rest-client/rest/contact';
 
 // Mock the API client

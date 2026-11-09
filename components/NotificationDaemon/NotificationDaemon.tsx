@@ -16,7 +16,10 @@ const NotificationDaemon = (): JSX.Element => {
         setQueue((prev) => prev.slice(1));
       }, 3200);
     };
-    window.addEventListener(DESKTOP_NOTIFICATION_EVENT, onNotify as EventListener);
+    window.addEventListener(
+      DESKTOP_NOTIFICATION_EVENT,
+      onNotify as EventListener
+    );
     return () =>
       window.removeEventListener(
         DESKTOP_NOTIFICATION_EVENT,
@@ -66,4 +69,3 @@ const Message = styled.div`
   font-size: 10px;
   color: rgba(175, 184, 194, 0.92);
 `;
-

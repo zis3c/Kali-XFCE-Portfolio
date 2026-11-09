@@ -81,8 +81,8 @@ export const CategoryItem = styled.button<CategoryItemProps>`
   background: ${({ isActive }) =>
     isActive ? 'rgba(54, 123, 240, 0.18)' : 'transparent'};
   border: none;
-  border-left: 2px solid ${({ isActive }) =>
-    isActive ? '#367bf0' : 'transparent'};
+  border-left: 2px solid
+    ${({ isActive }) => (isActive ? '#367bf0' : 'transparent')};
   outline: none;
   cursor: pointer;
   color: rgba(190, 195, 200, 0.85);

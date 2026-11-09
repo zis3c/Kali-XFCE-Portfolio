@@ -59,4 +59,3 @@ const Desktop = (): JSX.Element => {
 };
 
 export default Desktop;
-

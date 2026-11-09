@@ -11,7 +11,6 @@ export const Container = styled.main`
   overflow: hidden;
 
   /* Kali wallpaper — using user's neon background */
-  background:
-    url('/kali-neon.png') center/cover no-repeat fixed,
+  background: url('/kali-neon.png') center/cover no-repeat fixed,
     linear-gradient(135deg, #0e0e1a 0%, #141428 50%, #0e0e1a 100%);
 `;

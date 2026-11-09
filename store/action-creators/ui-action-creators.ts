@@ -13,7 +13,10 @@ import { State } from '../reducers';
  *@function changeTheme
  *@returns {function} - Redux thunk function
  */
-export const changeTheme = () => {
+export const changeTheme = (): ((
+  dispatch: Dispatch<UIaction>,
+  getState: () => State
+) => void) => {
   return (dispatch: Dispatch<UIaction>, getState: () => State) => {
     dispatch({ type: UIactionTypes.CHANGE_THEME });
     localStorage.setItem('theme', getState().ui.theme);

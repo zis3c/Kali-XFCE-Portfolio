@@ -1,5 +1,8 @@
 import { windowsReducer } from '../windowsReducer';
-import { WindowsActionTypes, WindowsState } from '../../../types/redux/windows-reducer-types';
+import {
+  WindowsActionTypes,
+  WindowsState,
+} from '../../../types/redux/windows-reducer-types';
 
 const defaultState: WindowsState = {
   openedWindows: [],

@@ -34,11 +34,12 @@ const About = (): JSX.Element => {
         </Paragraph>
         <Paragraph margin={'1rem 0'}>Built by Radzi Zamri (zis3c)</Paragraph>
         <Paragraph margin={'1rem 0'}>
-          Cybersecurity Student | Purple Team
+          Cybersecurity & CS Undergrad | Purple Team & RE / Binary Analysis
+          Trainer
         </Paragraph>
-        <Paragraph margin={'1rem 0'}>CTF Team: Dot Zero</Paragraph>
+        <Paragraph margin={'1rem 0'}>CTF Team: Dot Zero (U545)</Paragraph>
         <Paragraph margin={'1rem 0'}>
-          Universiti Sultan Azlan Shah (USAS)
+          Universiti Sultan Azlan Shah (USAS) | CGPA 3.83
         </Paragraph>
         <Paragraph margin={'2rem 0'}>
           This interactive portfolio simulates a Kali Linux Xfce desktop

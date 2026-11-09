@@ -305,7 +305,15 @@ export const PdfFileIcon: React.FC<IconProps> = ({
   >
     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
     <polyline points="14 2 14 8 20 8" />
-    <text x="7" y="18" fontSize="7" fill={color} stroke="none" fontFamily="Inter, sans-serif" fontWeight="600">
+    <text
+      x="7"
+      y="18"
+      fontSize="7"
+      fill={color}
+      stroke="none"
+      fontFamily="Inter, sans-serif"
+      fontWeight="600"
+    >
       PDF
     </text>
   </svg>
@@ -332,8 +340,16 @@ export const KaliDragonIcon: React.FC<IconProps> = ({
       fill={color}
       stroke="none"
     />
-    <path d="M18 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z" fill="#0d0d17" stroke="none" />
-    <path d="M26 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z" fill="#0d0d17" stroke="none" />
+    <path
+      d="M18 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"
+      fill="#0d0d17"
+      stroke="none"
+    />
+    <path
+      d="M26 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"
+      fill="#0d0d17"
+      stroke="none"
+    />
   </svg>
 );
 

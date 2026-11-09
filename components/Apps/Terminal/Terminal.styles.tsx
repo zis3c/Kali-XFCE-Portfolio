@@ -36,7 +36,7 @@ export const MenuItem = styled.span`
   color: rgba(180, 185, 195, 0.85);
   cursor: default;
   border-radius: 0;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.06);
   }

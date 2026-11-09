@@ -1,0 +1,6 @@
+.next
+coverage
+public
+e2e
+.storybook
+node_modules

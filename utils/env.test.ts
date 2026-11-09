@@ -1,7 +1,11 @@
-import { validateEnv, EnvValidationResult } from './env';
+import { validateEnv } from './env';
 
 const REQUIRED_VARS = ['DB_URI', 'SENDGRID_API_KEY', 'GOOGLE_EMAIL_ADDRESS'];
-const OPTIONAL_VARS = ['NEWS_API_KEY', 'NEWS_URL_QUERY', 'NEXT_PUBLIC_DEMO_PASSWORD'];
+const OPTIONAL_VARS = [
+  'NEWS_API_KEY',
+  'NEWS_URL_QUERY',
+  'NEXT_PUBLIC_DEMO_PASSWORD',
+];
 
 describe('validateEnv', () => {
   const originalEnv = process.env;

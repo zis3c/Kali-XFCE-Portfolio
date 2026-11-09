@@ -37,15 +37,21 @@ describe('uiReducer', () => {
   });
 
   it('opens and closes widgets modal', () => {
-    const opened = uiReducer(defaultState, { type: UIactionTypes.OPEN_WIDGETS_MODAL });
+    const opened = uiReducer(defaultState, {
+      type: UIactionTypes.OPEN_WIDGETS_MODAL,
+    });
     expect(opened.isWidgetOpen).toBe(true);
 
-    const closed = uiReducer(opened, { type: UIactionTypes.CLOSE_WIDGETS_MODAL });
+    const closed = uiReducer(opened, {
+      type: UIactionTypes.CLOSE_WIDGETS_MODAL,
+    });
     expect(closed.isWidgetOpen).toBe(false);
   });
 
   it('opens one modal closes others', () => {
-    const state = uiReducer(defaultState, { type: UIactionTypes.OPEN_SETTINGS_MODAL });
+    const state = uiReducer(defaultState, {
+      type: UIactionTypes.OPEN_SETTINGS_MODAL,
+    });
     expect(state.areSettingsOpen).toBe(true);
     expect(state.isWidgetOpen).toBe(false);
     expect(state.isAppCenterOpen).toBe(false);
@@ -62,12 +68,16 @@ describe('uiReducer', () => {
 
   it('closes context menu', () => {
     const openState = { ...defaultState, isContextMenuOpen: true };
-    const state = uiReducer(openState, { type: UIactionTypes.CLOSE_CONTEXT_MENU });
+    const state = uiReducer(openState, {
+      type: UIactionTypes.CLOSE_CONTEXT_MENU,
+    });
     expect(state.isContextMenuOpen).toBe(false);
   });
 
   it('marks intro as shown', () => {
-    const state = uiReducer(defaultState, { type: UIactionTypes.INTRO_WAS_SHOWN });
+    const state = uiReducer(defaultState, {
+      type: UIactionTypes.INTRO_WAS_SHOWN,
+    });
     expect(state.shouldIntroBeShown).toBe(false);
   });
 

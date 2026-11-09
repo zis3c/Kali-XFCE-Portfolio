@@ -20,11 +20,15 @@ describe('filesystem', () => {
     });
 
     it('resolves ~/Projects relative', () => {
-      expect(resolvePath('/home/zis3c', '~/Projects')).toBe('/home/zis3c/Projects');
+      expect(resolvePath('/home/zis3c', '~/Projects')).toBe(
+        '/home/zis3c/Projects'
+      );
     });
 
     it('resolves relative paths from cwd', () => {
-      expect(resolvePath('/home/zis3c', 'Documents')).toBe('/home/zis3c/Documents');
+      expect(resolvePath('/home/zis3c', 'Documents')).toBe(
+        '/home/zis3c/Documents'
+      );
     });
 
     it('resolves absolute paths unchanged', () => {
@@ -36,7 +40,9 @@ describe('filesystem', () => {
     });
 
     it('normalizes redundant . segments', () => {
-      expect(resolvePath('/home/zis3c', '././Documents')).toBe('/home/zis3c/Documents');
+      expect(resolvePath('/home/zis3c', '././Documents')).toBe(
+        '/home/zis3c/Documents'
+      );
     });
   });
 

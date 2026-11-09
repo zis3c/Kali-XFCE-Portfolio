@@ -24,11 +24,15 @@ const sendEmail = catchErrors(
     if (!apiKey) {
       throw new Error('SENDGRID_API_KEY is not configured');
     }
+    const recipient = process.env.GOOGLE_EMAIL_ADDRESS;
+    if (!recipient) {
+      throw new Error('GOOGLE_EMAIL_ADDRESS is not configured');
+    }
     sgMail.setApiKey(apiKey);
 
     const msg: MailDataRequired = {
-      to: process.env.GOOGLE_EMAIL_ADDRESS!,
-      from: process.env.GOOGLE_EMAIL_ADDRESS!,
+      to: recipient,
+      from: recipient,
       subject: `Message from ${name}`,
       html: `<h1>${name}</h1>\n 
 			<h3>left message:</h3> \n

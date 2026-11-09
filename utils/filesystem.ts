@@ -23,45 +23,58 @@ export interface FsNode {
 
 const aboutTxt = `Name:       Radzi Zamri
 Alias:      zis3c
-Role:       Cybersecurity Student | Purple Team
-CTF Team:   Dot Zero
+Role:       Cybersecurity & CS Undergrad | Purple Team | RE Trainer
+CTF Team:   Dot Zero (U545) — ctftime.org/team/421634
 University: Universiti Sultan Azlan Shah (USAS)
-Focus:      Offensive & Defensive Security, Automation, Web Development
-Approach:   Break it, fix it, automate it
-Status:     Open to CTF collabs, research, and internships`;
+Degree:     Bachelor of Computer Science (CGPA: 3.83 | Dean's List Sem 1-4)
+Diploma:    Diploma in Information Technology (CGPA: 3.77 | Dean's List 4 Sems)
+Focus:      Threat Detection, Reverse Engineering, Honeypot Telemetry, Full-Stack Tooling
+Status:     Seeking 14-Week Cybersecurity Internship (Feb 2027) | Open to CTF collabs`;
 
-const skillsTxt = `Security:    Penetration Testing, OSINT, Network Enumeration, OWASP Top 10
-              Burp Suite, Nmap, Wireshark, Metasploit, Aircrack-ng, Ghidra
-Offensive:   Web App Exploitation, Privilege Escalation, CTF Competitions
-Defensive:   Log Analysis, SIEM, Incident Response, Threat Hunting
-Languages:   Python, JavaScript, TypeScript, C++, Bash, SQL
-Frontend:    React, Next.js, Styled-Components, Tailwind CSS
-Backend:     Node.js, Express, FastAPI, PostgreSQL, MongoDB
-DevOps:      Docker, Linux, Git, CI/CD, Nginx, DigitalOcean
-Automation:  Telegram Bots, Web Scraping, Async I/O, CLIs`;
+const skillsTxt = `Disassemblers/RE: Ghidra, IDA Pro, Binary Ninja, Radare2 / Cutter, JADX, Apktool
+Debuggers/Dynamic: x64dbg, GDB + GEF, Frida (Dynamic Binary Instrumentation), Immunity Debugger
+Binary & Malware: PE-bear, Detect It Easy (DIE), CAPA, Process Hacker, Pwntools, Wireshark, Volatility
+Specializations:  Static & Dynamic Decompilation, Binary Patching, Hooking, Anti-Debugging Bypass,
+                  Control-Flow Triage, ELF/PE/APK Internals, HASSH Fingerprinting, MITRE ATT&CK
+Defensive/SOC:    SSH Honeypots (CloudSentinel), Threat Detection, Automated Firewall Blocking,
+                  SIEM/SOAR Workflows, ClickHouse Log Aggregations, Incident Response
+Programming:      Python, C, C++, TypeScript, JavaScript, PHP, SQL, Bash
+Web & Frameworks: React, Next.js, Laravel 13, Inertia.js, Tailwind CSS, FastAPI, Node.js
+Databases/Cloud:  PostgreSQL, ClickHouse, Redis, Docker, Linux, DigitalOcean, Git / CI/CD
+AI & Automation:  Codex, DeepSeek, Antigravity, Agentic Workflows, Telegram Bots, CLI Tools
+Languages:        Bahasa Melayu (Native), English (Fluent)`;
 
-const contactTxt = `Email:      I24107504@student.usas.edu.my
+const contactTxt = `Radzi bin Zamri (zis3c)
+Location:   Seri Kembangan, Selangor, Malaysia
+Email:      r.zradzizamri@gmail.com
+Student ID: I24107504@student.usas.edu.my
+Phone:      +601111537062
+Portfolio:  https://me.zis3c.dev
 GitHub:     https://github.com/zis3c
-LinkedIn:   https://www.linkedin.com/in/radzizamri/
-Instagram:  https://www.instagram.com/radz.z_/
-YouTube:    https://www.youtube.com/@zis3c
+LinkedIn:   https://linkedin.com/in/radzizamri
+Instagram:  https://instagram.com/radz.z_
+YouTube:    https://youtube.com/@zis3c
 
-Open to collaborations, CTF invites, and security research.`;
+Seeking 14-Week Cybersecurity Internship (Feb 2027) | Open to CTF collabs & research.`;
 
-const notesMd = `# Notes
+const notesMd = `# Notes & Active Agenda (2026)
 
-## TODO
-- [ ] Complete Purple Team lab setup
-- [ ] Write CTF writeup for latest competition
-- [ ] Finish FinVault dashboard features
-- [ ] Deploy Certclaim to production
-- [ ] Update STEM-Telebot membership system
+## Active Projects & Milestones
+- [x] CloudSentinel: SSH Honeypot with ClickHouse + Next.js dashboard & <1ms firewall blocker
+- [x] RedLilyGO: ESP32-S3 firmware with USB HID & PCAP capture + .NET 8 desktop companion
+- [x] JanjiCare: Laravel 13 + React 18 clinic booking & WebRTC telehealth consultation portal
+- [ ] Finalize FYP report and CloudSentinel benchmark documentation
+- [ ] Prepare for 14-week Cybersecurity Internship (commencing February 2027)
+- [ ] Organize next Dot Zero internal MockCTF & Advanced Binary Analysis / Frida workshop
+- [ ] Expand USAS Assignment Notifier & Timetable for next semester intake
 
-## Research
-- OWASP API Security Top 10
-- Container escape techniques
-- Polyglot file bypass methods
-- Reverse engineering ELF binaries`;
+## Research Interests
+- SSH/RDP Honeypot telemetry & automated SOAR containment
+- Advanced ELF & PE binary reverse engineering (Ghidra, IDA Pro, x64dbg, GDB+GEF, Frida)
+- Dynamic Binary Instrumentation (DBI) & runtime hooking for API call interception
+- Anti-analysis evasion: anti-debugging, packing detection, and string deobfuscation
+- ESP32-S3 hardware security & wireless packet analysis
+- OWASP Mobile Top 10 remediation & Android hybrid app security`;
 
 const bashrc = `# ~/.bashrc: executed by bash(1) for non-login shells.
 
@@ -81,10 +94,110 @@ if [ -x /usr/bin/dircolors ]; then
     eval "$(dircolors -b)"
 fi`;
 
-const resumeContent = `resume.pdf — binary file
-Use "open resume" in terminal or double-click in Thunar to view.`;
+const resumeContent = `RADZI BIN ZAMRI
+Seri Kembangan, Selangor | +601111537062 | r.zradzizamri@gmail.com
+me.zis3c.dev | github.com/zis3c | linkedin.com/in/radzizamri
+
+OBJECTIVE
+Computer Science undergraduate at Universiti Sultan Azlan Shah (CGPA 3.83) seeking a 14-week
+Cybersecurity Internship starting February 2027 in Selangor or Kuala Lumpur. Practical experience
+in threat detection, reverse engineering, and full-stack development, with the goal of contributing
+effectively to SOC monitoring, incident response, or penetration testing teams.
+
+EDUCATION
+- Bachelor of Computer Science - Universiti Sultan Azlan Shah (2024 - 2027) | CGPA: 3.83 (Dean's List Sem I-IV)
+- Diploma in Information Technology - Universiti Sultan Azlan Shah (2021 - 2024) | CGPA: 3.77 (Dean's List 4 Sems)
+
+FEATURED PROJECTS
+- CloudSentinel (FYP 2026): Python SSH Honeypot, HASSH, MITRE ATT&CK, ClickHouse & Next.js
+- RedLilyGO (2026): ESP32-S3 Security Firmware, USB HID, PCAP capture, .NET 8 Companion App
+- JanjiCare (2026): Clinic Web Appointment & Telehealth (Laravel 13, React 18, WebRTC LiveKit)
+- Dot Zero CTF Pipeline & RE Training: Team Secretary & RE Trainer (Ghidra, IDA, x64dbg, GDB, Frida)
+- STEM-USAS Ecosystem: stem.zis3c.dev & STEM-Telebot membership automation
+- USAS Assignment Notifier & Timetable: Telegram alert bot & jadualkelas.zis3c.dev
+
+CERTIFICATIONS
+- Google Cybersecurity Professional Certificate - Coursera (2026)
+- Reverse Engineering Bootcamp: Ghidra, IDA, Linux, and x86_64 - Udemy (2026)
+
+(Full PDF document available at /resume.pdf)`;
 
 // Real GitHub project READMEs
+const cloudSentinelReadme = `# CloudSentinel: SSH Honeypot & Threat Detection System (FYP)
+A high-interaction SSH honeypot deployed on DigitalOcean designed to capture brute-force intrusions and attacker commands in real time.
+
+## Key Features
+- HASSH client fingerprinting & 20 MITRE ATT&CK rules to classify scanner traffic.
+- Automated firewall IP blocking with <1ms median response time during benchmark testing.
+- Real-time Next.js analytics dashboard backed by ClickHouse (fast aggregations) and Redis (session cache).
+- GeoIP tracking and attack telemetry visualization.
+
+## Stack
+- Python (Honeypot Core, Async I/O)
+- Next.js + TypeScript (Dashboard)
+- ClickHouse (Time-series log storage)
+- Redis (Session cache & pub/sub)
+- DigitalOcean (Cloud deployment)
+- iptables / firewall automation`;
+
+const redLilygoReadme = `# RedLilyGO: ESP32-S3 Security Testing Firmware
+Custom C++ firmware for the LILYGO T-Dongle-S3 USB research dongle for authorized hardware security assessments and network analysis.
+
+## Key Features
+- Authorized USB HID payload injection & keystroke automation.
+- Wi-Fi packet capture (PCAP) saving to onboard storage.
+- Local web interface and .NET 8 desktop companion app to manage scripts and saved captures via USB serial.
+- Hardened CI workflow with CodeQL, Semgrep, and Gitleaks security scans on every commit.
+
+## Stack
+- C++ (ESP32-S3 Arduino / ESP-IDF)
+- .NET 8 (Desktop companion application)
+- WebSockets & Web UI
+- GitHub Actions Security Pipeline`;
+
+const janjiCareReadme = `# JanjiCare: Clinic Web Appointment & Telehealth System
+Full-stack healthcare booking and telehealth platform designed for modern clinical operations.
+
+## Key Features
+- Role-based access control (RBAC) separating Patient, Doctor, and Administrator portals.
+- Real-time live queue management powered by Laravel Reverb WebSockets.
+- Integrated LiveKit WebRTC video consultations secured by server-signed JWT room tokens.
+- Automated appointment notifications and management workflows.
+
+## Stack
+- Laravel 13 & PHP 8.3
+- React 18 & Inertia.js
+- Tailwind CSS
+- Laravel Reverb (WebSockets)
+- LiveKit WebRTC`;
+
+const ctfPipelineReadme = `# Dot Zero CTF Pipeline & RE Workshops
+Workspace automation and reverse engineering toolkit developed for the USAS CTF Team (Dot Zero / U545).
+
+## Highlights
+- CTFd automation CLI: fetch challenges, initialize writeup skeletons, and track flag submissions.
+- Hands-on Reverse Engineering workshops: Ghidra & IDA Pro static decompiler analysis, x64dbg & GDB+GEF dynamic binary patching, and Frida runtime API hooking.
+- Binary crackmes & anti-reversing: ELF/PE structure internals, anti-debugging evasion, and control-flow triage.
+- Team CTF achievements: 21st in RE:UN10N CTF 2025, 88th in ApoorvCTF 2026, 133rd / 1359 teams in 0xFun CTF 2026.
+
+## Stack
+- Python & Bash
+- Ghidra, IDA Pro, x64dbg, GDB+GEF, Frida
+- CTFd REST API`;
+
+const stemWebReadme = `# STEM-USAS Web Portal
+Official student association portal for STEM Universiti Sultan Azlan Shah (stem.zis3c.dev).
+
+## Key Features
+- Association announcements, committee profiles, and event registration.
+- Responsive modern interface built with React and TypeScript.
+- Integrated with STEM-Telebot for member verification and digital receipts.
+
+## Stack
+- React & TypeScript
+- Tailwind CSS
+- Vercel Deployment`;
+
 const finvaultReadme = `# FinVault
 AI-powered crypto wallet simulator built with Next.js, PostgreSQL, and Gemini-assisted fraud insights.
 
@@ -287,6 +400,94 @@ export const fsTree: FsNode = {
               name: 'Projects',
               type: 'dir',
               children: [
+                {
+                  name: 'CloudSentinel',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: cloudSentinelReadme,
+                      size: 420,
+                    },
+                    {
+                      name: 'honeypot.py',
+                      type: 'file',
+                      content:
+                        '# CloudSentinel SSH Honeypot Core\n# DigitalOcean deployment with HASSH & MITRE ATT&CK rules',
+                      size: 3100,
+                    },
+                  ],
+                },
+                {
+                  name: 'RedLilyGO',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: redLilygoReadme,
+                      size: 380,
+                    },
+                    {
+                      name: 'firmware.cpp',
+                      type: 'file',
+                      content:
+                        '// RedLilyGO ESP32-S3 Firmware\n// USB HID payload automation & Wi-Fi PCAP capture',
+                      size: 2800,
+                    },
+                  ],
+                },
+                {
+                  name: 'JanjiCare',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: janjiCareReadme,
+                      size: 350,
+                    },
+                    {
+                      name: 'routes.php',
+                      type: 'file',
+                      content:
+                        '<?php // JanjiCare routes: Laravel 13, Inertia & LiveKit WebRTC ?>',
+                      size: 1500,
+                    },
+                  ],
+                },
+                {
+                  name: 'CTF-Pipeline',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: ctfPipelineReadme,
+                      size: 340,
+                    },
+                    {
+                      name: 'pipeline.py',
+                      type: 'file',
+                      content:
+                        '# Dot Zero CTF Pipeline Automation\n# CTFd challenge fetcher & write-up generator',
+                      size: 2200,
+                    },
+                  ],
+                },
+                {
+                  name: 'STEM-Web',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content: stemWebReadme,
+                      size: 280,
+                    },
+                  ],
+                },
                 {
                   name: 'FinVault',
                   type: 'dir',
@@ -719,7 +920,7 @@ function splitParent(absPath: string): { parentPath: string; name: string } {
   return { parentPath: parentPath === '' ? '/' : parentPath, name };
 }
 
-export function createFile(absPath: string, content: string = ''): boolean {
+export function createFile(absPath: string, content = ''): boolean {
   const { parentPath, name } = splitParent(absPath);
   if (!name) return false;
   const parent = findNode(parentPath);

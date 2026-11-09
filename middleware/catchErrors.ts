@@ -24,12 +24,10 @@ export default function catchErrorsFrom(controller: NextController) {
         message: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined,
       });
-      return res
-        .status(500)
-        .json({
-          success: 'fail',
-          error: error instanceof Error ? error.message : String(error),
-        });
+      return res.status(500).json({
+        success: 'fail',
+        error: error instanceof Error ? error.message : String(error),
+      });
     });
   };
 }

@@ -32,20 +32,20 @@ const OpenedWindows = (): JSX.Element => {
             window.isOpen
         )
         .map((window) => (
-        <Window
-          key={window.windowName}
-          windowName={window.windowName}
-          windowIcon={window.windowIcon}
-          size={window.size}
-          isOpen={window.isOpen}
-          isActive={activeWindowName === window.windowName}
-          closeWindow={() => handleCloseWindow(window.windowName)}
-          focusWindow={() => focusWindow(window.windowName)}
-          minimizeWindow={() => toggleMinimizeWindow(window.windowName)}
-        >
-          {window.windowContent}
-        </Window>
-      ))}
+          <Window
+            key={window.windowName}
+            windowName={window.windowName}
+            windowIcon={window.windowIcon}
+            size={window.size}
+            isOpen={window.isOpen}
+            isActive={activeWindowName === window.windowName}
+            closeWindow={() => handleCloseWindow(window.windowName)}
+            focusWindow={() => focusWindow(window.windowName)}
+            minimizeWindow={() => toggleMinimizeWindow(window.windowName)}
+          >
+            {window.windowContent}
+          </Window>
+        ))}
     </Styled.Container>
   );
 };

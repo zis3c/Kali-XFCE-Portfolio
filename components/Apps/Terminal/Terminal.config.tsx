@@ -60,13 +60,13 @@ export const useTerminalCommands = (
                                CPU: Intel Core i7-10750H
                                Memory: ${memUsed}MiB / 8192MiB
 
-  ╔═══════════════════════════════════════════╗
-  ║  Radzi Zamri (zis3c)                      ║
-  ║  Cybersecurity Student | Purple Team      ║
-  ║  CTF Team: Dot Zero                       ║
-  ║  Universiti Sultan Azlan Shah             ║
-  ║  github.com/zis3c                         ║
-  ╚═══════════════════════════════════════════╝`;
+  ╔═══════════════════════════════════════════════════════╗
+  ║  Radzi Zamri (zis3c)                                  ║
+  ║  Cybersecurity & CS Undergrad (CGPA 3.83)             ║
+  ║  Purple Team • RE & Binary Analysis • Dot Zero (U545) ║
+  ║  Universiti Sultan Azlan Shah (USAS)                  ║
+  ║  github.com/zis3c | me.zis3c.dev                      ║
+  ╚═══════════════════════════════════════════════════════╝`;
   };
 
   const helpOutput = `Available commands:
@@ -106,7 +106,11 @@ export const useTerminalCommands = (
     skills --list     List technical skills
     projects --list   List project folders
 
-  Kali Tools (info only):
+  Reverse Engineering & Security Tools:
+    ghidra --version
+    x64dbg --version
+    gdb --version
+    frida --version
     nmap --version
     wireshark --version
     msfconsole --version
@@ -309,6 +313,9 @@ export const useTerminalCommands = (
           return { output: 'Opening contact.txt...', isError: false };
         }
         if (app === 'resume') {
+          if (typeof window !== 'undefined') {
+            window.open('/resume.pdf', '_blank');
+          }
           const resumeContent = readFile('/home/zis3c/resume.pdf');
           openWindow({
             windowName: 'resume.pdf — Mousepad',
@@ -322,7 +329,10 @@ export const useTerminalCommands = (
               />
             ),
           });
-          return { output: 'Opening resume.pdf...', isError: false };
+          return {
+            output: 'Opening resume.pdf in viewer and new tab...',
+            isError: false,
+          };
         }
         if (app === 'terminal') {
           openWindow({
@@ -412,6 +422,61 @@ Codename:       kali-rolling`,
       case 'xfconf-query':
         return {
           output: 'xfconf-query version 4.18.1',
+          isError: false,
+        };
+
+      case 'ghidra':
+        if (args[0] === '--version' || args[0] === '-v') {
+          return {
+            output: `Ghidra v11.1.2 (SRE Framework)
+Java Version: OpenJDK 21.0.3 64-Bit Server VM | NSA Research Directorate
+Supported Architectures: x86/x64, ARM/AArch64, MIPS, PowerPC, RISC-V, ESP32`,
+            isError: false,
+          };
+        }
+        return {
+          output:
+            'Ghidra Software Reverse Engineering Framework.\nUsage: ghidra --version',
+          isError: false,
+        };
+
+      case 'x64dbg':
+        if (args[0] === '--version' || args[0] === '-v') {
+          return {
+            output: `x64dbg (Snapshot: 2024-04-18)
+Open-source x64/x32 debugger for Windows binaries with ScyllaHide & TitanEngine.`,
+            isError: false,
+          };
+        }
+        return {
+          output: 'x64dbg Debugger simulator.\nUsage: x64dbg --version',
+          isError: false,
+        };
+
+      case 'gdb':
+        if (args[0] === '--version' || args[0] === '-v') {
+          return {
+            output: `GNU gdb (Debian 13.2-1) 13.2
+Loaded extensions: GEF (GDB Enhanced Features) / Pwndbg for binary exploit triage.`,
+            isError: false,
+          };
+        }
+        return {
+          output: 'GNU Debugger.\nUsage: gdb --version',
+          isError: false,
+        };
+
+      case 'frida':
+        if (args[0] === '--version' || args[0] === '-v') {
+          return {
+            output: `Frida 16.2.1
+Dynamic binary instrumentation toolkit (JavaScript API & C core hook engine)`,
+            isError: false,
+          };
+        }
+        return {
+          output:
+            'Frida dynamic binary instrumentation toolkit.\nUsage: frida --version',
           isError: false,
         };
 

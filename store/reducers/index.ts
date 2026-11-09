@@ -11,7 +11,6 @@ import { ContactState } from '../../types/redux/contact-reducer-types';
 import { newsReducer } from './newsReducer';
 import { NewsReducerState } from '../../types/redux/news-reducer-types';
 
-
 export const rootReducer = combineReducers({
   ui: uiReducer,
   todos: todosReducer,

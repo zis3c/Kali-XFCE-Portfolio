@@ -61,7 +61,8 @@ const AppCenter = (): JSX.Element => {
       windowIcon,
       size: {
         width: 0.55 * (typeof window !== 'undefined' ? window.innerWidth : 700),
-        height: 0.6 * (typeof window !== 'undefined' ? window.innerHeight : 500),
+        height:
+          0.6 * (typeof window !== 'undefined' ? window.innerHeight : 500),
       },
       windowContent: content,
     });
@@ -85,11 +86,7 @@ const AppCenter = (): JSX.Element => {
       windowIcon: 'KALI_FILEMANAGER',
       category: ['Favorites', 'System', 'Recently Used'],
       action: () =>
-        openApp(
-          'File Manager',
-          <FileManager />,
-          'KALI_FILEMANAGER'
-        ),
+        openApp('File Manager', <FileManager />, 'KALI_FILEMANAGER'),
     },
     {
       id: 3,

@@ -17,7 +17,8 @@ const systemTrayModalStyles = css<ContainerProps>`
   transform: ${({ isAppCenterOpen }) =>
     isAppCenterOpen ? `translateY(0)` : `translateY(-120%)`};
   opacity: ${({ isAppCenterOpen }) => (isAppCenterOpen ? 1 : 0)};
-  pointer-events: ${({ isAppCenterOpen }) => (isAppCenterOpen ? 'auto' : 'none')};
+  pointer-events: ${({ isAppCenterOpen }) =>
+    isAppCenterOpen ? 'auto' : 'none'};
   max-height: calc(100vh - 40px);
 `;
 

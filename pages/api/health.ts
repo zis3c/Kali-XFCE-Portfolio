@@ -19,11 +19,7 @@ export default async function healthHandler(
 ): Promise<void> {
   const dbState = mongoose.connection.readyState;
   const dbStatus =
-    dbState === 1
-      ? 'connected'
-      : dbState === 2
-      ? 'connecting'
-      : 'disconnected';
+    dbState === 1 ? 'connected' : dbState === 2 ? 'connecting' : 'disconnected';
 
   const healthy = dbState === 1;
 

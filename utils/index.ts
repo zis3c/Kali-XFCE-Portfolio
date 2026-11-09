@@ -18,8 +18,8 @@ const random = (min: number, max: number): number =>
  *@returns {Array<number>} random number in range
  */
 
-const range = (start: number, end: number, step = 1): number[] => {
-  const output = [];
+const range = (start: number, end?: number, step = 1): number[] => {
+  const output: number[] = [];
   if (typeof end === 'undefined') {
     end = start;
     start = 0;

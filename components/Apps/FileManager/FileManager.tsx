@@ -136,9 +136,12 @@ const FileManager = ({
       if (node.content) {
         openFileContent(name, node.content, fullPath);
       } else if (name === 'resume.pdf') {
+        if (typeof window !== 'undefined') {
+          window.open('/resume.pdf', '_blank');
+        }
         openFileContent(
           name,
-          'resume.pdf - binary file\nUse "open resume" in terminal or double-click in Thunar to view.',
+          'Opening /resume.pdf in a new tab...\n\nUse "open resume" in terminal or click the link above.',
           fullPath
         );
       }

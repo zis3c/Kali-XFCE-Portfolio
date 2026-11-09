@@ -59,8 +59,11 @@ const Shell = styled.main`
   display: grid;
   place-items: center;
   padding: 24px;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(91, 105, 116, 0.22), transparent 30%),
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(91, 105, 116, 0.22),
+      transparent 30%
+    ),
     linear-gradient(135deg, #050707 0%, #101418 55%, #060708 100%);
   color: #d5dde3;
   font-family: 'JetBrains Mono', 'Consolas', monospace;

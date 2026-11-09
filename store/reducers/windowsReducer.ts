@@ -91,9 +91,7 @@ export const windowsReducer = (
             : window
         ),
         activeWindowName:
-          state.activeWindowName === action.payload
-            ? null
-            : action.payload,
+          state.activeWindowName === action.payload ? null : action.payload,
       };
 
     case WindowsActionTypes.FOCUS_WINDOW:

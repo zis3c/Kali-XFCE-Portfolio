@@ -121,4 +121,3 @@ export const useAppContextMenuConfig = ({
 
   return { desktopContextMenuContent };
 };
-

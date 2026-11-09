@@ -1,5 +1,18 @@
 import 'styled-components';
-import { IPrimaryColors, IGrayColors, IUtilityColors, IGradients, IBoxShadows, IFontSizes, IFontWeights, IMediaBreakpoints, ISpacing, IZindexes, IPortfolioStyle, IKaliTokens } from '../design-system/system-design-variables';
+import {
+  IPrimaryColors,
+  IGrayColors,
+  IUtilityColors,
+  IGradients,
+  IBoxShadows,
+  IFontSizes,
+  IFontWeights,
+  IMediaBreakpoints,
+  ISpacing,
+  IZindexes,
+  IPortfolioStyle,
+  IKaliTokens,
+} from '../design-system/system-design-variables';
 
 /**
  * Augment the styled-components DefaultTheme interface

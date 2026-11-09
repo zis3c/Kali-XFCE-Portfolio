@@ -26,7 +26,7 @@ const TechWidget = (): JSX.Element => {
           🔥 Powered by Next.js and React
         </TextHeader>
         <Paragraph margin={'0.5rem 0'}>
-          🇨🇦 Handcrafted by me © 2021 🇺🇦
+          Built by Radzi Zamri (zis3c) © 2026
         </Paragraph>
       </Styled.TextWrapper>
     </Styled.Container>

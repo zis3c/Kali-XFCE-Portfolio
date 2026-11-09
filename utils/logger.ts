@@ -22,7 +22,16 @@ type RuntimeEnvGetter = () => string | undefined;
 
 const getRuntimeEnv = (): string | undefined => process.env.NODE_ENV;
 
-export const createLogger = (runtimeEnv: RuntimeEnvGetter = getRuntimeEnv) => {
+interface Logger {
+  debug: (msg: string, ctx?: Record<string, unknown>) => void;
+  info: (msg: string, ctx?: Record<string, unknown>) => void;
+  warn: (msg: string, ctx?: Record<string, unknown>) => void;
+  error: (msg: string, ctx?: Record<string, unknown>) => void;
+}
+
+export const createLogger = (
+  runtimeEnv: RuntimeEnvGetter = getRuntimeEnv
+): Logger => {
   const log = (
     level: LogLevel,
     message: string,
@@ -56,10 +65,8 @@ export const createLogger = (runtimeEnv: RuntimeEnvGetter = getRuntimeEnv) => {
   return {
     debug: (msg: string, ctx?: Record<string, unknown>) =>
       log('debug', msg, ctx),
-    info: (msg: string, ctx?: Record<string, unknown>) =>
-      log('info', msg, ctx),
-    warn: (msg: string, ctx?: Record<string, unknown>) =>
-      log('warn', msg, ctx),
+    info: (msg: string, ctx?: Record<string, unknown>) => log('info', msg, ctx),
+    warn: (msg: string, ctx?: Record<string, unknown>) => log('warn', msg, ctx),
     error: (msg: string, ctx?: Record<string, unknown>) =>
       log('error', msg, ctx),
   };

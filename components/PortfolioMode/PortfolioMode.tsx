@@ -25,114 +25,129 @@ type FeaturedProject = {
 
 const featuredProjects: FeaturedProject[] = [
   {
-    name: 'STEM Telebot',
-    stack: 'Python, Telegram Bot API, Google Sheets',
-    summary: 'Bilingual membership automation bot for STEM support workflows.',
+    name: 'CloudSentinel (FYP)',
+    stack: 'Python, Next.js, ClickHouse, Redis, DigitalOcean',
+    summary:
+      'SSH Honeypot & Threat Detection System capturing real-time brute-force sessions and scanner traffic.',
     highlights: [
-      'Join/leave automation',
-      'Sheets sync pipeline',
-      'Admin + superadmin controls',
+      'HASSH fingerprinting & 20 MITRE ATT&CK rules',
+      'Automated firewall IP blocking (<1ms median response)',
+      'Next.js dashboard backed by ClickHouse & Redis with GeoIP maps',
+    ],
+    accent: '#ef4444',
+    tags: ['Security', 'Web', 'Research'],
+    link: 'https://github.com/zis3c/CloudSentinel',
+  },
+  {
+    name: 'RedLilyGO',
+    stack: 'C++, .NET 8, ESP32-S3, GitHub Actions',
+    summary:
+      'Custom security testing firmware for LILYGO T-Dongle-S3 USB & Wi-Fi research.',
+    highlights: [
+      'USB HID payload automation & Wi-Fi packet capture (PCAP)',
+      'Local web UI & .NET 8 companion desktop manager over serial',
+      'CI pipeline with CodeQL, Semgrep & Gitleaks security checks',
+    ],
+    accent: '#f97316',
+    tags: ['Security', 'Research', 'Automation'],
+    link: 'https://github.com/zis3c/RedLilyGO',
+  },
+  {
+    name: 'JanjiCare',
+    stack: 'Laravel 13, React 18, Inertia.js, Tailwind, LiveKit WebRTC',
+    summary:
+      'Full-stack clinic booking & telehealth consultation platform with real-time queues.',
+    highlights: [
+      'Role-based access control (Patient, Doctor, Admin)',
+      'LiveKit WebRTC video consultations with server-signed JWT tokens',
+      'Real-time appointment queue updates powered by Laravel Reverb',
+    ],
+    accent: '#06b6d4',
+    tags: ['Web'],
+    link: 'https://github.com/zis3c/Clinic-Web-Appointment',
+  },
+  {
+    name: 'Dot Zero CTF Pipeline & RE',
+    stack: 'Ghidra, IDA, x64dbg, GDB/GEF, Frida, Python, Bash',
+    summary:
+      'CTF automation pipeline and hands-on Reverse Engineering training materials.',
+    highlights: [
+      'CTFd workspace automation tool to streamline challenge downloads & write-ups',
+      'RE workshops: Ghidra/IDA decompiler triage, x64dbg binary patching & Frida hooks',
+      'Crackme analysis & anti-reversing: ELF/PE parsing, GDB/GEF debugging & memory inspection',
+    ],
+    accent: '#8b5cf6',
+    tags: ['Security', 'Automation'],
+    link: 'https://ctftime.org/team/421634',
+  },
+  {
+    name: 'STEM Platform & Telebot',
+    stack: 'React, TypeScript, Python, Telegram Bot API, Google Sheets',
+    summary:
+      'Official web portal and automated membership verification ecosystem for STEM USAS.',
+    highlights: [
+      'Official STEM-USAS web portal at stem.zis3c.dev',
+      'Verified 62+ registered members with automated digital receipts',
+      'Google Sheets sync pipeline with admin & superadmin controls',
     ],
     accent: '#22c55e',
-    tags: ['Automation', 'Bot'],
+    tags: ['Web', 'Automation', 'Bot'],
     link: 'https://github.com/zis3c/STEM-Telebot',
   },
   {
-    name: 'Tgsortreact',
-    stack: 'Python, Telethon, Pandas, React',
+    name: 'USAS Assignment Notifier & Timetable',
+    stack: 'Python, PostgreSQL, Telegram Bot API, React',
     summary:
-      'Telegram reaction analytics engine with dashboard-oriented processing.',
+      'Automated LMS deadline tracker for 50 students across 245 assignments, plus timetable exporter.',
     highlights: [
-      'Reaction scrape jobs',
-      'Data cleaning with Pandas',
-      'Web analytics view',
-    ],
-    accent: '#38bdf8',
-    tags: ['Automation', 'Bot', 'Research'],
-    link: 'https://github.com/zis3c/Tgsortreact',
-  },
-  {
-    name: 'USAS Launcher',
-    stack: 'Python, Selenium, Desktop Automation',
-    summary:
-      'Secure launcher to speed up repetitive campus portal sign-in tasks.',
-    highlights: [
-      'Credential-assisted login',
-      'Browser automation profiles',
-      'Time-saving launcher UX',
-    ],
-    accent: '#f59e0b',
-    tags: ['Automation'],
-    link: 'https://github.com/zis3c/USAS-Launcher',
-  },
-  {
-    name: 'Assignment Notifier',
-    stack: 'Python, Telegram Bot API, Scheduler',
-    summary:
-      'Reminder bot for deadlines with privacy-minded credential handling.',
-    highlights: [
-      'Automated reminder cycle',
-      'Encrypted credential storage',
-      'Student-focused flow',
+      'Automated deadline alerts synced from USAS LMS',
+      'Student timetable exporter at jadualkelas.zis3c.dev (PDF & wallpapers)',
+      'Privacy-focused student credential & notification management',
     ],
     accent: '#e879f9',
-    tags: ['Automation', 'Bot'],
+    tags: ['Automation', 'Bot', 'Web'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
   },
   {
-    name: 'Certclaim',
-    stack: 'Next.js, TypeScript, Admin Panel',
+    name: 'Polyglot Files',
+    stack: 'Python CLI, File Internals, Steganography',
     summary:
-      'Certificate claim and verification portal with operator workflow.',
+      'Dual-format file generator combining valid JPEG/PNG and PDF structures for security analysis.',
     highlights: [
-      'Claim submission flow',
-      'Admin review dashboard',
-      'Structured record handling',
+      'Valid JPEG+PDF and PNG+PDF hybrid file generation',
+      'File signature parser behavior and upload validation research',
+      'Safe demonstration of format confusion vectors',
     ],
-    accent: '#60a5fa',
-    tags: ['Web'],
-    link: 'https://github.com/zis3c/Certclaim',
+    accent: '#a78bfa',
+    tags: ['Security', 'Research'],
+    link: 'https://github.com/zis3c/Polyglot-File',
   },
   {
-    name: 'Finvault',
-    stack: 'Next.js, PostgreSQL, Prisma',
-    summary: 'Fintech-style wallet simulator with transaction-centric UX.',
-    highlights: [
-      'Wallet balance modeling',
-      'Transaction history management',
-      'Database-backed state',
-    ],
-    accent: '#14b8a6',
-    tags: ['Web'],
-    link: 'https://github.com/zis3c/Finvault',
-  },
-  {
-    name: 'QRBot + Qrtendify',
-    stack: 'Python, Django, Telegram Bot API',
+    name: 'QRBot & Qrtendify',
+    stack: 'Python, Aiogram, Docker',
     summary:
-      'QR ecosystem: bot-generated QR utilities and attendance/session tracking.',
+      'Versatile QR code bot ecosystem for text, WiFi, vCard, and encrypted payloads.',
     highlights: [
-      'QR generate + decode bot',
-      'Encrypted mode support',
-      'Attendance platform integration',
+      'Multi-format QR code generation & camera/image decoding',
+      'Encrypted payload support for attendance tracking',
+      'Lightweight Docker deployment for high uptime',
     ],
     accent: '#fb7185',
     tags: ['Security', 'Bot', 'Automation'],
     link: 'https://github.com/zis3c/QRBot',
   },
   {
-    name: 'Polyglot Files',
-    stack: 'Security Research, File Format Internals',
-    summary:
-      'Polyglot file experiments that combine valid multiple file signatures.',
+    name: 'Finvault',
+    stack: 'Next.js, PostgreSQL, Prisma, Gemini API',
+    summary: 'Fintech-style wallet simulator with AI transaction analysis.',
     highlights: [
-      'JPG/PDF hybrids',
-      'PNG/PDF hybrids',
-      'Payload structure research',
+      'Wallet balance modeling & transaction ledger',
+      'Gemini AI-assisted fraud and spending insights',
+      'Database-backed state management with Prisma',
     ],
-    accent: '#a78bfa',
-    tags: ['Security', 'Research'],
-    link: 'https://github.com/zis3c/Polyglot-File',
+    accent: '#14b8a6',
+    tags: ['Web'],
+    link: 'https://github.com/zis3c/Finvault',
   },
 ];
 
@@ -383,34 +398,40 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       </Styled.Nav>
       <Styled.Main>
         <Styled.StatsStrip>
-          <Styled.StatPill>Role: Cybersecurity Student</Styled.StatPill>
-          <Styled.StatPill>CTF Team: Dot Zero</Styled.StatPill>
-          <Styled.StatPill>Repos: 14+</Styled.StatPill>
           <Styled.StatPill>
-            Now Building: Automation + Security Tools
+            Role: Cybersecurity & CS Undergrad (CGPA 3.83)
+          </Styled.StatPill>
+          <Styled.StatPill>CTF Team: Dot Zero (U545)</Styled.StatPill>
+          <Styled.StatPill>Repos: 20+</Styled.StatPill>
+          <Styled.StatPill>
+            Now Building: Threat Detection & RE Tooling
           </Styled.StatPill>
         </Styled.StatsStrip>
         <Styled.HeroSection id="simple-about">
-          <Styled.HeroBadge>Cybersecurity Student</Styled.HeroBadge>
+          <Styled.HeroBadge>
+            Cybersecurity Undergrad • Purple Team • RE Trainer
+          </Styled.HeroBadge>
           <Styled.HeroTitle>
             <GlitchText
               words={[
                 'Cybersecurity Portfolio',
-                'Offensive Security',
-                'Purple Team',
-                'Dot Zero',
+                'Threat Detection',
+                'Reverse Engineering',
+                'Dot Zero CTF',
               ]}
             />
           </Styled.HeroTitle>
           <Styled.HeroText>
-            USAS Bachelor of Computer Science student with offensive and
-            defensive security projects, CTF experience with Dot Zero, and
-            hands-on automation/tooling projects built from curiosity and hobby
-            exploration.
+            Universiti Sultan Azlan Shah (USAS) Computer Science undergraduate
+            (CGPA 3.83) with practical experience in threat detection, reverse
+            engineering, and full-stack development. Secretary & RE Trainer for
+            Dot Zero CTF team, currently seeking a 14-week Cybersecurity
+            Internship (starting February 2027) in SOC monitoring, incident
+            response, or penetration testing.
           </Styled.HeroText>
           <Styled.SocialGrid>
             <Styled.SocialButton
-              href="mailto:i24107504@usas.student.edu.my"
+              href="mailto:r.zradzizamri@gmail.com"
               bg="#ea4335"
               hoverBg="#d33426"
             >
@@ -433,6 +454,15 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               hoverBg="#004182"
             >
               <FaLinkedin /> LinkedIn
+            </Styled.SocialButton>
+            <Styled.SocialButton
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              bg="#059669"
+              hoverBg="#047857"
+            >
+              📄 Resume (PDF)
             </Styled.SocialButton>
             <Styled.SocialButton
               href="https://www.youtube.com/@zis3c"
@@ -459,10 +489,13 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           <Styled.Card accentColor="#3b82f6" colSpan={2}>
             <Styled.CardTitle accentColor="#3b82f6">About Me</Styled.CardTitle>
             <Styled.CardText>
-              Purple team focused. USAS Bachelor of Computer Science student and
-              active member of Dot Zero CTF team. I love breaking systems to
-              understand their flaws while building practical tools from
-              curiosity, experimentation, and daily problem-solving needs.
+              Purple team focused Computer Science undergraduate at Universiti
+              Sultan Azlan Shah (Degree CGPA 3.83, Diploma CGPA 3.77) with 4
+              Dean&apos;s List awards. Secretary and Reverse Engineering Trainer
+              for USAS CTF team Dot Zero (U545). Passionate about threat
+              detection, binary analysis across Ghidra, IDA Pro, x64dbg, GDB/GEF
+              &amp; Frida, honeypot telemetry, firmware security, and building
+              automated security tooling.
             </Styled.CardText>
           </Styled.Card>
           <Styled.Card accentColor="#10b981" rowSpan={2}>
@@ -470,21 +503,23 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               Project Arsenal
             </Styled.CardTitle>
             <Styled.CardText>
-              Hands-on builds across cybersecurity tooling, Telegram bots, local
-              automation, and utility apps made for learning and real use.
+              Hands-on builds across cybersecurity threat intelligence, custom
+              firmware, telehealth systems, CTF pipelines, and campus automation
+              tools.
             </Styled.CardText>
             <Styled.CardMeta>
-              <Styled.MetaItem>14 repositories reviewed</Styled.MetaItem>
-              <Styled.MetaItem>Security + automation focus</Styled.MetaItem>
+              <Styled.MetaItem>20+ public repositories</Styled.MetaItem>
+              <Styled.MetaItem>Threat detection &amp; RE focus</Styled.MetaItem>
               <Styled.MetaItem>
-                Academic + hobby/curiosity projects
+                Honeypot, firmware, web &amp; automation
               </Styled.MetaItem>
             </Styled.CardMeta>
           </Styled.Card>
           <Styled.Card accentColor="#f43f5e" colSpan={2} id="simple-contact">
             <Styled.CardTitle accentColor="#f43f5e">Contact</Styled.CardTitle>
             <Styled.CardText>
-              Open to learning, collaboration, and internship opportunities.
+              Open to 14-week Cybersecurity Internship (Feb 2027), CTF team
+              collabs, and security research opportunities.
             </Styled.CardText>
           </Styled.Card>
         </Styled.Cards>

@@ -5,8 +5,9 @@ export interface DesktopNotificationPayload {
 
 export const DESKTOP_NOTIFICATION_EVENT = 'desktop-notification';
 
-export const notifyDesktop = (payload: DesktopNotificationPayload) => {
+export const notifyDesktop = (payload: DesktopNotificationPayload): void => {
   if (typeof window === 'undefined') return;
-  window.dispatchEvent(new CustomEvent(DESKTOP_NOTIFICATION_EVENT, { detail: payload }));
+  window.dispatchEvent(
+    new CustomEvent(DESKTOP_NOTIFICATION_EVENT, { detail: payload })
+  );
 };
-

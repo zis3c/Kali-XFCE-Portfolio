@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import * as Styled from './TextViewer.styles';
 import { resolvePath, writeFile } from '../../../utils/filesystem';
 
@@ -128,10 +134,18 @@ const TextViewer = ({
           Save
         </Styled.ToolButton>
         <Styled.ToolSep />
-        <Styled.ToolButton type="button" title="Find Previous" onClick={() => moveToMatch(-1)}>
+        <Styled.ToolButton
+          type="button"
+          title="Find Previous"
+          onClick={() => moveToMatch(-1)}
+        >
           Prev
         </Styled.ToolButton>
-        <Styled.ToolButton type="button" title="Find Next" onClick={() => moveToMatch(1)}>
+        <Styled.ToolButton
+          type="button"
+          title="Find Next"
+          onClick={() => moveToMatch(1)}
+        >
           Next
         </Styled.ToolButton>
         <Styled.SearchInput
