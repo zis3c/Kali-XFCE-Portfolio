@@ -25,8 +25,8 @@ export interface Props {
 }
 
 /**
- *Renders realistic Linux boot sequence
- *@function Loader
+ * Renders realistic Linux boot sequence with a modern loading spinner UI
+ * @function Loader
  */
 const Loader = ({
   isOnScreen,
@@ -75,19 +75,29 @@ const Loader = ({
 
   return (
     <Styled.Container>
-      <Styled.BootScreen ref={bootRef}>
-        {bootLines.map((line, index) => {
-          if (line.startsWith('[  OK  ]')) {
-            const rest = line.slice(8);
-            return (
-              <Styled.BootLine key={index}>
-                [ <Styled.OkToken>OK</Styled.OkToken> ]{rest}
-              </Styled.BootLine>
-            );
-          }
-          return <Styled.BootLine key={index}>{line}</Styled.BootLine>;
-        })}
-      </Styled.BootScreen>
+      <Styled.LoaderCard>
+        <Styled.SpinnerRow>
+          <Styled.SpinnerRing aria-hidden="true" />
+          <Styled.SpinnerMeta>
+            <h2>Starting Kali Linux XFCE Desktop...</h2>
+            <p>Initializing system services · Press Enter or click to skip</p>
+          </Styled.SpinnerMeta>
+        </Styled.SpinnerRow>
+        <Styled.ProgressTrack />
+        <Styled.BootScreen ref={bootRef}>
+          {bootLines.map((line, index) => {
+            if (line.startsWith('[  OK  ]')) {
+              const rest = line.slice(8);
+              return (
+                <Styled.BootLine key={index}>
+                  [ <Styled.OkToken>OK</Styled.OkToken> ]{rest}
+                </Styled.BootLine>
+              );
+            }
+            return <Styled.BootLine key={index}>{line}</Styled.BootLine>;
+          })}
+        </Styled.BootScreen>
+      </Styled.LoaderCard>
     </Styled.Container>
   );
 };

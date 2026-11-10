@@ -1,9 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 type SimpleTheme = 'terminal' | 'paper';
 
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const pulseBar = keyframes`
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+`;
+
 /* ------------------------------------------------------------------ */
-/*  Next.js Monochrome Palette (Black / Zinc Grey / Crisp White)       */
+/*  Next.js Minimalist Monochrome Palette (Black / Zinc / Crisp White) */
 /* ------------------------------------------------------------------ */
 
 export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
@@ -13,9 +28,9 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
   --panel: ${({ themeMode }) =>
     themeMode === 'terminal' ? '#0a0a0a' : '#ffffff'};
   --well: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#141414' : '#f4f4f5'};
+    themeMode === 'terminal' ? '#121214' : '#f4f4f5'};
   --well-hover: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#1f1f1f' : '#e4e4e7'};
+    themeMode === 'terminal' ? '#1c1c1f' : '#e4e4e7'};
 
   /* Typography (WCAG AA verified) */
   --text: ${({ themeMode }) =>
@@ -25,15 +40,15 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
 
   /* Borders & Subtle Elevation */
   --border-strong: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#262626' : '#e4e4e7'};
+    themeMode === 'terminal' ? '#222225' : '#e4e4e7'};
   --border-subtle: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#1a1a1a' : '#f4f4f5'};
+    themeMode === 'terminal' ? '#18181b' : '#f4f4f5'};
   --border-hover: ${({ themeMode }) =>
     themeMode === 'terminal' ? '#52525b' : '#a1a1aa'};
   --focus-ring: ${({ themeMode }) =>
     themeMode === 'terminal' ? '#fafafa' : '#09090b'};
 
-  /* High-Contrast Monochrome Primary Controls (Next.js style) */
+  /* High-Contrast Monochrome Primary Controls */
   --btn-primary-bg: ${({ themeMode }) =>
     themeMode === 'terminal' ? '#fafafa' : '#09090b'};
   --btn-primary-text: ${({ themeMode }) =>
@@ -43,8 +58,8 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
 
   --card-shadow: ${({ themeMode }) =>
     themeMode === 'terminal'
-      ? '0 1px 2px rgba(0, 0, 0, 0.6)'
-      : '0 1px 3px rgba(0, 0, 0, 0.05)'};
+      ? '0 2px 8px rgba(0, 0, 0, 0.45)'
+      : '0 2px 8px rgba(0, 0, 0, 0.04)'};
 
   min-height: 100vh;
   background-color: var(--bg);
@@ -56,6 +71,79 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
 `;
 
 /* ------------------------------------------------------------------ */
+/*  Mock Boot Load Spinner Overlay                                     */
+/* ------------------------------------------------------------------ */
+
+export const BootLoaderOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(5, 5, 5, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+`;
+
+export const BootLoaderCard = styled.div`
+  width: min(420px, 100%);
+  background: #0a0a0a;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+
+  .spinner-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #262626;
+    border-top-color: #fafafa;
+    animation: ${spin} 0.7s linear infinite;
+  }
+
+  .spinner-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fafafa;
+  }
+
+  .spinner-sub {
+    margin: 0;
+    font-size: 12.5px;
+    color: #a1a1aa;
+  }
+
+  .spinner-bar {
+    width: 100%;
+    height: 4px;
+    background: #1a1a1a;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 4px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background: #fafafa;
+      border-radius: 999px;
+      animation: ${pulseBar} 1s ease-in-out infinite;
+    }
+  }
+`;
+
+/* ------------------------------------------------------------------ */
 /*  Top Navigation Bar                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -64,7 +152,7 @@ export const Nav = styled.header`
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 14px 32px;
+  padding: 16px 36px;
   border-bottom: 1px solid var(--border-strong);
   background: var(--panel);
   position: sticky;
@@ -72,7 +160,7 @@ export const Nav = styled.header`
   z-index: 20;
 
   @media (max-width: 900px) {
-    padding: 12px 20px;
+    padding: 14px 20px;
   }
 
   @media (max-width: 640px) {
@@ -108,52 +196,29 @@ export const Brand = styled.div`
   align-items: center;
   gap: 10px;
   white-space: nowrap;
-
-  .role-tag {
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    font-weight: 500;
-    padding: 2px 8px;
-    background: var(--well);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-
-    @media (max-width: 1120px) {
-      display: none;
-    }
-  }
 `;
 
 export const ChapterNav = styled.nav`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 
   button {
     min-height: 38px;
-    padding: 6px 11px;
+    padding: 6px 14px;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--muted);
     font-family: inherit;
-    font-size: 12.5px;
+    font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-
-    .chap-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      opacity: 0.7;
-      margin-right: 4px;
-    }
+    transition: color 0.15s ease, background 0.15s ease;
 
     &:hover {
       color: var(--text);
       background: var(--well);
-      border-color: var(--border-strong);
     }
 
     &:focus-visible {
@@ -164,490 +229,6 @@ export const ChapterNav = styled.nav`
 
   @media (max-width: 980px) {
     display: none;
-  }
-`;
-
-export const ChapterEyebrow = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--muted);
-  margin-bottom: 10px;
-`;
-
-export const ChapterDivider = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 18px;
-  margin-bottom: 56px;
-  border-top: 1px solid var(--border-strong);
-  border-bottom: 1px solid var(--border-strong);
-  background: var(--panel);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  color: var(--muted);
-  letter-spacing: 0.4px;
-
-  .divider-left {
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  .divider-right {
-    @media (max-width: 720px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    margin-bottom: 40px;
-    padding: 10px 14px;
-    font-size: 11px;
-  }
-`;
-
-export const StorySection = styled.section`
-  margin-bottom: 64px;
-
-  @media (max-width: 640px) {
-    margin-bottom: 48px;
-  }
-`;
-
-/* ------------------------------------------------------------------ */
-/*  Hero Identity Badge & Avatar                                       */
-/* ------------------------------------------------------------------ */
-
-export const IdentityStrip = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-subtle);
-`;
-
-export const AvatarThumb = styled.img`
-  width: 52px;
-  height: 52px;
-  border-radius: 10px;
-  object-fit: cover;
-  border: 1px solid var(--border-strong);
-  background: var(--well);
-  flex-shrink: 0;
-`;
-
-export const PreviewImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-`;
-
-export const IdentityMeta = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-
-  .id-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .id-coords {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    color: var(--muted);
-  }
-`;
-
-/* ------------------------------------------------------------------ */
-/*  Visual Showcase Gallery (JarnKet-inspired Real Work Reel)          */
-/* ------------------------------------------------------------------ */
-
-export const ShowcaseStage = styled.div`
-  margin-top: 22px;
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-`;
-
-export const ShowcaseMainGrid = styled.div`
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  border-bottom: 1px solid var(--border-strong);
-
-  @media (max-width: 920px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-export const ShowcaseViewport = styled.div`
-  background: var(--well);
-  border-right: 1px solid var(--border-strong);
-  position: relative;
-  aspect-ratio: 16 / 10;
-  max-height: 420px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-
-  @media (max-width: 920px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border-strong);
-    max-height: 320px;
-  }
-`;
-
-export const ShowcaseCaptionPanel = styled.div`
-  padding: 26px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-
-  .showcase-index {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-  }
-
-  h3 {
-    margin: 6px 0 8px;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.4px;
-    color: var(--text);
-  }
-
-  .showcase-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text);
-    padding: 4px 8px;
-    background: var(--well);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
-
-  @media (max-width: 640px) {
-    padding: 18px 16px;
-  }
-`;
-
-export const ShowcaseThumbRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
-  padding: 12px 16px;
-  background: var(--well);
-
-  @media (max-width: 960px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (max-width: 540px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-export const ShowcaseThumbBtn = styled.button<{ isActive: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  padding: 6px;
-  min-height: 44px;
-  border-radius: 6px;
-  border: 1px solid
-    ${({ isActive }) =>
-      isActive ? 'var(--btn-primary-bg)' : 'var(--border-strong)'};
-  background: ${({ isActive }) => (isActive ? 'var(--panel)' : 'var(--well)')};
-  color: var(--text);
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-  transition: border-color 0.15s ease, background 0.15s ease;
-
-  img {
-    width: 100%;
-    height: 48px;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 4px;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg);
-  }
-
-  .thumb-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: ${({ isActive }) => (isActive ? 'var(--text)' : 'var(--muted)')};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-  }
-
-  &:hover {
-    border-color: var(--border-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-  }
-`;
-
-export const PillarGrid = styled.div`
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-
-  @media (max-width: 960px) {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-`;
-
-export const PillarCard = styled.article<{ iconColor?: string }>`
-  background: var(--panel);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.18s ease, transform 0.18s ease;
-
-  &:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-  }
-
-  .pillar-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
-    background: var(--well);
-    border: 1px solid var(--border-strong);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19px;
-    color: ${({ iconColor }) => iconColor || 'var(--text)'};
-  }
-
-  h3 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    color: var(--text);
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.68;
-    color: var(--muted);
-  }
-
-  .pillar-tags {
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .pillar-tag {
-    padding: 3px 9px;
-    border-radius: 5px;
-    background: var(--well);
-    border: 1px solid var(--border-strong);
-  }
-`;
-
-/* ------------------------------------------------------------------ */
-/*  Editorial Experience & Recognition Ledgers                         */
-/* ------------------------------------------------------------------ */
-
-export const TimelineWrap = styled.div`
-  margin-top: 22px;
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-`;
-
-export const TimelineItem = styled.div`
-  display: grid;
-  grid-template-columns: 56px 210px 1fr;
-  gap: 18px;
-  padding: 22px 24px;
-  border-bottom: 1px solid var(--border-strong);
-  align-items: start;
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  .time-index {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    padding: 4px 8px;
-    border: 1px solid var(--border-strong);
-    background: var(--well);
-    border-radius: 5px;
-    text-align: center;
-  }
-
-  .time-period {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .time-sub {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-  }
-
-  .time-content {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .time-title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .time-desc {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--muted);
-    max-width: 68ch;
-  }
-
-  @media (max-width: 820px) {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 18px 16px;
-
-    .time-index {
-      width: fit-content;
-    }
-  }
-`;
-
-export const RecognitionGrid = styled.div`
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-
-  @media (max-width: 920px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-export const RecognitionCard = styled.div`
-  padding: 18px 20px;
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-
-  .rec-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    color: var(--muted);
-  }
-
-  .rec-badge {
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: var(--well);
-    border: 1px solid var(--border-strong);
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  h4 {
-    margin: 4px 0 0;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--muted);
   }
 `;
 
@@ -670,12 +251,12 @@ export const PaletteTrigger = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 8px 14px;
   border: 1px solid var(--border-strong);
   background: var(--well);
   color: var(--text);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -715,12 +296,12 @@ export const ThemeToggle = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 8px 14px;
   border: 1px solid var(--border-strong);
   background: var(--panel);
   color: var(--text);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -747,12 +328,12 @@ export const BackButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 8px 16px;
   border: 1px solid var(--btn-primary-bg);
   background: var(--btn-primary-bg);
   color: var(--btn-primary-text);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -774,118 +355,103 @@ export const BackButton = styled.button`
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Main Container                                                     */
+/*  Main Container (Spacious & Breathable)                             */
 /* ------------------------------------------------------------------ */
 
 export const Main = styled.main`
-  max-width: 1140px;
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 40px 24px 72px;
+  padding: 64px 24px 96px;
 
   @media (max-width: 900px) {
-    padding: 28px 18px 56px;
+    padding: 44px 20px 72px;
   }
 
   @media (max-width: 640px) {
-    padding: 20px 14px 44px;
+    padding: 32px 16px 56px;
   }
 `;
 
+export const StorySection = styled.section`
+  margin-bottom: 88px;
+
+  @media (max-width: 640px) {
+    margin-bottom: 64px;
+  }
+`;
+
+export const SectionHeader = styled.div`
+  text-align: left;
+  margin-bottom: 28px;
+`;
+
+export const SectionTitle = styled.h2`
+  font-size: clamp(22px, 2.8vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  margin: 0 0 8px 0;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const SectionSubtitle = styled.p`
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 64ch;
+`;
+
 /* ------------------------------------------------------------------ */
-/*  Section 1: Hero & Quick Summary                                    */
+/*  Section 1: Minimalist Hero                                         */
 /* ------------------------------------------------------------------ */
 
 export const HeroWorkbench = styled.section`
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: 20px;
-  align-items: stretch;
-  margin-bottom: 48px;
+  margin-bottom: 88px;
 
-  @media (max-width: 960px) {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 36px;
+  @media (max-width: 640px) {
+    margin-bottom: 64px;
   }
 `;
 
 export const HeroSection = styled.div`
-  background: var(--panel);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-`;
-
-export const WindowChromeBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 18px;
-  background: var(--well);
-  border-bottom: 1px solid var(--border-strong);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-
-  .window-dots {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .win-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid var(--border-hover);
-    display: inline-block;
-  }
-`;
-
-export const HeroBody = styled.div`
-  padding: 28px 28px 26px;
-
-  @media (max-width: 640px) {
-    padding: 20px 16px;
-  }
+  gap: 18px;
+  max-width: 780px;
 `;
 
 export const HeroTitle = styled.h1`
   margin: 0;
-  font-size: clamp(28px, 4.2vw, 44px);
+  font-size: clamp(32px, 5vw, 52px);
   font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -1.2px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
   color: var(--text);
 `;
 
 export const HeroRoleSub = styled.p`
-  margin: 12px 0 0;
-  font-size: clamp(14px, 1.6vw, 16px);
+  margin: 4px 0 0;
+  font-size: clamp(15px, 1.8vw, 18px);
   font-weight: 600;
   color: var(--text);
 `;
 
 export const HeroText = styled.p`
-  margin: 16px 0 0;
+  margin: 4px 0 0;
   color: var(--muted);
-  font-size: clamp(14px, 1.5vw, 15.5px);
-  line-height: 1.7;
-  max-width: 65ch;
+  font-size: clamp(15px, 1.6vw, 16.5px);
+  line-height: 1.75;
+  max-width: 66ch;
 `;
 
 export const SocialGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-strong);
+  margin-top: 12px;
 
   @media (max-width: 640px) {
     display: grid;
@@ -900,12 +466,12 @@ export const SocialButton = styled.a<{ iconColor?: string }>`
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  padding: 8px 14px;
-  background: var(--well);
+  padding: 10px 16px;
+  background: var(--panel);
   color: var(--text);
   border: 1px solid var(--border-strong);
-  border-radius: 6px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 13.5px;
   font-weight: 500;
   text-decoration: none;
   transition: border-color 0.15s ease, background 0.15s ease,
@@ -919,7 +485,7 @@ export const SocialButton = styled.a<{ iconColor?: string }>`
 
   &:hover {
     border-color: var(--border-hover);
-    background: var(--well-hover);
+    background: var(--well);
     transform: translateY(-1px);
   }
 
@@ -929,71 +495,132 @@ export const SocialButton = styled.a<{ iconColor?: string }>`
   }
 `;
 
-/* Right Column: Profile & Education Summary */
-export const TelemetryPanel = styled.aside`
-  background: var(--panel);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
-export const TelemetryBody = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-
-  @media (max-width: 640px) {
-    padding: 16px;
-  }
-`;
-
-export const RegisterTable = styled.dl`
-  margin: 0;
+export const QuickStatsGrid = styled.div`
+  margin-top: 36px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-`;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 
-export const RegisterRow = styled.div`
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 12px;
-  align-items: baseline;
-  padding: 9px 12px;
-  background: var(--well);
-  border: 1px solid var(--border-subtle);
-  border-radius: 6px;
-  font-size: 13px;
-
-  dt {
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  dd {
-    margin: 0;
-    color: var(--text);
-    font-weight: 600;
-    line-height: 1.45;
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: 3px;
+  }
+`;
+
+export const QuickStatCard = styled.div`
+  padding: 20px;
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .stat-label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
   }
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 2: Projects Directory                                      */
+/*  Section 2: What I Do (3 Spacious Cards)                            */
+/* ------------------------------------------------------------------ */
+
+export const PillarGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+`;
+
+export const PillarCard = styled.article<{ iconColor?: string }>`
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: ${({ iconColor }) => iconColor || 'var(--text)'};
+  }
+
+  h3 {
+    margin: 4px 0 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .pillar-tags {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .pillar-tag {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Section 3: Projects Directory (Minimalist & Clean)                 */
 /* ------------------------------------------------------------------ */
 
 export const DirectoryFrame = styled.section`
-  margin-bottom: 60px;
+  margin-bottom: 88px;
+
+  @media (max-width: 640px) {
+    margin-bottom: 64px;
+  }
 `;
 
 export const DirectoryHeaderBar = styled.div`
@@ -1002,47 +629,24 @@ export const DirectoryHeaderBar = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   gap: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-strong);
-`;
-
-export const SectionHeader = styled.div`
-  text-align: left;
-`;
-
-export const SectionTitle = styled.h2`
-  font-size: clamp(20px, 2.5vw, 26px);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  margin: 0 0 6px 0;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-export const SectionSubtitle = styled.p`
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.5;
+  margin-bottom: 20px;
 `;
 
 export const DirectoryCountBadge = styled.div`
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--muted);
-  background: var(--well);
+  background: var(--panel);
   border: 1px solid var(--border-strong);
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
 `;
 
 export const FilterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-bottom: 28px;
 
   @media (max-width: 640px) {
     gap: 6px;
@@ -1050,9 +654,9 @@ export const FilterRow = styled.div`
 `;
 
 export const FilterChip = styled.button<{ isActive: boolean }>`
-  min-height: 44px;
+  min-height: 42px;
   min-width: 44px;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border: 1px solid
     ${({ isActive }) =>
       isActive ? 'var(--btn-primary-bg)' : 'var(--border-strong)'};
@@ -1060,9 +664,9 @@ export const FilterChip = styled.button<{ isActive: boolean }>`
     isActive ? 'var(--btn-primary-bg)' : 'var(--panel)'};
   color: ${({ isActive }) =>
     isActive ? 'var(--btn-primary-text)' : 'var(--muted)'};
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -1082,18 +686,17 @@ export const FilterChip = styled.button<{ isActive: boolean }>`
   @media (max-width: 640px) {
     flex: 1 1 calc(33.333% - 6px);
     padding: 8px 10px;
-    font-size: 12px;
+    font-size: 12.5px;
     text-align: center;
   }
 `;
 
 export const ProjectsSection = styled.div`
-  margin-top: 22px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 20px;
 
-  @media (max-width: 920px) {
+  @media (max-width: 860px) {
     grid-template-columns: 1fr;
     gap: 16px;
   }
@@ -1104,17 +707,17 @@ export const ProjectCard = styled.article<{
   isFocused: boolean;
   isFlagship?: boolean;
 }>`
-  grid-column: ${({ isFlagship }) => (isFlagship ? '1 / -1' : 'span 1')};
   border: 1px solid
     ${({ isFocused }) =>
       isFocused ? 'var(--border-hover)' : 'var(--border-strong)'};
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
+  padding: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
+  gap: 20px;
   transition: border-color 0.18s ease, transform 0.18s ease;
 
   &:hover {
@@ -1122,126 +725,15 @@ export const ProjectCard = styled.article<{
     border-color: var(--border-hover);
   }
 
-  @media (max-width: 920px) {
-    grid-column: span 1;
-  }
-`;
-
-export const ProjectCardChrome = styled.div<{ isFocused?: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 16px;
-  background: var(--well);
-  border-bottom: 1px solid var(--border-strong);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
-
-  .chrome-left {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .chrome-index {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .slot-status {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--border-strong);
-    background: var(--panel);
-    color: var(--text);
-  }
-`;
-
-/* Real Project Screenshot Frame inside Card */
-export const ProjectPreviewFrame = styled.div`
-  position: relative;
-  width: 100%;
-  height: 205px;
-  background: var(--well);
-  border-bottom: 1px solid var(--border-strong);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    transition: transform 0.25s ease;
-  }
-
-  ${ProjectCard}:hover & img {
-    transform: scale(1.02);
-  }
-`;
-
-export const PreviewGalleryBar = styled.div`
-  position: absolute;
-  bottom: 8px;
-  right: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  background: rgba(9, 9, 11, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  z-index: 2;
-
-  button {
-    min-width: 24px;
-    min-height: 24px;
-    padding: 2px 7px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: #d4d4d8;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-
-    &.active-slide {
-      background: #fafafa;
-      color: #09090b;
-    }
-  }
-`;
-
-export const ProjectCardBody = styled.div<{ isFlagship?: boolean }>`
-  padding: 22px;
-  display: ${({ isFlagship }) => (isFlagship ? 'grid' : 'flex')};
-  grid-template-columns: ${({ isFlagship }) =>
-    isFlagship ? '1.15fr 0.85fr' : '1fr'};
-  flex-direction: column;
-  gap: 18px;
-  flex: 1;
-
-  @media (max-width: 820px) {
-    display: flex;
-    flex-direction: column;
-    padding: 18px 16px;
+  @media (max-width: 640px) {
+    padding: 22px 18px;
   }
 `;
 
 export const ProjectHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 `;
 
 export const ProjectTopBar = styled.div`
@@ -1254,13 +746,13 @@ export const ProjectTopBar = styled.div`
 export const ProjectIdentity = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 `;
 
 export const ProjectAvatar = styled.div<{ iconColor?: string }>`
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1274,13 +766,13 @@ export const ProjectAvatar = styled.div<{ iconColor?: string }>`
 export const ProjectMetaInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 `;
 
 export const ProjectName = styled.h3`
   margin: 0;
   color: var(--text);
-  font-size: clamp(17px, 2vw, 19px);
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
 `;
@@ -1289,14 +781,14 @@ export const ProjectMetaRow = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  font-size: 12.5px;
+  gap: 10px;
+  font-size: 13px;
   color: var(--muted);
 
   .repo-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
 `;
 
@@ -1304,13 +796,13 @@ export const ProjectQuickGithub = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
   border: 1px solid var(--border-strong);
   background: var(--well);
   color: var(--text);
-  font-size: 18px;
+  font-size: 17px;
   text-decoration: none;
   flex-shrink: 0;
   transition: border-color 0.15s ease, background 0.15s ease;
@@ -1326,19 +818,26 @@ export const ProjectQuickGithub = styled.a`
   }
 `;
 
+export const ProjectSummary = styled.p`
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14.5px;
+`;
+
 export const ProjectStackWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 `;
 
 export const TechBadge = styled.span<{ iconColor?: string }>`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
   border: 1px solid var(--border-strong);
   background: var(--well);
@@ -1352,43 +851,7 @@ export const TechBadge = styled.span<{ iconColor?: string }>`
   }
 
   .tech-name {
-    font-size: 12px;
-  }
-`;
-
-export const ProjectSummary = styled.p`
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.65;
-  font-size: 14px;
-  max-width: 65ch;
-`;
-
-export const ProjectHighlights = styled.ul`
-  margin: 0;
-  padding: 12px 14px;
-  list-style: none;
-  background: var(--well);
-  border: 1px solid var(--border-subtle);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-export const ProjectHighlight = styled.li`
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.5;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-
-  &::before {
-    content: '•';
-    color: var(--muted);
-    font-weight: 700;
-    flex-shrink: 0;
+    font-size: 12.5px;
   }
 `;
 
@@ -1397,14 +860,9 @@ export const ProjectActionRow = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 22px;
-  background: var(--well);
-  border-top: 1px solid var(--border-strong);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
   flex-wrap: wrap;
-
-  @media (max-width: 640px) {
-    padding: 12px 16px;
-  }
 `;
 
 export const ProjectButtonGroup = styled.div`
@@ -1420,9 +878,9 @@ export const ProjectOpenLink = styled.a`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--btn-primary-bg);
   border: 1px solid var(--btn-primary-bg);
   color: var(--btn-primary-text);
@@ -1450,9 +908,9 @@ export const ProjectDemoLink = styled.a`
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   border: 1px solid var(--border-strong);
   color: var(--text);
@@ -1478,10 +936,10 @@ export const ProjectDemoLink = styled.a`
 
 export const EmptyStateBox = styled.div`
   grid-column: 1 / -1;
-  padding: 36px 24px;
+  padding: 40px 24px;
   background: var(--panel);
   border: 1px dashed var(--border-strong);
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1495,7 +953,7 @@ export const EmptyStateBox = styled.div`
   }
 
   button {
-    min-height: 44px;
+    min-height: 42px;
     padding: 8px 16px;
     background: var(--btn-primary-bg);
     border: 1px solid var(--btn-primary-bg);
@@ -1503,23 +961,148 @@ export const EmptyStateBox = styled.div`
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
   }
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 3: Technical Skills & Tooling Table                        */
+/*  Section 4: Experience & Achievements                               */
+/* ------------------------------------------------------------------ */
+
+export const TimelineWrap = styled.div`
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+`;
+
+export const TimelineItem = styled.div`
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  padding: 26px 28px;
+  border-bottom: 1px solid var(--border-strong);
+  align-items: start;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .time-period {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .time-sub {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .time-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .time-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .time-desc {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 66ch;
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 18px;
+  }
+`;
+
+export const RecognitionGrid = styled.div`
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const RecognitionCard = styled.div`
+  padding: 22px 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .rec-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .rec-badge {
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  h4 {
+    margin: 4px 0 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Section 5: Technical Skills                                        */
 /* ------------------------------------------------------------------ */
 
 export const ArsenalSection = styled.section`
-  margin-bottom: 60px;
+  margin-bottom: 88px;
+
+  @media (max-width: 640px) {
+    margin-bottom: 64px;
+  }
 `;
 
 export const ArsenalRack = styled.div`
-  margin-top: 20px;
   border: 1px solid var(--border-strong);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
   overflow: hidden;
@@ -1527,7 +1110,7 @@ export const ArsenalRack = styled.div`
 
 export const ArsenalRow = styled.div`
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 260px 1fr;
   border-bottom: 1px solid var(--border-strong);
 
   &:last-child {
@@ -1540,16 +1123,16 @@ export const ArsenalRow = styled.div`
 `;
 
 export const ArsenalRowMeta = styled.div`
-  padding: 18px 20px;
+  padding: 22px 24px;
   background: var(--well);
   border-right: 1px solid var(--border-strong);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
 
   .rack-title {
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--text);
     display: flex;
@@ -1558,27 +1141,27 @@ export const ArsenalRowMeta = styled.div`
   }
 
   .rack-desc {
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--muted);
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   @media (max-width: 820px) {
     border-right: none;
     border-bottom: 1px solid var(--border-strong);
-    padding: 14px 16px;
+    padding: 16px 18px;
   }
 `;
 
 export const ArsenalBadgeList = styled.div`
-  padding: 18px 20px;
+  padding: 22px 24px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 
   @media (max-width: 640px) {
-    padding: 14px 16px;
+    padding: 16px 18px;
     gap: 8px;
   }
 `;
@@ -1586,10 +1169,10 @@ export const ArsenalBadgeList = styled.div`
 export const ArsenalBadge = styled.div<{ iconColor?: string }>`
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12.5px;
+  gap: 8px;
+  padding: 7px 13px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 500;
   background: var(--well);
   border: 1px solid var(--border-strong);
@@ -1604,57 +1187,57 @@ export const ArsenalBadge = styled.div<{ iconColor?: string }>`
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 4: Contact & Keyboard Shortcuts Footer                     */
+/*  Section 6: Contact & Footer                                        */
 /* ------------------------------------------------------------------ */
 
 export const CommsTerminal = styled.footer`
   border: 1px solid var(--border-strong);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
   overflow: hidden;
 `;
 
 export const CommsBody = styled.div`
-  padding: 24px;
+  padding: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
 
   @media (max-width: 640px) {
-    padding: 18px 16px;
+    padding: 22px 18px;
     flex-direction: column;
     align-items: flex-start;
   }
 `;
 
 export const CommsInfo = styled.div`
-  max-width: 60ch;
+  max-width: 58ch;
 
   h3 {
-    margin: 0 0 6px 0;
-    font-size: 18px;
+    margin: 0 0 8px 0;
+    font-size: 20px;
     font-weight: 700;
     color: var(--text);
   }
 
   p {
     margin: 0;
-    font-size: 14px;
+    font-size: 14.5px;
     color: var(--muted);
-    line-height: 1.55;
+    line-height: 1.6;
   }
 `;
 
 export const HotkeyBar = styled.div`
-  padding: 10px 24px;
+  padding: 12px 32px;
   background: var(--well);
   border-top: 1px solid var(--border-strong);
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 18px;
   font-size: 12px;
   color: var(--muted);
 
@@ -1676,7 +1259,7 @@ export const HotkeyBar = styled.div`
   }
 
   @media (max-width: 640px) {
-    padding: 10px 16px;
+    padding: 12px 18px;
     gap: 10px;
   }
 `;
@@ -1697,11 +1280,11 @@ export const PaletteOverlay = styled.div`
 `;
 
 export const PalettePanel = styled.div`
-  width: min(560px, calc(100vw - 32px));
+  width: min(540px, calc(100vw - 32px));
   border: 1px solid var(--border-strong);
   background: var(--panel);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 12px;
 `;
 
@@ -1719,7 +1302,7 @@ export const PaletteItem = styled.div<{ isActive: boolean }>`
   text-align: left;
   border: 1px solid
     ${({ isActive }) => (isActive ? 'var(--border-hover)' : 'transparent')};
-  border-radius: 6px;
+  border-radius: 8px;
   background: ${({ isActive }) => (isActive ? 'var(--well)' : 'transparent')};
   color: var(--text);
   padding: 10px 12px;
