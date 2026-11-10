@@ -1,47 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import * as Styled from './PortfolioMode.styles';
 
-const CHARS = '!<>-_\\/[]{}~=+*^?#________';
+interface GlitchTextProps {
+  words: string[];
+}
 
-const GlitchText = ({ words }: { words: string[] }) => {
-  const [text, setText] = useState(words[0]);
+const GlitchText: React.FC<GlitchTextProps> = ({ words }) => {
+  const [text, setText] = useState(words[0] || '');
   const [wordIndex, setWordIndex] = useState(0);
+
   const longestWord = words.reduce(
     (max, current) => (current.length > max.length ? current : max),
     words[0] || ''
   );
 
   useEffect(() => {
-    const nextWord = words[(wordIndex + 1) % words.length];
-    const currentWord = words[wordIndex];
-    const maxLength = Math.max(currentWord.length, nextWord.length);
-    let revealProgress = 0;
-    let glitchInterval: number | undefined;
+    if (!words || words.length === 0) return;
 
-    const startGlitch = window.setTimeout(() => {
-      glitchInterval = window.setInterval(() => {
-        const rendered = Array.from({ length: maxLength }, (_, index) => {
-          if (index < revealProgress) {
-            return nextWord[index] || '';
-          }
-          return CHARS[Math.floor(Math.random() * CHARS.length)];
-        }).join('');
+    const currentWord = words[wordIndex % words.length] || '';
+    const nextWord = words[(wordIndex + 1) % words.length] || '';
+    let intervalId: number | undefined;
 
-        setText(rendered);
-        revealProgress += 1 / 3;
+    const startTimer = window.setTimeout(() => {
+      let deleteStep = 0;
+      let typeStep = 0;
 
-        if (revealProgress >= nextWord.length) {
-          window.clearInterval(glitchInterval);
+      intervalId = window.setInterval(() => {
+        if (deleteStep < currentWord.length) {
+          deleteStep += 1;
+          setText(currentWord.slice(0, currentWord.length - deleteStep));
+        } else if (typeStep < nextWord.length) {
+          typeStep += 1;
+          setText(nextWord.slice(0, typeStep));
+        } else {
+          window.clearInterval(intervalId);
           setText(nextWord);
           setWordIndex((prev) => (prev + 1) % words.length);
         }
-      }, 30);
-    }, 3200);
+      }, 24);
+    }, 3000);
 
     return () => {
-      window.clearTimeout(startGlitch);
-      if (glitchInterval) {
-        window.clearInterval(glitchInterval);
+      window.clearTimeout(startTimer);
+      if (intervalId) {
+        window.clearInterval(intervalId);
       }
     };
   }, [wordIndex, words]);

@@ -13,16 +13,25 @@ const CanvasWrapper = styled.div<{ themeMode: 'terminal' | 'paper' }>`
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  opacity: ${({ themeMode }) => (themeMode === 'terminal' ? 0.045 : 0.03)};
+  opacity: ${({ themeMode }) => (themeMode === 'terminal' ? 0.22 : 0.15)};
   transition: opacity 0.3s ease;
 `;
 
-const ASCII_RAMP = [' ', '·', '·', '.', ':', '-', '~', '+', '*'];
+const StyledCanvas = styled.canvas`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+`;
+
+const ASCII_RAMP = ['.', '·', ':', '~', '=', '+', '*', '#'];
 
 /**
  * Animated Interactive ASCII Wave Background.
- * Waves continuously ripple across the screen and dynamically displace / scatter
- * whenever the user moves their cursor across the viewport.
+ * Waves continuously undulate across the viewport and dynamically disperse / ripple
+ * whenever the user moves their cursor across the screen.
  */
 const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -44,11 +53,11 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
 
     // Mouse position and target (for smooth lerping)
     const mouse = {
-      x: -1000,
-      y: -1000,
-      targetX: -1000,
-      targetY: -1000,
-      radius: 160,
+      x: -2000,
+      y: -2000,
+      targetX: -2000,
+      targetY: -2000,
+      radius: 200,
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -57,26 +66,30 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
     };
 
     const handleMouseLeave = () => {
-      mouse.targetX = -1000;
-      mouse.targetY = -1000;
+      mouse.targetX = -2000;
+      mouse.targetY = -2000;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave);
 
-    const charWidth = 14;
-    const charHeight = 18;
+    const charWidth = 20;
+    const charHeight = 22;
     let cols = 0;
     let rows = 0;
 
     const handleResize = () => {
       if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(dpr, dpr);
+      if (typeof ctx.setTransform === 'function') {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      } else if (typeof ctx.scale === 'function') {
+        ctx.scale(dpr, dpr);
+      }
 
       cols = Math.ceil(window.innerWidth / charWidth);
       rows = Math.ceil(window.innerHeight / charHeight);
@@ -86,11 +99,11 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
     window.addEventListener('resize', handleResize);
 
     const render = () => {
-      time += 0.025;
+      time += 0.035;
 
-      // Smooth mouse lerp
-      mouse.x += (mouse.targetX - mouse.x) * 0.15;
-      mouse.y += (mouse.targetY - mouse.y) * 0.15;
+      // Smooth mouse tracking
+      mouse.x += (mouse.targetX - mouse.x) * 0.12;
+      mouse.y += (mouse.targetY - mouse.y) * 0.12;
 
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -104,30 +117,33 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
           const x = c * charWidth + charWidth / 2;
           const y = r * charHeight + charHeight / 2;
 
-          // Base multi-frequency sine wave
+          // Multi-frequency sine wave undulating across space
           const wave1 =
-            Math.sin(c * 0.12 + time * 0.8) * Math.cos(r * 0.1 + time * 0.6);
-          const wave2 = Math.sin((c + r) * 0.08 - time * 0.5) * 0.5;
-          let height = wave1 + wave2;
+            Math.sin(c * 0.14 + time * 1.1) * Math.cos(r * 0.14 + time * 0.9);
+          const wave2 = Math.sin(c * 0.08 + r * 0.08 - time * 0.7) * 0.8;
+          let val = (wave1 + wave2) * 1.6;
 
-          // Mouse cursor interaction (repulsion ripple)
+          // Mouse perturbation / ripple repulsion
           const dx = x - mouse.x;
           const dy = y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < mouse.radius) {
             const influence = 1 - dist / mouse.radius;
-            // Push wave outward from cursor and create high-frequency ripple
-            const ripple = Math.sin(dist * 0.18 - time * 4) * influence * 1.8;
-            height += ripple + influence * 0.8;
+            // Push wave outward from cursor and create high-energy ripple
+            const ripple = Math.sin(dist * 0.14 - time * 6) * influence * 3.2;
+            val += ripple + influence * 1.8;
           }
 
-          // Normalize height [-1.5, 2.5] to ASCII ramp index [0, ramp.length - 1]
-          const normalized = Math.max(0, Math.min(1, (height + 1.2) / 2.6));
-          const charIndex = Math.floor(normalized * (ASCII_RAMP.length - 1));
-          const char = ASCII_RAMP[charIndex];
+          const normalized = Math.max(0, Math.min(1, (val + 3) / 6));
+          const charIndex = Math.floor(normalized * ASCII_RAMP.length);
+          const clampedIdx = Math.max(
+            0,
+            Math.min(ASCII_RAMP.length - 1, charIndex)
+          );
+          const char = ASCII_RAMP[clampedIdx];
 
-          if (char && char !== ' ') {
+          if (char) {
             ctx.fillText(char, x, y);
           }
         }
@@ -148,7 +164,7 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
 
   return (
     <CanvasWrapper themeMode={themeMode} aria-hidden="true">
-      <canvas ref={canvasRef} />
+      <StyledCanvas ref={canvasRef} />
     </CanvasWrapper>
   );
 };

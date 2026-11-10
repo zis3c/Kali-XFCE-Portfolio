@@ -1561,6 +1561,29 @@ export const GlitchLive = styled.span`
   grid-area: 1 / 1;
   white-space: nowrap;
 
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    vertical-align: -0.15em;
+    margin-left: 4px;
+    background-color: currentColor;
+    opacity: 0.8;
+    animation: glitchCursorBlink 1s infinite;
+  }
+
+  @keyframes glitchCursorBlink {
+    0%,
+    50% {
+      opacity: 0.8;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   @media (max-width: 700px) {
     white-space: normal;
     overflow-wrap: anywhere;
