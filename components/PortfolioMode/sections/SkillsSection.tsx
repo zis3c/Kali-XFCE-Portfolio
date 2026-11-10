@@ -42,11 +42,10 @@ const SkillsSection = (): JSX.Element => (
       <Styled.ArsenalRow>
         <Styled.ArsenalRowMeta>
           <span className="rack-title">
-            <FiTerminal /> Security &amp; Reverse Engineering
+            <FiTerminal /> Security &amp; Reversing
           </span>
           <span className="rack-desc">
-            Tools for analyzing binaries, debugging, and inspecting network
-            traffic.
+            Binary analysis, debugging, and packet inspection.
           </span>
         </Styled.ArsenalRowMeta>
         <Styled.ArsenalBadgeList>

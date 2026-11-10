@@ -363,9 +363,9 @@ export const StorySection = styled.section`
   scroll-snap-align: start;
   scroll-margin-top: 64px;
 
-  @media (max-height: 720px), (max-width: 900px) {
+  @media (max-width: 768px) {
     min-height: auto;
-    padding: 56px 0 40px;
+    padding: 48px 0 32px;
   }
 `;
 
@@ -408,9 +408,9 @@ export const HeroWorkbench = styled.section`
   scroll-snap-align: start;
   scroll-margin-top: 64px;
 
-  @media (max-height: 720px), (max-width: 900px) {
+  @media (max-width: 768px) {
     min-height: auto;
-    padding: 56px 0 40px;
+    padding: 48px 0 32px;
   }
 `;
 
@@ -1301,9 +1301,9 @@ export const ArsenalSection = styled.section`
   scroll-snap-align: start;
   scroll-margin-top: 64px;
 
-  @media (max-height: 720px), (max-width: 900px) {
+  @media (max-width: 768px) {
     min-height: auto;
-    padding: 56px 0 40px;
+    padding: 48px 0 32px;
   }
 `;
 
@@ -1317,7 +1317,7 @@ export const ArsenalRack = styled.div`
 
 export const ArsenalRow = styled.div`
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 280px 1fr;
   border-bottom: 1px solid var(--border-strong);
 
   &:last-child {
@@ -1407,9 +1407,9 @@ export const ContactSection = styled.section`
   scroll-snap-align: start;
   scroll-margin-top: 64px;
 
-  @media (max-height: 720px), (max-width: 900px) {
+  @media (max-width: 768px) {
     min-height: auto;
-    padding: 56px 0 40px;
+    padding: 48px 0 32px;
   }
 `;
 
