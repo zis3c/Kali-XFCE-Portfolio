@@ -135,15 +135,6 @@ const FileManager = ({
       const name = node.name;
       if (node.content) {
         openFileContent(name, node.content, fullPath);
-      } else if (name === 'resume.pdf') {
-        if (typeof window !== 'undefined') {
-          window.open('/resume.pdf', '_blank');
-        }
-        openFileContent(
-          name,
-          'Opening /resume.pdf in a new tab...\n\nUse "open resume" in terminal or click the link above.',
-          fullPath
-        );
       }
     },
     [navigateTo, openFileContent]

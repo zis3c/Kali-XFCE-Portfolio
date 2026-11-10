@@ -313,24 +313,22 @@ export const useTerminalCommands = (
           return { output: 'Opening contact.txt...', isError: false };
         }
         if (app === 'resume') {
-          if (typeof window !== 'undefined') {
-            window.open('/resume.pdf', '_blank');
-          }
-          const resumeContent = readFile('/home/zis3c/resume.pdf');
+          const resumeContent = readFile('/home/zis3c/resume.txt');
           openWindow({
-            windowName: 'resume.pdf — Mousepad',
+            windowName: 'resume.txt — Mousepad',
             isOpen: true,
             windowIcon: 'KALI_TEXTFILE',
             size: { width: 560, height: 420 },
             windowContent: (
               <TextViewer
-                content={resumeContent || 'resume.pdf — binary file'}
-                filename="resume.pdf"
+                content={resumeContent || ''}
+                filename="resume.txt"
+                filepath="/home/zis3c/resume.txt"
               />
             ),
           });
           return {
-            output: 'Opening resume.pdf in viewer and new tab...',
+            output: 'Opening resume.txt...',
             isError: false,
           };
         }
