@@ -68,4 +68,14 @@ describe('withRetry', () => {
     // Should have been called maxRetries+1 times
     expect(fn).toHaveBeenCalledTimes(4);
   });
+
+  it('works without explicit options', async () => {
+    await expect(withRetry(() => Promise.resolve('ok'))).resolves.toBe('ok');
+  });
+
+  it('throws without requiring an onRetry callback', async () => {
+    await expect(
+      withRetry(() => Promise.reject(new Error('nope')), { maxRetries: 0 })
+    ).rejects.toThrow('nope');
+  });
 });

@@ -24,6 +24,11 @@ const Harness = () => {
   return <div ref={ref} data-visible={isVisible} />;
 };
 
+const NullHarness = () => {
+  const [isVisible] = useIntersectionObserver(null, {});
+  return <span data-visible={isVisible} />;
+};
+
 describe('useIntersectionObserver', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -51,5 +56,12 @@ describe('useIntersectionObserver', () => {
     wrap.unmount();
 
     expect(unobserveMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('does nothing when the ref is null', () => {
+    const wrap = mount(<NullHarness />);
+
+    expect(observeMock).not.toHaveBeenCalled();
+    expect(wrap.find('span').prop('data-visible')).toBe(false);
   });
 });

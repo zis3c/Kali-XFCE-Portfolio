@@ -23,13 +23,13 @@ declarations, generated files, and framework bootstraps (`_app`, `_document`,
 
 Current global thresholds in `jest.config.js`:
 
-- statements: 90%
-- lines: 90%
-- functions: 88%
-- branches: 75%
+- statements: 92%
+- lines: 94%
+- functions: 91%
+- branches: 82%
 
-The thresholds are deliberately just below the measured baseline (about 92%
-statements, 94% lines, 91% functions, and 79% branches) so a real regression
+The thresholds are deliberately just below the measured baseline (about 94%
+statements, 95% lines, 93% functions, and 85% branches) so a real regression
 fails CI, while small refactors do not.
 
 ## Test inventory
@@ -45,7 +45,7 @@ fails CI, while small refactors do not.
 | Components | 75+    | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
 | Pages      | 4      | home flow, error page, health, contact                                        |
 
-The current suite is 122 files and 563 tests.
+The current suite is 131 files and 655 tests.
 
 Run a single suite with `npx jest <path>`.
 
