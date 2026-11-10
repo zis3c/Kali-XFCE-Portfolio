@@ -52,7 +52,6 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Selection color */
   ::selection {
-    background: rgba(34, 197, 94, 0.4);
-    color: #ffffff;
+    background: rgba(54, 123, 240, 0.35);
   }
 `;

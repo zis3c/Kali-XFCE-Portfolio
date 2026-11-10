@@ -1,5 +1,6 @@
 import React from 'react';
-import { FiCpu, FiTerminal } from 'react-icons/fi';
+import { FcLinux } from 'react-icons/fc';
+import { FiCode, FiCpu, FiTerminal } from 'react-icons/fi';
 import {
   SiCplusplus,
   SiDigitalocean,
@@ -10,7 +11,6 @@ import {
   SiJavascript,
   SiKalilinux,
   SiLaravel,
-  SiLinux,
   SiNextdotjs,
   SiPhp,
   SiPostgresql,
@@ -56,15 +56,15 @@ const SkillsSection = (): JSX.Element => (
             </span>
             <span>Ghidra</span>
           </Styled.ArsenalBadge>
-          <Styled.ArsenalBadge iconColor="#F59E0B">
+          <Styled.ArsenalBadge iconColor="#38BDF8">
             <span className="badge-icon">
-              <SiLinux />
+              <FiCode />
             </span>
             <span>IDA Pro</span>
           </Styled.ArsenalBadge>
           <Styled.ArsenalBadge iconColor="#10B981">
             <span className="badge-icon">
-              <SiLinux />
+              <FiCpu />
             </span>
             <span>Binary Ninja</span>
           </Styled.ArsenalBadge>
@@ -203,6 +203,12 @@ const SkillsSection = (): JSX.Element => (
           </span>
         </Styled.ArsenalRowMeta>
         <Styled.ArsenalBadgeList>
+          <Styled.ArsenalBadge>
+            <span className="badge-icon">
+              <FcLinux />
+            </span>
+            <span>Linux</span>
+          </Styled.ArsenalBadge>
           <Styled.ArsenalBadge iconColor="#367BF0">
             <span className="badge-icon">
               <SiKalilinux />

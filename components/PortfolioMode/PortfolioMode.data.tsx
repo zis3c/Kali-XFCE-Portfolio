@@ -1,9 +1,9 @@
 import React from 'react';
+import { FcLinux } from 'react-icons/fc';
 import {
   FaBell,
   FaBolt,
   FaBookOpen,
-  FaBrain,
   FaCalendarAlt,
   FaChartBar,
   FaCheckCircle,
@@ -36,7 +36,6 @@ import {
   SiJavascript,
   SiKalilinux,
   SiLaravel,
-  SiLinux,
   SiNextdotjs,
   SiNodered,
   SiOpenai,
@@ -95,7 +94,7 @@ const featuredProjects: FeaturedProject[] = [
       { name: 'Next.js', icon: <SiNextdotjs /> },
       { name: 'Redis', icon: <SiRedis />, color: '#DC382D' },
       { name: 'DigitalOcean', icon: <SiDigitalocean />, color: '#0080FF' },
-      { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
+      { name: 'Linux', icon: <FcLinux />, color: 'inherit' },
     ],
     summary:
       'A cloud-based SSH honeypot that detects automated login attacks in real time, blocks malicious IPs within a second, and visualizes attack patterns on a live web dashboard.',
@@ -287,7 +286,7 @@ const featuredProjects: FeaturedProject[] = [
     id: '12',
     name: 'LLM-API-Lab',
     year: '2025',
-    icon: <FaBrain />,
+    icon: <SiOpenai />,
     iconColor: '#10A37F',
     repoType: 'AI API Testing Playground',
     stack: [
@@ -432,7 +431,7 @@ const featuredProjects: FeaturedProject[] = [
     repoType: 'File Format Security Tool',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
+      { name: 'Linux', icon: <FcLinux />, color: 'inherit' },
       { name: 'CLI', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
@@ -450,7 +449,7 @@ const featuredProjects: FeaturedProject[] = [
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'C', icon: <SiC />, color: '#A8B9CC' },
-      { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
+      { name: 'Linux', icon: <FcLinux />, color: 'inherit' },
     ],
     summary:
       'An educational tool created for university workshops to show how source code is compiled into binary instructions and decompiled back.',

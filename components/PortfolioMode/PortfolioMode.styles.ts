@@ -69,6 +69,16 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+
+  ::selection,
+  *::selection {
+    background: ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? 'rgba(255, 255, 255, 0.28)'
+        : 'rgba(0, 0, 0, 0.15)'};
+    color: ${({ themeMode }) =>
+      themeMode === 'terminal' ? '#fafafa' : '#09090b'};
+  }
 `;
 
 /* ------------------------------------------------------------------ */
