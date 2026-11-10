@@ -98,11 +98,21 @@ const Home: NextPage<ServerProps> = ({ title }) => {
         e.preventDefault();
         setBootHint('F8: Advanced boot options opened (simulated).');
       }
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (selectedBootIndex === 0) {
+          setMode('portfolio');
+        } else {
+          setMode('kali');
+          setPhase('boot');
+          setBootCycle((prev) => prev + 1);
+        }
+      }
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mode]);
+  }, [mode, selectedBootIndex]);
 
   /* ---- Handlers passed to BootChooser ---- */
 

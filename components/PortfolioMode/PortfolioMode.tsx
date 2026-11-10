@@ -51,18 +51,20 @@ import {
 import * as Styled from './PortfolioMode.styles';
 
 /* ------------------------------------------------------------------ */
-/*  Data                                                               */
+/*  Data (with Authentic Brand Icon Colors)                            */
 /* ------------------------------------------------------------------ */
 
 type TechItem = {
   name: string;
   icon: React.ReactNode;
+  color?: string;
 };
 
 type FeaturedProject = {
-  slot: string;
+  id: string;
   name: string;
   icon: React.ReactNode;
+  iconColor: string;
   repoType: string;
   stack: TechItem[];
   summary: string;
@@ -75,108 +77,113 @@ type FeaturedProject = {
 
 const featuredProjects: FeaturedProject[] = [
   {
-    slot: '01',
+    id: '01',
     name: 'CloudSentinel (FYP)',
     icon: <FaShieldAlt />,
-    repoType: 'SSH Honeypot & Threat Intel',
+    iconColor: '#EF4444',
+    repoType: 'SSH Honeypot & Threat Detection',
     stack: [
-      { name: 'Python', icon: <SiPython /> },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Next.js', icon: <SiNextdotjs /> },
-      { name: 'Redis', icon: <SiRedis /> },
-      { name: 'DigitalOcean', icon: <SiDigitalocean /> },
-      { name: 'Linux', icon: <SiLinux /> },
+      { name: 'Redis', icon: <SiRedis />, color: '#DC382D' },
+      { name: 'DigitalOcean', icon: <SiDigitalocean />, color: '#0080FF' },
+      { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
     ],
     summary:
-      'High-interaction SSH honeypot and threat detection system deployed on DigitalOcean to capture brute-force sessions, attacker command streams, and automated scanner payloads in real time.',
+      'High-interaction SSH honeypot and threat detection system deployed on DigitalOcean to capture brute-force sessions, attacker command streams, and automated scanner traffic in real time.',
     highlights: [
       'HASSH client fingerprinting paired with 20 MITRE ATT&CK classification rules',
-      'Automated iptables firewall IP containment with <1ms median benchmark response',
-      'Next.js telemetry dashboard backed by ClickHouse time-series storage and Redis pub/sub',
+      'Automated firewall IP blocking with <1ms median benchmark response time',
+      'Next.js analytics dashboard backed by ClickHouse storage and Redis pub/sub',
     ],
     tags: ['Security', 'Web', 'Research'],
     link: 'https://github.com/zis3c/CloudSentinel',
   },
   {
-    slot: '02',
+    id: '02',
     name: 'RedLilyGO',
     icon: <FaMicrochip />,
+    iconColor: '#F97316',
     repoType: 'ESP32-S3 Security Firmware',
     stack: [
-      { name: 'C++', icon: <SiCplusplus /> },
-      { name: '.NET 8', icon: <SiDotnet /> },
-      { name: 'Wireshark', icon: <SiWireshark /> },
-      { name: 'CI/CD', icon: <SiGithubactions /> },
+      { name: 'C++', icon: <SiCplusplus />, color: '#00599C' },
+      { name: '.NET 8', icon: <SiDotnet />, color: '#512BD4' },
+      { name: 'Wireshark', icon: <SiWireshark />, color: '#1679A7' },
+      { name: 'GitHub Actions', icon: <SiGithubactions />, color: '#2088FF' },
     ],
     summary:
-      'Custom C++ security assessment firmware for the LILYGO T-Dongle-S3 hardware dongle, built for authorized USB HID testing and wireless packet capture.',
+      'Custom C++ security assessment firmware for the LILYGO T-Dongle-S3 USB hardware dongle, built for authorized USB HID testing and wireless packet capture.',
     highlights: [
-      'Authorized USB HID keystroke injection and payload sequencing',
-      'Onboard Wi-Fi PCAP packet capture controlled via local web UI and .NET 8 desktop companion over serial',
-      'Hardened GitHub Actions pipeline with CodeQL, Semgrep, and Gitleaks static analysis',
+      'Authorized USB HID keystroke automation and payload sequencing',
+      'Onboard Wi-Fi PCAP packet capture managed via web UI and .NET 8 desktop app',
+      'Automated CI security checks with CodeQL, Semgrep, and Gitleaks',
     ],
     tags: ['Security', 'Research', 'Automation'],
     link: 'https://github.com/zis3c/RedLilyGO',
   },
   {
-    slot: '03',
+    id: '03',
     name: 'JanjiCare',
     icon: <FaHospital />,
+    iconColor: '#06B6D4',
     repoType: 'Clinic Web Appointment & Telehealth',
     stack: [
-      { name: 'Laravel 13', icon: <SiLaravel /> },
-      { name: 'PHP 8.3', icon: <SiPhp /> },
-      { name: 'React 18', icon: <SiReact /> },
-      { name: 'Tailwind', icon: <SiTailwindcss /> },
-      { name: 'WebRTC', icon: <SiWebrtc /> },
+      { name: 'Laravel 13', icon: <SiLaravel />, color: '#FF2D20' },
+      { name: 'PHP 8.3', icon: <SiPhp />, color: '#777BB4' },
+      { name: 'React 18', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: '#38BDF8' },
+      { name: 'WebRTC', icon: <SiWebrtc />, color: '#F59E0B' },
     ],
     summary:
-      'Full-stack clinical appointment scheduling and telehealth consultation platform with live queue synchronization.',
+      'Full-stack clinical appointment booking and telehealth video consultation platform with live queue updates.',
     highlights: [
-      'Role-based access control isolating Patient, Doctor, and Administrator workflows',
-      'LiveKit WebRTC encrypted video consultations authenticated via server-signed JWT room tokens',
-      'Real-time clinical queue updates broadcast over Laravel Reverb WebSockets',
+      'Role-based portals separating Patient, Doctor, and Administrator workflows',
+      'LiveKit WebRTC encrypted video calls secured by server-signed JWT tokens',
+      'Real-time patient queue updates powered by Laravel Reverb WebSockets',
     ],
     tags: ['Web'],
     link: 'https://github.com/zis3c/Clinic-Web-Appointment',
   },
   {
-    slot: '04',
+    id: '04',
     name: 'Google Forms Spammer',
     icon: <FaBolt />,
-    repoType: 'Async Stress Testing Engine',
+    iconColor: '#EAB308',
+    repoType: 'Async Stress Testing Tool',
     stack: [
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'aiohttp', icon: <SiPython /> },
-      { name: 'Google Forms', icon: <SiGoogle /> },
-      { name: 'Rich CLI', icon: <SiGnubash /> },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'aiohttp', icon: <SiPython />, color: '#FFD43B' },
+      { name: 'Google Forms', icon: <SiGoogle />, color: '#4285F4' },
+      { name: 'Rich CLI', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
-      'Asynchronous stress-testing engine for Google Forms engineered with multi-worker concurrency and automated field discovery.',
+      'High-speed asynchronous stress-testing tool for Google Forms with multi-worker concurrency and automatic field detection.',
     highlights: [
-      'Non-blocking aiohttp worker pool capable of high-throughput concurrent request bursts',
-      'Adaptive HTTP 429 rate-limit backoff, user-agent rotation, and automatic form schema parser',
-      'Includes local web configurator UI and Rich terminal telemetry view',
+      'Non-blocking aiohttp worker pool supporting high concurrent request bursts',
+      'Smart HTTP 429 rate-limit backoff, user-agent rotation, and auto question parser',
+      'Includes local web configurator UI and Rich terminal dashboard',
     ],
     tags: ['Automation', 'Security', 'Research'],
     link: 'https://github.com/zis3c/google-form-spammer',
   },
   {
-    slot: '05',
+    id: '05',
     name: 'Dot Zero CTF Pipeline & RE',
     icon: <FaFlag />,
-    repoType: 'CTFd Automation & RE Workshops',
+    iconColor: '#8B5CF6',
+    repoType: 'CTF Automation & Reverse Engineering',
     stack: [
-      { name: 'Kali Linux', icon: <SiKalilinux /> },
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'Bash', icon: <SiGnubash /> },
-      { name: 'Reverse Eng', icon: <SiLinux /> },
+      { name: 'Kali Linux', icon: <SiKalilinux />, color: '#367BF0' },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
+      { name: 'Reverse Eng', icon: <SiLinux />, color: '#EAB308' },
     ],
     summary:
-      'CTFd workspace automation CLI and hands-on Reverse Engineering training curriculum built for USAS CTF team Dot Zero (U545).',
+      'CTFd competition automation CLI and hands-on Reverse Engineering training materials created for USAS CTF team Dot Zero (U545).',
     highlights: [
-      'Automated CTFd challenge synchronization, directory scaffolding, and write-up templates',
-      'RE training labs: Ghidra and IDA Pro static decompilation, x64dbg patching, and Frida dynamic hooks',
-      'Crackme triage covering ELF/PE internals, GDB+GEF memory inspection, and anti-debugging bypass',
+      'Automated CTFd challenge downloader, workspace setup, and write-up generator',
+      'RE workshops: Ghidra and IDA Pro decompilation, x64dbg patching, and Frida hooks',
+      'Binary crackme labs covering ELF/PE internals, GDB+GEF debugging, and anti-debug bypass',
     ],
     tags: ['Security', 'Automation'],
     link: 'https://ctftime.org/team/421634',
@@ -184,23 +191,24 @@ const featuredProjects: FeaturedProject[] = [
     demoLabel: 'CTFtime Profile',
   },
   {
-    slot: '06',
+    id: '06',
     name: 'STEM Platform & Telebot',
     icon: <FaRobot />,
-    repoType: 'Student Ecosystem & Bot',
+    iconColor: '#22C55E',
+    repoType: 'Student Web Portal & Telegram Bot',
     stack: [
-      { name: 'React', icon: <SiReact /> },
-      { name: 'TypeScript', icon: <SiTypescript /> },
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'Telegram', icon: <SiTelegram /> },
-      { name: 'Google Sheets', icon: <SiGoogle /> },
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
+      { name: 'Google Sheets', icon: <SiGoogle />, color: '#34A853' },
     ],
     summary:
-      'Official student association portal and automated Telegram membership verification pipeline for STEM USAS.',
+      'Official student association portal and automated Telegram membership verification bot for STEM USAS.',
     highlights: [
-      'Production web portal deployed at stem.zis3c.dev for event and committee management',
-      'Verified 62+ registered members with automated digital receipt generation',
-      'Real-time Google Sheets synchronization with role-tiered admin and superadmin bot commands',
+      'Official STEM-USAS web portal live at stem.zis3c.dev',
+      'Verified 62+ registered student members with automated digital receipts',
+      'Real-time Google Sheets sync with admin and superadmin bot commands',
     ],
     tags: ['Web', 'Automation', 'Bot'],
     link: 'https://github.com/zis3c/STEM-Telebot',
@@ -208,22 +216,23 @@ const featuredProjects: FeaturedProject[] = [
     demoLabel: 'stem.zis3c.dev',
   },
   {
-    slot: '07',
+    id: '07',
     name: 'USAS Assignment Notifier & Timetable',
     icon: <FaBell />,
-    repoType: 'LMS Tracker & Timetable Generator',
+    iconColor: '#EC4899',
+    repoType: 'LMS Deadline Tracker & Timetable Exporter',
     stack: [
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'PostgreSQL', icon: <SiPostgresql /> },
-      { name: 'Telegram', icon: <SiTelegram /> },
-      { name: 'React', icon: <SiReact /> },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1' },
+      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
     ],
     summary:
-      'Automated campus LMS deadline tracker serving 50 students across 245 assignments, paired with a class timetable exporter.',
+      'Automated campus LMS deadline tracker serving 50 students across 245 assignments, paired with a class timetable generator.',
     highlights: [
-      'Scheduled LMS scraper dispatching proactive Telegram deadline alerts',
-      'Interactive timetable generator at jadualkelas.zis3c.dev exporting PDFs and lockscreen wallpapers',
-      'PostgreSQL state persistence with encrypted student session handling',
+      'Automated LMS scraper sending proactive Telegram deadline reminders',
+      'Class timetable builder at jadualkelas.zis3c.dev exporting PDFs and wallpapers',
+      'PostgreSQL database with encrypted student credential management',
     ],
     tags: ['Automation', 'Bot', 'Web'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
@@ -231,41 +240,43 @@ const featuredProjects: FeaturedProject[] = [
     demoLabel: 'jadualkelas.zis3c.dev',
   },
   {
-    slot: '08',
+    id: '08',
     name: 'Polyglot Files',
     icon: <FaFileCode />,
-    repoType: 'Format Confusion & Security Research',
+    iconColor: '#A855F7',
+    repoType: 'File Format Security Research',
     stack: [
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'Linux', icon: <SiLinux /> },
-      { name: 'Binary RE', icon: <SiGnubash /> },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
+      { name: 'Binary Analysis', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
-      'Dual-signature file generator combining valid JPEG/PNG and PDF binary structures to test magic-byte parsers and upload validators.',
+      'Dual-format file generator combining valid JPEG/PNG and PDF structures to test file signature parsers and upload filters.',
     highlights: [
-      'Constructs valid hybrid JPEG+PDF and PNG+PDF polyglot binaries',
-      'Demonstrates parser differential behavior across document and image readers',
-      'Designed for security research and defensive upload filter hardening',
+      'Generates valid hybrid JPEG+PDF and PNG+PDF polyglot files',
+      'Demonstrates parser behavior across image viewers and PDF readers',
+      'Built for file upload validation research and defensive filter testing',
     ],
     tags: ['Security', 'Research'],
     link: 'https://github.com/zis3c/Polyglot-File',
   },
   {
-    slot: '09',
+    id: '09',
     name: 'QRBot & Qrtendify',
     icon: <FaQrcode />,
-    repoType: 'QR Code Automation & Crypto Attendance',
+    iconColor: '#3B82F6',
+    repoType: 'QR Code & Attendance Automation',
     stack: [
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'Docker', icon: <SiDocker /> },
-      { name: 'Telegram', icon: <SiTelegram /> },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Docker', icon: <SiDocker />, color: '#2496ED' },
+      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
     ],
     summary:
-      'Multi-format QR code generation, optical decoding, and encrypted attendance verification bot ecosystem.',
+      'Versatile QR code generator, scanner, and encrypted attendance check-in bot on Telegram.',
     highlights: [
-      'Generates and decodes Text, Wi-Fi, vCard, and geolocation QR payloads via Telegram',
-      'Cryptographic payload signing for tamper-resistant event attendance check-ins',
-      'Containerized with Docker for isolated, reproducible deployment',
+      'Generates and decodes Text, Wi-Fi, vCard, and location QR codes',
+      'Encrypted QR payload verification for student event attendance',
+      'Dockerized setup for reliable cloud deployment',
     ],
     tags: ['Security', 'Bot', 'Automation'],
     link: 'https://github.com/zis3c/QRBot',
@@ -416,6 +427,28 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   ];
 
   useEffect(() => {
+    const actions = [
+      { label: 'Go to About', run: () => jumpTo('simple-about') },
+      { label: 'Go to Projects', run: () => jumpTo('simple-projects') },
+      { label: 'Go to Contact', run: () => jumpTo('simple-contact') },
+      {
+        label: 'Open GitHub',
+        run: () =>
+          window.open(
+            'https://github.com/zis3c',
+            '_blank',
+            'noopener,noreferrer'
+          ),
+      },
+      {
+        label: 'Toggle Theme',
+        run: () =>
+          setSimpleTheme((prev) =>
+            prev === 'terminal' ? 'paper' : 'terminal'
+          ),
+      },
+    ];
+
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -429,17 +462,17 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       if (isPaletteOpen) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
-          setPaletteIndex((prev) => (prev + 1) % paletteActions.length);
+          setPaletteIndex((prev) => (prev + 1) % actions.length);
         }
         if (e.key === 'ArrowUp') {
           e.preventDefault();
           setPaletteIndex(
-            (prev) => (prev - 1 + paletteActions.length) % paletteActions.length
+            (prev) => (prev - 1 + actions.length) % actions.length
           );
         }
         if (e.key === 'Enter') {
           e.preventDefault();
-          paletteActions[paletteIndex].run();
+          actions[paletteIndex].run();
           setIsPaletteOpen(false);
         }
         return;
@@ -466,7 +499,13 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             Math.max(1, filteredProjects.length)
         );
       }
-      if (e.key === 'Enter' && filteredProjects[focusedProjectIndex]) {
+      const targetTag = (e.target as HTMLElement | null)?.tagName;
+      if (
+        e.key === 'Enter' &&
+        targetTag !== 'BUTTON' &&
+        targetTag !== 'A' &&
+        filteredProjects[focusedProjectIndex]
+      ) {
         window.open(
           filteredProjects[focusedProjectIndex].link,
           '_blank',
@@ -477,17 +516,17 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  });
+  }, [isPaletteOpen, paletteIndex, filteredProjects, focusedProjectIndex]);
 
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
-      {/* Top Workstation Window Titlebar */}
+      {/* Top Navigation Bar */}
       <Styled.Nav>
         <Styled.BrandGroup>
-          <Styled.StatusLed title="Workstation Online" />
+          <Styled.StatusLed title="Available for Feb 2027 Internship" />
           <Styled.Brand>
-            <span>RADZI ZAMRI // ZIS3C</span>
-            <span className="sys-path">SYS://WORKSTATION/PORTFOLIO.EXE</span>
+            <span>Radzi Zamri (zis3c)</span>
+            <span className="role-tag">Cybersecurity &amp; CS Portfolio</span>
           </Styled.Brand>
         </Styled.BrandGroup>
 
@@ -496,10 +535,10 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             type="button"
             onClick={() => setIsPaletteOpen(true)}
             aria-label="Open command palette"
-            title="Command Palette (Ctrl+K)"
+            title="Quick Jump (Ctrl+K)"
           >
             <FiCommand />
-            <span>Command</span>
+            <span>Quick Jump</span>
             <span className="kbd-tag">Ctrl+K</span>
           </Styled.PaletteTrigger>
 
@@ -515,11 +554,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                 ? 'Switch to paper light theme'
                 : 'Switch to terminal dark theme'
             }
-            title={simpleTheme === 'terminal' ? 'Paper Manual' : 'CRT Phosphor'}
+            title={simpleTheme === 'terminal' ? 'Light Mode' : 'Dark Mode'}
           >
             {simpleTheme === 'terminal' ? <FiSun /> : <FiMoon />}
             <span className="btn-label">
-              {simpleTheme === 'terminal' ? 'Paper Manual' : 'CRT Phosphor'}
+              {simpleTheme === 'terminal' ? 'Light Mode' : 'Dark Mode'}
             </span>
           </Styled.ThemeToggle>
 
@@ -527,24 +566,24 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             type="button"
             onClick={onBackToChooser}
             aria-label="Open system boot menu"
-            title="Return to BIOS Boot Menu"
+            title="Switch to Kali Desktop or Boot Menu"
           >
             <FiPower />
-            <span className="btn-label">BIOS Boot</span>
+            <span className="btn-label">Boot Menu</span>
           </Styled.BackButton>
         </Styled.NavActions>
       </Styled.Nav>
 
       <Styled.Main>
-        {/* Section 1: Asymmetric Operator Dossier + Hardware Readout */}
+        {/* Section 1: About & Academic Highlights */}
         <Styled.HeroWorkbench id="simple-about">
           <Styled.HeroSection>
             <Styled.WindowChromeBar>
-              <span>[0x00] // OPERATOR_DOSSIER.SYS</span>
-              <span className="window-controls">
-                <span className="win-code">TTY1</span>
-                <span className="win-box" />
-                <span className="win-box" />
+              <span>About Radzi Zamri</span>
+              <span className="window-dots">
+                <span className="win-dot" />
+                <span className="win-dot" />
+                <span className="win-dot" />
               </span>
             </Styled.WindowChromeBar>
 
@@ -555,42 +594,45 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                     'Cybersecurity Portfolio',
                     'Threat Detection & SOC',
                     'Reverse Engineering',
-                    'Dot Zero CTF (U545)',
+                    'Dot Zero CTF Team',
                   ]}
                 />
               </Styled.HeroTitle>
 
               <Styled.HeroRoleSub>
-                Computer Science Undergrad (CGPA 3.83) / Purple Team / RE
-                Trainer
+                Computer Science Undergraduate (CGPA 3.83) · Purple Team &amp;
+                Reverse Engineering Trainer
               </Styled.HeroRoleSub>
 
               <Styled.HeroText>
-                Universiti Sultan Azlan Shah (USAS) Computer Science
-                undergraduate with hands-on experience in SSH honeypot
-                telemetry, binary reverse engineering (Ghidra, IDA Pro, x64dbg,
-                GDB+GEF, Frida), custom hardware firmware, and full-stack
-                engineering. Secretary and Reverse Engineering Trainer for Dot
-                Zero CTF team, seeking a 14-week Cybersecurity Internship
-                starting February 2027 in SOC monitoring, incident response, or
-                penetration testing.
+                Computer Science student at Universiti Sultan Azlan Shah (USAS)
+                with practical experience in SSH honeypot threat detection,
+                binary reverse engineering (Ghidra, IDA Pro, x64dbg, GDB+GEF,
+                Frida), hardware security firmware, and full-stack web
+                development. Secretary and Reverse Engineering Trainer for USAS
+                CTF team Dot Zero, currently seeking a 14-week Cybersecurity
+                Internship starting February 2027.
               </Styled.HeroText>
 
               <Styled.SocialGrid>
-                <Styled.SocialButton href="mailto:r.zradzizamri@gmail.com">
-                  <FaEnvelope /> Email Dispatch
+                <Styled.SocialButton
+                  href="mailto:r.zradzizamri@gmail.com"
+                  iconColor="#EA4335"
+                >
+                  <FaEnvelope /> Email
                 </Styled.SocialButton>
                 <Styled.SocialButton
                   href="https://github.com/zis3c"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaGithub /> GitHub (zis3c)
+                  <FaGithub /> GitHub
                 </Styled.SocialButton>
                 <Styled.SocialButton
                   href="https://linkedin.com/in/radzizamri"
                   target="_blank"
                   rel="noopener noreferrer"
+                  iconColor="#0A66C2"
                 >
                   <FaLinkedin /> LinkedIn
                 </Styled.SocialButton>
@@ -598,6 +640,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   href="https://ctftime.org/team/421634"
                   target="_blank"
                   rel="noopener noreferrer"
+                  iconColor="#EF4444"
                 >
                   <FaFlag /> Dot Zero CTF
                 </Styled.SocialButton>
@@ -605,6 +648,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   href="https://www.youtube.com/@zis3c"
                   target="_blank"
                   rel="noopener noreferrer"
+                  iconColor="#FF0000"
                 >
                   <FaYoutube /> YouTube
                 </Styled.SocialButton>
@@ -612,6 +656,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   href="https://www.instagram.com/radz.z_/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  iconColor="#E4405F"
                 >
                   <FaInstagram /> Instagram
                 </Styled.SocialButton>
@@ -619,70 +664,67 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             </Styled.HeroBody>
           </Styled.HeroSection>
 
-          <Styled.TelemetryPanel aria-label="Verified Operator Specifications">
+          <Styled.TelemetryPanel aria-label="Profile and Academic Summary">
             <Styled.WindowChromeBar>
-              <span>[0x01] // VERIFIED_TELEMETRY.LOG</span>
-              <span className="win-code">READONLY</span>
+              <span>Profile &amp; Academic Summary</span>
+              <span>Verified</span>
             </Styled.WindowChromeBar>
             <Styled.TelemetryBody>
               <Styled.RegisterTable>
                 <Styled.RegisterRow>
-                  <dt>OPERATOR_ID</dt>
+                  <dt>Full Name</dt>
                   <dd>Radzi bin Zamri (zis3c)</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>DEGREE_BCSC</dt>
-                  <dd>CGPA 3.83 (Dean&apos;s List Sem I-IV, USAS)</dd>
+                  <dt>University</dt>
+                  <dd>Universiti Sultan Azlan Shah (USAS)</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>DIPLOMA_IT</dt>
-                  <dd>CGPA 3.77 (Dean&apos;s List 4 Sems, USAS)</dd>
+                  <dt>Bachelor&apos;s</dt>
+                  <dd>Computer Science · CGPA 3.83 (Dean&apos;s List)</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>CTF_DIVISION</dt>
+                  <dt>Diploma</dt>
+                  <dd>Information Technology · CGPA 3.77</dd>
+                </Styled.RegisterRow>
+                <Styled.RegisterRow>
+                  <dt>CTF Team</dt>
                   <dd>Dot Zero (U545) Secretary &amp; RE Trainer</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>CTF_RECORDS</dt>
-                  <dd>21st RE:UN10N / 88th ApoorvCTF / 133rd 0xFun</dd>
+                  <dt>CTF Results</dt>
+                  <dd>21st RE:UN10N · 88th ApoorvCTF · 133rd 0xFun</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>CERTIFIED_01</dt>
-                  <dd>Google Cybersecurity Professional (2026)</dd>
+                  <dt>Certificates</dt>
+                  <dd>Google Cybersecurity · RE Bootcamp (Ghidra/IDA)</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>CERTIFIED_02</dt>
-                  <dd>RE Bootcamp: Ghidra, IDA &amp; Linux x86_64</dd>
-                </Styled.RegisterRow>
-                <Styled.RegisterRow>
-                  <dt>DEPLOYMENT</dt>
-                  <dd>14-Wk Internship Ready (Feb 2027, Selangor/KL)</dd>
+                  <dt>Internship</dt>
+                  <dd>14 Weeks starting Feb 2027 (Selangor / KL)</dd>
                 </Styled.RegisterRow>
               </Styled.RegisterTable>
             </Styled.TelemetryBody>
           </Styled.TelemetryPanel>
         </Styled.HeroWorkbench>
 
-        {/* Section 2: Mounted Repository Bay */}
+        {/* Section 2: Featured Projects */}
         <Styled.DirectoryFrame id="simple-projects">
           <Styled.DirectoryHeaderBar>
             <Styled.SectionHeader>
-              <Styled.SectionTitle>
-                <span className="reg-prefix">DIR // 0x02</span>
-                <span>Mounted Project Repositories</span>
-              </Styled.SectionTitle>
+              <Styled.SectionTitle>Featured Projects</Styled.SectionTitle>
               <Styled.SectionSubtitle>
-                Production systems, hardware security firmware, async stress
-                engines, and reverse engineering toolkits.
+                Open-source security tools, custom hardware firmware, full-stack
+                web platforms, and automation bots.
               </Styled.SectionSubtitle>
             </Styled.SectionHeader>
             <Styled.DirectoryCountBadge>
-              MOUNTED: {String(filteredProjects.length).padStart(2, '0')} /{' '}
-              {String(featuredProjects.length).padStart(2, '0')} MODULES
+              Showing {filteredProjects.length} of {featuredProjects.length}{' '}
+              projects
             </Styled.DirectoryCountBadge>
           </Styled.DirectoryHeaderBar>
 
-          <Styled.FilterRow role="tablist" aria-label="Filter repositories">
+          <Styled.FilterRow role="tablist" aria-label="Filter projects">
             {PROJECT_FILTERS.map((filter) => (
               <Styled.FilterChip
                 key={filter}
@@ -698,15 +740,15 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           <Styled.ProjectsSection>
             {filteredProjects.length === 0 ? (
               <Styled.EmptyStateBox>
-                <p>No repository modules match the selected filter.</p>
+                <p>No projects match the selected category.</p>
                 <button type="button" onClick={() => setProjectFilter('All')}>
-                  Reset Filter to All
+                  Show All Projects
                 </button>
               </Styled.EmptyStateBox>
             ) : (
               filteredProjects.map((project, index) => {
                 const isFlagship =
-                  projectFilter === 'All' && project.slot === '01';
+                  projectFilter === 'All' && project.id === '01';
                 return (
                   <Styled.ProjectCard
                     key={project.name}
@@ -717,12 +759,9 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                     <Styled.ProjectCardChrome
                       isFocused={index === focusedProjectIndex}
                     >
-                      <span>
-                        <span className="slot-id">[{project.slot}]</span> ::{' '}
-                        {project.repoType.toUpperCase()}
-                      </span>
+                      <span>{project.repoType}</span>
                       <span className="slot-status">
-                        {isFlagship ? 'FLAGSHIP FYP' : 'PUBLIC REPO'}
+                        {isFlagship ? 'Featured FYP' : 'Open Source'}
                       </span>
                     </Styled.ProjectCardChrome>
 
@@ -730,7 +769,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                       <Styled.ProjectHeader>
                         <Styled.ProjectTopBar>
                           <Styled.ProjectIdentity>
-                            <Styled.ProjectAvatar>
+                            <Styled.ProjectAvatar iconColor={project.iconColor}>
                               {project.icon}
                             </Styled.ProjectAvatar>
                             <Styled.ProjectMetaInfo>
@@ -739,7 +778,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                               </Styled.ProjectName>
                               <Styled.ProjectMetaRow>
                                 <span className="repo-tag">
-                                  <FaFolder /> {project.repoType}
+                                  <FaFolder /> {project.tags.join(' · ')}
                                 </span>
                               </Styled.ProjectMetaRow>
                             </Styled.ProjectMetaInfo>
@@ -750,7 +789,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`GitHub repo for ${project.name}`}
-                            title="Inspect Repository on GitHub"
+                            title="View on GitHub"
                           >
                             <FaGithub />
                           </Styled.ProjectQuickGithub>
@@ -758,7 +797,10 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
                         <Styled.ProjectStackWrapper>
                           {project.stack.map((tech) => (
-                            <Styled.TechBadge key={tech.name}>
+                            <Styled.TechBadge
+                              key={tech.name}
+                              iconColor={tech.color}
+                            >
                               <span className="tech-icon">{tech.icon}</span>
                               <span className="tech-name">{tech.name}</span>
                             </Styled.TechBadge>
@@ -788,7 +830,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <FaGithub /> Inspect Repository
+                          <FaGithub /> View Repository
                         </Styled.ProjectOpenLink>
                         {project.demoLink && (
                           <Styled.ProjectDemoLink
@@ -797,7 +839,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                             rel="noopener noreferrer"
                           >
                             <FiExternalLink />{' '}
-                            {project.demoLabel || 'Live Deployment'}
+                            {project.demoLabel || 'Live Website'}
                           </Styled.ProjectDemoLink>
                         )}
                       </Styled.ProjectButtonGroup>
@@ -809,83 +851,80 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           </Styled.ProjectsSection>
         </Styled.DirectoryFrame>
 
-        {/* Section 3: Rack-Mount Technical Arsenal Matrix */}
+        {/* Section 3: Technical Skills & Tooling */}
         <Styled.ArsenalSection>
           <Styled.SectionHeader>
             <Styled.SectionTitle>
-              <span className="reg-prefix">SYS // 0x03</span>
               <FiCpu />
-              <span>Technical Arsenal &amp; Workstation Matrix</span>
+              <span>Technical Skills &amp; Tooling</span>
             </Styled.SectionTitle>
             <Styled.SectionSubtitle>
-              Hardware-indexed breakdown of reverse engineering disassemblers,
-              dynamic instrumentation, languages, and defensive telemetry
-              stacks.
+              Tools, programming languages, and frameworks used across my
+              security research and software projects.
             </Styled.SectionSubtitle>
           </Styled.SectionHeader>
 
           <Styled.ArsenalRack>
             <Styled.ArsenalRow>
               <Styled.ArsenalRowMeta>
-                <span className="rack-addr">REG // 0x03A</span>
                 <span className="rack-title">
-                  <FiTerminal /> Reverse Engineering &amp; Binary Analysis
+                  <FiTerminal /> Reverse Engineering &amp; Security
                 </span>
                 <span className="rack-desc">
-                  Static decompilation, dynamic debugging, runtime API hooking,
-                  and ELF/PE triage.
+                  Static decompilation, dynamic debugging, runtime hooking, and
+                  binary analysis.
                 </span>
               </Styled.ArsenalRowMeta>
               <Styled.ArsenalBadgeList>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#EF4444">
                   <span className="badge-icon">
                     <SiKalilinux />
                   </span>
                   <span>Ghidra</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#F59E0B">
                   <span className="badge-icon">
                     <SiLinux />
                   </span>
                   <span>IDA Pro</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#10B981">
                   <span className="badge-icon">
                     <SiLinux />
                   </span>
                   <span>Binary Ninja</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#8B5CF6">
                   <span className="badge-icon">
                     <FiTerminal />
                   </span>
                   <span>Radare2 / Cutter</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#EF4444">
                   <span className="badge-icon">
                     <FiTerminal />
                   </span>
                   <span>x64dbg</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#38BDF8">
                   <span className="badge-icon">
                     <FiTerminal />
                   </span>
                   <span>GDB + GEF</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#F97316">
                   <span className="badge-icon">
                     <SiPython />
                   </span>
                   <span>Frida (DBI)</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#1679A7">
                   <span className="badge-icon">
                     <SiWireshark />
                   </span>
                   <span>Wireshark</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#EAB308">
                   <span className="badge-icon">
                     <SiLinux />
                   </span>
@@ -896,53 +935,52 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
             <Styled.ArsenalRow>
               <Styled.ArsenalRowMeta>
-                <span className="rack-addr">REG // 0x03B</span>
                 <span className="rack-title">
-                  <FaMicrochip /> Core Languages &amp; Firmware
+                  <FaMicrochip /> Programming Languages
                 </span>
                 <span className="rack-desc">
-                  Systems programming, async automation engines, and embedded
-                  ESP32-S3 development.
+                  Backend automation, embedded firmware, and full-stack
+                  development.
                 </span>
               </Styled.ArsenalRowMeta>
               <Styled.ArsenalBadgeList>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#3776AB">
                   <span className="badge-icon">
                     <SiPython />
                   </span>
                   <span>Python (AsyncIO / aiohttp)</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#00599C">
                   <span className="badge-icon">
                     <SiCplusplus />
                   </span>
                   <span>C / C++ (ESP32-S3)</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#3178C6">
                   <span className="badge-icon">
                     <SiTypescript />
                   </span>
                   <span>TypeScript</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#777BB4">
                   <span className="badge-icon">
                     <SiPhp />
                   </span>
                   <span>PHP 8.3</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#512BD4">
                   <span className="badge-icon">
                     <SiDotnet />
                   </span>
                   <span>.NET 8</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#4EAA25">
                   <span className="badge-icon">
                     <SiGnubash />
                   </span>
-                  <span>Bash &amp; POSIX Shell</span>
+                  <span>Bash &amp; Shell</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#4169E1">
                   <span className="badge-icon">
                     <SiPostgresql />
                   </span>
@@ -953,13 +991,12 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
             <Styled.ArsenalRow>
               <Styled.ArsenalRowMeta>
-                <span className="rack-addr">REG // 0x03C</span>
                 <span className="rack-title">
-                  <SiReact /> Web, Real-Time &amp; Telehealth
+                  <SiReact /> Web &amp; Application Frameworks
                 </span>
                 <span className="rack-desc">
-                  Full-stack portals, encrypted video consultations, and
-                  WebSocket event broadcasting.
+                  Modern web applications, real-time queues, and telehealth
+                  video systems.
                 </span>
               </Styled.ArsenalRowMeta>
               <Styled.ArsenalBadgeList>
@@ -969,31 +1006,31 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   </span>
                   <span>Next.js</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#00D8FF">
                   <span className="badge-icon">
                     <SiReact />
                   </span>
                   <span>React 18</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#FF2D20">
                   <span className="badge-icon">
                     <SiLaravel />
                   </span>
                   <span>Laravel 13 &amp; Inertia</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#38BDF8">
                   <span className="badge-icon">
                     <SiTailwindcss />
                   </span>
                   <span>Tailwind CSS</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#F59E0B">
                   <span className="badge-icon">
                     <SiWebrtc />
                   </span>
                   <span>LiveKit WebRTC</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#DC382D">
                   <span className="badge-icon">
                     <SiRedis />
                   </span>
@@ -1004,76 +1041,75 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
             <Styled.ArsenalRow>
               <Styled.ArsenalRowMeta>
-                <span className="rack-addr">REG // 0x03D</span>
                 <span className="rack-title">
-                  <FaShieldAlt /> Defensive SOC, Telemetry &amp; Cloud
+                  <FaShieldAlt /> Cloud, Databases &amp; Defense
                 </span>
                 <span className="rack-desc">
-                  Honeypot ingestion, automated firewall containment, CI/CD
-                  security, and Linux ops.
+                  Honeypot deployment, log analytics, containers, and CI/CD
+                  security pipelines.
                 </span>
               </Styled.ArsenalRowMeta>
               <Styled.ArsenalBadgeList>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#367BF0">
                   <span className="badge-icon">
                     <SiKalilinux />
                   </span>
                   <span>Kali GNU/Linux</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#EF4444">
                   <span className="badge-icon">
                     <FaShieldAlt />
                   </span>
                   <span>HASSH &amp; MITRE ATT&amp;CK</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#4169E1">
                   <span className="badge-icon">
                     <SiPostgresql />
                   </span>
                   <span>ClickHouse &amp; PostgreSQL</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#2496ED">
                   <span className="badge-icon">
                     <SiDocker />
                   </span>
                   <span>Docker</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#0080FF">
                   <span className="badge-icon">
                     <SiDigitalocean />
                   </span>
                   <span>DigitalOcean</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#2088FF">
                   <span className="badge-icon">
                     <SiGithubactions />
                   </span>
                   <span>CodeQL / Semgrep / Gitleaks</span>
                 </Styled.ArsenalBadge>
-                <Styled.ArsenalBadge>
+                <Styled.ArsenalBadge iconColor="#26A5E4">
                   <span className="badge-icon">
                     <SiTelegram />
                   </span>
-                  <span>Telegram Bot Automation</span>
+                  <span>Telegram Bot API</span>
                 </Styled.ArsenalBadge>
               </Styled.ArsenalBadgeList>
             </Styled.ArsenalRow>
           </Styled.ArsenalRack>
         </Styled.ArsenalSection>
 
-        {/* Section 4: Direct Comms Terminal Footer */}
+        {/* Section 4: Contact & Internship Availability */}
         <Styled.CommsTerminal id="simple-contact">
           <Styled.WindowChromeBar>
-            <span>[0x04] // COM1_TRANSMISSION_PORT</span>
-            <span className="win-code">STATUS: LISTENING</span>
+            <span>Contact &amp; Internship Availability</span>
+            <span>Open for Feb 2027</span>
           </Styled.WindowChromeBar>
           <Styled.CommsBody>
             <Styled.CommsInfo>
-              <h3>Ready for Feb 2027 Cybersecurity Internship &amp; CTF</h3>
+              <h3>Looking for a Feb 2027 Cybersecurity Internship</h3>
               <p>
-                Available for a 14-week industrial placement starting February
-                2027 across Selangor and Kuala Lumpur (SOC Monitoring, Incident
-                Response, Threat Intelligence, or Penetration Testing).
+                Available for a 14-week internship starting February 2027 in
+                Selangor or Kuala Lumpur (SOC Monitoring, Incident Response,
+                Threat Intelligence, or Penetration Testing).
               </p>
             </Styled.CommsInfo>
             <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
@@ -1085,22 +1121,22 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin /> Connect on LinkedIn
+                <FaLinkedin /> LinkedIn Profile
               </Styled.ProjectDemoLink>
             </Styled.ProjectButtonGroup>
           </Styled.CommsBody>
           <Styled.HotkeyBar>
             <span>
-              <kbd>J</kbd>/<kbd>K</kbd> Scroll Viewport
+              <kbd>J</kbd>/<kbd>K</kbd> Scroll Page
             </span>
             <span>
-              <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> Select Module
+              <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> Select Project
             </span>
             <span>
-              <kbd>Enter</kbd> Open Focused Repo
+              <kbd>Enter</kbd> Open Selected Project
             </span>
             <span>
-              <kbd>Ctrl+K</kbd> Command Palette
+              <kbd>Ctrl+K</kbd> Quick Jump Menu
             </span>
           </Styled.HotkeyBar>
         </Styled.CommsTerminal>
@@ -1111,11 +1147,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           <Styled.PalettePanel
             role="dialog"
             aria-modal="true"
-            aria-label="Command Palette"
+            aria-label="Quick Jump Menu"
             onClick={(e) => e.stopPropagation()}
           >
             <Styled.PaletteTitle>
-              SYS://COMMAND_PALETTE (USE UP/DOWN &amp; ENTER)
+              Quick Jump (Use Up/Down &amp; Enter)
             </Styled.PaletteTitle>
             {paletteActions.map((action, index) => (
               <Styled.PaletteItem

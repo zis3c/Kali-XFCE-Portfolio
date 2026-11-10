@@ -109,5 +109,21 @@ describe('Home', () => {
     });
     wrap.update();
     expect(wrap.text()).toContain('Advanced boot options opened');
+
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    });
+    wrap.update();
+    expect(wrap.find(Loader)).toHaveLength(1);
+  });
+
+  it('launches Portfolio Mode when pressing Enter on default boot option', () => {
+    const { wrap } = setup();
+
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    });
+    wrap.update();
+    expect(wrap.find(PortfolioMode)).toHaveLength(1);
   });
 });

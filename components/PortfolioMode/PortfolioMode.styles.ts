@@ -3,76 +3,60 @@ import styled from 'styled-components';
 type SimpleTheme = 'terminal' | 'paper';
 
 /* ------------------------------------------------------------------ */
-/*  Root Workstation Chassis & Theme Tokens                            */
+/*  Next.js Monochrome Palette (Black / Zinc Grey / Crisp White)       */
 /* ------------------------------------------------------------------ */
 
 export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
-  /* Core Neutral Chassis (3 tones) */
+  /* Surfaces */
   --bg: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#090b0e' : '#f4f1ea'};
+    themeMode === 'terminal' ? '#000000' : '#fafafa'};
   --panel: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#11151c' : '#ffffff'};
+    themeMode === 'terminal' ? '#0a0a0a' : '#ffffff'};
   --well: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#0c0f14' : '#ebe6dc'};
+    themeMode === 'terminal' ? '#141414' : '#f4f4f5'};
+  --well-hover: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#1f1f1f' : '#e4e4e7'};
 
-  /* Typography (WCAG AA verified via contrast-check.py) */
+  /* Typography (WCAG AA verified) */
   --text: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#f1f5f9' : '#0f172a'};
+    themeMode === 'terminal' ? '#fafafa' : '#09090b'};
   --muted: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#94a3b8' : '#334155'};
+    themeMode === 'terminal' ? '#a1a1aa' : '#52525b'};
 
-  /* Primary Phosphor Accent + Secondary Hardware Register Accent */
-  --accent: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#4ade80' : '#15803d'};
-  --accent-strong: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#22c55e' : '#166534'};
-  --accent-tint: ${({ themeMode }) =>
-    themeMode === 'terminal' ? 'rgba(74, 222, 128, 0.12)' : '#f0fdf4'};
-  --accent-border: ${({ themeMode }) =>
-    themeMode === 'terminal' ? 'rgba(74, 222, 128, 0.45)' : '#86efac'};
-
-  --amber: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#fbbf24' : '#92400e'};
-  --amber-tint: ${({ themeMode }) =>
-    themeMode === 'terminal' ? 'rgba(251, 191, 36, 0.12)' : '#fffbeb'};
-  --amber-border: ${({ themeMode }) =>
-    themeMode === 'terminal' ? 'rgba(251, 191, 36, 0.4)' : '#fcd34d'};
-
-  /* Hardware Borders & Tactile 3D Bevels */
+  /* Borders & Subtle Elevation */
   --border-strong: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#334155' : '#1e293b'};
+    themeMode === 'terminal' ? '#262626' : '#e4e4e7'};
   --border-subtle: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#1e293b' : '#cbd5e1'};
-  --bevel-light: ${({ themeMode }) =>
-    themeMode === 'terminal'
-      ? 'rgba(255, 255, 255, 0.08)'
-      : 'rgba(255, 255, 255, 0.9)'};
-  --bevel-shadow: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '#040507' : '#cbd5e1'};
+    themeMode === 'terminal' ? '#1a1a1a' : '#f4f4f5'};
+  --border-hover: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#52525b' : '#a1a1aa'};
+  --focus-ring: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#fafafa' : '#09090b'};
+
+  /* High-Contrast Monochrome Primary Controls (Next.js style) */
+  --btn-primary-bg: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#fafafa' : '#09090b'};
+  --btn-primary-text: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#09090b' : '#fafafa'};
+  --btn-primary-hover: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#d4d4d8' : '#27272a'};
+
   --card-shadow: ${({ themeMode }) =>
-    themeMode === 'terminal' ? '4px 4px 0px #040507' : '4px 4px 0px #cbd5e1'};
-  --keycap-shadow: ${({ themeMode }) =>
     themeMode === 'terminal'
-      ? '0 3px 0 #040507, inset 0 1px 0 rgba(255, 255, 255, 0.12)'
-      : '0 3px 0 #94a3b8, inset 0 1px 0 #ffffff'};
+      ? '0 1px 2px rgba(0, 0, 0, 0.6)'
+      : '0 1px 3px rgba(0, 0, 0, 0.05)'};
 
   min-height: 100vh;
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter',
+    sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  position: relative;
-
-  /* Subtle CRT scanline motif in terminal mode; clean archival grain in paper mode */
-  background-image: ${({ themeMode }) =>
-    themeMode === 'terminal'
-      ? 'repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 3px)'
-      : 'none'};
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Workstation Top Chrome Bar (Nav)                                   */
+/*  Top Navigation Bar                                                 */
 /* ------------------------------------------------------------------ */
 
 export const Nav = styled.header`
@@ -80,65 +64,59 @@ export const Nav = styled.header`
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 12px 28px;
-  border-bottom: 2px solid var(--border-strong);
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--border-strong);
   background: var(--panel);
-  box-shadow: 0 2px 0 var(--bevel-shadow);
   position: sticky;
   top: 0;
   z-index: 20;
 
   @media (max-width: 900px) {
-    padding: 12px 18px;
+    padding: 12px 20px;
   }
 
   @media (max-width: 640px) {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
-    padding: 10px 14px;
+    padding: 12px 16px;
   }
 `;
 
 export const BrandGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
-
-  @media (max-width: 640px) {
-    justify-content: space-between;
-  }
 `;
 
 export const StatusLed = styled.span`
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  background: var(--accent);
-  border: 1px solid var(--border-strong);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
   flex-shrink: 0;
 `;
 
 export const Brand = styled.div`
-  font-size: clamp(14px, 1.8vw, 17px);
-  font-weight: 800;
-  letter-spacing: 0.4px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
   color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
   white-space: nowrap;
 
-  .sys-path {
+  .role-tag {
     color: var(--muted);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 2px 8px;
     background: var(--well);
-    border: 1px solid var(--border-subtle);
-    border-radius: 3px;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
 
     @media (max-width: 900px) {
       display: none;
@@ -149,7 +127,7 @@ export const Brand = styled.div`
 export const NavActions = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 
   @media (max-width: 640px) {
@@ -170,33 +148,30 @@ export const PaletteTrigger = styled.button`
   border: 1px solid var(--border-strong);
   background: var(--well);
   color: var(--text);
-  border-radius: 4px;
-  box-shadow: var(--keycap-shadow);
+  border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s ease, background 0.15s ease;
 
   .kbd-tag {
-    color: var(--amber);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    padding: 1px 5px;
-    border: 1px solid var(--amber-border);
-    background: var(--amber-tint);
-    border-radius: 3px;
+    padding: 2px 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--panel);
+    border-radius: 4px;
   }
 
   &:hover {
-    border-color: var(--accent);
-  }
-
-  &:active {
-    transform: translateY(2px);
+    border-color: var(--border-hover);
+    background: var(--well-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -218,25 +193,20 @@ export const ThemeToggle = styled.button`
   border: 1px solid var(--border-strong);
   background: var(--panel);
   color: var(--text);
-  border-radius: 4px;
-  box-shadow: var(--keycap-shadow);
+  border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s ease, background 0.15s ease;
 
   &:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  &:active {
-    transform: translateY(2px);
+    border-color: var(--border-hover);
+    background: var(--well);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -252,28 +222,22 @@ export const BackButton = styled.button`
   gap: 8px;
   min-height: 44px;
   padding: 8px 16px;
-  border: 1px solid var(--accent-border);
-  background: var(--accent-tint);
-  color: var(--accent);
-  border-radius: 4px;
-  box-shadow: var(--keycap-shadow);
+  border: 1px solid var(--btn-primary-bg);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 800;
-  transition: transform 0.1s ease, background 0.15s ease;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s ease;
 
   &:hover {
-    background: var(--accent-strong);
-    color: #ffffff;
-  }
-
-  &:active {
-    transform: translateY(2px);
+    background: var(--btn-primary-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -283,13 +247,13 @@ export const BackButton = styled.button`
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Main Workstation Container                                         */
+/*  Main Container                                                     */
 /* ------------------------------------------------------------------ */
 
 export const Main = styled.main`
-  max-width: 1160px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 36px 24px 72px;
+  padding: 40px 24px 72px;
 
   @media (max-width: 900px) {
     padding: 28px 18px 56px;
@@ -301,27 +265,27 @@ export const Main = styled.main`
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 1: Asymmetric Workstation Hero + CRT Telemetry Readout     */
+/*  Section 1: Hero & Quick Summary                                    */
 /* ------------------------------------------------------------------ */
 
 export const HeroWorkbench = styled.section`
   display: grid;
   grid-template-columns: 7fr 5fr;
-  gap: 24px;
+  gap: 20px;
   align-items: stretch;
   margin-bottom: 56px;
 
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
     margin-bottom: 40px;
   }
 `;
 
 export const HeroSection = styled.div`
   background: var(--panel);
-  border: 2px solid var(--border-strong);
-  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
@@ -334,36 +298,30 @@ export const WindowChromeBar = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 8px 14px;
+  padding: 10px 18px;
   background: var(--well);
-  border-bottom: 2px solid var(--border-strong);
-  font-size: 11px;
-  font-weight: 700;
+  border-bottom: 1px solid var(--border-strong);
+  font-size: 12px;
+  font-weight: 600;
   color: var(--muted);
-  letter-spacing: 0.5px;
 
-  .window-controls {
+  .window-dots {
     display: inline-flex;
     align-items: center;
     gap: 6px;
   }
 
-  .win-box {
-    width: 10px;
-    height: 10px;
-    border: 1px solid var(--border-strong);
-    background: var(--panel);
+  .win-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hover);
     display: inline-block;
-  }
-
-  .win-code {
-    color: var(--amber);
-    font-weight: 800;
   }
 `;
 
 export const HeroBody = styled.div`
-  padding: 28px 26px 26px;
+  padding: 28px 28px 26px;
 
   @media (max-width: 640px) {
     padding: 20px 16px;
@@ -372,23 +330,22 @@ export const HeroBody = styled.div`
 
 export const HeroTitle = styled.h1`
   margin: 0;
-  font-size: clamp(26px, 4.2vw, 44px);
+  font-size: clamp(28px, 4.2vw, 44px);
   font-weight: 800;
   line-height: 1.12;
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
   color: var(--text);
 `;
 
 export const HeroRoleSub = styled.p`
   margin: 12px 0 0;
-  font-size: clamp(13px, 1.6vw, 15px);
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.2px;
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 600;
+  color: var(--text);
 `;
 
 export const HeroText = styled.p`
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   color: var(--muted);
   font-size: clamp(14px, 1.5vw, 15.5px);
   line-height: 1.7;
@@ -401,7 +358,7 @@ export const SocialGrid = styled.div`
   gap: 10px;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px dashed var(--border-subtle);
+  border-top: 1px solid var(--border-strong);
 
   @media (max-width: 640px) {
     display: grid;
@@ -410,7 +367,7 @@ export const SocialGrid = styled.div`
   }
 `;
 
-export const SocialButton = styled.a<{ bg?: string; hoverBg?: string }>`
+export const SocialButton = styled.a<{ iconColor?: string }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -420,41 +377,36 @@ export const SocialButton = styled.a<{ bg?: string; hoverBg?: string }>`
   background: var(--well);
   color: var(--text);
   border: 1px solid var(--border-strong);
-  border-radius: 4px;
-  box-shadow: var(--keycap-shadow);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
-  transition: transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    transform 0.1s ease;
 
   svg {
-    color: var(--accent);
-    font-size: 14px;
+    color: ${({ iconColor }) => iconColor || 'var(--text)'};
+    font-size: 15px;
     flex-shrink: 0;
   }
 
   &:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--border-hover);
+    background: var(--well-hover);
     transform: translateY(-1px);
   }
 
-  &:active {
-    transform: translateY(2px);
-  }
-
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 `;
 
-/* Right Column: Recessed Hardware Telemetry / Dossier Readout */
+/* Right Column: Profile & Education Summary */
 export const TelemetryPanel = styled.aside`
   background: var(--panel);
-  border: 2px solid var(--border-strong);
-  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
@@ -465,7 +417,7 @@ export const TelemetryBody = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
 
   @media (max-width: 640px) {
@@ -482,19 +434,18 @@ export const RegisterTable = styled.dl`
 
 export const RegisterRow = styled.div`
   display: grid;
-  grid-template-columns: 128px 1fr;
-  gap: 10px;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
   align-items: baseline;
-  padding: 8px 10px;
+  padding: 9px 12px;
   background: var(--well);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: 6px;
+  font-size: 13px;
 
   dt {
-    color: var(--amber);
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    color: var(--muted);
+    font-weight: 500;
   }
 
   dd {
@@ -506,12 +457,12 @@ export const RegisterRow = styled.div`
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 3px;
   }
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 2: Mounted Repository Bay (Filter + Projects)              */
+/*  Section 2: Projects Directory                                      */
 /* ------------------------------------------------------------------ */
 
 export const DirectoryFrame = styled.section`
@@ -525,7 +476,7 @@ export const DirectoryHeaderBar = styled.div`
   flex-wrap: wrap;
   gap: 16px;
   padding-bottom: 16px;
-  border-bottom: 2px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
 `;
 
 export const SectionHeader = styled.div`
@@ -533,56 +484,41 @@ export const SectionHeader = styled.div`
 `;
 
 export const SectionTitle = styled.h2`
-  font-size: clamp(20px, 2.6vw, 26px);
-  font-weight: 800;
-  letter-spacing: -0.4px;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin: 0 0 6px 0;
   color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
-
-  .reg-prefix {
-    font-size: 13px;
-    padding: 3px 8px;
-    background: var(--amber-tint);
-    border: 1px solid var(--amber-border);
-    color: var(--amber);
-    border-radius: 3px;
-    font-weight: 800;
-  }
 `;
 
 export const SectionSubtitle = styled.p`
   margin: 0;
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--muted);
   line-height: 1.5;
 `;
 
 export const DirectoryCountBadge = styled.div`
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-tint);
-  border: 1px solid var(--accent-border);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--well);
+  border: 1px solid var(--border-strong);
   padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
 `;
 
 export const FilterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-  padding: 12px;
-  background: var(--well);
-  border: 1px solid var(--border-strong);
-  border-radius: 5px;
+  gap: 8px;
+  margin-top: 16px;
 
   @media (max-width: 640px) {
-    gap: 8px;
-    padding: 10px;
+    gap: 6px;
   }
 `;
 
@@ -592,48 +528,47 @@ export const FilterChip = styled.button<{ isActive: boolean }>`
   padding: 8px 16px;
   border: 1px solid
     ${({ isActive }) =>
-      isActive ? 'var(--accent-border)' : 'var(--border-strong)'};
+      isActive ? 'var(--btn-primary-bg)' : 'var(--border-strong)'};
   background: ${({ isActive }) =>
-    isActive ? 'var(--accent-tint)' : 'var(--panel)'};
-  color: ${({ isActive }) => (isActive ? 'var(--accent)' : 'var(--text)')};
-  border-radius: 4px;
-  box-shadow: ${({ isActive }) => (isActive ? 'none' : 'var(--keycap-shadow)')};
+    isActive ? 'var(--btn-primary-bg)' : 'var(--panel)'};
+  color: ${({ isActive }) =>
+    isActive ? 'var(--btn-primary-text)' : 'var(--muted)'};
+  border-radius: 6px;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  transition: all 0.15s ease;
 
   &:hover {
-    border-color: var(--accent);
-  }
-
-  &:active {
-    transform: translateY(2px);
+    border-color: ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-bg)' : 'var(--border-hover)'};
+    color: ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-text)' : 'var(--text)'};
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
   @media (max-width: 640px) {
-    flex: 1 1 calc(33.333% - 8px);
+    flex: 1 1 calc(33.333% - 6px);
     padding: 8px 10px;
-    font-size: 11.5px;
+    font-size: 12px;
     text-align: center;
   }
 `;
 
 export const ProjectsSection = styled.div`
-  margin-top: 24px;
+  margin-top: 22px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+  gap: 18px;
 
   @media (max-width: 920px) {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
 `;
 
@@ -643,20 +578,21 @@ export const ProjectCard = styled.article<{
   isFlagship?: boolean;
 }>`
   grid-column: ${({ isFlagship }) => (isFlagship ? '1 / -1' : 'span 1')};
-  border: 2px solid
-    ${({ isFocused }) => (isFocused ? 'var(--accent)' : 'var(--border-strong)')};
-  border-radius: 6px;
+  border: 1px solid
+    ${({ isFocused }) =>
+      isFocused ? 'var(--border-hover)' : 'var(--border-strong)'};
+  border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  transition: border-color 0.18s ease, transform 0.18s ease;
 
   &:hover {
     transform: translateY(-2px);
-    border-color: var(--accent);
+    border-color: var(--border-hover);
   }
 
   @media (max-width: 920px) {
@@ -669,24 +605,19 @@ export const ProjectCardChrome = styled.div<{ isFocused?: boolean }>`
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 7px 14px;
-  background: ${({ isFocused }) =>
-    isFocused ? 'var(--accent-tint)' : 'var(--well)'};
+  padding: 8px 16px;
+  background: var(--well);
   border-bottom: 1px solid var(--border-strong);
-  font-size: 11px;
-  font-weight: 700;
-  color: ${({ isFocused }) => (isFocused ? 'var(--accent)' : 'var(--muted)')};
-
-  .slot-id {
-    color: var(--amber);
-    font-weight: 800;
-  }
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
 
   .slot-status {
-    font-size: 10.5px;
-    padding: 1px 6px;
-    border-radius: 3px;
-    border: 1px solid var(--border-subtle);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
     background: var(--panel);
     color: var(--text);
   }
@@ -698,7 +629,7 @@ export const ProjectCardBody = styled.div<{ isFlagship?: boolean }>`
   grid-template-columns: ${({ isFlagship }) =>
     isFlagship ? '1.15fr 0.85fr' : '1fr'};
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   flex: 1;
 
   @media (max-width: 820px) {
@@ -711,7 +642,7 @@ export const ProjectCardBody = styled.div<{ isFlagship?: boolean }>`
 export const ProjectHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 `;
 
 export const ProjectTopBar = styled.div`
@@ -727,32 +658,31 @@ export const ProjectIdentity = styled.div`
   gap: 12px;
 `;
 
-export const ProjectAvatar = styled.div<{ accentColor?: string }>`
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
+export const ProjectAvatar = styled.div<{ iconColor?: string }>`
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  color: var(--accent);
+  color: ${({ iconColor }) => iconColor || 'var(--text)'};
   background: var(--well);
   border: 1px solid var(--border-strong);
-  box-shadow: var(--keycap-shadow);
   flex-shrink: 0;
 `;
 
 export const ProjectMetaInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 `;
 
 export const ProjectName = styled.h3`
   margin: 0;
   color: var(--text);
-  font-size: clamp(17px, 2vw, 20px);
-  font-weight: 800;
+  font-size: clamp(17px, 2vw, 19px);
+  font-weight: 700;
   letter-spacing: -0.3px;
 `;
 
@@ -761,13 +691,13 @@ export const ProjectMetaRow = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   color: var(--muted);
 
   .repo-tag {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
 `;
 
@@ -777,27 +707,22 @@ export const ProjectQuickGithub = styled.a`
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid var(--border-strong);
   background: var(--well);
-  box-shadow: var(--keycap-shadow);
   color: var(--text);
-  font-size: 17px;
+  font-size: 18px;
   text-decoration: none;
   flex-shrink: 0;
-  transition: transform 0.1s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 
   &:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  &:active {
-    transform: translateY(2px);
+    border-color: var(--border-hover);
+    background: var(--well-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 `;
@@ -808,29 +733,27 @@ export const ProjectStackWrapper = styled.div`
   gap: 6px;
 `;
 
-export const TechBadge = styled.span`
+export const TechBadge = styled.span<{ iconColor?: string }>`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 9px;
-  border-radius: 3px;
-  font-size: 11.5px;
-  font-weight: 700;
-  border: 1px solid var(--border-subtle);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border-strong);
   background: var(--well);
   color: var(--text);
-  letter-spacing: 0.2px;
 
   .tech-icon {
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
-    color: var(--accent);
+    font-size: 14px;
+    color: ${({ iconColor }) => iconColor || 'var(--text)'};
   }
 
   .tech-name {
-    font-size: 11.5px;
-    font-family: inherit;
+    font-size: 12px;
   }
 `;
 
@@ -848,14 +771,14 @@ export const ProjectHighlights = styled.ul`
   list-style: none;
   background: var(--well);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 `;
 
 export const ProjectHighlight = styled.li`
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--text);
   line-height: 1.5;
   display: flex;
@@ -863,9 +786,9 @@ export const ProjectHighlight = styled.li`
   gap: 8px;
 
   &::before {
-    content: '>';
-    color: var(--amber);
-    font-weight: 800;
+    content: '•';
+    color: var(--muted);
+    font-weight: 700;
     flex-shrink: 0;
   }
 `;
@@ -900,27 +823,21 @@ export const ProjectOpenLink = styled.a`
   gap: 8px;
   min-height: 44px;
   padding: 8px 16px;
-  border-radius: 4px;
-  background: var(--accent-tint);
-  border: 1px solid var(--accent-border);
-  box-shadow: var(--keycap-shadow);
-  color: var(--accent);
+  border-radius: 6px;
+  background: var(--btn-primary-bg);
+  border: 1px solid var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 800;
-  transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s ease;
 
   &:hover {
-    background: var(--accent-strong);
-    color: #ffffff;
-  }
-
-  &:active {
-    transform: translateY(2px);
+    background: var(--btn-primary-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -936,27 +853,22 @@ export const ProjectDemoLink = styled.a`
   gap: 6px;
   min-height: 44px;
   padding: 8px 14px;
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--panel);
   border: 1px solid var(--border-strong);
-  box-shadow: var(--keycap-shadow);
   color: var(--text);
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s ease, background 0.15s ease;
 
   &:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-  }
-
-  &:active {
-    transform: translateY(2px);
+    border-color: var(--border-hover);
+    background: var(--well-hover);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -969,8 +881,8 @@ export const EmptyStateBox = styled.div`
   grid-column: 1 / -1;
   padding: 36px 24px;
   background: var(--panel);
-  border: 2px dashed var(--border-strong);
-  border-radius: 6px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -986,19 +898,19 @@ export const EmptyStateBox = styled.div`
   button {
     min-height: 44px;
     padding: 8px 16px;
-    background: var(--accent-tint);
-    border: 1px solid var(--accent-border);
-    color: var(--accent);
+    background: var(--btn-primary-bg);
+    border: 1px solid var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
   }
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 3: Rack-Mount Technical Arsenal Matrix                     */
+/*  Section 3: Technical Skills & Tooling Table                        */
 /* ------------------------------------------------------------------ */
 
 export const ArsenalSection = styled.section`
@@ -1007,8 +919,8 @@ export const ArsenalSection = styled.section`
 
 export const ArsenalRack = styled.div`
   margin-top: 20px;
-  border: 2px solid var(--border-strong);
-  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
   overflow: hidden;
@@ -1016,7 +928,7 @@ export const ArsenalRack = styled.div`
 
 export const ArsenalRow = styled.div`
   display: grid;
-  grid-template-columns: 290px 1fr;
+  grid-template-columns: 280px 1fr;
   border-bottom: 1px solid var(--border-strong);
 
   &:last-child {
@@ -1037,16 +949,9 @@ export const ArsenalRowMeta = styled.div`
   justify-content: center;
   gap: 4px;
 
-  .rack-addr {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--amber);
-    letter-spacing: 0.5px;
-  }
-
   .rack-title {
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--text);
     display: flex;
     align-items: center;
@@ -1054,14 +959,14 @@ export const ArsenalRowMeta = styled.div`
   }
 
   .rack-desc {
-    font-size: 11.5px;
+    font-size: 12.5px;
     color: var(--muted);
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   @media (max-width: 820px) {
     border-right: none;
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-strong);
     padding: 14px 16px;
   }
 `;
@@ -1071,7 +976,7 @@ export const ArsenalBadgeList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   @media (max-width: 640px) {
     padding: 14px 16px;
@@ -1079,34 +984,33 @@ export const ArsenalBadgeList = styled.div`
   }
 `;
 
-export const ArsenalBadge = styled.div`
+export const ArsenalBadge = styled.div<{ iconColor?: string }>`
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
   background: var(--well);
   border: 1px solid var(--border-strong);
-  box-shadow: var(--keycap-shadow);
   color: var(--text);
 
   .badge-icon {
     display: inline-flex;
     align-items: center;
-    font-size: 14px;
-    color: var(--accent);
+    font-size: 15px;
+    color: ${({ iconColor }) => iconColor || 'var(--text)'};
   }
 `;
 
 /* ------------------------------------------------------------------ */
-/*  Section 4: Direct Comms Dispatch & Keyboard Status Bar             */
+/*  Section 4: Contact & Keyboard Shortcuts Footer                     */
 /* ------------------------------------------------------------------ */
 
 export const CommsTerminal = styled.footer`
-  border: 2px solid var(--border-strong);
-  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--card-shadow);
   overflow: hidden;
@@ -1133,13 +1037,13 @@ export const CommsInfo = styled.div`
   h3 {
     margin: 0 0 6px 0;
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--text);
   }
 
   p {
     margin: 0;
-    font-size: 13.5px;
+    font-size: 14px;
     color: var(--muted);
     line-height: 1.55;
   }
@@ -1152,7 +1056,7 @@ export const HotkeyBar = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--muted);
 
   span {
@@ -1162,14 +1066,14 @@ export const HotkeyBar = styled.div`
   }
 
   kbd {
-    padding: 1px 6px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
     border: 1px solid var(--border-strong);
     background: var(--panel);
-    color: var(--amber);
-    font-family: inherit;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   @media (max-width: 640px) {
@@ -1185,7 +1089,7 @@ export const HotkeyBar = styled.div`
 export const PaletteOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.68);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1194,35 +1098,34 @@ export const PaletteOverlay = styled.div`
 `;
 
 export const PalettePanel = styled.div`
-  width: min(620px, calc(100vw - 32px));
-  border: 2px solid var(--border-strong);
+  width: min(560px, calc(100vw - 32px));
+  border: 1px solid var(--border-strong);
   background: var(--panel);
-  box-shadow: var(--card-shadow);
-  border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border-radius: 8px;
   padding: 12px;
 `;
 
 export const PaletteTitle = styled.div`
-  color: var(--amber);
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding: 4px 8px 8px;
+  border-bottom: 1px solid var(--border-strong);
 `;
 
 export const PaletteItem = styled.div<{ isActive: boolean }>`
   width: 100%;
   text-align: left;
   border: 1px solid
-    ${({ isActive }) => (isActive ? 'var(--accent-border)' : 'transparent')};
-  border-radius: 4px;
-  background: ${({ isActive }) =>
-    isActive ? 'var(--accent-tint)' : 'transparent'};
-  color: ${({ isActive }) => (isActive ? 'var(--accent)' : 'var(--text)')};
+    ${({ isActive }) => (isActive ? 'var(--border-hover)' : 'transparent')};
+  border-radius: 6px;
+  background: ${({ isActive }) => (isActive ? 'var(--well)' : 'transparent')};
+  color: var(--text);
   padding: 10px 12px;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 13.5px;
+  font-weight: 500;
   cursor: pointer;
 `;
 
