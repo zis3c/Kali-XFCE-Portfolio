@@ -1,0 +1,51 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import ErrorHandler from '../utils/errorHandler';
+
+interface MongooseError extends Error {
+  statusCode?: number;
+  path?: string;
+  errors?: Record<string, { message: string }>;
+}
+
+export function onError(
+  err: Error,
+  req: NextApiRequest,
+  res: NextApiResponse
+): void {
+  const mongooseErr = err as MongooseError;
+  mongooseErr.statusCode = mongooseErr.statusCode || 500;
+
+  let error: Error | ErrorHandler = { ...mongooseErr } as Error;
+
+  error.message = err.message;
+
+  // Wrong Mongoose Object ID Error
+  if (mongooseErr.name === 'CastError') {
+    const message = `Resource not found. Invalid: ${mongooseErr.path}`;
+    error = new ErrorHandler(message, 400);
+  }
+
+  // Handling Mongoose Validation Error
+  if (mongooseErr.name === 'ValidationError' && mongooseErr.errors) {
+    const message = Object.values(mongooseErr.errors).map((e) => e.message)[0];
+    error = new ErrorHandler(message, 400);
+  }
+
+  const accepts = req.headers.accept ?? '';
+  const wantsHtml = accepts.includes('text/html');
+
+  if (wantsHtml) {
+    res.redirect('/500');
+    return;
+  }
+
+  const statusCode =
+    error instanceof ErrorHandler ? error.statusCode : mongooseErr.statusCode;
+
+  res.status(statusCode).json({
+    success: false,
+    error,
+    message: error.message,
+    stack: error.stack,
+  });
+}

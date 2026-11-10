@@ -1,0 +1,9 @@
+{
+  "name": "zis3c | portfolio",
+  "short_name": "zis3c | portfolio",
+  "start_url": "./",
+  "theme_color": "rgb(165,203,146)",
+  "scope": "./",
+  "display": "standalone",
+  "description": "This is a portfolio website for Radzi Zamri, a cybersecurity student and Purple Team enthusiast."
+}

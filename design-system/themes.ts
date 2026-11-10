@@ -1,0 +1,53 @@
+import { DefaultTheme } from 'styled-components';
+import {
+  allGradients,
+  borderRadii,
+  boxShadows,
+  darkGrayColors,
+  darkPrimaryColors,
+  darkUtilityColors,
+  fontSizes,
+  fontWeights,
+  kaliTokens,
+  lightGrayColors,
+  lightPrimaryColors,
+  lightUtilityColors,
+  portfolioStyles,
+  responsiveBreakPoints,
+  spacing,
+  zIndexes,
+} from './system-design-variables';
+
+export const darkTheme: DefaultTheme = {
+  mode: 'dark',
+  primary: darkPrimaryColors,
+  gray: darkGrayColors,
+  colors: darkUtilityColors,
+  gradients: allGradients,
+  boxShadow: boxShadows,
+  borderRadius: borderRadii.main,
+  zIndex: zIndexes,
+  fontSize: fontSizes,
+  fontWeight: fontWeights,
+  space: spacing,
+  media: responsiveBreakPoints,
+  portfolio: portfolioStyles,
+  kali: kaliTokens,
+};
+
+export const lightTheme: DefaultTheme = {
+  mode: 'light',
+  primary: lightPrimaryColors,
+  gray: lightGrayColors,
+  colors: lightUtilityColors,
+  gradients: allGradients,
+  boxShadow: boxShadows,
+  borderRadius: borderRadii.main,
+  zIndex: zIndexes,
+  fontSize: fontSizes,
+  fontWeight: fontWeights,
+  space: spacing,
+  media: responsiveBreakPoints,
+  portfolio: portfolioStyles,
+  kali: kaliTokens,
+};
