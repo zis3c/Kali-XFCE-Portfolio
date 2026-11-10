@@ -1,5 +1,9 @@
 const quote = (filenames) =>
-  filenames.map((filename) => `"${filename.replace(/"/g, '\\"')}"`).join(' ');
+  filenames
+    .map(
+      (filename) => `"${filename.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+    )
+    .join(' ');
 
 module.exports = {
   // Type check TypeScript files

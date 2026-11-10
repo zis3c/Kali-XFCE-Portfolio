@@ -53,8 +53,7 @@
         "utils/logger.ts",
         "utils/filesystem.ts",
         "components/ErrorBoundary/ErrorBoundary.tsx",
-        "store/reducers/index.ts",
-        "**/*.stories.tsx"
+        "store/reducers/index.ts"
       ],
       "rules": { "no-console": "off" }
     },

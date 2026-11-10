@@ -127,7 +127,6 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
 
 5. Open:
    - App: `http://localhost:3000`
-   - Storybook: `http://localhost:6006`
 
 ## Scripts
 
@@ -140,7 +139,6 @@ Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. I
 | `npm run tsc`           | TypeScript type check          |
 | `npm run test`          | Run Jest unit tests            |
 | `npm run test:coverage` | Run tests with coverage report |
-| `npm run storybook`     | Start Storybook                |
 | `npm run cm`            | Commit with Commitizen         |
 
 ## Testing

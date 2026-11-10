@@ -3,11 +3,6 @@ import { logger } from '../../utils/logger';
 import { validateEnv } from '../../utils/env';
 
 /**
- * @EXPORTS
- */
-export { connectWithDB, disconnectFromDB };
-
-/**
  * Instantiates connection with database.
  * Validates required environment variables before connecting.
  * @function connectWithDB
@@ -70,3 +65,4 @@ if (typeof process !== 'undefined') {
 }
 
 export default connectWithDB;
+export { connectWithDB, disconnectFromDB };

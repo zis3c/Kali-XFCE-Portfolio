@@ -5,11 +5,6 @@ import { withRetry } from '../../utils/retry';
 import { logger } from '../../utils/logger';
 
 /**
- * @EXPORTS
- */
-export { getLatestNews };
-
-/**
  * Fetches latest news from NEWS_API with exponential backoff retry.
  * Retries up to 2 additional times (3 total attempts) on network failures.
  *
@@ -41,3 +36,5 @@ const getLatestNews = (): Promise<AxiosResponse<INewsApiResponse>> => {
     }
   );
 };
+
+export { getLatestNews };

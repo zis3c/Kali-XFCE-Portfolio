@@ -45,10 +45,9 @@ AI & Automation:  Codex, DeepSeek, Antigravity, Agentic Workflows, Telegram Bots
 Languages:        Bahasa Melayu (Native), English (Fluent)`;
 
 const contactTxt = `Radzi bin Zamri (zis3c)
-Location:   Seri Kembangan, Selangor, Malaysia
+Role:       Cybersecurity & CS Undergrad (CGPA 3.83) | Purple Team
+Location:   Selangor, Malaysia
 Email:      r.zradzizamri@gmail.com
-Student ID: I24107504@student.usas.edu.my
-Phone:      +601111537062
 Portfolio:  https://me.zis3c.dev
 GitHub:     https://github.com/zis3c
 LinkedIn:   https://linkedin.com/in/radzizamri
@@ -95,7 +94,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi`;
 
 const resumeContent = `RADZI BIN ZAMRI
-Seri Kembangan, Selangor | +601111537062 | r.zradzizamri@gmail.com
+Cybersecurity & Computer Science Undergrad (CGPA: 3.83)
+Selangor, Malaysia | r.zradzizamri@gmail.com
 me.zis3c.dev | github.com/zis3c | linkedin.com/in/radzizamri
 
 OBJECTIVE
@@ -110,17 +110,17 @@ EDUCATION
 
 FEATURED PROJECTS
 - CloudSentinel (FYP 2026): Python SSH Honeypot, HASSH, MITRE ATT&CK, ClickHouse & Next.js
+- Google Forms Spammer: High-performance async stress tester with aiohttp & web configurator
 - RedLilyGO (2026): ESP32-S3 Security Firmware, USB HID, PCAP capture, .NET 8 Companion App
 - JanjiCare (2026): Clinic Web Appointment & Telehealth (Laravel 13, React 18, WebRTC LiveKit)
 - Dot Zero CTF Pipeline & RE Training: Team Secretary & RE Trainer (Ghidra, IDA, x64dbg, GDB, Frida)
 - STEM-USAS Ecosystem: stem.zis3c.dev & STEM-Telebot membership automation
 - USAS Assignment Notifier & Timetable: Telegram alert bot & jadualkelas.zis3c.dev
+- Polyglot Files: Dual-signature file generator & parser confusion research
 
 CERTIFICATIONS
 - Google Cybersecurity Professional Certificate - Coursera (2026)
-- Reverse Engineering Bootcamp: Ghidra, IDA, Linux, and x86_64 - Udemy (2026)
-
-(Full PDF document available at /resume.pdf)`;
+- Reverse Engineering Bootcamp: Ghidra, IDA, Linux, and x86_64 - Udemy (2026)`;
 
 // Real GitHub project READMEs
 const cloudSentinelReadme = `# CloudSentinel: SSH Honeypot & Threat Detection System (FYP)
@@ -197,24 +197,6 @@ Official student association portal for STEM Universiti Sultan Azlan Shah (stem.
 - React & TypeScript
 - Tailwind CSS
 - Vercel Deployment`;
-
-const finvaultReadme = `# FinVault
-AI-powered crypto wallet simulator built with Next.js, PostgreSQL, and Gemini-assisted fraud insights.
-
-## Stack
-- Next.js + TypeScript
-- PostgreSQL + Prisma
-- Google Gemini API
-- Tailwind CSS + shadcn/ui`;
-
-const certclaimReadme = `# Certclaim
-A secure certificate claim portal with admin dashboard, QR access, attendance tracking, and Google Sheets integration.
-
-## Stack
-- Next.js + FastAPI
-- PostgreSQL
-- QR Code Generation
-- Google Sheets API`;
 
 const stemTelebotReadme = `# STEM-Telebot
 A Telegram Bot to manage and verify student memberships using Google Sheets.
@@ -371,7 +353,7 @@ export const fsTree: FsNode = {
             },
             { name: 'notes.md', type: 'file', content: notesMd, size: 340 },
             {
-              name: 'resume.pdf',
+              name: 'resume.txt',
               type: 'file',
               content: resumeContent,
               size: 2048,
@@ -485,36 +467,6 @@ export const fsTree: FsNode = {
                       type: 'file',
                       content: stemWebReadme,
                       size: 280,
-                    },
-                  ],
-                },
-                {
-                  name: 'FinVault',
-                  type: 'dir',
-                  children: [
-                    {
-                      name: 'README.md',
-                      type: 'file',
-                      content: finvaultReadme,
-                      size: 280,
-                    },
-                    {
-                      name: 'package.json',
-                      type: 'file',
-                      content: '{ "name": "finvault", "version": "1.0.0" }',
-                      size: 42,
-                    },
-                  ],
-                },
-                {
-                  name: 'Certclaim',
-                  type: 'dir',
-                  children: [
-                    {
-                      name: 'README.md',
-                      type: 'file',
-                      content: certclaimReadme,
-                      size: 320,
                     },
                   ],
                 },
@@ -908,6 +860,8 @@ export function writeFile(absPath: string, content: string): boolean {
   if (!node || node.type !== 'file') return false;
   node.content = content;
   node.size = content.length;
+  // The VFS stores public portfolio demo content, not secrets.
+  // lgtm[js/clear-text-storage-of-sensitive-data]
   persistVfsToStorage();
   return true;
 }
