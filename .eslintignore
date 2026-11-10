@@ -4,3 +4,4 @@ public
 e2e
 .storybook
 node_modules
+next-env.d.ts

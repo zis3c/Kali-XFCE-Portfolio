@@ -50,17 +50,17 @@ Run a single suite with `npx jest <path>`.
 
 `npm run audit` fails on unapproved high or critical production
 vulnerabilities. `audit-allowlist.json` holds temporary exceptions with a
-reason and a review date. The allowlist currently covers two deferred major
-upgrades:
+reason and a review date; it is currently empty.
 
-- `next` 14 to 16 (also covers its bundled `postcss`)
-- `@sendgrid/mail` 7 to 8 (also covers its nested `axios` and `@sendgrid/*`)
+The production tree is on Next.js 15.5.29 and `@sendgrid/mail` 8.1.6. A
+`postcss` override pins Next's nested copy to the patched 8.5.x line, so no
+high or critical advisories remain. Only low-severity transitive advisories
+from SendGrid's `deepmerge` remain and are accepted.
 
-When the review date passes, the audit script fails until the upgrades are
-done or the allowlist is renewed with a new date.
+When the review date passes, the audit script fails until the allowlist is
+reviewed and renewed.
 
-Dependabot opens weekly npm and GitHub Actions updates. Major Next.js and
-SendGrid versions are ignored until that migration is planned.
+Dependabot opens weekly npm and GitHub Actions updates.
 
 ## CI jobs
 
@@ -71,3 +71,6 @@ SendGrid versions are ignored until that migration is planned.
 3. **test** - Jest with coverage thresholds, uploads the HTML report
 4. **security** - production dependency audit
 5. **build** - production Next.js build on pushes and manual runs
+
+`.github/workflows/codeql.yml` runs CodeQL security-and-quality analysis on
+pushes, pull requests, and a weekly schedule.
