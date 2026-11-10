@@ -23,13 +23,14 @@ declarations, generated files, and framework bootstraps (`_app`, `_document`,
 
 Current global thresholds in `jest.config.js`:
 
-- statements: 80%
-- lines: 80%
-- functions: 80%
-- branches: 60%
+- statements: 90%
+- lines: 90%
+- functions: 88%
+- branches: 75%
 
-The thresholds are deliberately just below the measured baseline so a real
-regression fails CI, while small refactors do not.
+The thresholds are deliberately just below the measured baseline (about 92%
+statements, 94% lines, 91% functions, and 79% branches) so a real regression
+fails CI, while small refactors do not.
 
 ## Test inventory
 
@@ -38,11 +39,13 @@ regression fails CI, while small refactors do not.
 | API routes | 3      | contact form validation, CORS, rate limiting, health endpoint                 |
 | Backend    | 3      | Mongo connection helpers, SendGrid controller, Contact model                  |
 | Middleware | 5      | error mapping, correlation IDs, security headers, rate limiting               |
-| Redux      | 10     | reducers and action creators (news, contact, UI, windows, todos)              |
+| Redux      | 12     | reducers and action creators (news, contact, UI, windows, todos)              |
 | Utilities  | 13     | filesystem, retry, logging, env, API features, notifications                  |
-| Hooks      | 7      | hover, outside click, mouse coordinates, reduced motion, observer             |
-| Components | 65+    | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
+| Hooks      | 9      | hover, outside click, mouse coordinates, reduced motion, observer             |
+| Components | 75+    | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
 | Pages      | 4      | home flow, error page, health, contact                                        |
+
+The current suite is 122 files and 563 tests.
 
 Run a single suite with `npx jest <path>`.
 
