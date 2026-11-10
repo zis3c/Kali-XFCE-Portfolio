@@ -189,8 +189,13 @@ Kali-XFCE-Portfolio/
 
 - Virtual filesystem writes are in-memory only and persist via `localStorage`.
 - Mousepad edits reset after refresh/restart.
-- Build on Vercel enables lint/type checking during production build.
+- CI runs lint, typecheck, tests, security audit, and a production build.
+
+## Contributing
+
+Read `CONTRIBUTING.md` before opening a pull request. Security issues should follow
+`SECURITY.md` instead of a public issue.
 
 ## License
 
-MIT
+MIT. See `LICENSE`.
