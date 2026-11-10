@@ -9,6 +9,7 @@ import type {
 import PortfolioNav from './PortfolioNav';
 import PortfolioBootLoader from './PortfolioBootLoader';
 import CommandPalette from './CommandPalette';
+import AsciiWaveBg from './AsciiWaveBg';
 import HeroSection from './sections/HeroSection';
 import CraftSection from './sections/CraftSection';
 import ProjectsSection from './sections/ProjectsSection';
@@ -215,6 +216,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
+      <AsciiWaveBg themeMode={simpleTheme} />
       <PortfolioBootLoader
         isOpen={isBootLoading}
         onDismiss={() => setIsBootLoading(false)}

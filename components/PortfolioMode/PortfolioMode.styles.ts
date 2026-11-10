@@ -337,6 +337,8 @@ export const BackButton = styled.button`
 /* ------------------------------------------------------------------ */
 
 export const Main = styled.main`
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -507,25 +509,33 @@ export const QuickStatsGrid = styled.div`
 `;
 
 export const QuickStatCard = styled.div`
-  padding: 20px;
+  padding: 16px 20px;
   background: var(--panel);
   border: 1px solid var(--border-strong);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
 
   .stat-label {
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
   }
 
   .stat-value {
-    font-size: 15px;
+    font-size: clamp(14px, 1.15vw, 15px);
     font-weight: 700;
     color: var(--text);
-    line-height: 1.4;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -1087,6 +1097,193 @@ export const RecognitionCard = styled.div`
     font-size: 13.5px;
     line-height: 1.6;
     color: var(--muted);
+  }
+`;
+
+export const CtfShowcaseWrap = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+`;
+
+export const CtfTeamBanner = styled.div`
+  padding: 18px 22px;
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .team-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .team-roster {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .team-stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+  }
+`;
+
+export const CtfTabsRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .tabs-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ctftime-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    transition: all 0.15s ease;
+
+    &:hover {
+      border-color: var(--border-hover);
+      background: var(--well-hover);
+    }
+  }
+`;
+
+export const CtfTabButton = styled.button<{ isActive: boolean }>`
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid
+    ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-bg)' : 'var(--border-strong)'};
+  background: ${({ isActive }) =>
+    isActive ? 'var(--btn-primary-bg)' : 'var(--panel)'};
+  color: ${({ isActive }) =>
+    isActive ? 'var(--btn-primary-text)' : 'var(--muted)'};
+
+  &:hover {
+    color: ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-text)' : 'var(--text)'};
+    border-color: ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-bg)' : 'var(--border-hover)'};
+  }
+`;
+
+export const CtfGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 4px;
+  }
+`;
+
+export const CtfCard = styled.div<{ isTopTen?: boolean }>`
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--panel);
+  border: 1px solid
+    ${({ isTopTen }) =>
+      isTopTen ? 'var(--border-hover)' : 'var(--border-strong)'};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--card-shadow);
+
+  .ctf-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .ctf-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .ctf-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ctf-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ctf-rank {
+    flex-shrink: 0;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: ${({ isTopTen }) =>
+      isTopTen ? 'var(--well-hover)' : 'var(--well)'};
+    color: var(--text);
+    border: 1px solid var(--border-strong);
   }
 `;
 

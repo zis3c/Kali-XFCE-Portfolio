@@ -502,6 +502,221 @@ const PROJECT_FILTERS = [
 type ProjectFilter = typeof PROJECT_FILTERS[number];
 type SimpleTheme = 'terminal' | 'paper';
 
+export interface CtfCompetition {
+  id: string;
+  name: string;
+  year: number;
+  position: number;
+  level: 'National' | 'International';
+  type: 'Team (Dot Zero)' | 'Individual';
+}
+
+export const ctfCompetitions: CtfCompetition[] = [
+  // National (Malaysia)
+  {
+    id: 'c-1',
+    name: 'TAMiNG iCTFF8 UiTM',
+    year: 2026,
+    position: 4,
+    level: 'National',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-2',
+    name: 'NERACA 3.0',
+    year: 2025,
+    position: 5,
+    level: 'National',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-3',
+    name: '3108CTF: WARISAN TAKHTA 2026',
+    year: 2026,
+    position: 12,
+    level: 'National',
+    type: 'Individual',
+  },
+  {
+    id: 'c-4',
+    name: 'CURTIN CTF V3.0',
+    year: 2025,
+    position: 18,
+    level: 'National',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-5',
+    name: 'RE:UN10N CTF',
+    year: 2025,
+    position: 21,
+    level: 'National',
+    type: 'Team (Dot Zero)',
+  },
+
+  // International (CTFtime)
+  {
+    id: 'c-6',
+    name: 'BearcatCTF 2026 - Setting Sail',
+    year: 2026,
+    position: 39,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-7',
+    name: 'WATCHLIST',
+    year: 2026,
+    position: 57,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-8',
+    name: '0xL4ugh CTF v5',
+    year: 2026,
+    position: 80,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-9',
+    name: 'ApoorvCTF 2026',
+    year: 2026,
+    position: 88,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-10',
+    name: 'Kaspersky CTF 2026',
+    year: 2026,
+    position: 93,
+    level: 'International',
+    type: 'Individual',
+  },
+  {
+    id: 'c-11',
+    name: 'KnightCTF 2026',
+    year: 2026,
+    position: 100,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-12',
+    name: 'Midnight Flag CTF - EXECUTION',
+    year: 2026,
+    position: 107,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-13',
+    name: 'GPN CTF 2026',
+    year: 2026,
+    position: 124,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-14',
+    name: '0xFUN CTF 2026',
+    year: 2026,
+    position: 133,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-15',
+    name: 'UniVsThreats 26 Quals CTF',
+    year: 2026,
+    position: 141,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-16',
+    name: 'UTCTF 2026',
+    year: 2026,
+    position: 147,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-17',
+    name: 'L3akCTF 2026',
+    year: 2026,
+    position: 154,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-18',
+    name: 'SunshineCTF 2026',
+    year: 2026,
+    position: 155,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-19',
+    name: 'DiceCTF 2026 Quals',
+    year: 2026,
+    position: 164,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-20',
+    name: 'UMDCTF 2026',
+    year: 2026,
+    position: 190,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-21',
+    name: 'BITSCTF 2026',
+    year: 2026,
+    position: 203,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-22',
+    name: 'K17 CTF 2026',
+    year: 2026,
+    position: 217,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-23',
+    name: 'PascalCTF 2026',
+    year: 2026,
+    position: 222,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-24',
+    name: 'TAMUctf 2026',
+    year: 2026,
+    position: 249,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+  {
+    id: 'c-25',
+    name: 'H7CTF 2026 Quals',
+    year: 2026,
+    position: 554,
+    level: 'International',
+    type: 'Team (Dot Zero)',
+  },
+];
+
 export { featuredProjects, PROJECT_FILTERS };
 export type {
   TechItem,

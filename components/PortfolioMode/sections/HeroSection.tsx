@@ -24,7 +24,7 @@ const HeroSection = (): JSX.Element => (
       </Styled.HeroTitle>
 
       <Styled.HeroRoleSub>
-        Computer Science Student · Security Researcher · Software Developer
+        Computer Science Student · Cybersecurity Researcher
       </Styled.HeroRoleSub>
 
       <Styled.HeroText>
@@ -88,19 +88,15 @@ const HeroSection = (): JSX.Element => (
     <Styled.QuickStatsGrid>
       <Styled.QuickStatCard>
         <span className="stat-label">Primary Focus</span>
-        <span className="stat-value">Cybersecurity &amp; Web Development</span>
+        <span className="stat-value">Cybersecurity</span>
       </Styled.QuickStatCard>
       <Styled.QuickStatCard>
         <span className="stat-label">University Team</span>
-        <span className="stat-value">
-          Dot Zero CTF · Secretary &amp; Trainer
-        </span>
+        <span className="stat-value">Dot Zero CTF</span>
       </Styled.QuickStatCard>
       <Styled.QuickStatCard>
-        <span className="stat-label">Open Source</span>
-        <span className="stat-value">
-          23 Projects Across Web, Bots &amp; Security
-        </span>
+        <span className="stat-label">CTF Record</span>
+        <span className="stat-value">25 Competitions Played</span>
       </Styled.QuickStatCard>
       <Styled.QuickStatCard>
         <span className="stat-label">Based In</span>
