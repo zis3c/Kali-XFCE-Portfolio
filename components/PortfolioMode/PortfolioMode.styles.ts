@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 type SimpleTheme = 'terminal' | 'paper';
 
@@ -1317,7 +1317,7 @@ export const ArsenalRack = styled.div`
 
 export const ArsenalRow = styled.div`
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 310px 1fr;
   border-bottom: 1px solid var(--border-strong);
 
   &:last-child {
@@ -1345,18 +1345,23 @@ export const ArsenalRowMeta = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
   }
 
   .rack-desc {
     font-size: 13px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.45;
   }
 
   @media (max-width: 820px) {
     border-right: none;
     border-bottom: 1px solid var(--border-strong);
     padding: 14px 16px;
+
+    .rack-title {
+      white-space: normal;
+    }
   }
 `;
 
@@ -1734,6 +1739,127 @@ export const FooterSocialList = styled.div`
     &:hover {
       color: var(--text);
       transform: translateY(-2px);
+    }
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Monochrome Scrollbar & Floating Scroll-To-Top Button               */
+/* ------------------------------------------------------------------ */
+
+export const PortfolioGlobalScrollbar = createGlobalStyle<{
+  themeMode: SimpleTheme;
+}>`
+  html, body {
+    scrollbar-color: ${({ themeMode }) =>
+      themeMode === 'terminal' ? '#3f3f46 #09090b' : '#a1a1aa #f4f4f5'};
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ themeMode }) =>
+      themeMode === 'terminal' ? '#09090b' : '#f4f4f5'};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? 'rgba(255, 255, 255, 0.25)'
+        : 'rgba(0, 0, 0, 0.25)'};
+    border-radius: 4px;
+    border: 2px solid
+      ${({ themeMode }) => (themeMode === 'terminal' ? '#09090b' : '#f4f4f5')};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? 'rgba(255, 255, 255, 0.5)'
+        : 'rgba(0, 0, 0, 0.5)'};
+  }
+`;
+
+export const ScrollToTopFab = styled.button<{
+  themeMode: SimpleTheme;
+  $visible: boolean;
+}>`
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 50;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid
+    ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? 'rgba(255, 255, 255, 0.2)'
+        : 'rgba(0, 0, 0, 0.15)'};
+  background: ${({ themeMode }) =>
+    themeMode === 'terminal'
+      ? 'rgba(10, 10, 12, 0.75)'
+      : 'rgba(255, 255, 255, 0.85)'};
+  color: ${({ themeMode }) =>
+    themeMode === 'terminal' ? '#fafafa' : '#09090b'};
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: ${({ themeMode }) =>
+    themeMode === 'terminal'
+      ? '0 8px 24px rgba(0, 0, 0, 0.6)'
+      : '0 8px 24px rgba(0, 0, 0, 0.1)'};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: ${({ $visible }) =>
+    $visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.85)'};
+  pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: ${({ themeMode }) =>
+      themeMode === 'terminal' ? '#18181b' : '#ffffff'};
+    border-color: ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? 'rgba(255, 255, 255, 0.5)'
+        : 'rgba(0, 0, 0, 0.35)'};
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: ${({ themeMode }) =>
+      themeMode === 'terminal'
+        ? '0 12px 28px rgba(0, 0, 0, 0.8)'
+        : '0 12px 28px rgba(0, 0, 0, 0.16)'};
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
 `;

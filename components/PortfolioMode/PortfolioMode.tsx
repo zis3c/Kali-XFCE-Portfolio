@@ -17,6 +17,7 @@ import JourneySection from './sections/JourneySection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
 import PortfolioFooter from './PortfolioFooter';
+import ScrollToTopButton from './ScrollToTopButton';
 
 interface Props {
   onBackToChooser: () => void;
@@ -210,6 +211,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
+      <Styled.PortfolioGlobalScrollbar themeMode={simpleTheme} />
       <AsciiWaveBg themeMode={simpleTheme} />
 
       <PortfolioNav
@@ -253,6 +255,8 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         onCancel={() => setIsExitConfirmOpen(false)}
         onConfirm={onBackToChooser}
       />
+
+      <ScrollToTopButton themeMode={simpleTheme} />
     </Styled.Wrapper>
   );
 };

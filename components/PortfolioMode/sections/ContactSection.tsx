@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
 import * as Styled from '../PortfolioMode.styles';
 
@@ -12,7 +12,7 @@ const ContactSection = (): JSX.Element => (
       </Styled.SectionTitle>
       <Styled.SectionSubtitle>
         Interested in collaborating, discussing cybersecurity research, or
-        checking out my work? Let&apos;s connect.
+        checking out my work? Feel free to connect with me.
       </Styled.SectionSubtitle>
     </Styled.SectionHeader>
 
@@ -21,9 +21,8 @@ const ContactSection = (): JSX.Element => (
         <Styled.CommsInfo>
           <h3>Direct Channels</h3>
           <p>
-            Feel free to connect on GitHub or message me on LinkedIn. Open to
-            reverse engineering discussions, security tool development, and
-            open-source projects.
+            Feel free to connect on GitHub. Open to reverse engineering
+            discussions, security tool development, and open-source projects.
           </p>
         </Styled.CommsInfo>
         <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
@@ -33,13 +32,6 @@ const ContactSection = (): JSX.Element => (
             rel="noopener noreferrer"
           >
             <FaGithub /> GitHub (@zis3c)
-          </Styled.ProjectOpenLink>
-          <Styled.ProjectOpenLink
-            href="https://linkedin.com/in/radzizamri"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedin /> LinkedIn
           </Styled.ProjectOpenLink>
         </Styled.ProjectButtonGroup>
       </Styled.CommsBody>

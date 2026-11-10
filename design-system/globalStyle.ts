@@ -42,12 +42,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(54, 123, 240, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(54, 123, 240, 0.5);
+    background: rgba(255, 255, 255, 0.45);
   }
 
   /* Selection color */
