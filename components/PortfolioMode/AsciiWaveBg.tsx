@@ -26,7 +26,26 @@ const StyledCanvas = styled.canvas`
   display: block;
 `;
 
-const ASCII_RAMP = ['.', '·', ':', '~', '=', '+', '*', '#'];
+const ASCII_RAMP = [
+  '·',
+  '.',
+  ':',
+  ';',
+  '!',
+  '~',
+  '=',
+  '+',
+  '-',
+  '<',
+  '>',
+  '*',
+  'x',
+  '#',
+  '%',
+  '&',
+  '$',
+  '@',
+];
 
 /**
  * Animated Interactive ASCII Wave Background.
@@ -73,8 +92,8 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave);
 
-    const charWidth = 20;
-    const charHeight = 22;
+    const charWidth = 14;
+    const charHeight = 16;
     let cols = 0;
     let rows = 0;
 
@@ -107,7 +126,7 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
 
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      ctx.font = '12px "JetBrains Mono", Consolas, monospace';
+      ctx.font = '11px "JetBrains Mono", Consolas, monospace';
       ctx.fillStyle = themeMode === 'terminal' ? '#a1a1aa' : '#71717a';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';

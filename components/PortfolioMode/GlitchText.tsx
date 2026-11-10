@@ -5,6 +5,8 @@ interface GlitchTextProps {
   words: string[];
 }
 
+const GLITCH_CHARS = '0123456789ABCDEF!@#$%^&*()+-=[]{}|;:,.<>?~/\\*+=~';
+
 const GlitchText: React.FC<GlitchTextProps> = ({ words }) => {
   const [text, setText] = useState(words[0] || '');
   const [wordIndex, setWordIndex] = useState(0);
@@ -19,31 +21,35 @@ const GlitchText: React.FC<GlitchTextProps> = ({ words }) => {
 
     const currentWord = words[wordIndex % words.length] || '';
     const nextWord = words[(wordIndex + 1) % words.length] || '';
-    let intervalId: number | undefined;
+    const maxLength = Math.max(currentWord.length, nextWord.length);
+    let glitchInterval: number | undefined;
 
     const startTimer = window.setTimeout(() => {
-      let deleteStep = 0;
-      let typeStep = 0;
+      let revealProgress = 0;
 
-      intervalId = window.setInterval(() => {
-        if (deleteStep < currentWord.length) {
-          deleteStep += 1;
-          setText(currentWord.slice(0, currentWord.length - deleteStep));
-        } else if (typeStep < nextWord.length) {
-          typeStep += 1;
-          setText(nextWord.slice(0, typeStep));
-        } else {
-          window.clearInterval(intervalId);
+      glitchInterval = window.setInterval(() => {
+        const rendered = Array.from({ length: maxLength }, (_, index) => {
+          if (index < revealProgress) {
+            return nextWord[index] || '';
+          }
+          return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+        }).join('');
+
+        setText(rendered);
+        revealProgress += 0.6;
+
+        if (revealProgress >= nextWord.length) {
+          window.clearInterval(glitchInterval);
           setText(nextWord);
           setWordIndex((prev) => (prev + 1) % words.length);
         }
-      }, 24);
-    }, 3000);
+      }, 30);
+    }, 2800);
 
     return () => {
       window.clearTimeout(startTimer);
-      if (intervalId) {
-        window.clearInterval(intervalId);
+      if (glitchInterval) {
+        window.clearInterval(glitchInterval);
       }
     };
   }, [wordIndex, words]);
