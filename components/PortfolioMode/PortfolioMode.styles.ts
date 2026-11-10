@@ -68,6 +68,7 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
     sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 `;
 
 /* ------------------------------------------------------------------ */
@@ -236,42 +237,24 @@ export const NavActions = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
-
-  @media (max-width: 640px) {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
 `;
 
 export const PaletteTrigger = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 8px 14px;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
   border: 1px solid var(--border-strong);
   background: var(--well);
   color: var(--text);
   border-radius: 8px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 16px;
   transition: border-color 0.15s ease, background 0.15s ease;
-
-  .kbd-tag {
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 2px 6px;
-    border: 1px solid var(--border-strong);
-    background: var(--panel);
-    border-radius: 4px;
-  }
 
   &:hover {
     border-color: var(--border-hover);
@@ -282,30 +265,23 @@ export const PaletteTrigger = styled.button`
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-
-  @media (max-width: 640px) {
-    padding: 8px 6px;
-    .kbd-tag {
-      display: none;
-    }
-  }
 `;
 
 export const ThemeToggle = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 8px 14px;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
   border: 1px solid var(--border-strong);
   background: var(--panel);
   color: var(--text);
   border-radius: 8px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 16px;
   transition: border-color 0.15s ease, background 0.15s ease;
 
   &:hover {
@@ -317,27 +293,23 @@ export const ThemeToggle = styled.button`
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-
-  @media (max-width: 640px) {
-    padding: 8px 6px;
-  }
 `;
 
 export const BackButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 8px 16px;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
   border: 1px solid var(--btn-primary-bg);
   background: var(--btn-primary-bg);
   color: var(--btn-primary-text);
   border-radius: 8px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 16px;
   transition: background 0.15s ease;
 
   &:hover {
@@ -347,10 +319,6 @@ export const BackButton = styled.button`
   &:focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
-  }
-
-  @media (max-width: 640px) {
-    padding: 8px 6px;
   }
 `;
 
@@ -362,28 +330,36 @@ export const Main = styled.main`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 32px 96px;
+  padding: 0 32px 64px;
 
   @media (max-width: 900px) {
-    padding: 44px 20px 72px;
+    padding: 0 20px 48px;
   }
 
   @media (max-width: 640px) {
-    padding: 32px 16px 56px;
+    padding: 0 16px 40px;
   }
 `;
 
 export const StorySection = styled.section`
-  margin-bottom: 88px;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 0;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 64px;
+  @media (max-height: 720px), (max-width: 900px) {
+    min-height: auto;
+    padding: 56px 0 40px;
   }
 `;
 
 export const SectionHeader = styled.div`
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   width: 100%;
 `;
 
@@ -411,10 +387,18 @@ export const SectionSubtitle = styled.p`
 /* ------------------------------------------------------------------ */
 
 export const HeroWorkbench = styled.section`
-  margin-bottom: 88px;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 0;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 64px;
+  @media (max-height: 720px), (max-width: 900px) {
+    min-height: auto;
+    padding: 56px 0 40px;
   }
 `;
 
@@ -618,10 +602,16 @@ export const PillarCard = styled.article<{ iconColor?: string }>`
 /* ------------------------------------------------------------------ */
 
 export const DirectoryFrame = styled.section`
-  margin-bottom: 88px;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 48px 0;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 64px;
+  @media (max-width: 900px) {
+    padding: 40px 0;
   }
 `;
 
@@ -984,7 +974,7 @@ export const TimelineItem = styled.div`
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 24px;
-  padding: 26px 28px;
+  padding: 20px 24px;
   border-bottom: 1px solid var(--border-strong);
   align-items: start;
 
@@ -1031,12 +1021,12 @@ export const TimelineItem = styled.div`
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
     gap: 8px;
-    padding: 20px 18px;
+    padding: 18px 16px;
   }
 `;
 
 export const RecognitionGrid = styled.div`
-  margin-top: 20px;
+  margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
@@ -1047,7 +1037,7 @@ export const RecognitionGrid = styled.div`
 `;
 
 export const RecognitionCard = styled.div`
-  padding: 22px 24px;
+  padding: 18px 20px;
   border: 1px solid var(--border-strong);
   border-radius: 12px;
   background: var(--panel);
@@ -1095,10 +1085,18 @@ export const RecognitionCard = styled.div`
 /* ------------------------------------------------------------------ */
 
 export const ArsenalSection = styled.section`
-  margin-bottom: 88px;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 0;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 64px;
+  @media (max-height: 720px), (max-width: 900px) {
+    min-height: auto;
+    padding: 56px 0 40px;
   }
 `;
 
@@ -1125,7 +1123,7 @@ export const ArsenalRow = styled.div`
 `;
 
 export const ArsenalRowMeta = styled.div`
-  padding: 22px 24px;
+  padding: 18px 22px;
   background: var(--well);
   border-right: 1px solid var(--border-strong);
   display: flex;
@@ -1151,19 +1149,19 @@ export const ArsenalRowMeta = styled.div`
   @media (max-width: 820px) {
     border-right: none;
     border-bottom: 1px solid var(--border-strong);
-    padding: 16px 18px;
+    padding: 14px 16px;
   }
 `;
 
 export const ArsenalBadgeList = styled.div`
-  padding: 22px 24px;
+  padding: 18px 22px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 
   @media (max-width: 640px) {
-    padding: 16px 18px;
+    padding: 14px 16px;
     gap: 8px;
   }
 `;
@@ -1191,6 +1189,22 @@ export const ArsenalBadge = styled.div<{ iconColor?: string }>`
 /* ------------------------------------------------------------------ */
 /*  Section 6: Contact & Footer                                        */
 /* ------------------------------------------------------------------ */
+
+export const ContactSection = styled.section`
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 0;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+
+  @media (max-height: 720px), (max-width: 900px) {
+    min-height: auto;
+    padding: 56px 0 40px;
+  }
+`;
 
 export const CommsTerminal = styled.footer`
   border: 1px solid var(--border-strong);

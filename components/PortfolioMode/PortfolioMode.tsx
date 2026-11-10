@@ -844,11 +844,9 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             type="button"
             onClick={() => setIsPaletteOpen(true)}
             aria-label="Open command palette"
-            title="Quick Jump (Ctrl+K)"
+            title="Command Palette (Ctrl+K)"
           >
             <FiCommand />
-            <span>Menu</span>
-            <span className="kbd-tag">Ctrl+K</span>
           </Styled.PaletteTrigger>
 
           <Styled.ThemeToggle
@@ -863,22 +861,22 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                 ? 'Switch to paper light theme'
                 : 'Switch to terminal dark theme'
             }
-            title={simpleTheme === 'terminal' ? 'Light Mode' : 'Dark Mode'}
+            title={
+              simpleTheme === 'terminal'
+                ? 'Switch to Light Theme'
+                : 'Switch to Dark Theme'
+            }
           >
             {simpleTheme === 'terminal' ? <FiSun /> : <FiMoon />}
-            <span className="btn-label">
-              {simpleTheme === 'terminal' ? 'Light Mode' : 'Dark Mode'}
-            </span>
           </Styled.ThemeToggle>
 
           <Styled.BackButton
             type="button"
             onClick={onBackToChooser}
             aria-label="Open system boot menu"
-            title="Switch to Kali Desktop or Boot Menu"
+            title="Return to Boot Menu / Kali Linux"
           >
             <FiPower />
-            <span className="btn-label">Boot Menu</span>
           </Styled.BackButton>
         </Styled.NavActions>
       </Styled.Nav>
@@ -1535,48 +1533,50 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         </Styled.ArsenalSection>
 
         {/* Section 6: Contact */}
-        <Styled.CommsTerminal id="simple-contact">
-          <Styled.CommsBody>
-            <Styled.CommsInfo>
-              <h3>Get in Touch</h3>
-              <p>
-                Interested in collaborating, talking about cybersecurity, or
-                checking out my code? Feel free to connect with me on GitHub or
-                LinkedIn.
-              </p>
-            </Styled.CommsInfo>
-            <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
-              <Styled.ProjectOpenLink
-                href="https://github.com/zis3c"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub /> GitHub (@zis3c)
-              </Styled.ProjectOpenLink>
-              <Styled.ProjectDemoLink
-                href="https://linkedin.com/in/radzizamri"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin /> LinkedIn
-              </Styled.ProjectDemoLink>
-            </Styled.ProjectButtonGroup>
-          </Styled.CommsBody>
-          <Styled.HotkeyBar>
-            <span>
-              <kbd>J</kbd>/<kbd>K</kbd> Scroll
-            </span>
-            <span>
-              <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> Select Project
-            </span>
-            <span>
-              <kbd>Enter</kbd> Open Project
-            </span>
-            <span>
-              <kbd>Ctrl+K</kbd> Quick Menu
-            </span>
-          </Styled.HotkeyBar>
-        </Styled.CommsTerminal>
+        <Styled.ContactSection id="simple-contact">
+          <Styled.CommsTerminal>
+            <Styled.CommsBody>
+              <Styled.CommsInfo>
+                <h3>Get in Touch</h3>
+                <p>
+                  Interested in collaborating, talking about cybersecurity, or
+                  checking out my code? Feel free to connect with me on GitHub
+                  or LinkedIn.
+                </p>
+              </Styled.CommsInfo>
+              <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
+                <Styled.ProjectOpenLink
+                  href="https://github.com/zis3c"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub /> GitHub (@zis3c)
+                </Styled.ProjectOpenLink>
+                <Styled.ProjectDemoLink
+                  href="https://linkedin.com/in/radzizamri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaLinkedin /> LinkedIn
+                </Styled.ProjectDemoLink>
+              </Styled.ProjectButtonGroup>
+            </Styled.CommsBody>
+            <Styled.HotkeyBar>
+              <span>
+                <kbd>J</kbd>/<kbd>K</kbd> Scroll
+              </span>
+              <span>
+                <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> Select Project
+              </span>
+              <span>
+                <kbd>Enter</kbd> Open Project
+              </span>
+              <span>
+                <kbd>Ctrl+K</kbd> Quick Menu
+              </span>
+            </Styled.HotkeyBar>
+          </Styled.CommsTerminal>
+        </Styled.ContactSection>
       </Styled.Main>
 
       {isPaletteOpen && (
