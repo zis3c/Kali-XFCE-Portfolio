@@ -55,7 +55,7 @@ Run a single suite with `npx jest <path>`.
 vulnerabilities. `audit-allowlist.json` holds temporary exceptions with a
 reason and a review date; it is currently empty.
 
-The production tree is on Next.js 15.5.29 and `@sendgrid/mail` 8.1.6. Overrides
+The production tree is on Next.js 16.4.6 and `@sendgrid/mail` 8.1.6. Overrides
 pin Next's nested `postcss` to the patched 8.5.x line, `minimatch` under
 TypeScript ESLint to 11.0.1, and `@tootallnate/once` to 2.0.1.
 

@@ -5,6 +5,7 @@ import AsciiWaveBg from './AsciiWaveBg';
 
 interface MockContext {
   scale: jest.Mock;
+  setTransform?: jest.Mock;
   clearRect: jest.Mock;
   fillText: jest.Mock;
   font: string;
@@ -55,21 +56,25 @@ describe('AsciiWaveBg', () => {
   });
 
   it('renders and animates the ASCII wave canvas', () => {
+    context.setTransform = jest.fn();
     const wrap = mount(<AsciiWaveBg themeMode="terminal" />);
 
     expect(context.fillText).toHaveBeenCalled();
     expect(context.fillStyle).toBe('#a1a1aa');
+    expect(context.setTransform).toHaveBeenCalled();
 
     act(() => {
       window.dispatchEvent(
         new MouseEvent('mousemove', { clientX: 100, clientY: 120 })
+      );
+      window.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: 180, clientY: 160 })
       );
       window.dispatchEvent(new MouseEvent('mouseleave'));
       window.dispatchEvent(new Event('resize'));
       frameCallback?.(0);
     });
 
-    expect(context.scale).toHaveBeenCalled();
     expect(context.fillText).toHaveBeenCalled();
 
     wrap.unmount();

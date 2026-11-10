@@ -15,8 +15,8 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
+  images: {
+    qualities: [75, 100],
   },
   typescript: {
     ignoreBuildErrors: false,

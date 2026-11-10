@@ -16,7 +16,6 @@ import ProjectsSection from './sections/ProjectsSection';
 import JourneySection from './sections/JourneySection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
-import PortfolioFooter from './PortfolioFooter';
 import ScrollToTopButton from './ScrollToTopButton';
 
 interface Props {
@@ -184,6 +183,20 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             Math.max(1, filteredProjects.length)
         );
       }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setFocusedProjectIndex(
+          (prev) => (prev + 2) % Math.max(1, filteredProjects.length)
+        );
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setFocusedProjectIndex(
+          (prev) =>
+            (prev - 2 + Math.max(1, filteredProjects.length)) %
+            Math.max(1, filteredProjects.length)
+        );
+      }
       const targetTag = (e.target as HTMLElement | null)?.tagName;
       if (
         e.key === 'Enter' &&
@@ -239,8 +252,6 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         <SkillsSection />
         <ContactSection />
       </Styled.Main>
-
-      <PortfolioFooter />
 
       <CommandPalette
         isOpen={isPaletteOpen}
