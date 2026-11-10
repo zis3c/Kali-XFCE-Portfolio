@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import * as Styled from '../PortfolioMode.styles';
 
 const ContactSection = (): JSX.Element => (
@@ -10,8 +10,7 @@ const ContactSection = (): JSX.Element => (
           <h3>Get in Touch</h3>
           <p>
             Interested in collaborating, talking about cybersecurity, or
-            checking out my code? Feel free to connect with me on GitHub or
-            LinkedIn.
+            checking out my code? Feel free to connect with me on GitHub.
           </p>
         </Styled.CommsInfo>
         <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
@@ -22,13 +21,6 @@ const ContactSection = (): JSX.Element => (
           >
             <FaGithub /> GitHub (@zis3c)
           </Styled.ProjectOpenLink>
-          <Styled.ProjectDemoLink
-            href="https://linkedin.com/in/radzizamri"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedin /> LinkedIn
-          </Styled.ProjectDemoLink>
         </Styled.ProjectButtonGroup>
       </Styled.CommsBody>
       <Styled.HotkeyBar>
