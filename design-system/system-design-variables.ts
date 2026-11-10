@@ -4,29 +4,6 @@
 =============================================*/
 
 /**
- *@EXPORTS
- */
-
-export {
-  darkPrimaryColors,
-  lightPrimaryColors,
-  darkGrayColors,
-  lightGrayColors,
-  darkUtilityColors,
-  lightUtilityColors,
-  fontSizes,
-  allGradients,
-  fontWeights,
-  responsiveBreakPoints,
-  spacing,
-  borderRadii,
-  boxShadows,
-  zIndexes,
-  portfolioStyles,
-  kaliTokens,
-};
-
-/**
  * TABLE OF CONTENTS
  *
  * COLORS
@@ -355,3 +332,22 @@ const portfolioStyles = {
 };
 
 export type IPortfolioStyle = typeof portfolioStyles;
+
+export {
+  darkPrimaryColors,
+  lightPrimaryColors,
+  darkGrayColors,
+  lightGrayColors,
+  darkUtilityColors,
+  lightUtilityColors,
+  fontSizes,
+  allGradients,
+  fontWeights,
+  responsiveBreakPoints,
+  spacing,
+  borderRadii,
+  boxShadows,
+  zIndexes,
+  portfolioStyles,
+  kaliTokens,
+};

@@ -1,4 +1,3 @@
-export { random, range };
 /**
  *Returns random number in specified range
  *@function random
@@ -29,3 +28,5 @@ const range = (start: number, end?: number, step = 1): number[] => {
   }
   return output;
 };
+
+export { random, range };

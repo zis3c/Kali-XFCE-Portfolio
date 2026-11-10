@@ -4,11 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 import sgMail from '@sendgrid/mail';
 import { MailDataRequired } from '@sendgrid/helpers/classes/mail';
 /**
- * @EXPORTS
- */
-export { sendEmail };
-
-/**
  * Send email via sendgrid
  * @POST /api/contact
  * @function sendEmail
@@ -49,3 +44,5 @@ const sendEmail = catchErrors(
     });
   }
 );
+
+export { sendEmail };
