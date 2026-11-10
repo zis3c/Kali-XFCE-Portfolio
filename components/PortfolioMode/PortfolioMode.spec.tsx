@@ -21,7 +21,7 @@ describe('PortfolioMode', () => {
   it('renders all featured projects by default', () => {
     const wrap = mount(<PortfolioMode onBackToChooser={jest.fn()} />);
 
-    expect(wrap.find(Styled.ProjectCard)).toHaveLength(9);
+    expect(wrap.find(Styled.ProjectCard)).toHaveLength(23);
     expect(wrap.text()).toContain('CloudSentinel');
   });
 
@@ -35,7 +35,7 @@ describe('PortfolioMode', () => {
 
     const cards = wrap.find(Styled.ProjectCard);
     expect(cards.length).toBeGreaterThan(0);
-    expect(cards.length).toBeLessThan(9);
+    expect(cards.length).toBeLessThan(23);
   });
 
   it('toggles between terminal and paper themes', () => {

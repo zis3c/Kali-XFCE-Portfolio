@@ -50,7 +50,7 @@ describe('PortfolioMode coverage', () => {
     });
     wrap.update();
 
-    expect(wrap.find(Styled.ProjectCard).at(8).prop('isFocused')).toBe(true);
+    expect(wrap.find(Styled.ProjectCard).at(22).prop('isFocused')).toBe(true);
   });
 
   it('runs the Go to About palette action', () => {

@@ -614,6 +614,97 @@ export const fsTree: FsNode = {
                     },
                   ],
                 },
+                {
+                  name: 'Kali-XFCE-Portfolio',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# Kali-XFCE-Portfolio\nInteractive portfolio simulating Kali Linux XFCE desktop with apps, terminal, and session flow (Next.js, TypeScript, Redux).',
+                      size: 260,
+                    },
+                  ],
+                },
+                {
+                  name: 'USAS-Class-Timetable',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# USAS-Class-Timetable\nThe timetable portal for USAS students to manage, view, and export their class schedules (jadualkelas.zis3c.dev).',
+                      size: 240,
+                    },
+                  ],
+                },
+                {
+                  name: 'LLM-API-Lab',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# LLM-API-Lab\nLightweight static playground for testing LLM provider integrations with OpenAPI contract and browser dashboard.',
+                      size: 230,
+                    },
+                  ],
+                },
+                {
+                  name: 'LilyGO-T-Dongle-S3-Firmware',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# LilyGO-T-Dongle-S3-Firmware\nLilyGO T-Dongle-S3 firmware with board matrix, flash helper, smoke test, docs, and release validation.',
+                      size: 240,
+                    },
+                  ],
+                },
+                {
+                  name: 'MLBB-CounterDraft',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# MLBB-CounterDraft\nMobile Legends draft helper with live sync, hero catalog hygiene, and scoring logic (Next.js, TypeScript).',
+                      size: 230,
+                    },
+                  ],
+                },
+                {
+                  name: 'USAS-VC-Evaluation-Automator',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# USAS-VC-Evaluation-Automator\nLightweight JavaScript automation tool and userscript for the Course Teaching Evaluation Form on USAS VirtualCampus.',
+                      size: 250,
+                    },
+                  ],
+                },
+                {
+                  name: 'RE-App-UMC-Student-USAS',
+                  type: 'dir',
+                  children: [
+                    {
+                      name: 'README.md',
+                      type: 'file',
+                      content:
+                        '# RE-App-UMC-Student-USAS (Private Research)\nAndroid mobile application security review and high-level Smali static analysis. Sensitive details are kept private.',
+                      size: 210,
+                    },
+                  ],
+                },
               ],
             },
             {

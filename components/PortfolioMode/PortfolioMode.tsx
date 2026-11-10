@@ -15,12 +15,28 @@ import {
   FaFileCode,
   FaQrcode,
   FaFolder,
+  FaStar,
+  FaCodeBranch,
+  FaLock,
+  FaDesktop,
+  FaCalendarAlt,
+  FaGamepad,
+  FaCheckCircle,
+  FaServer,
+  FaWifi,
+  FaChartBar,
+  FaCogs,
+  FaBookOpen,
+  FaBrain,
+  FaMobileAlt,
 } from 'react-icons/fa';
 import {
   SiPython,
   SiNextdotjs,
   SiReact,
   SiTypescript,
+  SiJavascript,
+  SiHtml5,
   SiLaravel,
   SiPhp,
   SiTailwindcss,
@@ -29,6 +45,7 @@ import {
   SiDocker,
   SiDigitalocean,
   SiTelegram,
+  SiC,
   SiCplusplus,
   SiDotnet,
   SiWebrtc,
@@ -38,6 +55,14 @@ import {
   SiGoogle,
   SiGithubactions,
   SiLinux,
+  SiRedux,
+  SiArduino,
+  SiOpenai,
+  SiVisualstudiocode,
+  SiPandas,
+  SiAndroid,
+  SiNodered,
+  SiEclipsemosquitto,
 } from 'react-icons/si';
 import {
   FiPower,
@@ -66,6 +91,10 @@ type FeaturedProject = {
   icon: React.ReactNode;
   iconColor: string;
   repoType: string;
+  statusLabel?: string;
+  isPrivate?: boolean;
+  stars?: number;
+  forks?: number;
   stack: TechItem[];
   summary: string;
   highlights: string[];
@@ -81,7 +110,9 @@ const featuredProjects: FeaturedProject[] = [
     name: 'CloudSentinel (FYP)',
     icon: <FaShieldAlt />,
     iconColor: '#EF4444',
-    repoType: 'SSH Honeypot & Threat Detection',
+    repoType: 'SSH Honeypot & SOAR Threat Detection',
+    statusLabel: 'Featured FYP · Private',
+    isPrivate: true,
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Next.js', icon: <SiNextdotjs /> },
@@ -90,11 +121,11 @@ const featuredProjects: FeaturedProject[] = [
       { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
     ],
     summary:
-      'High-interaction SSH honeypot and threat detection system deployed on DigitalOcean to capture brute-force sessions, attacker command streams, and automated scanner traffic in real time.',
+      'An event-driven, cloud-native SSH honeypot with active SOAR auto-blocking under 1 second, HASSH cryptographic fingerprinting, and automated MITRE ATT&CK v18 mapping.',
     highlights: [
-      'HASSH client fingerprinting paired with 20 MITRE ATT&CK classification rules',
-      'Automated firewall IP blocking with <1ms median benchmark response time',
-      'Next.js analytics dashboard backed by ClickHouse storage and Redis pub/sub',
+      'HASSH cryptographic client fingerprinting with automated MITRE ATT&CK v18 mapping',
+      'Active SOAR firewall auto-blocking under 1 second (<1ms median local benchmark)',
+      'Real-time Next.js telemetry dashboard backed by ClickHouse storage and Redis streams',
     ],
     tags: ['Security', 'Web', 'Research'],
     link: 'https://github.com/zis3c/CloudSentinel',
@@ -105,181 +136,487 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaMicrochip />,
     iconColor: '#F97316',
     repoType: 'ESP32-S3 Security Firmware',
+    stars: 6,
     stack: [
-      { name: 'C++', icon: <SiCplusplus />, color: '#00599C' },
+      { name: 'ESP32-S3 C++', icon: <SiCplusplus />, color: '#00599C' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
       { name: '.NET 8', icon: <SiDotnet />, color: '#512BD4' },
-      { name: 'Wireshark', icon: <SiWireshark />, color: '#1679A7' },
-      { name: 'GitHub Actions', icon: <SiGithubactions />, color: '#2088FF' },
+      { name: 'Wireshark PCAP', icon: <SiWireshark />, color: '#1679A7' },
     ],
     summary:
-      'Custom C++ security assessment firmware for the LILYGO T-Dongle-S3 USB hardware dongle, built for authorized USB HID testing and wireless packet capture.',
+      'ESP32-S3 firmware for LilyGO T-Dongle-S3 combining USB HID injection (DuckyScript), ESP32 Marauder Wi-Fi/BLE auditing with SD PCAP logging, local SoftAP web console, and a serial .NET 8 companion app.',
     highlights: [
-      'Authorized USB HID keystroke automation and payload sequencing',
-      'Onboard Wi-Fi PCAP packet capture managed via web UI and .NET 8 desktop app',
-      'Automated CI security checks with CodeQL, Semgrep, and Gitleaks',
+      'DuckyScript USB HID keystroke injection and local SoftAP web management console',
+      'ESP32 Marauder Wi-Fi and BLE auditing with onboard SD card PCAP packet logging',
+      'Serial .NET 8 desktop companion app and CI security checks (CodeQL, Semgrep, Gitleaks)',
     ],
     tags: ['Security', 'Research', 'Automation'],
     link: 'https://github.com/zis3c/RedLilyGO',
   },
   {
     id: '03',
-    name: 'JanjiCare',
+    name: 'Clinic-Web-Appointment (JanjiCare)',
     icon: <FaHospital />,
     iconColor: '#06B6D4',
-    repoType: 'Clinic Web Appointment & Telehealth',
+    repoType: 'Clinic Management & WebRTC Telehealth',
+    stars: 2,
     stack: [
-      { name: 'Laravel 13', icon: <SiLaravel />, color: '#FF2D20' },
-      { name: 'PHP 8.3', icon: <SiPhp />, color: '#777BB4' },
-      { name: 'React 18', icon: <SiReact />, color: '#00D8FF' },
-      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: '#38BDF8' },
+      { name: 'Laravel', icon: <SiLaravel />, color: '#FF2D20' },
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
       { name: 'WebRTC', icon: <SiWebrtc />, color: '#F59E0B' },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: '#38BDF8' },
     ],
     summary:
-      'Full-stack clinical appointment booking and telehealth video consultation platform with live queue updates.',
+      'A clinic management system designed to connect admins, doctors, and patients, featuring appointment booking, digital prescriptions, and WebRTC telehealth.',
     highlights: [
-      'Role-based portals separating Patient, Doctor, and Administrator workflows',
-      'LiveKit WebRTC encrypted video calls secured by server-signed JWT tokens',
-      'Real-time patient queue updates powered by Laravel Reverb WebSockets',
+      'Role-based portals connecting Administrators, Doctors, and Patients',
+      'Appointment scheduling, digital prescriptions, and real-time WebSocket queue updates',
+      'Encrypted WebRTC telehealth video consultations built into the browser',
     ],
     tags: ['Web'],
     link: 'https://github.com/zis3c/Clinic-Web-Appointment',
   },
   {
     id: '04',
-    name: 'Google Forms Spammer',
+    name: 'Google-Form-Spammer',
     icon: <FaBolt />,
     iconColor: '#EAB308',
-    repoType: 'Async Stress Testing Tool',
+    repoType: 'Async Stress-Testing CLI',
+    stars: 5,
+    forks: 1,
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'aiohttp', icon: <SiPython />, color: '#FFD43B' },
+      { name: 'aiohttp / asyncio', icon: <SiPython />, color: '#FFD43B' },
       { name: 'Google Forms', icon: <SiGoogle />, color: '#4285F4' },
-      { name: 'Rich CLI', icon: <SiGnubash />, color: '#4EAA25' },
+      { name: 'CLI', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
-      'High-speed asynchronous stress-testing tool for Google Forms with multi-worker concurrency and automatic field detection.',
+      'A high-performance, asynchronous Google Forms spammer and stress-testing CLI built with Python asyncio and aiohttp.',
     highlights: [
-      'Non-blocking aiohttp worker pool supporting high concurrent request bursts',
-      'Smart HTTP 429 rate-limit backoff, user-agent rotation, and auto question parser',
-      'Includes local web configurator UI and Rich terminal dashboard',
+      'Asynchronous aiohttp worker pool for high-concurrency form submission testing',
+      'Automatic form field parser with HTTP 429 rate-limit backoff and user-agent rotation',
+      'Interactive terminal progress output for educational load and stress testing',
     ],
     tags: ['Automation', 'Security', 'Research'],
-    link: 'https://github.com/zis3c/google-form-spammer',
+    link: 'https://github.com/zis3c/Google-Form-Spammer',
   },
   {
     id: '05',
-    name: 'Dot Zero CTF Pipeline & RE',
-    icon: <FaFlag />,
-    iconColor: '#8B5CF6',
-    repoType: 'CTF Automation & Reverse Engineering',
+    name: 'Codex-notifier-vscode',
+    icon: <FaBell />,
+    iconColor: '#007ACC',
+    repoType: 'VS Code Extension',
+    stars: 6,
+    forks: 7,
     stack: [
-      { name: 'Kali Linux', icon: <SiKalilinux />, color: '#367BF0' },
-      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
-      { name: 'Reverse Eng', icon: <SiLinux />, color: '#EAB308' },
+      { name: 'VS Code API', icon: <SiVisualstudiocode />, color: '#007ACC' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
     ],
     summary:
-      'CTFd competition automation CLI and hands-on Reverse Engineering training materials created for USAS CTF team Dot Zero (U545).',
+      'VS Code extension that notifies developers with sound and status/banner alerts when Codex responses finish.',
     highlights: [
-      'Automated CTFd challenge downloader, workspace setup, and write-up generator',
-      'RE workshops: Ghidra and IDA Pro decompilation, x64dbg patching, and Frida hooks',
-      'Binary crackme labs covering ELF/PE internals, GDB+GEF debugging, and anti-debug bypass',
+      'Audio cues and VS Code status bar/banner notifications when long AI tasks complete',
+      'Adopted by the community with 6 GitHub stars and 7 forks',
+      'Lightweight zero-dependency extension workflow for developer productivity',
     ],
-    tags: ['Security', 'Automation'],
-    link: 'https://ctftime.org/team/421634',
-    demoLink: 'https://ctftime.org/team/421634',
-    demoLabel: 'CTFtime Profile',
+    tags: ['Automation', 'Web'],
+    link: 'https://github.com/zis3c/Codex-notifier-vscode',
   },
   {
     id: '06',
-    name: 'STEM Platform & Telebot',
-    icon: <FaRobot />,
-    iconColor: '#22C55E',
-    repoType: 'Student Web Portal & Telegram Bot',
+    name: 'CTF-Pipeline',
+    icon: <FaFlag />,
+    iconColor: '#8B5CF6',
+    repoType: 'Multi-CTF Pipeline & Toolchain',
     stack: [
-      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
-      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
-      { name: 'Google Sheets', icon: <SiGoogle />, color: '#34A853' },
+      { name: 'Kali Linux', icon: <SiKalilinux />, color: '#367BF0' },
+      { name: 'Bash', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
-      'Official student association portal and automated Telegram membership verification bot for STEM USAS.',
+      'Portable multi-CTF pipeline for syncing CTFd challenges, downloading attachments, organizing solver workspaces, and validating local CTF toolchains.',
     highlights: [
-      'Official STEM-USAS web portal live at stem.zis3c.dev',
-      'Verified 62+ registered student members with automated digital receipts',
-      'Real-time Google Sheets sync with admin and superadmin bot commands',
+      'Syncs CTFd challenges and attachments automatically into structured category folders',
+      'Validates local Reverse Engineering and Pwn toolchains (Ghidra, x64dbg, GDB+GEF, Frida)',
+      'Built for USAS CTF team Dot Zero (U545) competition workflows',
     ],
-    tags: ['Web', 'Automation', 'Bot'],
+    tags: ['Security', 'Automation'],
+    link: 'https://github.com/zis3c/CTF-Pipeline',
+    demoLink: 'https://ctftime.org/team/421634',
+    demoLabel: 'Dot Zero CTFtime',
+  },
+  {
+    id: '07',
+    name: 'Kali-XFCE-Portfolio',
+    icon: <FaDesktop />,
+    iconColor: '#367BF0',
+    repoType: 'Kali Linux Desktop Simulation',
+    stack: [
+      { name: 'Next.js', icon: <SiNextdotjs /> },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
+      { name: 'Redux', icon: <SiRedux />, color: '#764ABC' },
+      { name: 'Kali Linux', icon: <SiKalilinux />, color: '#367BF0' },
+    ],
+    summary:
+      'Interactive portfolio simulating a Kali Linux XFCE desktop with window management, terminal emulator, virtual filesystem, and dual boot session flow.',
+    highlights: [
+      'Full XFCE desktop simulation with interactive Terminal, File Manager, and apps',
+      'BIOS dual-boot chooser switching between Portfolio Mode and Kali Linux Mode',
+      'Keyboard-driven navigation, command palette (Ctrl+K), and light/dark themes',
+    ],
+    tags: ['Web', 'Security'],
+    link: 'https://github.com/zis3c/Kali-XFCE-Portfolio',
+    demoLink: 'https://me.zis3c.dev',
+    demoLabel: 'me.zis3c.dev',
+  },
+  {
+    id: '08',
+    name: 'STEM-Telebot',
+    icon: <FaRobot />,
+    iconColor: '#26A5E4',
+    repoType: 'Membership Verification Bot',
+    stars: 2,
+    forks: 1,
+    stack: [
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Telegram Bot', icon: <SiTelegram />, color: '#26A5E4' },
+      { name: 'Google Sheets API', icon: <SiGoogle />, color: '#34A853' },
+    ],
+    summary:
+      'STEM membership verification Telegram bot backed by Google Sheets, with admin tools, broadcasts, and web dashboards.',
+    highlights: [
+      'Automated student membership verification and digital receipt generation',
+      'Real-time two-way sync with Google Sheets and admin broadcast tools',
+      'Verified 62+ registered STEM USAS members with role-based bot commands',
+    ],
+    tags: ['Bot', 'Automation'],
     link: 'https://github.com/zis3c/STEM-Telebot',
+  },
+  {
+    id: '09',
+    name: 'STEM-USAS',
+    icon: <FaCheckCircle />,
+    iconColor: '#22C55E',
+    repoType: 'Official STEM USAS Portal',
+    stack: [
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: '#38BDF8' },
+    ],
+    summary:
+      'Official web portal for the STEM student association at Universiti Sultan Azlan Shah (USAS), showcasing programs, leadership, and registration links.',
+    highlights: [
+      'Production web portal deployed at stem.zis3c.dev for USAS STEM students',
+      'Responsive layout presenting club activities, announcements, and committee directory',
+      'Integrated with the STEM-Telebot verification workflow',
+    ],
+    tags: ['Web'],
+    link: 'https://github.com/zis3c/STEM-USAS',
     demoLink: 'https://stem.zis3c.dev',
     demoLabel: 'stem.zis3c.dev',
   },
   {
-    id: '07',
-    name: 'USAS Assignment Notifier & Timetable',
+    id: '10',
+    name: 'USAS-Assignment-Notifier',
     icon: <FaBell />,
     iconColor: '#EC4899',
-    repoType: 'LMS Deadline Tracker & Timetable Exporter',
+    repoType: 'Automated Assignment Tracker',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1' },
       { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
-      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1' },
     ],
     summary:
-      'Automated campus LMS deadline tracker serving 50 students across 245 assignments, paired with a class timetable generator.',
+      'Automated USAS assignment tracker that syncs VirtualCampus course deadlines and sends real-time Telegram alerts.',
     highlights: [
-      'Automated LMS scraper sending proactive Telegram deadline reminders',
-      'Class timetable builder at jadualkelas.zis3c.dev exporting PDFs and wallpapers',
-      'PostgreSQL database with encrypted student credential management',
+      'Served 50 active USAS students tracking 245+ course assignments automatically',
+      'Scheduled scraper syncing Moodle/VirtualCampus deadlines with Telegram notifications',
+      'Encrypted credential storage and customizable reminder intervals',
     ],
-    tags: ['Automation', 'Bot', 'Web'],
+    tags: ['Automation', 'Bot'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
+  },
+  {
+    id: '11',
+    name: 'USAS-Class-Timetable',
+    icon: <FaCalendarAlt />,
+    iconColor: '#38BDF8',
+    repoType: 'Student Timetable Portal',
+    forks: 1,
+    stack: [
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
+    ],
+    summary:
+      'The timetable portal for USAS students to manage, view, and export their class schedules.',
+    highlights: [
+      'Interactive schedule builder live at jadualkelas.zis3c.dev for USAS students',
+      'Exports clean PDF timetables and high-resolution lockscreen wallpapers',
+      'Conflict detection and course slot search across university faculties',
+    ],
+    tags: ['Web', 'Automation'],
+    link: 'https://github.com/zis3c/USAS-Class-Timetable',
     demoLink: 'https://jadualkelas.zis3c.dev',
     demoLabel: 'jadualkelas.zis3c.dev',
   },
   {
-    id: '08',
-    name: 'Polyglot Files',
+    id: '12',
+    name: 'LLM-API-Lab',
+    icon: <FaBrain />,
+    iconColor: '#10A37F',
+    repoType: 'Multi-Provider LLM Playground',
+    stack: [
+      { name: 'OpenAI / LLM APIs', icon: <SiOpenai />, color: '#10A37F' },
+      { name: 'HTML5', icon: <SiHtml5 />, color: '#E34F26' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
+    ],
+    summary:
+      'Lightweight static playground for testing LLM provider integrations. Multi-provider support with OpenAPI contract, browser dashboard, and zero build step.',
+    highlights: [
+      'Supports OpenAI, Anthropic, Mistral, and OpenRouter endpoints in one dashboard',
+      'Includes OpenAPI specification contract and latency/token response inspector',
+      'Zero build step static architecture for rapid API key and prompt testing',
+    ],
+    tags: ['Web', 'Research'],
+    link: 'https://github.com/zis3c/LLM-API-Lab',
+  },
+  {
+    id: '13',
+    name: 'LilyGO-T-Dongle-S3-Firmware',
+    icon: <FaMicrochip />,
+    iconColor: '#00979D',
+    repoType: 'ESP32-S3 Board Matrix & Validation',
+    stars: 1,
+    stack: [
+      { name: 'C', icon: <SiC />, color: '#A8B9CC' },
+      { name: 'Arduino', icon: <SiArduino />, color: '#00979D' },
+      { name: 'ESP32-S3', icon: <SiCplusplus />, color: '#00599C' },
+    ],
+    summary:
+      'LilyGO T-Dongle-S3 firmware with board matrix, flash helper, smoke test, docs, and release validation.',
+    highlights: [
+      'Hardware board matrix configuration for ESP32-S3 T-Dongle variants',
+      'Automated flash helper scripts and post-flash hardware smoke tests',
+      'Release validation pipeline ensuring reliable firmware builds',
+    ],
+    tags: ['Security', 'Automation', 'Research'],
+    link: 'https://github.com/zis3c/LilyGO-T-Dongle-S3-Firmware',
+  },
+  {
+    id: '14',
+    name: 'QRBot',
+    icon: <FaQrcode />,
+    iconColor: '#3B82F6',
+    repoType: 'Telegram QR Generator & Scanner',
+    stack: [
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Docker', icon: <SiDocker />, color: '#2496ED' },
+      { name: 'Telegram Bot', icon: <SiTelegram />, color: '#26A5E4' },
+    ],
+    summary:
+      'A versatile Telegram bot for generating and scanning QR codes like Text, WiFi, vCard, Geo and Encoded.',
+    highlights: [
+      'Generates and decodes Text, Wi-Fi credentials, vCard contacts, and Geo QR codes',
+      'Supports encoded payload inspection straight from Telegram chat photos',
+      'Containerized with Docker for one-command cloud deployment',
+    ],
+    tags: ['Bot', 'Security', 'Automation'],
+    link: 'https://github.com/zis3c/QRBot',
+  },
+  {
+    id: '15',
+    name: 'MLBB-CounterDraft',
+    icon: <FaGamepad />,
+    iconColor: '#F59E0B',
+    repoType: 'Draft Recommendation Engine',
+    stack: [
+      { name: 'Next.js', icon: <SiNextdotjs /> },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
+      { name: 'React', icon: <SiReact />, color: '#00D8FF' },
+    ],
+    summary:
+      'Mobile Legends draft helper with live sync, hero catalog hygiene, and counter-pick scoring logic.',
+    highlights: [
+      'Real-time counter-pick recommendation engine with weighted synergy scoring',
+      'Automated hero catalog data validation and role filtering',
+      'Responsive draft simulator built with Next.js and TypeScript',
+    ],
+    tags: ['Web'],
+    link: 'https://github.com/zis3c/MLBB-CounterDraft',
+  },
+  {
+    id: '16',
+    name: 'USAS-VC-Evaluation-Automator',
+    icon: <FaCogs />,
+    iconColor: '#F7DF1E',
+    repoType: 'VirtualCampus Userscript Tool',
+    stack: [
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
+      { name: 'DOM Automation', icon: <SiHtml5 />, color: '#E34F26' },
+    ],
+    summary:
+      'A lightweight JavaScript automation tool and userscript designed to quickly fill out the Course Teaching Evaluation Form on the USAS VirtualCampus portal.',
+    highlights: [
+      'One-click completion for repetitive multi-page VirtualCampus evaluation forms',
+      'Runs directly in the browser as a lightweight userscript with zero external deps',
+      'Saves student time during end-of-semester course evaluations',
+    ],
+    tags: ['Automation', 'Web'],
+    link: 'https://github.com/zis3c/USAS-VC-Evaluation-Automator',
+  },
+  {
+    id: '17',
+    name: 'basic-iot-cloud-setup',
+    icon: <FaServer />,
+    iconColor: '#0080FF',
+    repoType: 'IoT Cloud Infrastructure (KSC6493)',
+    stack: [
+      { name: 'Shell', icon: <SiGnubash />, color: '#4EAA25' },
+      { name: 'Node-RED', icon: <SiNodered />, color: '#8F0000' },
+      {
+        name: 'Mosquitto MQTT',
+        icon: <SiEclipsemosquitto />,
+        color: '#3C5280',
+      },
+      { name: 'DigitalOcean', icon: <SiDigitalocean />, color: '#0080FF' },
+    ],
+    summary:
+      'Basic IoT cloud infrastructure for KSC6493. An automated lab setup featuring Traefik, Node-RED, Mosquitto (MQTT), and time-series data visualization on DigitalOcean.',
+    highlights: [
+      'Automated provisioning script deploying Traefik reverse proxy with TLS',
+      'Integrates Eclipse Mosquitto MQTT broker with Node-RED flow automation',
+      'Time-series sensor telemetry dashboard hosted on DigitalOcean',
+    ],
+    tags: ['Automation', 'Web'],
+    link: 'https://github.com/zis3c/basic-iot-cloud-setup',
+  },
+  {
+    id: '18',
+    name: 'USAS-Launcher',
+    icon: <FaWifi />,
+    iconColor: '#10B981',
+    repoType: 'Campus Wi-Fi & Portal Auto-Login',
+    stack: [
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Automation', icon: <SiGnubash />, color: '#4EAA25' },
+    ],
+    summary:
+      'An automated tool that instantly connects to the USAS campus WiFi and logs into your student portals with one click.',
+    highlights: [
+      'Automates captive portal authentication on the USAS campus Wi-Fi network',
+      'One-click login launcher for student academic portals',
+      'Cross-platform Python script designed for daily campus convenience',
+    ],
+    tags: ['Automation'],
+    link: 'https://github.com/zis3c/USAS-Launcher',
+  },
+  {
+    id: '19',
+    name: 'Tgreactsort',
+    icon: <FaChartBar />,
+    iconColor: '#6366F1',
+    repoType: 'Telegram Reaction Analytics',
+    stars: 1,
+    stack: [
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+      { name: 'Pandas', icon: <SiPandas />, color: '#150458' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
+      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
+    ],
+    summary:
+      'Fetch, sort and visualize Telegram channel messages by reaction count using CLI and web dashboard.',
+    highlights: [
+      'Extracts and ranks Telegram channel posts by reaction engagement metrics',
+      'Data processing pipeline powered by Python and Pandas',
+      'Includes both a fast CLI sorter and an interactive browser chart dashboard',
+    ],
+    tags: ['Automation', 'Bot', 'Research'],
+    link: 'https://github.com/zis3c/Tgreactsort',
+  },
+  {
+    id: '20',
+    name: 'Polyglot-File',
     icon: <FaFileCode />,
     iconColor: '#A855F7',
-    repoType: 'File Format Security Research',
+    repoType: 'Multi-Format File Generator',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Linux', icon: <SiLinux />, color: '#EAB308' },
       { name: 'Binary Analysis', icon: <SiGnubash />, color: '#4EAA25' },
     ],
     summary:
-      'Dual-format file generator combining valid JPEG/PNG and PDF structures to test file signature parsers and upload filters.',
+      'A security tool to generate valid multi-format files (JPEG+PDF) for steganography and file parser research.',
     highlights: [
-      'Generates valid hybrid JPEG+PDF and PNG+PDF polyglot files',
-      'Demonstrates parser behavior across image viewers and PDF readers',
-      'Built for file upload validation research and defensive filter testing',
+      'Constructs valid dual-signature JPEG+PDF and PNG+PDF polyglot binaries',
+      'Tests magic-byte parser differentials across image viewers and PDF readers',
+      'Used for file upload validation research and defensive filter testing',
     ],
     tags: ['Security', 'Research'],
     link: 'https://github.com/zis3c/Polyglot-File',
   },
   {
-    id: '09',
-    name: 'QRBot & Qrtendify',
-    icon: <FaQrcode />,
-    iconColor: '#3B82F6',
-    repoType: 'QR Code & Attendance Automation',
+    id: '21',
+    name: 'Compilation-and-RE-Process',
+    icon: <FaMicrochip />,
+    iconColor: '#EC4899',
+    repoType: 'Code-to-Binary & RE Visualizer',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
-      { name: 'Docker', icon: <SiDocker />, color: '#2496ED' },
-      { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
+      { name: 'C / Assembly', icon: <SiC />, color: '#A8B9CC' },
+      { name: 'Reverse Eng', icon: <SiLinux />, color: '#EAB308' },
     ],
     summary:
-      'Versatile QR code generator, scanner, and encrypted attendance check-in bot on Telegram.',
+      'Visualizing the lifecycle of code from source to binary and back again.',
     highlights: [
-      'Generates and decodes Text, Wi-Fi, vCard, and location QR codes',
-      'Encrypted QR payload verification for student event attendance',
-      'Dockerized setup for reliable cloud deployment',
+      'Interactive simulator showing preprocessing, compilation, assembly, and linking stages',
+      'Demonstrates how C, Java, and Python map to machine instructions and decompiler output',
+      'Created as a visual teaching aid for Dot Zero Reverse Engineering workshops',
     ],
-    tags: ['Security', 'Bot', 'Automation'],
-    link: 'https://github.com/zis3c/QRBot',
+    tags: ['Security', 'Research'],
+    link: 'https://github.com/zis3c/Compilation-and-RE-Process',
+  },
+  {
+    id: '22',
+    name: 'CTF-Writeups',
+    icon: <FaBookOpen />,
+    iconColor: '#14B8A6',
+    repoType: 'CTF Solutions & Security Notes',
+    stack: [
+      { name: 'Kali Linux', icon: <SiKalilinux />, color: '#367BF0' },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB' },
+    ],
+    summary:
+      'Collection of CTF write-ups and solutions for learning and reference.',
+    highlights: [
+      'Step-by-step walkthroughs covering Reverse Engineering, Forensics, and Web challenges',
+      'Includes solver scripts and binary analysis notes from university and international CTFs',
+      'Maintained as an open learning resource for cybersecurity students',
+    ],
+    tags: ['Security', 'Research'],
+    link: 'https://github.com/zis3c/CTF-Writeups',
+  },
+  {
+    id: '23',
+    name: 'RE-App-UMC-Student-USAS',
+    icon: <FaMobileAlt />,
+    iconColor: '#3DDC84',
+    repoType: 'Mobile App Security Review',
+    statusLabel: 'Private Research',
+    isPrivate: true,
+    stack: [
+      { name: 'Android Smali', icon: <SiAndroid />, color: '#3DDC84' },
+      { name: 'Static Analysis', icon: <SiKalilinux />, color: '#367BF0' },
+    ],
+    summary:
+      'Private Android mobile security research focusing on high-level Smali static analysis and mobile application hardening concepts.',
+    highlights: [
+      'High-level APK structure and Smali bytecode review in an isolated lab environment',
+      'Focused on defensive mobile security patterns and OWASP Mobile Top 10 awareness',
+      'Private repository: sensitive application internals and details are kept confidential',
+    ],
+    tags: ['Security', 'Research'],
+    link: 'https://github.com/zis3c/RE-App-UMC-Student-USAS',
   },
 ];
 
@@ -761,7 +1098,8 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                     >
                       <span>{project.repoType}</span>
                       <span className="slot-status">
-                        {isFlagship ? 'Featured FYP' : 'Open Source'}
+                        {project.statusLabel ||
+                          (isFlagship ? 'Featured FYP' : 'Public · MIT')}
                       </span>
                     </Styled.ProjectCardChrome>
 
@@ -778,8 +1116,24 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                               </Styled.ProjectName>
                               <Styled.ProjectMetaRow>
                                 <span className="repo-tag">
-                                  <FaFolder /> {project.tags.join(' · ')}
+                                  {project.isPrivate ? (
+                                    <FaLock />
+                                  ) : (
+                                    <FaFolder />
+                                  )}{' '}
+                                  {project.tags.join(' · ')}
                                 </span>
+                                {project.stars !== undefined && (
+                                  <span className="repo-tag">
+                                    <FaStar style={{ color: '#EAB308' }} />{' '}
+                                    {project.stars}
+                                  </span>
+                                )}
+                                {project.forks !== undefined && (
+                                  <span className="repo-tag">
+                                    <FaCodeBranch /> {project.forks}
+                                  </span>
+                                )}
                               </Styled.ProjectMetaRow>
                             </Styled.ProjectMetaInfo>
                           </Styled.ProjectIdentity>
