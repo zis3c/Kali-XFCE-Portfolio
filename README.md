@@ -169,6 +169,11 @@ utils/                   virtual filesystem, logger, retry, env validation
 hooks/                   reusable React hooks
 types/                   shared TypeScript types
 design-system/           theme tokens and global styles
+test/                    test helpers and mock store
+docs/                    testing and quality documentation
+e2e/                     Playwright smoke spec (manual run)
+.github/                 CI, CodeQL, Dependabot, issue templates
+public/                  images, icons, wallpapers, manifest
 ```
 
 | Folder           | Responsibility                                 |
@@ -182,6 +187,10 @@ design-system/           theme tokens and global styles
 | `hooks/`         | React hooks for UI behaviour                   |
 | `design-system/` | Theme tokens and global CSS                    |
 | `test/`          | Test helpers and mock store                    |
+| `docs/`          | Testing and quality documentation              |
+| `e2e/`           | Playwright smoke spec, run manually            |
+| `.github/`       | CI, CodeQL, Dependabot, issue templates        |
+| `public/`        | Images, icons, wallpapers, manifest            |
 
 ## Project structure
 
