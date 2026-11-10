@@ -1,201 +1,256 @@
 # Kali XFCE Portfolio
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.x-3178C6?logo=typescript&logoColor=white)
-![Redux](https://img.shields.io/badge/Redux-State-764ABC?logo=redux&logoColor=white)
-![styled-components](https://img.shields.io/badge/styled--components-6-DB7093?logo=styled-components&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-Jest%20%2B%20Playwright-C21325?logo=jest&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16.4.6-black?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-4.1-764ABC?logo=redux&logoColor=white)
+![styled-components](https://img.shields.io/badge/styled--components-5.3-DB7093?logo=styled-components&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-20.9%2B-339933?logo=nodedotjs&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)
 
 <p align="center">
-  <img src="public/about/2.png" alt="Kali XFCE Portfolio Preview" width="900">
+  <img src="public/about/2.png" alt="Kali XFCE Portfolio preview" width="900">
 </p>
 
-Live Demo: **[https://me.zis3c.dev/](https://me.zis3c.dev/)**
+<p align="center">
+  <a href="https://me.zis3c.dev/">Live demo</a>
+  ·
+  <a href="https://github.com/zis3c/Kali-XFCE-Portfolio/issues">Issues</a>
+  ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
 
-Interactive portfolio that simulates a **Kali Linux XFCE desktop** in browser. Includes boot flow, login screen, draggable windows, terminal emulator, file manager, Mousepad editor, and app launcher behavior.
+An interactive portfolio that simulates a **Kali Linux XFCE desktop** in the
+browser. It ships two experiences: a full Kali desktop simulation with a boot
+flow, login screen, draggable windows, terminal, file manager, editor, and app
+launcher, plus a minimal Portfolio Mode for quick reading.
 
 > [!WARNING]
-> This project is a simulation for portfolio and educational use. It is not a real operating system.
+> This is a simulation for portfolio and educational use. It is not a real
+> operating system, and it does not provide real system access.
 
-## Features
+## Highlights
 
-- Kali/XFCE-inspired desktop UI and workflow
-- Boot → login → desktop sequence with keyboard navigation
-- Login validation
-- Workspace switcher and top panel app indicators
-- Terminal emulator with custom commands (`ls`, `cat`, `cd`, `whoami`, `uname`, `clear`, `help`, etc.)
-- Thunar-style file manager with virtual filesystem ops:
-  - new folder, rename, delete (non-empty protection)
-- Mousepad-style editor with find/replace and keyboard shortcuts
-- Chrome-like in-app browser shell with back/forward navigation
-- Notification daemon and panel context actions
-- Draggable, resizable windows via `react-rnd`
-- Dark theme optimized with custom design-system tokens
-- Contact form with validation, rate limiting, and SendGrid email delivery
-- Health check endpoint with MongoDB connectivity status
-- Security headers, correlation ID tracing, structured logging
+- Dual experience: Kali XFCE desktop or minimal Portfolio Mode
+- Boot chooser with keyboard navigation and a simulated BIOS screen
+- Login flow with configurable demo password
+- Draggable, resizable windows with focus, minimize, and close states
+- Terminal emulator with a virtual filesystem and custom commands
+- Thunar-style file manager with folder, rename, and delete actions
+- Mousepad-style text editor with find, replace, and save
+- Chrome-style in-app browser shell with history navigation
+- Command palette, keyboard shortcuts, and reduced-motion support
+- Portfolio sections for about, projects, experience, skills, and contact
+- Contact API with validation, rate limiting, and SendGrid delivery
+- Health endpoint with MongoDB status
+- Security headers, request correlation IDs, and structured logging
 
-## Architecture
+## Tech stack
 
+| Layer      | Choice                                               |
+| ---------- | ---------------------------------------------------- |
+| Framework  | Next.js 16 (Pages Router, ISR)                       |
+| Language   | TypeScript 5.4 (strict)                              |
+| UI         | React 18, styled-components 5                        |
+| State      | Redux 4, Redux Thunk, next-redux-wrapper             |
+| API        | Next.js API routes with next-connect                 |
+| Database   | MongoDB with Mongoose                                |
+| Email      | SendGrid                                             |
+| Testing    | Jest, Enzyme, React Test Utils                       |
+| Tooling    | ESLint, Prettier, Husky, lint-staged, Commitizen     |
+| Security   | npm audit gate, CodeQL, Dependabot, security headers |
+| Deployment | Vercel                                               |
+
+## Requirements
+
+- Node.js **20.9 or newer**
+- npm 10 or newer
+- MongoDB connection string for the contact and health endpoints
+- SendGrid API key for email delivery
+
+## Getting started
+
+```bash
+git clone https://github.com/zis3c/Kali-XFCE-Portfolio.git
+cd Kali-XFCE-Portfolio
+npm ci --legacy-peer-deps
+cp .env.example .env.local
+npm run dev
 ```
-                    ┌──────────────────────────────────┐
-                    │           pages/ (Next.js)         │
-                    │  index.tsx   _app.tsx  _document   │
-                    │  api/ (health, contact, ...)       │
-                    └──────────┬───────────────────────┘
-                               │
-          ┌────────────────────┼────────────────────┐
-          │                    │                    │
-   ┌──────▼──────┐   ┌────────▼────────┐   ┌───────▼───────┐
-   │ components/ │   │     store/      │   │   backend/    │
-   │  Desktop    │   │  Redux slices   │   │ controllers   │
-   │  Apps       │   │ + SSR wrapper   │   │ models (DB)   │
-   │  Widgets    │   └─────────────────┘   └───────────────┘
-   └─────────────┘
-          │
-   ┌──────┴───────┬──────────────┬──────────────┐
-   │  utils/      │  hooks/      │ middleware/   │
-   │  filesystem  │  useActions  │  rateLimit    │
-   │  logger      │  useHover    │  catchErrors  │
-   │  retry       │  ...         │  requestId    │
-   └──────────────┴──────────────┴──────────────┘
-```
 
-| Layer            | Responsibility                                                                   |
-| ---------------- | -------------------------------------------------------------------------------- |
-| `pages/`         | Next.js routing, SSR/ISR data fetching, API routes                               |
-| `components/`    | Presentational + container components (Desktop, Apps, Widgets)                   |
-| `store/`         | Redux state management with `next-redux-wrapper` for SSR hydration               |
-| `backend/`       | Mongoose models and controller logic (contact, news)                             |
-| `utils/`         | Pure functions: virtual filesystem, logger, retry, error handling                |
-| `hooks/`         | Custom React hooks: intersection observer, click-outside, reduced motion         |
-| `middleware/`    | API middleware: rate limiting, error catching, correlation IDs, security headers |
-| `design-system/` | Theme tokens (colors, spacing, typography, XFCE component tokens)                |
+Open `http://localhost:3000`.
 
-## Stack
+### Environment variables
 
-- **Framework:** Next.js 14 (Pages Router) with ISR
-- **Language:** TypeScript 4.x (strict mode, discriminated unions)
-- **State:** Redux + Redux Thunk + `next-redux-wrapper`
-- **Styling:** styled-components 6 (dark Kali theme)
-- **Database:** MongoDB (Mongoose ODM)
-- **Email:** SendGrid
-- **Testing:** Jest + Enzyme (unit), Playwright (E2E smoke)
-- **Tooling:** ESLint, Prettier, Husky, lint-staged, Commitizen
-- **Deployment:** Vercel
+| Variable                    | Required | Purpose                                       |
+| --------------------------- | -------- | --------------------------------------------- |
+| `DB_URI`                    | Yes      | MongoDB connection string                     |
+| `SENDGRID_API_KEY`          | Yes      | SendGrid API key                              |
+| `GOOGLE_EMAIL_ADDRESS`      | Yes      | Recipient and sender address for contact mail |
+| `NEXT_PUBLIC_DEMO_PASSWORD` | No       | Login password, defaults to `1234`            |
+| `NEWS_API_KEY`              | No       | Enables the news widget                       |
+| `NEWS_URL_QUERY`            | No       | News API URL without the key                  |
 
-## Installation
-
-1. **Clone repository**
-
-   ```bash
-   git clone <your-private-repo-url>
-   cd Kali-XFCE-Portfolio
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Create environment file**
-
-   `.env.local`
-
-   ```env
-   DB_URI=your_mongodb_connection_string
-   SENDGRID_API_KEY=your_sendgrid_key
-   GOOGLE_EMAIL_ADDRESS=your_email@example.com
-   ```
-
-   Optional:
-
-   ```env
-   NEWS_API_KEY=your_news_api_key
-   NEXT_PUBLIC_DEMO_PASSWORD=1234
-   ```
-
-4. **Run development server**
-
-   ```bash
-   npm run dev
-   ```
-
-5. Open:
-   - App: `http://localhost:3000`
+`DB_URI`, `SENDGRID_API_KEY`, and `GOOGLE_EMAIL_ADDRESS` are required at runtime.
+The app still boots without the optional variables, but the related widgets and
+features stay disabled.
 
 ## Scripts
 
-| Command                 | Description                    |
-| ----------------------- | ------------------------------ |
-| `npm run dev`           | Start development server       |
-| `npm run build`         | Production build               |
-| `npm run start`         | Start production server        |
-| `npm run lint`          | Run ESLint                     |
-| `npm run tsc`           | TypeScript type check          |
-| `npm run test`          | Run Jest unit tests            |
-| `npm run test:coverage` | Run tests with coverage report |
-| `npm run cm`            | Commit with Commitizen         |
+| Command                 | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `npm run dev`           | Start the development server on port 3000                 |
+| `npm run build`         | Create a production build with Next.js                    |
+| `npm run start`         | Start the production server                               |
+| `npm run lint`          | Run ESLint with zero warnings allowed                     |
+| `npm run typecheck`     | Run `tsc --noEmit`                                        |
+| `npm run format`        | Format the repository with Prettier                       |
+| `npm run format:check`  | Check formatting                                          |
+| `npm run test`          | Run the Jest suite                                        |
+| `npm run test:coverage` | Run tests with coverage thresholds                        |
+| `npm run audit`         | Check production dependencies for high or critical issues |
+| `npm run cm`            | Commit with Commitizen                                    |
 
-## Testing
+## Usage
 
-- **Unit tests:** Jest + Enzyme (reducers, utils, middleware, hooks)
-- **E2E tests:** Playwright (critical user flow: boot → login → desktop → terminal)
+### Boot chooser
 
-```bash
-# Run all unit tests
-npm test
+The first screen is a simulated BIOS boot menu. Use the arrow keys to select a
+target and press Enter, or click one of the boot options:
 
-# Run with coverage
-npm run test:coverage
+- **Portfolio Mode**: the minimal reading experience
+- **Kali Linux XFCE Mode**: the full desktop simulation
 
-# Run E2E tests (requires dev server running on port 8888)
-npx playwright test e2e/smoke.spec.ts
+### Kali desktop
+
+1. Watch the boot sequence, then press Enter or click to skip it.
+2. Log in with `NEXT_PUBLIC_DEMO_PASSWORD` (default `1234`).
+3. Use the desktop icons, panel, application menu, or terminal.
+
+Useful shortcuts:
+
+| Shortcut         | Action                                  |
+| ---------------- | --------------------------------------- |
+| `Ctrl+Alt+T`     | Open a terminal                         |
+| `Ctrl+K`         | Open the Portfolio Mode command palette |
+| `J` / `K`        | Scroll the Portfolio Mode page          |
+| `Left` / `Right` | Move focus between projects             |
+| `Enter`          | Open the focused project                |
+| `Escape`         | Close the palette or the exit dialog    |
+
+### Portfolio Mode
+
+Portfolio Mode keeps the same content with a simpler layout and a terminal or
+paper theme. The power button opens a confirmation dialog before returning to the
+boot menu.
+
+## Architecture
+
+The application is split into a Pages Router shell, a Redux state layer, and a
+simulated desktop UI.
+
+```text
+pages/
+  index.tsx              boot chooser, login, desktop, portfolio modes
+  api/contact            validated, rate-limited contact endpoint
+  api/health             MongoDB status and uptime
+
+components/
+  Desktop, SystemTray    desktop shell and panel
+  Apps/                  Terminal, FileManager, TextViewer, browser
+  PortfolioMode/         minimal portfolio experience
+  Widgets, Windows       desktop widgets and window manager
+
+store/                   Redux reducers and thunks
+backend/                 Mongoose models, controllers, DB helpers
+middleware/              rate limit, errors, request IDs, security headers
+utils/                   virtual filesystem, logger, retry, env validation
+hooks/                   reusable React hooks
+types/                   shared TypeScript types
+design-system/           theme tokens and global styles
 ```
 
-## Project Structure
+| Folder           | Responsibility                                 |
+| ---------------- | ---------------------------------------------- |
+| `pages/`         | Routing, server-side data fetching, API routes |
+| `components/`    | Desktop, apps, widgets, Portfolio Mode         |
+| `store/`         | Redux reducers and action creators             |
+| `backend/`       | Database models and email controller           |
+| `middleware/`    | API security and error handling                |
+| `utils/`         | Pure helpers, filesystem simulation, logging   |
+| `hooks/`         | React hooks for UI behaviour                   |
+| `design-system/` | Theme tokens and global CSS                    |
+| `test/`          | Test helpers and mock store                    |
+
+## Project structure
 
 ```text
 Kali-XFCE-Portfolio/
-├── backend/                  # Controllers, models, DB helpers
-├── components/               # Desktop, apps, widgets, portfolio UI
-│   └── Apps/                 # Terminal, FileManager, VsCode, TextViewer
-├── design-system/            # Theme tokens, global styles, CSS variables
-├── e2e/                      # Playwright E2E tests
-├── hooks/                    # Custom React hooks
-├── middleware/                # API middleware (rate limit, errors, tracing)
-├── pages/                    # Next.js pages + API routes
-│   └── api/                  # REST API endpoints
-├── public/                   # Icons, images, wallpapers, web manifest
-├── store/                    # Redux reducers and action creators
-├── test/                     # Test utilities and mock store
-├── types/                    # TypeScript type definitions
-├── utils/                    # Virtual filesystem, logger, retry, env validation
-├── README.md
+├── backend/                 # Controllers, models, DB helpers
+├── components/              # Desktop, apps, widgets, portfolio UI
+│   ├── Apps/                # Terminal, FileManager, TextViewer, browser
+│   ├── PortfolioMode/       # Portfolio sections and modals
+│   └── icons/               # Inline SVG icon set
+├── design-system/           # Theme tokens and global styles
+├── docs/                    # Testing and quality documentation
+├── e2e/                     # Playwright smoke spec (manual run)
+├── hooks/                   # Custom React hooks
+├── middleware/              # API middleware
+├── pages/                   # Next.js pages and API routes
+├── public/                  # Images, icons, wallpapers, manifest
+├── store/                   # Redux reducers and action creators
+├── test/                    # Test utilities and page tests
+├── types/                   # TypeScript types
+├── utils/                   # Virtual filesystem, logger, retry
+├── .github/                 # CI, CodeQL, Dependabot, issue templates
 ├── jest.config.js
+├── next.config.js
+├── package.json
 ├── tsconfig.json
-└── package.json
+└── README.md
 ```
 
-## Login
+## Testing and quality
 
-- Password: configured via `NEXT_PUBLIC_DEMO_PASSWORD` (default: `1234`)
+The project uses strict CI gates:
 
-## Notes
+```bash
+npm run lint
+npm run typecheck
+npm run format:check
+npm run test:coverage
+npm run audit
+npm run build
+```
 
-- Virtual filesystem writes are in-memory only and persist via `localStorage`.
-- Mousepad edits reset after refresh/restart.
-- CI runs lint, typecheck, tests, security audit, and a production build.
+The Jest suite covers API routes, middleware, Redux, utilities, hooks, and UI
+components. Coverage thresholds are enforced at 92% statements, 94% lines, 91%
+functions, and 82% branches. See `docs/TESTING.md` for the full test inventory.
+
+The `e2e/` folder contains a Playwright smoke spec. Playwright is not installed
+by default and the spec is not part of CI yet, so run it manually after installing
+Playwright.
+
+## Security
+
+- Security headers are configured in `next.config.js` and the API middleware.
+- Contact requests are validated, rate-limited, and checked for allowed origins.
+- `npm run audit` fails on unapproved high or critical production findings.
+- CodeQL and Dependabot run in GitHub Actions.
+- Do not report vulnerabilities in a public issue. Follow `SECURITY.md`.
+
+## Deployment
+
+The live site runs on Vercel at <https://me.zis3c.dev/>. Configure the environment
+variables from the table above in the Vercel project before deploying. The build
+command is `npm run build`.
 
 ## Contributing
 
-Read `CONTRIBUTING.md` before opening a pull request. Security issues should follow
-`SECURITY.md` instead of a public issue.
+Read `CONTRIBUTING.md` before opening a pull request. Keep changes focused, add
+tests for new behaviour, and run the quality gates listed above.
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).
