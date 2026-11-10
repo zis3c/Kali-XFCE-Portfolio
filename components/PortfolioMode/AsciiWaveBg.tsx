@@ -13,11 +13,11 @@ const CanvasWrapper = styled.div<{ themeMode: 'terminal' | 'paper' }>`
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  opacity: ${({ themeMode }) => (themeMode === 'terminal' ? 0.14 : 0.08)};
+  opacity: ${({ themeMode }) => (themeMode === 'terminal' ? 0.045 : 0.03)};
   transition: opacity 0.3s ease;
 `;
 
-const ASCII_RAMP = [' ', '·', '.', ':', '-', '~', '=', '+', '*', '%', '#', '@'];
+const ASCII_RAMP = [' ', '·', '·', '.', ':', '-', '~', '+', '*'];
 
 /**
  * Animated Interactive ASCII Wave Background.
@@ -95,7 +95,7 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       ctx.font = '12px "JetBrains Mono", Consolas, monospace';
-      ctx.fillStyle = themeMode === 'terminal' ? '#fafafa' : '#09090b';
+      ctx.fillStyle = themeMode === 'terminal' ? '#a1a1aa' : '#71717a';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
