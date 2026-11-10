@@ -28,4 +28,21 @@ describe('WithSparkles', () => {
     expect(wrap.text()).toBe('child');
     expect(wrap.find(Sparkle)).toHaveLength(3);
   });
+
+  it('renders with reduced motion enabled', () => {
+    window.matchMedia = jest.fn().mockReturnValue({
+      matches: false,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    });
+
+    const wrap = mount(
+      <WithSparkles color="#ffd700">
+        <span>reduced</span>
+      </WithSparkles>
+    );
+
+    expect(wrap.text()).toBe('reduced');
+    expect(wrap.find(Sparkle)).toHaveLength(3);
+  });
 });

@@ -30,10 +30,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 75,
-      functions: 88,
-      lines: 90,
-      statements: 90,
+      branches: 82,
+      functions: 91,
+      lines: 94,
+      statements: 92,
     },
   },
   // Enzyme stays here as a compatibility layer for the existing component specs.

@@ -50,6 +50,46 @@ describe('DesktopApps coverage', () => {
     expect(byDate.wrap.find(DesktopButton)).toHaveLength(6);
   });
 
+  it('draws a selection box while dragging and ends on mouse up', () => {
+    const { wrap } = render();
+    const container = wrap.find(Styled.DesktopContainer);
+    const onMouseDown = container.prop('onMouseDown') as (
+      e: React.MouseEvent<HTMLDivElement>
+    ) => void;
+    const onMouseMove = container.prop('onMouseMove') as (
+      e: React.MouseEvent<HTMLDivElement>
+    ) => void;
+    const onMouseUp = () =>
+      (wrap.find(Styled.DesktopContainer).prop('onMouseUp') as () => void)();
+    const down = mouse(null, {});
+    (down as unknown as { target: unknown }).target = (
+      down as unknown as { currentTarget: unknown }
+    ).currentTarget;
+
+    act(() => {
+      onMouseDown(down);
+    });
+    wrap.update();
+
+    const move = mouse(null, {});
+    (move as unknown as { clientX: number }).clientX = 100;
+    (move as unknown as { clientY: number }).clientY = 100;
+
+    act(() => {
+      onMouseMove(move);
+    });
+    wrap.update();
+
+    expect(wrap.find(Styled.SelectionBox)).toHaveLength(1);
+
+    act(() => {
+      onMouseUp();
+    });
+    wrap.update();
+
+    expect(wrap.find(Styled.SelectionBox)).toHaveLength(0);
+  });
+
   it('clears the selection when clicking on an icon target', () => {
     const { wrap } = render();
     const container = wrap.find(Styled.DesktopContainer);
