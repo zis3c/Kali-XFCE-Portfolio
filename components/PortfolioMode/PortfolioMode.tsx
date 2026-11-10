@@ -7,7 +7,7 @@ import type {
   SimpleTheme,
 } from './PortfolioMode.data';
 import PortfolioNav from './PortfolioNav';
-import PortfolioBootLoader from './PortfolioBootLoader';
+import ExitConfirmModal from './ExitConfirmModal';
 import CommandPalette from './CommandPalette';
 import AsciiWaveBg from './AsciiWaveBg';
 import HeroSection from './sections/HeroSection';
@@ -16,6 +16,7 @@ import ProjectsSection from './sections/ProjectsSection';
 import JourneySection from './sections/JourneySection';
 import SkillsSection from './sections/SkillsSection';
 import ContactSection from './sections/ContactSection';
+import PortfolioFooter from './PortfolioFooter';
 
 interface Props {
   onBackToChooser: () => void;
@@ -27,7 +28,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [paletteIndex, setPaletteIndex] = useState(0);
   const [focusedProjectIndex, setFocusedProjectIndex] = useState(0);
-  const [isBootLoading, setIsBootLoading] = useState(true);
+  const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
   const [repoStats, setRepoStats] = useState<Record<string, GithubRepoStat>>(
     {}
   );
@@ -66,13 +67,6 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
     ],
     [jumpTo]
   );
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setIsBootLoading(false);
-    }, 450);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     setFocusedProjectIndex(0);
@@ -217,10 +211,6 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
       <AsciiWaveBg themeMode={simpleTheme} />
-      <PortfolioBootLoader
-        isOpen={isBootLoading}
-        onDismiss={() => setIsBootLoading(false)}
-      />
 
       <PortfolioNav
         simpleTheme={simpleTheme}
@@ -228,7 +218,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           setSimpleTheme((prev) => (prev === 'terminal' ? 'paper' : 'terminal'))
         }
         onOpenPalette={() => setIsPaletteOpen(true)}
-        onBackToChooser={onBackToChooser}
+        onBackToChooser={() => setIsExitConfirmOpen(true)}
         jumpTo={jumpTo}
       />
 
@@ -248,11 +238,20 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         <ContactSection />
       </Styled.Main>
 
+      <PortfolioFooter jumpTo={jumpTo} />
+
       <CommandPalette
         isOpen={isPaletteOpen}
         actions={paletteActions}
         paletteIndex={paletteIndex}
         onClose={() => setIsPaletteOpen(false)}
+      />
+
+      <ExitConfirmModal
+        isOpen={isExitConfirmOpen}
+        themeMode={simpleTheme}
+        onCancel={() => setIsExitConfirmOpen(false)}
+        onConfirm={onBackToChooser}
       />
     </Styled.Wrapper>
   );

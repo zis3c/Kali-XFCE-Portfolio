@@ -342,14 +342,14 @@ export const Main = styled.main`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px max(140px, calc(100vh - 460px));
+  padding: 0 32px 32px;
 
   @media (max-width: 900px) {
-    padding: 0 20px max(120px, calc(100vh - 460px));
+    padding: 0 20px 24px;
   }
 
   @media (max-width: 640px) {
-    padding: 0 16px 80px;
+    padding: 0 16px 20px;
   }
 `;
 
@@ -1588,5 +1588,152 @@ export const GlitchLive = styled.span`
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Footer Component                                                   */
+/* ------------------------------------------------------------------ */
+
+export const Footer = styled.footer`
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--border-strong);
+  background: var(--panel);
+  padding: 44px 36px 32px;
+
+  @media (max-width: 900px) {
+    padding: 36px 20px 24px;
+  }
+`;
+
+export const FooterContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+`;
+
+export const FooterTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+`;
+
+export const FooterBrand = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 440px;
+
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .brand-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .brand-location {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+  }
+`;
+
+export const FooterNavLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
+`;
+
+export const FooterLinksRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--text);
+    }
+  }
+`;
+
+export const BackToTopButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--well);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--border-strong);
+  }
+`;
+
+export const FooterBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 12.5px;
+  color: var(--muted);
+`;
+
+export const FooterSocialList = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  a {
+    color: var(--muted);
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+      color: var(--text);
+      transform: translateY(-2px);
+    }
   }
 `;
