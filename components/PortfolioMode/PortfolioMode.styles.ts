@@ -342,14 +342,14 @@ export const Main = styled.main`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px 64px;
+  padding: 0 32px max(140px, calc(100vh - 460px));
 
   @media (max-width: 900px) {
-    padding: 0 20px 48px;
+    padding: 0 20px max(120px, calc(100vh - 460px));
   }
 
   @media (max-width: 640px) {
-    padding: 0 16px 40px;
+    padding: 0 16px 80px;
   }
 `;
 
