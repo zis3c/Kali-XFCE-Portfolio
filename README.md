@@ -213,6 +213,10 @@ Kali-XFCE-Portfolio/
 ├── types/                   # TypeScript types
 ├── utils/                   # Virtual filesystem, logger, retry
 ├── .github/                 # CI, CodeQL, Dependabot, issue templates
+├── CODE_OF_CONDUCT.md       # Community standards
+├── CONTRIBUTING.md          # Contribution guide
+├── LICENSE                  # MIT License
+├── SECURITY.md              # Vulnerability reporting
 ├── jest.config.js
 ├── next.config.js
 ├── package.json
