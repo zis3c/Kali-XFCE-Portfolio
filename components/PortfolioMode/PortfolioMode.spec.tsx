@@ -123,4 +123,32 @@ describe('PortfolioMode', () => {
       'noopener,noreferrer'
     );
   });
+
+  it('fetches live repository stars and forks from the GitHub API', async () => {
+    const originalFetch = window.fetch;
+    window.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [
+        { name: 'RedLilyGO', stargazers_count: 12, forks_count: 3 },
+      ],
+    });
+
+    const wrap = mount(<PortfolioMode onBackToChooser={jest.fn()} />);
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+    wrap.update();
+
+    expect(window.fetch).toHaveBeenCalledWith(
+      'https://api.github.com/users/zis3c/repos?per_page=100'
+    );
+    expect(wrap.find(Styled.ProjectCard).at(1).text()).toContain('12');
+    expect(wrap.find(Styled.ProjectCard).at(1).text()).toContain('3');
+
+    window.fetch = originalFetch;
+  });
 });

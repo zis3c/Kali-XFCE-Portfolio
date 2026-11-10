@@ -118,9 +118,207 @@ export const Brand = styled.div`
     border: 1px solid var(--border-strong);
     border-radius: 6px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1080px) {
       display: none;
     }
+  }
+`;
+
+export const ChapterNav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  button {
+    min-height: 38px;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      color: var(--text);
+      background: var(--well);
+      border-color: var(--border-strong);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    display: none;
+  }
+`;
+
+export const ChapterEyebrow = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 10px;
+`;
+
+export const StorySection = styled.section`
+  margin-bottom: 72px;
+
+  @media (max-width: 640px) {
+    margin-bottom: 52px;
+  }
+`;
+
+export const PillarGrid = styled.div`
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+`;
+
+export const PillarCard = styled.article<{ iconColor?: string }>`
+  background: var(--panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .pillar-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    color: ${({ iconColor }) => iconColor || 'var(--text)'};
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.68;
+    color: var(--muted);
+  }
+
+  .pillar-tags {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .pillar-tag {
+    padding: 3px 9px;
+    border-radius: 5px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+  }
+`;
+
+export const TimelineWrap = styled.div`
+  margin-top: 22px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+`;
+
+export const TimelineItem = styled.div`
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 20px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border-strong);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .time-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .time-sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .time-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .time-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .time-desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 68ch;
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px 16px;
   }
 `;
 

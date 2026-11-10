@@ -32,14 +32,13 @@ const About = (): JSX.Element => {
         <Paragraph margin={'1rem 0'}>
           Kali GNU/Linux Rolling | Xfce 4.18
         </Paragraph>
-        <Paragraph margin={'1rem 0'}>Built by Radzi Zamri (zis3c)</Paragraph>
+        <Paragraph margin={'1rem 0'}>Built by Radzi (zis3c)</Paragraph>
         <Paragraph margin={'1rem 0'}>
-          Cybersecurity & CS Undergrad | Purple Team & RE / Binary Analysis
-          Trainer
+          Cybersecurity Researcher | Purple Team & RE / Binary Analysis Trainer
         </Paragraph>
         <Paragraph margin={'1rem 0'}>CTF Team: Dot Zero (U545)</Paragraph>
         <Paragraph margin={'1rem 0'}>
-          Universiti Sultan Azlan Shah (USAS) | CGPA 3.83
+          Computer Science & Information Technology
         </Paragraph>
         <Paragraph margin={'2rem 0'}>
           This interactive portfolio simulates a Kali Linux Xfce desktop

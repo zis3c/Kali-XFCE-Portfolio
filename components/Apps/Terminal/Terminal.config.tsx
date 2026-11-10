@@ -61,10 +61,10 @@ export const useTerminalCommands = (
                                Memory: ${memUsed}MiB / 8192MiB
 
   ╔═══════════════════════════════════════════════════════╗
-  ║  Radzi Zamri (zis3c)                                  ║
-  ║  Cybersecurity & CS Undergrad (CGPA 3.83)             ║
+  ║  Radzi (zis3c)                                        ║
+  ║  Cybersecurity Researcher & Full-Stack Developer      ║
   ║  Purple Team • RE & Binary Analysis • Dot Zero (U545) ║
-  ║  Universiti Sultan Azlan Shah (USAS)                  ║
+  ║  Computer Science & Information Technology            ║
   ║  github.com/zis3c | me.zis3c.dev                      ║
   ╚═══════════════════════════════════════════════════════╝`;
   };
@@ -102,7 +102,7 @@ export const useTerminalCommands = (
     clear             Clear terminal (or Ctrl+L)
 
   Portfolio:
-    open <app>        Open app (about, projects, skills, contact, resume, terminal, files)
+    open <app>        Open app (about, projects, skills, contact, terminal, files)
     skills --list     List technical skills
     projects --list   List project folders
 
@@ -311,26 +311,6 @@ export const useTerminalCommands = (
             ),
           });
           return { output: 'Opening contact.txt...', isError: false };
-        }
-        if (app === 'resume') {
-          const resumeContent = readFile('/home/zis3c/resume.txt');
-          openWindow({
-            windowName: 'resume.txt — Mousepad',
-            isOpen: true,
-            windowIcon: 'KALI_TEXTFILE',
-            size: { width: 560, height: 420 },
-            windowContent: (
-              <TextViewer
-                content={resumeContent || ''}
-                filename="resume.txt"
-                filepath="/home/zis3c/resume.txt"
-              />
-            ),
-          });
-          return {
-            output: 'Opening resume.txt...',
-            isError: false,
-          };
         }
         if (app === 'terminal') {
           openWindow({

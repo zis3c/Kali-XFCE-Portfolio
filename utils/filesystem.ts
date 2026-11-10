@@ -23,13 +23,11 @@ export interface FsNode {
 
 const aboutTxt = `Name:       Radzi Zamri
 Alias:      zis3c
-Role:       Cybersecurity & CS Undergrad | Purple Team | RE Trainer
+Role:       Cybersecurity Researcher | Purple Team | RE Trainer
 CTF Team:   Dot Zero (U545) — ctftime.org/team/421634
-University: Universiti Sultan Azlan Shah (USAS)
-Degree:     Bachelor of Computer Science (CGPA: 3.83 | Dean's List Sem 1-4)
-Diploma:    Diploma in Information Technology (CGPA: 3.77 | Dean's List 4 Sems)
+Background: Computer Science & Information Technology
 Focus:      Threat Detection, Reverse Engineering, Honeypot Telemetry, Full-Stack Tooling
-Status:     Seeking 14-Week Cybersecurity Internship (Feb 2027) | Open to CTF collabs`;
+Status:     Open to security research & CTF collaborations`;
 
 const skillsTxt = `Disassemblers/RE: Ghidra, IDA Pro, Binary Ninja, Radare2 / Cutter, JADX, Apktool
 Debuggers/Dynamic: x64dbg, GDB + GEF, Frida (Dynamic Binary Instrumentation), Immunity Debugger
@@ -44,17 +42,16 @@ Databases/Cloud:  PostgreSQL, ClickHouse, Redis, Docker, Linux, DigitalOcean, Gi
 AI & Automation:  Codex, DeepSeek, Antigravity, Agentic Workflows, Telegram Bots, CLI Tools
 Languages:        Bahasa Melayu (Native), English (Fluent)`;
 
-const contactTxt = `Radzi bin Zamri (zis3c)
-Role:       Cybersecurity & CS Undergrad (CGPA 3.83) | Purple Team
-Location:   Selangor, Malaysia
-Email:      r.zradzizamri@gmail.com
+const contactTxt = `Radzi (zis3c)
+Role:       Cybersecurity Researcher & Full-Stack Developer
 Portfolio:  https://me.zis3c.dev
 GitHub:     https://github.com/zis3c
 LinkedIn:   https://linkedin.com/in/radzizamri
+CTFtime:    https://ctftime.org/team/421634
 Instagram:  https://instagram.com/radz.z_
 YouTube:    https://youtube.com/@zis3c
 
-Seeking 14-Week Cybersecurity Internship (Feb 2027) | Open to CTF collabs & research.`;
+Open to CTF collaborations, open-source tooling, and security research.`;
 
 const notesMd = `# Notes & Active Agenda (2026)
 
@@ -62,8 +59,7 @@ const notesMd = `# Notes & Active Agenda (2026)
 - [x] CloudSentinel: SSH Honeypot with ClickHouse + Next.js dashboard & <1ms firewall blocker
 - [x] RedLilyGO: ESP32-S3 firmware with USB HID & PCAP capture + .NET 8 desktop companion
 - [x] JanjiCare: Laravel 13 + React 18 clinic booking & WebRTC telehealth consultation portal
-- [ ] Finalize FYP report and CloudSentinel benchmark documentation
-- [ ] Prepare for 14-week Cybersecurity Internship (commencing February 2027)
+- [ ] Finalize CloudSentinel benchmark documentation
 - [ ] Organize next Dot Zero internal MockCTF & Advanced Binary Analysis / Frida workshop
 - [ ] Expand USAS Assignment Notifier & Timetable for next semester intake
 
@@ -92,35 +88,6 @@ alias grep='grep --color=auto'
 if [ -x /usr/bin/dircolors ]; then
     eval "$(dircolors -b)"
 fi`;
-
-const resumeContent = `RADZI BIN ZAMRI
-Cybersecurity & Computer Science Undergrad (CGPA: 3.83)
-Selangor, Malaysia | r.zradzizamri@gmail.com
-me.zis3c.dev | github.com/zis3c | linkedin.com/in/radzizamri
-
-OBJECTIVE
-Computer Science undergraduate at Universiti Sultan Azlan Shah (CGPA 3.83) seeking a 14-week
-Cybersecurity Internship starting February 2027 in Selangor or Kuala Lumpur. Practical experience
-in threat detection, reverse engineering, and full-stack development, with the goal of contributing
-effectively to SOC monitoring, incident response, or penetration testing teams.
-
-EDUCATION
-- Bachelor of Computer Science - Universiti Sultan Azlan Shah (2024 - 2027) | CGPA: 3.83 (Dean's List Sem I-IV)
-- Diploma in Information Technology - Universiti Sultan Azlan Shah (2021 - 2024) | CGPA: 3.77 (Dean's List 4 Sems)
-
-FEATURED PROJECTS
-- CloudSentinel (FYP 2026): Python SSH Honeypot, HASSH, MITRE ATT&CK, ClickHouse & Next.js
-- Google Forms Spammer: High-performance async stress tester with aiohttp & web configurator
-- RedLilyGO (2026): ESP32-S3 Security Firmware, USB HID, PCAP capture, .NET 8 Companion App
-- JanjiCare (2026): Clinic Web Appointment & Telehealth (Laravel 13, React 18, WebRTC LiveKit)
-- Dot Zero CTF Pipeline & RE Training: Team Secretary & RE Trainer (Ghidra, IDA, x64dbg, GDB, Frida)
-- STEM-USAS Ecosystem: stem.zis3c.dev & STEM-Telebot membership automation
-- USAS Assignment Notifier & Timetable: Telegram alert bot & jadualkelas.zis3c.dev
-- Polyglot Files: Dual-signature file generator & parser confusion research
-
-CERTIFICATIONS
-- Google Cybersecurity Professional Certificate - Coursera (2026)
-- Reverse Engineering Bootcamp: Ghidra, IDA, Linux, and x86_64 - Udemy (2026)`;
 
 // Real GitHub project READMEs
 const cloudSentinelReadme = `# CloudSentinel: SSH Honeypot & Threat Detection System (FYP)
@@ -352,12 +319,6 @@ export const fsTree: FsNode = {
               size: 180,
             },
             { name: 'notes.md', type: 'file', content: notesMd, size: 340 },
-            {
-              name: 'resume.txt',
-              type: 'file',
-              content: resumeContent,
-              size: 2048,
-            },
             {
               name: 'Desktop',
               type: 'dir',

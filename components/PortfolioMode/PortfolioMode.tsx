@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FaEnvelope,
   FaGithub,
   FaLinkedin,
   FaYoutube,
@@ -93,8 +92,6 @@ type FeaturedProject = {
   repoType: string;
   statusLabel?: string;
   isPrivate?: boolean;
-  stars?: number;
-  forks?: number;
   stack: TechItem[];
   summary: string;
   highlights: string[];
@@ -102,6 +99,11 @@ type FeaturedProject = {
   link: string;
   demoLink?: string;
   demoLabel?: string;
+};
+
+type GithubRepoStat = {
+  stars: number;
+  forks: number;
 };
 
 const featuredProjects: FeaturedProject[] = [
@@ -136,7 +138,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaMicrochip />,
     iconColor: '#F97316',
     repoType: 'ESP32-S3 Security Firmware',
-    stars: 6,
     stack: [
       { name: 'ESP32-S3 C++', icon: <SiCplusplus />, color: '#00599C' },
       { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
@@ -159,7 +160,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaHospital />,
     iconColor: '#06B6D4',
     repoType: 'Clinic Management & WebRTC Telehealth',
-    stars: 2,
     stack: [
       { name: 'Laravel', icon: <SiLaravel />, color: '#FF2D20' },
       { name: 'React', icon: <SiReact />, color: '#00D8FF' },
@@ -183,8 +183,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaBolt />,
     iconColor: '#EAB308',
     repoType: 'Async Stress-Testing CLI',
-    stars: 5,
-    forks: 1,
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'aiohttp / asyncio', icon: <SiPython />, color: '#FFD43B' },
@@ -207,8 +205,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaBell />,
     iconColor: '#007ACC',
     repoType: 'VS Code Extension',
-    stars: 6,
-    forks: 7,
     stack: [
       { name: 'VS Code API', icon: <SiVisualstudiocode />, color: '#007ACC' },
       { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
@@ -217,8 +213,8 @@ const featuredProjects: FeaturedProject[] = [
       'VS Code extension that notifies developers with sound and status/banner alerts when Codex responses finish.',
     highlights: [
       'Audio cues and VS Code status bar/banner notifications when long AI tasks complete',
-      'Adopted by the community with 6 GitHub stars and 7 forks',
-      'Lightweight zero-dependency extension workflow for developer productivity',
+      'Used by developers to stay productive during background code generation runs',
+      'Lightweight zero-dependency extension workflow for VS Code',
     ],
     tags: ['Automation', 'Web'],
     link: 'https://github.com/zis3c/Codex-notifier-vscode',
@@ -239,7 +235,7 @@ const featuredProjects: FeaturedProject[] = [
     highlights: [
       'Syncs CTFd challenges and attachments automatically into structured category folders',
       'Validates local Reverse Engineering and Pwn toolchains (Ghidra, x64dbg, GDB+GEF, Frida)',
-      'Built for USAS CTF team Dot Zero (U545) competition workflows',
+      'Built for university CTF team Dot Zero (U545) competition workflows',
     ],
     tags: ['Security', 'Automation'],
     link: 'https://github.com/zis3c/CTF-Pipeline',
@@ -276,8 +272,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaRobot />,
     iconColor: '#26A5E4',
     repoType: 'Membership Verification Bot',
-    stars: 2,
-    forks: 1,
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Telegram Bot', icon: <SiTelegram />, color: '#26A5E4' },
@@ -288,7 +282,7 @@ const featuredProjects: FeaturedProject[] = [
     highlights: [
       'Automated student membership verification and digital receipt generation',
       'Real-time two-way sync with Google Sheets and admin broadcast tools',
-      'Verified 62+ registered STEM USAS members with role-based bot commands',
+      'Role-based bot commands for student association administrators',
     ],
     tags: ['Bot', 'Automation'],
     link: 'https://github.com/zis3c/STEM-Telebot',
@@ -307,7 +301,7 @@ const featuredProjects: FeaturedProject[] = [
     summary:
       'Official web portal for the STEM student association at Universiti Sultan Azlan Shah (USAS), showcasing programs, leadership, and registration links.',
     highlights: [
-      'Production web portal deployed at stem.zis3c.dev for USAS STEM students',
+      'Production web portal deployed at stem.zis3c.dev for STEM students',
       'Responsive layout presenting club activities, announcements, and committee directory',
       'Integrated with the STEM-Telebot verification workflow',
     ],
@@ -330,9 +324,9 @@ const featuredProjects: FeaturedProject[] = [
     summary:
       'Automated USAS assignment tracker that syncs VirtualCampus course deadlines and sends real-time Telegram alerts.',
     highlights: [
-      'Served 50 active USAS students tracking 245+ course assignments automatically',
+      'Tracks course assignments and upcoming submission deadlines automatically',
       'Scheduled scraper syncing Moodle/VirtualCampus deadlines with Telegram notifications',
-      'Encrypted credential storage and customizable reminder intervals',
+      'Encrypted credential handling and customizable reminder intervals',
     ],
     tags: ['Automation', 'Bot'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
@@ -343,7 +337,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaCalendarAlt />,
     iconColor: '#38BDF8',
     repoType: 'Student Timetable Portal',
-    forks: 1,
     stack: [
       { name: 'React', icon: <SiReact />, color: '#00D8FF' },
       { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
@@ -351,7 +344,7 @@ const featuredProjects: FeaturedProject[] = [
     summary:
       'The timetable portal for USAS students to manage, view, and export their class schedules.',
     highlights: [
-      'Interactive schedule builder live at jadualkelas.zis3c.dev for USAS students',
+      'Interactive schedule builder live at jadualkelas.zis3c.dev for university students',
       'Exports clean PDF timetables and high-resolution lockscreen wallpapers',
       'Conflict detection and course slot search across university faculties',
     ],
@@ -387,7 +380,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaMicrochip />,
     iconColor: '#00979D',
     repoType: 'ESP32-S3 Board Matrix & Validation',
-    stars: 1,
     stack: [
       { name: 'C', icon: <SiC />, color: '#A8B9CC' },
       { name: 'Arduino', icon: <SiArduino />, color: '#00979D' },
@@ -504,7 +496,7 @@ const featuredProjects: FeaturedProject[] = [
     summary:
       'An automated tool that instantly connects to the USAS campus WiFi and logs into your student portals with one click.',
     highlights: [
-      'Automates captive portal authentication on the USAS campus Wi-Fi network',
+      'Automates captive portal authentication on the campus Wi-Fi network',
       'One-click login launcher for student academic portals',
       'Cross-platform Python script designed for daily campus convenience',
     ],
@@ -517,7 +509,6 @@ const featuredProjects: FeaturedProject[] = [
     icon: <FaChartBar />,
     iconColor: '#6366F1',
     repoType: 'Telegram Reaction Analytics',
-    stars: 1,
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Pandas', icon: <SiPandas />, color: '#150458' },
@@ -702,6 +693,9 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [paletteIndex, setPaletteIndex] = useState(0);
   const [focusedProjectIndex, setFocusedProjectIndex] = useState(0);
+  const [repoStats, setRepoStats] = useState<Record<string, GithubRepoStat>>(
+    {}
+  );
 
   const filteredProjects = featuredProjects.filter((project) => {
     if (projectFilter === 'All') return true;
@@ -711,6 +705,40 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   useEffect(() => {
     setFocusedProjectIndex(0);
   }, [projectFilter]);
+
+  /* Fetch live stars & forks directly from GitHub public REST API */
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.fetch !== 'function') {
+      return;
+    }
+    let isMounted = true;
+    window
+      .fetch('https://api.github.com/users/zis3c/repos?per_page=100')
+      .then((res) => (res && res.ok ? res.json() : null))
+      .then((data) => {
+        if (!isMounted || !Array.isArray(data)) return;
+        const nextStats: Record<string, GithubRepoStat> = {};
+        data.forEach((repo: Record<string, unknown>) => {
+          if (typeof repo.name === 'string') {
+            nextStats[repo.name.toLowerCase()] = {
+              stars:
+                typeof repo.stargazers_count === 'number'
+                  ? repo.stargazers_count
+                  : 0,
+              forks:
+                typeof repo.forks_count === 'number' ? repo.forks_count : 0,
+            };
+          }
+        });
+        setRepoStats(nextStats);
+      })
+      .catch(() => {
+        /* Fallback silently if GitHub API is rate-limited or offline */
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const prevHtmlScrollBehavior =
@@ -860,12 +888,33 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       {/* Top Navigation Bar */}
       <Styled.Nav>
         <Styled.BrandGroup>
-          <Styled.StatusLed title="Available for Feb 2027 Internship" />
+          <Styled.StatusLed title="Active Portfolio" />
           <Styled.Brand>
-            <span>Radzi Zamri (zis3c)</span>
-            <span className="role-tag">Cybersecurity &amp; CS Portfolio</span>
+            <span>Radzi (zis3c)</span>
+            <span className="role-tag">Security &amp; Software Portfolio</span>
           </Styled.Brand>
         </Styled.BrandGroup>
+
+        <Styled.ChapterNav aria-label="Portfolio sections">
+          <button type="button" onClick={() => jumpTo('simple-about')}>
+            Story
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-craft')}>
+            What I Do
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-journey')}>
+            Journey
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-projects')}>
+            Projects
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-skills')}>
+            Toolkit
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-contact')}>
+            Connect
+          </button>
+        </Styled.ChapterNav>
 
         <Styled.NavActions>
           <Styled.PaletteTrigger
@@ -912,11 +961,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       </Styled.Nav>
 
       <Styled.Main>
-        {/* Section 1: About & Academic Highlights */}
+        {/* Chapter 1: Introduction & Personal Story */}
         <Styled.HeroWorkbench id="simple-about">
           <Styled.HeroSection>
             <Styled.WindowChromeBar>
-              <span>About Radzi Zamri</span>
+              <span>01 · Who I Am</span>
               <span className="window-dots">
                 <span className="win-dot" />
                 <span className="win-dot" />
@@ -925,39 +974,43 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             </Styled.WindowChromeBar>
 
             <Styled.HeroBody>
+              <Styled.ChapterEyebrow>
+                Chapter 01 · Introduction
+              </Styled.ChapterEyebrow>
               <Styled.HeroTitle>
                 <GlitchText
                   words={[
-                    'Cybersecurity Portfolio',
-                    'Threat Detection & SOC',
-                    'Reverse Engineering',
-                    'Dot Zero CTF Team',
+                    'Hi, I am Radzi (zis3c).',
+                    'Threat Detection Builder.',
+                    'Binary Reverse Engineer.',
+                    'Full-Stack Software Maker.',
                   ]}
                 />
               </Styled.HeroTitle>
 
               <Styled.HeroRoleSub>
-                Computer Science Undergraduate (CGPA 3.83) · Purple Team &amp;
-                Reverse Engineering Trainer
+                Cybersecurity Researcher · Reverse Engineering Trainer ·
+                Full-Stack Developer
               </Styled.HeroRoleSub>
 
               <Styled.HeroText>
-                Computer Science student at Universiti Sultan Azlan Shah (USAS)
-                with practical experience in SSH honeypot threat detection,
-                binary reverse engineering (Ghidra, IDA Pro, x64dbg, GDB+GEF,
-                Frida), hardware security firmware, and full-stack web
-                development. Secretary and Reverse Engineering Trainer for USAS
-                CTF team Dot Zero, currently seeking a 14-week Cybersecurity
-                Internship starting February 2027.
+                I am a Computer Science student and security researcher who
+                learns best by taking systems apart and building defenses from
+                scratch. Whether I am deploying an SSH honeypot to observe how
+                automated scanners behave in the wild, dissecting compiled
+                binaries in Ghidra and x64dbg, or flashing custom firmware onto
+                an ESP32-S3 hardware dongle, I enjoy working close to how
+                software and networks actually operate.
+              </Styled.HeroText>
+
+              <Styled.HeroText>
+                Beyond security research, I build full-stack web platforms and
+                automation bots that solve real everyday problems for students
+                and communities, while mentoring peers as Secretary and Reverse
+                Engineering Trainer for our university CTF team, Dot Zero.
               </Styled.HeroText>
 
               <Styled.SocialGrid>
-                <Styled.SocialButton
-                  href="mailto:r.zradzizamri@gmail.com"
-                  iconColor="#EA4335"
-                >
-                  <FaEnvelope /> Email
-                </Styled.SocialButton>
                 <Styled.SocialButton
                   href="https://github.com/zis3c"
                   target="_blank"
@@ -1001,58 +1054,227 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             </Styled.HeroBody>
           </Styled.HeroSection>
 
-          <Styled.TelemetryPanel aria-label="Profile and Academic Summary">
+          <Styled.TelemetryPanel aria-label="Quick Snapshot">
             <Styled.WindowChromeBar>
-              <span>Profile &amp; Academic Summary</span>
-              <span>Verified</span>
+              <span>At a Glance</span>
+              <span>zis3c</span>
             </Styled.WindowChromeBar>
             <Styled.TelemetryBody>
               <Styled.RegisterTable>
                 <Styled.RegisterRow>
-                  <dt>Full Name</dt>
-                  <dd>Radzi bin Zamri (zis3c)</dd>
+                  <dt>Handle</dt>
+                  <dd>Radzi · zis3c</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>University</dt>
-                  <dd>Universiti Sultan Azlan Shah (USAS)</dd>
+                  <dt>Background</dt>
+                  <dd>Computer Science &amp; Information Technology</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Bachelor&apos;s</dt>
-                  <dd>Computer Science · CGPA 3.83 (Dean&apos;s List)</dd>
-                </Styled.RegisterRow>
-                <Styled.RegisterRow>
-                  <dt>Diploma</dt>
-                  <dd>Information Technology · CGPA 3.77</dd>
+                  <dt>Primary Focus</dt>
+                  <dd>Threat Detection, Reverse Engineering &amp; Web</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
                   <dt>CTF Team</dt>
-                  <dd>Dot Zero (U545) Secretary &amp; RE Trainer</dd>
+                  <dd>Dot Zero (U545) · Secretary &amp; RE Trainer</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>CTF Results</dt>
-                  <dd>21st RE:UN10N · 88th ApoorvCTF · 133rd 0xFun</dd>
+                  <dt>RE Workflow</dt>
+                  <dd>Ghidra, IDA Pro, x64dbg, GDB+GEF &amp; Frida</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Certificates</dt>
-                  <dd>Google Cybersecurity · RE Bootcamp (Ghidra/IDA)</dd>
+                  <dt>Flagship Work</dt>
+                  <dd>CloudSentinel Honeypot &amp; RedLilyGO ESP32-S3</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Internship</dt>
-                  <dd>14 Weeks starting Feb 2027 (Selangor / KL)</dd>
+                  <dt>Open Source</dt>
+                  <dd>23 Repositories across Security, Web &amp; Bots</dd>
                 </Styled.RegisterRow>
               </Styled.RegisterTable>
             </Styled.TelemetryBody>
           </Styled.TelemetryPanel>
         </Styled.HeroWorkbench>
 
-        {/* Section 2: Featured Projects */}
+        {/* Chapter 2: What I Do (Craft & Philosophy) */}
+        <Styled.StorySection id="simple-craft">
+          <Styled.SectionHeader>
+            <Styled.ChapterEyebrow>
+              Chapter 02 · What I Do
+            </Styled.ChapterEyebrow>
+            <Styled.SectionTitle>
+              How I Approach Security &amp; Engineering
+            </Styled.SectionTitle>
+            <Styled.SectionSubtitle>
+              My work sits at the intersection of defensive monitoring,
+              low-level binary analysis, and practical full-stack software.
+            </Styled.SectionSubtitle>
+          </Styled.SectionHeader>
+
+          <Styled.PillarGrid>
+            <Styled.PillarCard iconColor="#EF4444">
+              <div className="pillar-icon">
+                <FaShieldAlt />
+              </div>
+              <h3>Threat Detection &amp; Purple Team</h3>
+              <p>
+                To defend a system effectively, you need visibility into how
+                real attackers operate. I build cloud-native honeypots like
+                CloudSentinel to capture live brute-force sessions, fingerprint
+                clients using HASSH, map commands to MITRE ATT&amp;CK, and
+                automate sub-second firewall containment.
+              </p>
+              <div className="pillar-tags">
+                <span className="pillar-tag">SSH Honeypots</span>
+                <span className="pillar-tag">HASSH &amp; MITRE ATT&amp;CK</span>
+                <span className="pillar-tag">SOAR Auto-Blocking</span>
+              </div>
+            </Styled.PillarCard>
+
+            <Styled.PillarCard iconColor="#8B5CF6">
+              <div className="pillar-icon">
+                <FiTerminal />
+              </div>
+              <h3>Reverse Engineering &amp; Binary Triage</h3>
+              <p>
+                When source code is unavailable, the compiled binary tells the
+                real story. I combine static decompilation (Ghidra, IDA Pro)
+                with dynamic debugging and runtime instrumentation (x64dbg,
+                GDB+GEF, Frida) to inspect ELF/PE/APK internals and teach
+                hands-on workshops for the Dot Zero CTF team.
+              </p>
+              <div className="pillar-tags">
+                <span className="pillar-tag">Ghidra &amp; IDA Pro</span>
+                <span className="pillar-tag">x64dbg &amp; GDB+GEF</span>
+                <span className="pillar-tag">Frida DBI</span>
+              </div>
+            </Styled.PillarCard>
+
+            <Styled.PillarCard iconColor="#F97316">
+              <div className="pillar-icon">
+                <FaMicrochip />
+              </div>
+              <h3>Full-Stack &amp; Hardware Building</h3>
+              <p>
+                I love turning ideas into complete, usable products. That ranges
+                from C++ firmware on ESP32-S3 USB dongles (RedLilyGO) to Laravel
+                + React WebRTC telehealth platforms (JanjiCare) and automated
+                Telegram bots that simplify campus life for students.
+              </p>
+              <div className="pillar-tags">
+                <span className="pillar-tag">Next.js &amp; React</span>
+                <span className="pillar-tag">Laravel &amp; Python</span>
+                <span className="pillar-tag">ESP32-S3 Firmware</span>
+              </div>
+            </Styled.PillarCard>
+          </Styled.PillarGrid>
+        </Styled.StorySection>
+
+        {/* Chapter 3: The Journey (Timeline) */}
+        <Styled.StorySection id="simple-journey">
+          <Styled.SectionHeader>
+            <Styled.ChapterEyebrow>
+              Chapter 03 · The Journey
+            </Styled.ChapterEyebrow>
+            <Styled.SectionTitle>
+              Milestones &amp; Progression
+            </Styled.SectionTitle>
+            <Styled.SectionSubtitle>
+              A look at how my curiosity evolved from Linux and web development
+              into security research, hardware firmware, and CTF leadership.
+            </Styled.SectionSubtitle>
+          </Styled.SectionHeader>
+
+          <Styled.TimelineWrap>
+            <Styled.TimelineItem>
+              <div className="time-period">
+                <span>2026 · Present</span>
+                <span className="time-sub">Security Research &amp; FYP</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Building CloudSentinel &amp; RedLilyGO Hardware Firmware
+                </h3>
+                <p className="time-desc">
+                  Architected CloudSentinel, an event-driven SSH honeypot with
+                  active SOAR auto-blocking, ClickHouse analytics, and MITRE
+                  ATT&amp;CK mapping, while developing custom ESP32-S3 security
+                  assessment firmware and a .NET 8 companion app for RedLilyGO.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <div className="time-period">
+                <span>2025 – 2026</span>
+                <span className="time-sub">Dot Zero CTF Team (U545)</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Team Secretary &amp; Reverse Engineering Trainer
+                </h3>
+                <p className="time-desc">
+                  Co-organized internal training sessions and hands-on binary
+                  reverse engineering workshops (Ghidra, x64dbg, GDB+GEF,
+                  Frida), built the CTF-Pipeline workspace automation tool, and
+                  competed alongside Dot Zero in international CTFs (including
+                  21st in RE:UN10N CTF, 88th in ApoorvCTF, and 133rd in 0xFun
+                  CTF).
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <div className="time-period">
+                <span>2024 – 2026</span>
+                <span className="time-sub">Full-Stack &amp; Automation</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Shipping Campus Platforms, Telehealth &amp; Developer Tools
+                </h3>
+                <p className="time-desc">
+                  Built and launched web portals and automation tools used by
+                  students and developers, including the STEM-USAS portal,
+                  STEM-Telebot, USAS Class Timetable generator, Assignment
+                  Notifier, JanjiCare WebRTC clinic platform, and the Codex
+                  Notifier VS Code extension.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <div className="time-period">
+                <span>2021 – 2024</span>
+                <span className="time-sub">Core Foundations</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Linux Systems, Networking &amp; Software Engineering
+                </h3>
+                <p className="time-desc">
+                  Built a strong foundation in Linux environments, computer
+                  networking, relational databases, and full-stack programming,
+                  sparking a lasting interest in how software can be both
+                  engineered and secured.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+          </Styled.TimelineWrap>
+        </Styled.StorySection>
+
+        {/* Chapter 4: Featured Projects */}
         <Styled.DirectoryFrame id="simple-projects">
           <Styled.DirectoryHeaderBar>
             <Styled.SectionHeader>
-              <Styled.SectionTitle>Featured Projects</Styled.SectionTitle>
+              <Styled.ChapterEyebrow>
+                Chapter 04 · Projects &amp; Research
+              </Styled.ChapterEyebrow>
+              <Styled.SectionTitle>
+                Things I Have Built &amp; Explored
+              </Styled.SectionTitle>
               <Styled.SectionSubtitle>
-                Open-source security tools, custom hardware firmware, full-stack
-                web platforms, and automation bots.
+                All 23 repositories across defensive security, hardware
+                firmware, full-stack web apps, and automation. Stars and forks
+                sync live from the GitHub API.
               </Styled.SectionSubtitle>
             </Styled.SectionHeader>
             <Styled.DirectoryCountBadge>
@@ -1086,6 +1308,9 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               filteredProjects.map((project, index) => {
                 const isFlagship =
                   projectFilter === 'All' && project.id === '01';
+                const repoSlug =
+                  project.link.split('/').pop()?.toLowerCase() || '';
+                const liveStat = repoStats[repoSlug];
                 return (
                   <Styled.ProjectCard
                     key={project.name}
@@ -1123,15 +1348,21 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                                   )}{' '}
                                   {project.tags.join(' · ')}
                                 </span>
-                                {project.stars !== undefined && (
-                                  <span className="repo-tag">
+                                {liveStat && liveStat.stars > 0 && (
+                                  <span
+                                    className="repo-tag"
+                                    title="Live stars from GitHub API"
+                                  >
                                     <FaStar style={{ color: '#EAB308' }} />{' '}
-                                    {project.stars}
+                                    {liveStat.stars}
                                   </span>
                                 )}
-                                {project.forks !== undefined && (
-                                  <span className="repo-tag">
-                                    <FaCodeBranch /> {project.forks}
+                                {liveStat && liveStat.forks > 0 && (
+                                  <span
+                                    className="repo-tag"
+                                    title="Live forks from GitHub API"
+                                  >
+                                    <FaCodeBranch /> {liveStat.forks}
                                   </span>
                                 )}
                               </Styled.ProjectMetaRow>
@@ -1205,16 +1436,19 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           </Styled.ProjectsSection>
         </Styled.DirectoryFrame>
 
-        {/* Section 3: Technical Skills & Tooling */}
-        <Styled.ArsenalSection>
+        {/* Chapter 5: Technical Skills & Tooling */}
+        <Styled.ArsenalSection id="simple-skills">
           <Styled.SectionHeader>
+            <Styled.ChapterEyebrow>
+              Chapter 05 · Technical Toolkit
+            </Styled.ChapterEyebrow>
             <Styled.SectionTitle>
               <FiCpu />
-              <span>Technical Skills &amp; Tooling</span>
+              <span>Tools, Languages &amp; Frameworks</span>
             </Styled.SectionTitle>
             <Styled.SectionSubtitle>
-              Tools, programming languages, and frameworks used across my
-              security research and software projects.
+              The disassemblers, debuggers, languages, and infrastructure tools
+              I use across my security research and development workflow.
             </Styled.SectionSubtitle>
           </Styled.SectionHeader>
 
@@ -1451,24 +1685,28 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           </Styled.ArsenalRack>
         </Styled.ArsenalSection>
 
-        {/* Section 4: Contact & Internship Availability */}
+        {/* Chapter 6: Connect */}
         <Styled.CommsTerminal id="simple-contact">
           <Styled.WindowChromeBar>
-            <span>Contact &amp; Internship Availability</span>
-            <span>Open for Feb 2027</span>
+            <span>06 · Let&apos;s Connect</span>
+            <span>zis3c</span>
           </Styled.WindowChromeBar>
           <Styled.CommsBody>
             <Styled.CommsInfo>
-              <h3>Looking for a Feb 2027 Cybersecurity Internship</h3>
+              <h3>Want to Collaborate or Talk Security?</h3>
               <p>
-                Available for a 14-week internship starting February 2027 in
-                Selangor or Kuala Lumpur (SOC Monitoring, Incident Response,
-                Threat Intelligence, or Penetration Testing).
+                Always open to connecting with fellow security researchers, CTF
+                players, and developers. Reach out or explore my latest work
+                through GitHub and LinkedIn.
               </p>
             </Styled.CommsInfo>
             <Styled.ProjectButtonGroup style={{ width: 'auto' }}>
-              <Styled.ProjectOpenLink href="mailto:r.zradzizamri@gmail.com">
-                <FaEnvelope /> r.zradzizamri@gmail.com
+              <Styled.ProjectOpenLink
+                href="https://github.com/zis3c"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub /> GitHub (@zis3c)
               </Styled.ProjectOpenLink>
               <Styled.ProjectDemoLink
                 href="https://linkedin.com/in/radzizamri"
