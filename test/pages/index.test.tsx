@@ -55,6 +55,11 @@ describe('Home', () => {
 
     wrap.find(PortfolioStyled.BackButton).simulate('click');
     wrap.update();
+    wrap
+      .find('button')
+      .filterWhere((node) => node.text().includes('Return to Boot Menu'))
+      .simulate('click');
+    wrap.update();
     expect(wrap.find(PortfolioMode)).toHaveLength(0);
     expect(wrap.text()).toContain('Portfolio Mode (default)');
   });
@@ -90,6 +95,11 @@ describe('Home', () => {
 
     wrap.find(BootStyled.Button).at(0).simulate('click');
     wrap.find(PortfolioStyled.BackButton).simulate('click');
+    wrap.update();
+    wrap
+      .find('button')
+      .filterWhere((node) => node.text().includes('Return to Boot Menu'))
+      .simulate('click');
     wrap.update();
 
     act(() => {
