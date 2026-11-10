@@ -75,7 +75,7 @@ import {
 import * as Styled from './PortfolioMode.styles';
 
 /* ------------------------------------------------------------------ */
-/*  Data (with Authentic Brand Icon Colors)                            */
+/*  Data (with Authentic Brand Icon Colors & Real Project Previews)    */
 /* ------------------------------------------------------------------ */
 
 type TechItem = {
@@ -87,11 +87,15 @@ type TechItem = {
 type FeaturedProject = {
   id: string;
   name: string;
+  year: string;
+  role: string;
   icon: React.ReactNode;
   iconColor: string;
   repoType: string;
   statusLabel?: string;
   isPrivate?: boolean;
+  previewImage?: string;
+  galleryImages?: { label: string; src: string }[];
   stack: TechItem[];
   summary: string;
   highlights: string[];
@@ -106,10 +110,104 @@ type GithubRepoStat = {
   forks: number;
 };
 
+type ShowcaseSlide = {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  summary: string;
+  repoLink: string;
+  liveLink?: string;
+  liveLabel?: string;
+};
+
+const showcaseSlides: ShowcaseSlide[] = [
+  {
+    id: '01',
+    title: 'RedLilyGO · ESP32-S3 Security Firmware',
+    category: '2026 · Embedded Hardware & BadUSB',
+    image: '/assets/projects/redlilygo-features.png',
+    summary:
+      'Custom ESP32-S3 firmware for the LilyGO T-Dongle-S3 combining DuckyScript BadUSB injection, Wi-Fi/BLE Marauder auditing, MicroSD PCAP packet capture, VNC remote control, and a hardware killswitch.',
+    repoLink: 'https://github.com/zis3c/RedLilyGO',
+  },
+  {
+    id: '02',
+    title: 'JanjiCare · Clinic & WebRTC Telehealth',
+    category: '2026 · Full-Stack Healthcare Platform',
+    image: '/assets/projects/janjicare-dashboard.png',
+    summary:
+      'Role-based clinic management system built with Laravel 13, React, TypeScript, and WebRTC. Connects administrators, doctors, and patients with real-time queue check-in and browser video consultations.',
+    repoLink: 'https://github.com/zis3c/Clinic-Web-Appointment',
+  },
+  {
+    id: '03',
+    title: 'Kali-XFCE-Portfolio · Desktop OS Simulation',
+    category: '2026 · Interactive Web Desktop',
+    image: '/about/2.png',
+    summary:
+      'Dual-boot portfolio environment simulating a Kali Linux XFCE desktop with window management, interactive terminal emulator, virtual filesystem, and this editorial Portfolio Mode.',
+    repoLink: 'https://github.com/zis3c/Kali-XFCE-Portfolio',
+    liveLink: 'https://me.zis3c.dev',
+    liveLabel: 'me.zis3c.dev',
+  },
+  {
+    id: '04',
+    title: 'STEM-Telebot · Digital ID & Verification',
+    category: '2026 · Telegram Bot & Database Automation',
+    image: '/assets/projects/stem-telebot.png',
+    summary:
+      'Official Telegram bot for the STEM USAS student society automating membership verification, digital membership pass generation, faculty broadcasts, and two-way database sync.',
+    repoLink: 'https://github.com/zis3c/STEM-Telebot',
+  },
+  {
+    id: '05',
+    title: 'USAS-Assignment-Notifier (DueBot)',
+    category: '2026 · Moodle LMS Deadline Bridge',
+    image: '/assets/projects/usas-notifier.png',
+    summary:
+      'Automated deadline monitoring bridge between USAS Moodle LMS and Telegram. Scans coursework hourly, verifies submission state, and stores student credentials with Fernet AES-128 encryption.',
+    repoLink: 'https://github.com/zis3c/USAS-Assignment-Notifier',
+  },
+  {
+    id: '06',
+    title: 'USAS-Class-Timetable Portal',
+    category: '2026 · Student Schedule & Utility Suite',
+    image: '/assets/projects/usas-timetable.png',
+    summary:
+      'Student timetable portal featuring weekly schedule building, QR attendance, exam schedule lookup, Google/Apple Calendar sync, and high-resolution PDF/wallpaper export.',
+    repoLink: 'https://github.com/zis3c/USAS-Class-Timetable',
+    liveLink: 'https://jadualkelas.zis3c.dev',
+    liveLabel: 'jadualkelas.zis3c.dev',
+  },
+  {
+    id: '07',
+    title: 'MLBB-CounterDraft · Draft Simulator',
+    category: '2025 · Real-Time Recommendation Engine',
+    image: '/assets/projects/mlbb-counterdraft.png',
+    summary:
+      'Competitive draft assistant with live hero data sync, priority ban/pick scoring, lane/role filtering, and synergy calculations built with Next.js and TypeScript.',
+    repoLink: 'https://github.com/zis3c/MLBB-CounterDraft',
+  },
+  {
+    id: '08',
+    title: 'STEM-USAS · Official Association Portal',
+    category: '2026 · Campus Community Web Platform',
+    image: '/assets/projects/stem-usas.png',
+    summary:
+      'Official bilingual web portal for Persatuan Sains Teknologi & Multimedia (STEM USAS), showcasing student programs, open-source initiatives, and free student project hosting.',
+    repoLink: 'https://github.com/zis3c/STEM-USAS',
+    liveLink: 'https://stem.zis3c.dev',
+    liveLabel: 'stem.zis3c.dev',
+  },
+];
+
 const featuredProjects: FeaturedProject[] = [
   {
     id: '01',
     name: 'CloudSentinel (FYP)',
+    year: '2026',
+    role: 'Creator & Security Researcher',
     icon: <FaShieldAlt />,
     iconColor: '#EF4444',
     repoType: 'SSH Honeypot & SOAR Threat Detection',
@@ -135,9 +233,20 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '02',
     name: 'RedLilyGO',
+    year: '2026',
+    role: 'Creator & Firmware Engineer',
     icon: <FaMicrochip />,
     iconColor: '#F97316',
     repoType: 'ESP32-S3 Security Firmware',
+    previewImage: '/assets/projects/redlilygo-features.png',
+    galleryImages: [
+      { label: 'Architecture', src: '/assets/projects/redlilygo-features.png' },
+      {
+        label: 'Dongle Hardware',
+        src: '/assets/projects/redlilygo-hardware.png',
+      },
+      { label: 'Web Console', src: '/assets/projects/redlilygo-dashboard.png' },
+    ],
     stack: [
       { name: 'ESP32-S3 C++', icon: <SiCplusplus />, color: '#00599C' },
       { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
@@ -157,9 +266,24 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '03',
     name: 'Clinic-Web-Appointment (JanjiCare)',
+    year: '2026',
+    role: 'Full-Stack Developer',
     icon: <FaHospital />,
     iconColor: '#06B6D4',
     repoType: 'Clinic Management & WebRTC Telehealth',
+    previewImage: '/assets/projects/janjicare-dashboard.png',
+    galleryImages: [
+      { label: 'Admin Queue', src: '/assets/projects/janjicare-dashboard.png' },
+      { label: 'Landing Page', src: '/assets/projects/janjicare-landing.png' },
+      {
+        label: 'System Bento',
+        src: '/assets/projects/janjicare-infographic.png',
+      },
+      {
+        label: 'WebRTC Room',
+        src: '/assets/projects/janjicare-telehealth.png',
+      },
+    ],
     stack: [
       { name: 'Laravel', icon: <SiLaravel />, color: '#FF2D20' },
       { name: 'React', icon: <SiReact />, color: '#00D8FF' },
@@ -180,9 +304,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '04',
     name: 'Google-Form-Spammer',
+    year: '2025',
+    role: 'Creator & Maintainer',
     icon: <FaBolt />,
     iconColor: '#EAB308',
     repoType: 'Async Stress-Testing CLI',
+    previewImage: '/assets/projects/gform-spammer.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'aiohttp / asyncio', icon: <SiPython />, color: '#FFD43B' },
@@ -202,6 +329,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '05',
     name: 'Codex-notifier-vscode',
+    year: '2025',
+    role: 'Extension Author',
     icon: <FaBell />,
     iconColor: '#007ACC',
     repoType: 'VS Code Extension',
@@ -213,7 +342,7 @@ const featuredProjects: FeaturedProject[] = [
       'VS Code extension that notifies developers with sound and status/banner alerts when Codex responses finish.',
     highlights: [
       'Audio cues and VS Code status bar/banner notifications when long AI tasks complete',
-      'Used by developers to stay productive during background code generation runs',
+      'Adopted by community developers (stars and forks tracked live via GitHub)',
       'Lightweight zero-dependency extension workflow for VS Code',
     ],
     tags: ['Automation', 'Web'],
@@ -222,6 +351,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '06',
     name: 'CTF-Pipeline',
+    year: '2026',
+    role: 'Creator · Dot Zero (U545)',
     icon: <FaFlag />,
     iconColor: '#8B5CF6',
     repoType: 'Multi-CTF Pipeline & Toolchain',
@@ -245,9 +376,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '07',
     name: 'Kali-XFCE-Portfolio',
+    year: '2026',
+    role: 'Creator & Designer',
     icon: <FaDesktop />,
     iconColor: '#367BF0',
     repoType: 'Kali Linux Desktop Simulation',
+    previewImage: '/about/2.png',
     stack: [
       { name: 'Next.js', icon: <SiNextdotjs /> },
       { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
@@ -269,9 +403,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '08',
     name: 'STEM-Telebot',
+    year: '2026',
+    role: 'Lead Developer',
     icon: <FaRobot />,
     iconColor: '#26A5E4',
     repoType: 'Membership Verification Bot',
+    previewImage: '/assets/projects/stem-telebot.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Telegram Bot', icon: <SiTelegram />, color: '#26A5E4' },
@@ -290,9 +427,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '09',
     name: 'STEM-USAS',
+    year: '2026',
+    role: 'Lead Web Developer',
     icon: <FaCheckCircle />,
     iconColor: '#22C55E',
     repoType: 'Official STEM USAS Portal',
+    previewImage: '/assets/projects/stem-usas.png',
     stack: [
       { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
       { name: 'React', icon: <SiReact />, color: '#00D8FF' },
@@ -313,9 +453,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '10',
     name: 'USAS-Assignment-Notifier',
+    year: '2026',
+    role: 'Creator & Backend Developer',
     icon: <FaBell />,
     iconColor: '#EC4899',
     repoType: 'Automated Assignment Tracker',
+    previewImage: '/assets/projects/usas-notifier.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Telegram', icon: <SiTelegram />, color: '#26A5E4' },
@@ -326,7 +469,7 @@ const featuredProjects: FeaturedProject[] = [
     highlights: [
       'Tracks course assignments and upcoming submission deadlines automatically',
       'Scheduled scraper syncing Moodle/VirtualCampus deadlines with Telegram notifications',
-      'Encrypted credential handling and customizable reminder intervals',
+      'Fernet AES-128 encrypted credential storage and submission-state verification',
     ],
     tags: ['Automation', 'Bot'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
@@ -334,9 +477,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '11',
     name: 'USAS-Class-Timetable',
+    year: '2026',
+    role: 'Creator & Frontend Engineer',
     icon: <FaCalendarAlt />,
     iconColor: '#38BDF8',
     repoType: 'Student Timetable Portal',
+    previewImage: '/assets/projects/usas-timetable.png',
     stack: [
       { name: 'React', icon: <SiReact />, color: '#00D8FF' },
       { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
@@ -345,7 +491,7 @@ const featuredProjects: FeaturedProject[] = [
       'The timetable portal for USAS students to manage, view, and export their class schedules.',
     highlights: [
       'Interactive schedule builder live at jadualkelas.zis3c.dev for university students',
-      'Exports clean PDF timetables and high-resolution lockscreen wallpapers',
+      'Exports clean PDF timetables, QR attendance, and lockscreen wallpapers',
       'Conflict detection and course slot search across university faculties',
     ],
     tags: ['Web', 'Automation'],
@@ -356,6 +502,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '12',
     name: 'LLM-API-Lab',
+    year: '2025',
+    role: 'Creator',
     icon: <FaBrain />,
     iconColor: '#10A37F',
     repoType: 'Multi-Provider LLM Playground',
@@ -377,9 +525,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '13',
     name: 'LilyGO-T-Dongle-S3-Firmware',
+    year: '2025',
+    role: 'Embedded Firmware Maintainer',
     icon: <FaMicrochip />,
     iconColor: '#00979D',
     repoType: 'ESP32-S3 Board Matrix & Validation',
+    previewImage: '/assets/projects/lilygo-dongle-s3.png',
     stack: [
       { name: 'C', icon: <SiC />, color: '#A8B9CC' },
       { name: 'Arduino', icon: <SiArduino />, color: '#00979D' },
@@ -398,9 +549,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '14',
     name: 'QRBot',
+    year: '2025',
+    role: 'Creator',
     icon: <FaQrcode />,
     iconColor: '#3B82F6',
     repoType: 'Telegram QR Generator & Scanner',
+    previewImage: '/assets/projects/qrbot.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Docker', icon: <SiDocker />, color: '#2496ED' },
@@ -419,9 +573,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '15',
     name: 'MLBB-CounterDraft',
+    year: '2025',
+    role: 'Creator & Full-Stack Developer',
     icon: <FaGamepad />,
     iconColor: '#F59E0B',
     repoType: 'Draft Recommendation Engine',
+    previewImage: '/assets/projects/mlbb-counterdraft.png',
     stack: [
       { name: 'Next.js', icon: <SiNextdotjs /> },
       { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6' },
@@ -440,6 +597,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '16',
     name: 'USAS-VC-Evaluation-Automator',
+    year: '2025',
+    role: 'Creator',
     icon: <FaCogs />,
     iconColor: '#F7DF1E',
     repoType: 'VirtualCampus Userscript Tool',
@@ -460,6 +619,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '17',
     name: 'basic-iot-cloud-setup',
+    year: '2025',
+    role: 'Infrastructure Author',
     icon: <FaServer />,
     iconColor: '#0080FF',
     repoType: 'IoT Cloud Infrastructure (KSC6493)',
@@ -486,9 +647,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '18',
     name: 'USAS-Launcher',
+    year: '2025',
+    role: 'Creator',
     icon: <FaWifi />,
     iconColor: '#10B981',
     repoType: 'Campus Wi-Fi & Portal Auto-Login',
+    previewImage: '/assets/projects/usas-launcher.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Automation', icon: <SiGnubash />, color: '#4EAA25' },
@@ -506,9 +670,12 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '19',
     name: 'Tgreactsort',
+    year: '2025',
+    role: 'Creator',
     icon: <FaChartBar />,
     iconColor: '#6366F1',
     repoType: 'Telegram Reaction Analytics',
+    previewImage: '/assets/projects/tgreactsort.png',
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Pandas', icon: <SiPandas />, color: '#150458' },
@@ -528,6 +695,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '20',
     name: 'Polyglot-File',
+    year: '2025',
+    role: 'Security Researcher',
     icon: <FaFileCode />,
     iconColor: '#A855F7',
     repoType: 'Multi-Format File Generator',
@@ -549,6 +718,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '21',
     name: 'Compilation-and-RE-Process',
+    year: '2025',
+    role: 'RE Workshop Author',
     icon: <FaMicrochip />,
     iconColor: '#EC4899',
     repoType: 'Code-to-Binary & RE Visualizer',
@@ -570,6 +741,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '22',
     name: 'CTF-Writeups',
+    year: '2025',
+    role: 'Author · Dot Zero (U545)',
     icon: <FaBookOpen />,
     iconColor: '#14B8A6',
     repoType: 'CTF Solutions & Security Notes',
@@ -590,6 +763,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     id: '23',
     name: 'RE-App-UMC-Student-USAS',
+    year: '2025',
+    role: 'Mobile Security Researcher',
     icon: <FaMobileAlt />,
     iconColor: '#3DDC84',
     repoType: 'Mobile App Security Review',
@@ -693,6 +868,8 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const [paletteIndex, setPaletteIndex] = useState(0);
   const [focusedProjectIndex, setFocusedProjectIndex] = useState(0);
+  const [activeShowcaseIdx, setActiveShowcaseIdx] = useState(0);
+  const [cardImageIdx, setCardImageIdx] = useState<Record<string, number>>({});
   const [repoStats, setRepoStats] = useState<Record<string, GithubRepoStat>>(
     {}
   );
@@ -883,36 +1060,41 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isPaletteOpen, paletteIndex, filteredProjects, focusedProjectIndex]);
 
+  const currentShowcase =
+    showcaseSlides[activeShowcaseIdx] || showcaseSlides[0];
+
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
       {/* Top Navigation Bar */}
       <Styled.Nav>
         <Styled.BrandGroup>
-          <Styled.StatusLed title="Active Portfolio" />
+          <Styled.StatusLed title="Active Portfolio · Malaysia (UTC+8)" />
           <Styled.Brand>
             <span>Radzi (zis3c)</span>
-            <span className="role-tag">Security &amp; Software Portfolio</span>
+            <span className="role-tag">
+              MY · UTC+8 · Security &amp; Software
+            </span>
           </Styled.Brand>
         </Styled.BrandGroup>
 
         <Styled.ChapterNav aria-label="Portfolio sections">
           <button type="button" onClick={() => jumpTo('simple-about')}>
-            Story
+            <span className="chap-num">01</span>Index
           </button>
-          <button type="button" onClick={() => jumpTo('simple-craft')}>
-            What I Do
-          </button>
-          <button type="button" onClick={() => jumpTo('simple-journey')}>
-            Journey
+          <button type="button" onClick={() => jumpTo('simple-showcase')}>
+            <span className="chap-num">02</span>Showcase
           </button>
           <button type="button" onClick={() => jumpTo('simple-projects')}>
-            Projects
+            <span className="chap-num">03</span>Work (23)
+          </button>
+          <button type="button" onClick={() => jumpTo('simple-journey')}>
+            <span className="chap-num">04</span>Field Log
           </button>
           <button type="button" onClick={() => jumpTo('simple-skills')}>
-            Toolkit
+            <span className="chap-num">05</span>Toolkit
           </button>
           <button type="button" onClick={() => jumpTo('simple-contact')}>
-            Connect
+            <span className="chap-num">06</span>Connect
           </button>
         </Styled.ChapterNav>
 
@@ -961,11 +1143,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       </Styled.Nav>
 
       <Styled.Main>
-        {/* Chapter 1: Introduction & Personal Story */}
+        {/* Chapter 1: Introduction & Editorial Identity */}
         <Styled.HeroWorkbench id="simple-about">
           <Styled.HeroSection>
             <Styled.WindowChromeBar>
-              <span>01 · Who I Am</span>
+              <span>01 · Editorial Index &amp; Story</span>
               <span className="window-dots">
                 <span className="win-dot" />
                 <span className="win-dot" />
@@ -974,8 +1156,22 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             </Styled.WindowChromeBar>
 
             <Styled.HeroBody>
+              <Styled.IdentityStrip>
+                <Styled.AvatarThumb
+                  src="/assets/avatars/memoji-zi.jpg"
+                  alt="Radzi (zis3c) avatar"
+                />
+                <Styled.IdentityMeta>
+                  <span className="id-name">Radzi (@zis3c)</span>
+                  <span className="id-coords">
+                    MALAYSIA (UTC+8) · DOT ZERO CTF (U545) · SECURITY &amp;
+                    FULL-STACK
+                  </span>
+                </Styled.IdentityMeta>
+              </Styled.IdentityStrip>
+
               <Styled.ChapterEyebrow>
-                Chapter 01 · Introduction
+                Chapter 01 · Who I Am
               </Styled.ChapterEyebrow>
               <Styled.HeroTitle>
                 <GlitchText
@@ -996,18 +1192,19 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               <Styled.HeroText>
                 I am a Computer Science student and security researcher who
                 learns best by taking systems apart and building defenses from
-                scratch. Whether I am deploying an SSH honeypot to observe how
-                automated scanners behave in the wild, dissecting compiled
-                binaries in Ghidra and x64dbg, or flashing custom firmware onto
-                an ESP32-S3 hardware dongle, I enjoy working close to how
-                software and networks actually operate.
+                the ground up. Whether I am deploying an SSH honeypot to observe
+                how automated scanners behave in the wild, dissecting compiled
+                binaries in Ghidra and x64dbg, or flashing custom C++ firmware
+                onto an ESP32-S3 USB dongle, I enjoy working close to how
+                software, packets, and hardware actually operate.
               </Styled.HeroText>
 
               <Styled.HeroText>
-                Beyond security research, I build full-stack web platforms and
-                automation bots that solve real everyday problems for students
-                and communities, while mentoring peers as Secretary and Reverse
-                Engineering Trainer for our university CTF team, Dot Zero.
+                Alongside security research, I build full-stack web platforms
+                and Telegram automation bots that solve everyday problems for
+                students and communities, while mentoring peers as Secretary and
+                Reverse Engineering Trainer for our university CTF team, Dot
+                Zero.
               </Styled.HeroText>
 
               <Styled.SocialGrid>
@@ -1056,7 +1253,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
 
           <Styled.TelemetryPanel aria-label="Quick Snapshot">
             <Styled.WindowChromeBar>
-              <span>At a Glance</span>
+              <span>Field Dossier</span>
               <span>zis3c</span>
             </Styled.WindowChromeBar>
             <Styled.TelemetryBody>
@@ -1066,11 +1263,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   <dd>Radzi · zis3c</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Background</dt>
+                  <dt>Discipline</dt>
                   <dd>Computer Science &amp; Information Technology</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Primary Focus</dt>
+                  <dt>Core Focus</dt>
                   <dd>Threat Detection, Reverse Engineering &amp; Web</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
@@ -1086,35 +1283,22 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                   <dd>CloudSentinel Honeypot &amp; RedLilyGO ESP32-S3</dd>
                 </Styled.RegisterRow>
                 <Styled.RegisterRow>
-                  <dt>Open Source</dt>
-                  <dd>23 Repositories across Security, Web &amp; Bots</dd>
+                  <dt>Public &amp; Lab</dt>
+                  <dd>23 Repositories (Live GitHub API Sync)</dd>
                 </Styled.RegisterRow>
               </Styled.RegisterTable>
             </Styled.TelemetryBody>
           </Styled.TelemetryPanel>
         </Styled.HeroWorkbench>
 
-        {/* Chapter 2: What I Do (Craft & Philosophy) */}
+        {/* Three Core Pillars */}
         <Styled.StorySection id="simple-craft">
-          <Styled.SectionHeader>
-            <Styled.ChapterEyebrow>
-              Chapter 02 · What I Do
-            </Styled.ChapterEyebrow>
-            <Styled.SectionTitle>
-              How I Approach Security &amp; Engineering
-            </Styled.SectionTitle>
-            <Styled.SectionSubtitle>
-              My work sits at the intersection of defensive monitoring,
-              low-level binary analysis, and practical full-stack software.
-            </Styled.SectionSubtitle>
-          </Styled.SectionHeader>
-
           <Styled.PillarGrid>
             <Styled.PillarCard iconColor="#EF4444">
               <div className="pillar-icon">
                 <FaShieldAlt />
               </div>
-              <h3>Threat Detection &amp; Purple Team</h3>
+              <h3>01 · Threat Detection &amp; Purple Team</h3>
               <p>
                 To defend a system effectively, you need visibility into how
                 real attackers operate. I build cloud-native honeypots like
@@ -1133,12 +1317,12 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               <div className="pillar-icon">
                 <FiTerminal />
               </div>
-              <h3>Reverse Engineering &amp; Binary Triage</h3>
+              <h3>02 · Reverse Engineering &amp; Binary Triage</h3>
               <p>
                 When source code is unavailable, the compiled binary tells the
                 real story. I combine static decompilation (Ghidra, IDA Pro)
                 with dynamic debugging and runtime instrumentation (x64dbg,
-                GDB+GEF, Frida) to inspect ELF/PE/APK internals and teach
+                GDB+GEF, Frida) to inspect ELF/PE/APK internals and lead
                 hands-on workshops for the Dot Zero CTF team.
               </p>
               <div className="pillar-tags">
@@ -1152,7 +1336,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
               <div className="pillar-icon">
                 <FaMicrochip />
               </div>
-              <h3>Full-Stack &amp; Hardware Building</h3>
+              <h3>03 · Full-Stack &amp; Hardware Firmware</h3>
               <p>
                 I love turning ideas into complete, usable products. That ranges
                 from C++ firmware on ESP32-S3 USB dongles (RedLilyGO) to Laravel
@@ -1168,113 +1352,123 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
           </Styled.PillarGrid>
         </Styled.StorySection>
 
-        {/* Chapter 3: The Journey (Timeline) */}
-        <Styled.StorySection id="simple-journey">
+        <Styled.ChapterDivider>
+          <span className="divider-left">
+            CHAPTER 01 -&gt; 02 · BUILT FROM LINUX TERMINALS, PACKET CAPTURES
+            &amp; HARDWARE INTERFACES
+          </span>
+          <span className="divider-right">VISUAL ARCHIVE · REAL BUILDS</span>
+        </Styled.ChapterDivider>
+
+        {/* Chapter 2: Interactive Visual Showcase Reel (Real Images from project io) */}
+        <Styled.StorySection id="simple-showcase">
           <Styled.SectionHeader>
             <Styled.ChapterEyebrow>
-              Chapter 03 · The Journey
+              Chapter 02 · Visual Showcase
             </Styled.ChapterEyebrow>
             <Styled.SectionTitle>
-              Milestones &amp; Progression
+              Inside the Interfaces, Firmware &amp; Platforms
             </Styled.SectionTitle>
             <Styled.SectionSubtitle>
-              A look at how my curiosity evolved from Linux and web development
-              into security research, hardware firmware, and CTF leadership.
+              A visual walkthrough of real dashboards, hardware architectures,
+              and student platforms built across my projects. Select any preview
+              below to inspect the build.
             </Styled.SectionSubtitle>
           </Styled.SectionHeader>
 
-          <Styled.TimelineWrap>
-            <Styled.TimelineItem>
-              <div className="time-period">
-                <span>2026 · Present</span>
-                <span className="time-sub">Security Research &amp; FYP</span>
-              </div>
-              <div className="time-content">
-                <h3 className="time-title">
-                  Building CloudSentinel &amp; RedLilyGO Hardware Firmware
-                </h3>
-                <p className="time-desc">
-                  Architected CloudSentinel, an event-driven SSH honeypot with
-                  active SOAR auto-blocking, ClickHouse analytics, and MITRE
-                  ATT&amp;CK mapping, while developing custom ESP32-S3 security
-                  assessment firmware and a .NET 8 companion app for RedLilyGO.
-                </p>
-              </div>
-            </Styled.TimelineItem>
+          <Styled.ShowcaseStage>
+            <Styled.WindowChromeBar>
+              <span>
+                Visual Preview · {currentShowcase.id} / 08 ·{' '}
+                {currentShowcase.title}
+              </span>
+              <span>{currentShowcase.category}</span>
+            </Styled.WindowChromeBar>
 
-            <Styled.TimelineItem>
-              <div className="time-period">
-                <span>2025 – 2026</span>
-                <span className="time-sub">Dot Zero CTF Team (U545)</span>
-              </div>
-              <div className="time-content">
-                <h3 className="time-title">
-                  Team Secretary &amp; Reverse Engineering Trainer
-                </h3>
-                <p className="time-desc">
-                  Co-organized internal training sessions and hands-on binary
-                  reverse engineering workshops (Ghidra, x64dbg, GDB+GEF,
-                  Frida), built the CTF-Pipeline workspace automation tool, and
-                  competed alongside Dot Zero in international CTFs (including
-                  21st in RE:UN10N CTF, 88th in ApoorvCTF, and 133rd in 0xFun
-                  CTF).
-                </p>
-              </div>
-            </Styled.TimelineItem>
+            <Styled.ShowcaseMainGrid>
+              <Styled.ShowcaseViewport>
+                <Styled.PreviewImg
+                  src={currentShowcase.image}
+                  alt={currentShowcase.title}
+                />
+              </Styled.ShowcaseViewport>
 
-            <Styled.TimelineItem>
-              <div className="time-period">
-                <span>2024 – 2026</span>
-                <span className="time-sub">Full-Stack &amp; Automation</span>
-              </div>
-              <div className="time-content">
-                <h3 className="time-title">
-                  Shipping Campus Platforms, Telehealth &amp; Developer Tools
-                </h3>
-                <p className="time-desc">
-                  Built and launched web portals and automation tools used by
-                  students and developers, including the STEM-USAS portal,
-                  STEM-Telebot, USAS Class Timetable generator, Assignment
-                  Notifier, JanjiCare WebRTC clinic platform, and the Codex
-                  Notifier VS Code extension.
-                </p>
-              </div>
-            </Styled.TimelineItem>
+              <Styled.ShowcaseCaptionPanel>
+                <div>
+                  <span className="showcase-index">
+                    EXHIBIT {currentShowcase.id} OF 08
+                  </span>
+                  <h3>{currentShowcase.title}</h3>
+                  <span className="showcase-sub">
+                    {currentShowcase.category}
+                  </span>
+                  <p>{currentShowcase.summary}</p>
+                </div>
 
-            <Styled.TimelineItem>
-              <div className="time-period">
-                <span>2021 – 2024</span>
-                <span className="time-sub">Core Foundations</span>
-              </div>
-              <div className="time-content">
-                <h3 className="time-title">
-                  Linux Systems, Networking &amp; Software Engineering
-                </h3>
-                <p className="time-desc">
-                  Built a strong foundation in Linux environments, computer
-                  networking, relational databases, and full-stack programming,
-                  sparking a lasting interest in how software can be both
-                  engineered and secured.
-                </p>
-              </div>
-            </Styled.TimelineItem>
-          </Styled.TimelineWrap>
+                <Styled.ProjectButtonGroup>
+                  <Styled.ProjectOpenLink
+                    href={currentShowcase.repoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub /> View Source
+                  </Styled.ProjectOpenLink>
+                  {currentShowcase.liveLink && (
+                    <Styled.ProjectDemoLink
+                      href={currentShowcase.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FiExternalLink />{' '}
+                      {currentShowcase.liveLabel || 'Live Demo'}
+                    </Styled.ProjectDemoLink>
+                  )}
+                </Styled.ProjectButtonGroup>
+              </Styled.ShowcaseCaptionPanel>
+            </Styled.ShowcaseMainGrid>
+
+            <Styled.ShowcaseThumbRow aria-label="Visual showcase thumbnails">
+              {showcaseSlides.map((slide, idx) => (
+                <Styled.ShowcaseThumbBtn
+                  key={slide.id}
+                  type="button"
+                  isActive={idx === activeShowcaseIdx}
+                  onClick={() => setActiveShowcaseIdx(idx)}
+                >
+                  <Styled.PreviewImg src={slide.image} alt={slide.title} />
+                  <span className="thumb-label">
+                    {slide.id} · {slide.title.split(' · ')[0]}
+                  </span>
+                </Styled.ShowcaseThumbBtn>
+              ))}
+            </Styled.ShowcaseThumbRow>
+          </Styled.ShowcaseStage>
         </Styled.StorySection>
 
-        {/* Chapter 4: Featured Projects */}
+        <Styled.ChapterDivider>
+          <span className="divider-left">
+            CHAPTER 02 -&gt; 03 · COMPLETE REPOSITORY INDEX (23 PROJECTS · LIVE
+            GITHUB API)
+          </span>
+          <span className="divider-right">
+            SECURITY · FIRMWARE · FULL-STACK · BOTS
+          </span>
+        </Styled.ChapterDivider>
+
+        {/* Chapter 3: Featured Projects Directory (All 23 Repositories) */}
         <Styled.DirectoryFrame id="simple-projects">
           <Styled.DirectoryHeaderBar>
             <Styled.SectionHeader>
               <Styled.ChapterEyebrow>
-                Chapter 04 · Projects &amp; Research
+                Chapter 03 · Selected Works &amp; Archive
               </Styled.ChapterEyebrow>
               <Styled.SectionTitle>
-                Things I Have Built &amp; Explored
+                Projects, Firmware &amp; Security Research
               </Styled.SectionTitle>
               <Styled.SectionSubtitle>
-                All 23 repositories across defensive security, hardware
-                firmware, full-stack web apps, and automation. Stars and forks
-                sync live from the GitHub API.
+                All 23 repositories across defensive security, ESP32-S3
+                hardware, full-stack web platforms, and Telegram automation.
+                Stars and forks are fetched live from the GitHub API.
               </Styled.SectionSubtitle>
             </Styled.SectionHeader>
             <Styled.DirectoryCountBadge>
@@ -1311,6 +1505,13 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                 const repoSlug =
                   project.link.split('/').pop()?.toLowerCase() || '';
                 const liveStat = repoStats[repoSlug];
+                const gallery = project.galleryImages;
+                const activeSlideIdx = cardImageIdx[project.id] || 0;
+                const activePreviewSrc =
+                  gallery && gallery[activeSlideIdx]
+                    ? gallery[activeSlideIdx].src
+                    : project.previewImage;
+
                 return (
                   <Styled.ProjectCard
                     key={project.name}
@@ -1321,12 +1522,50 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
                     <Styled.ProjectCardChrome
                       isFocused={index === focusedProjectIndex}
                     >
-                      <span>{project.repoType}</span>
+                      <span className="chrome-left">
+                        <span className="chrome-index">{project.id}</span>
+                        <span>
+                          {project.year} · {project.repoType}
+                        </span>
+                      </span>
                       <span className="slot-status">
                         {project.statusLabel ||
-                          (isFlagship ? 'Featured FYP' : 'Public · MIT')}
+                          (isFlagship ? 'Featured FYP' : project.role)}
                       </span>
                     </Styled.ProjectCardChrome>
+
+                    {activePreviewSrc && (
+                      <Styled.ProjectPreviewFrame>
+                        <Styled.PreviewImg
+                          src={activePreviewSrc}
+                          alt={`${project.name} preview`}
+                          loading="lazy"
+                        />
+                        {gallery && gallery.length > 1 && (
+                          <Styled.PreviewGalleryBar
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {gallery.map((imgItem, gIdx) => (
+                              <button
+                                key={imgItem.label}
+                                type="button"
+                                className={
+                                  gIdx === activeSlideIdx ? 'active-slide' : ''
+                                }
+                                onClick={() =>
+                                  setCardImageIdx((prev) => ({
+                                    ...prev,
+                                    [project.id]: gIdx,
+                                  }))
+                                }
+                              >
+                                {imgItem.label}
+                              </button>
+                            ))}
+                          </Styled.PreviewGalleryBar>
+                        )}
+                      </Styled.ProjectPreviewFrame>
+                    )}
 
                     <Styled.ProjectCardBody isFlagship={isFlagship}>
                       <Styled.ProjectHeader>
@@ -1435,6 +1674,158 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
             )}
           </Styled.ProjectsSection>
         </Styled.DirectoryFrame>
+
+        <Styled.ChapterDivider>
+          <span className="divider-left">
+            CHAPTER 03 -&gt; 04 · FIELD LOGS, CTF COMPETITIONS &amp; TECHNICAL
+            MENTORSHIP
+          </span>
+          <span className="divider-right">
+            DOT ZERO (U545) · CERTIFICATIONS
+          </span>
+        </Styled.ChapterDivider>
+
+        {/* Chapter 4: The Journey & CTF Recognition Ledger */}
+        <Styled.StorySection id="simple-journey">
+          <Styled.SectionHeader>
+            <Styled.ChapterEyebrow>
+              Chapter 04 · Experience &amp; Field Log
+            </Styled.ChapterEyebrow>
+            <Styled.SectionTitle>
+              Journey, CTF Leadership &amp; Recognition
+            </Styled.SectionTitle>
+            <Styled.SectionSubtitle>
+              How my path evolved from Linux and web development into threat
+              detection, hardware firmware, and training peers in Reverse
+              Engineering.
+            </Styled.SectionSubtitle>
+          </Styled.SectionHeader>
+
+          <Styled.TimelineWrap>
+            <Styled.TimelineItem>
+              <span className="time-index">01</span>
+              <div className="time-period">
+                <span>2026 · Present</span>
+                <span className="time-sub">Security Research &amp; FYP</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  CloudSentinel Honeypot &amp; RedLilyGO Hardware Firmware
+                </h3>
+                <p className="time-desc">
+                  Architected CloudSentinel, an event-driven SSH honeypot with
+                  active SOAR auto-blocking, ClickHouse analytics, and MITRE
+                  ATT&amp;CK mapping, while developing custom ESP32-S3 security
+                  assessment firmware and a .NET 8 companion app for RedLilyGO.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <span className="time-index">02</span>
+              <div className="time-period">
+                <span>2025 - 2026</span>
+                <span className="time-sub">Dot Zero CTF Team (U545)</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Team Secretary &amp; Reverse Engineering Trainer
+                </h3>
+                <p className="time-desc">
+                  Co-organized internal training sessions and hands-on binary
+                  reverse engineering workshops (Ghidra, x64dbg, GDB+GEF,
+                  Frida), built the CTF-Pipeline workspace automation tool, and
+                  competed alongside Dot Zero in international CTFs.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <span className="time-index">03</span>
+              <div className="time-period">
+                <span>2024 - 2026</span>
+                <span className="time-sub">Campus &amp; Open-Source</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Shipping Campus Platforms, Telehealth &amp; Developer Tools
+                </h3>
+                <p className="time-desc">
+                  Built and launched web portals and automation tools used by
+                  students and developers, including the STEM-USAS portal,
+                  STEM-Telebot, USAS Class Timetable generator, Assignment
+                  Notifier, JanjiCare WebRTC clinic platform, and the Codex
+                  Notifier VS Code extension.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+
+            <Styled.TimelineItem>
+              <span className="time-index">04</span>
+              <div className="time-period">
+                <span>2021 - 2024</span>
+                <span className="time-sub">Core Foundations</span>
+              </div>
+              <div className="time-content">
+                <h3 className="time-title">
+                  Linux Systems, Networking &amp; Software Engineering
+                </h3>
+                <p className="time-desc">
+                  Built a strong foundation in Linux environments, computer
+                  networking, relational databases, and full-stack programming,
+                  sparking a lasting interest in how software can be both
+                  engineered and secured.
+                </p>
+              </div>
+            </Styled.TimelineItem>
+          </Styled.TimelineWrap>
+
+          <Styled.RecognitionGrid>
+            <Styled.RecognitionCard>
+              <div className="rec-top">
+                <span>CTF COMPETITION · 2026</span>
+                <span className="rec-badge">#21 / 316 Teams</span>
+              </div>
+              <h4>RE:UN10N CTF · Dot Zero (U545)</h4>
+              <p>
+                Placed 21st internationally with university CTF team Dot Zero,
+                focusing on Reverse Engineering and binary analysis challenges.
+              </p>
+            </Styled.RecognitionCard>
+
+            <Styled.RecognitionCard>
+              <div className="rec-top">
+                <span>INTERNATIONAL CTFS · 2026</span>
+                <span className="rec-badge">Top 15% Finishes</span>
+              </div>
+              <h4>ApoorvCTF (#88) &amp; 0xFun CTF (#133)</h4>
+              <p>
+                Placed 88th of 620 teams in ApoorvCTF and 133rd of 975 teams in
+                0xFun CTF alongside Dot Zero teammates.
+              </p>
+            </Styled.RecognitionCard>
+
+            <Styled.RecognitionCard>
+              <div className="rec-top">
+                <span>CREDENTIALS &amp; TRAINING</span>
+                <span className="rec-badge">Verified</span>
+              </div>
+              <h4>Google Cybersecurity &amp; RE Bootcamp</h4>
+              <p>
+                Completed the Google Cybersecurity Professional Certificate and
+                hands-on Reverse Engineering binary analysis training.
+              </p>
+            </Styled.RecognitionCard>
+          </Styled.RecognitionGrid>
+        </Styled.StorySection>
+
+        <Styled.ChapterDivider>
+          <span className="divider-left">
+            CHAPTER 04 -&gt; 05 · DISASSEMBLERS, DEBUGGERS, LANGUAGES &amp;
+            CLOUD INFRASTRUCTURE
+          </span>
+          <span className="divider-right">30+ TOOLS ACROSS 4 DISCIPLINES</span>
+        </Styled.ChapterDivider>
 
         {/* Chapter 5: Technical Skills & Tooling */}
         <Styled.ArsenalSection id="simple-skills">
@@ -1689,15 +2080,15 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         <Styled.CommsTerminal id="simple-contact">
           <Styled.WindowChromeBar>
             <span>06 · Let&apos;s Connect</span>
-            <span>zis3c</span>
+            <span>zis3c · Malaysia (UTC+8)</span>
           </Styled.WindowChromeBar>
           <Styled.CommsBody>
             <Styled.CommsInfo>
               <h3>Want to Collaborate or Talk Security?</h3>
               <p>
                 Always open to connecting with fellow security researchers, CTF
-                players, and developers. Reach out or explore my latest work
-                through GitHub and LinkedIn.
+                players, and developers. Explore my latest repositories or reach
+                out directly via GitHub and LinkedIn.
               </p>
             </Styled.CommsInfo>
             <Styled.ProjectButtonGroup style={{ width: 'auto' }}>

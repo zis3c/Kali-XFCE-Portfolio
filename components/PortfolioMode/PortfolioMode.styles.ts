@@ -111,14 +111,15 @@ export const Brand = styled.div`
 
   .role-tag {
     color: var(--muted);
-    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
     font-weight: 500;
     padding: 2px 8px;
     background: var(--well);
     border: 1px solid var(--border-strong);
     border-radius: 6px;
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1120px) {
       display: none;
     }
   }
@@ -131,16 +132,23 @@ export const ChapterNav = styled.nav`
 
   button {
     min-height: 38px;
-    padding: 6px 12px;
+    padding: 6px 11px;
     background: transparent;
     border: 1px solid transparent;
     border-radius: 6px;
     color: var(--muted);
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
     cursor: pointer;
     transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+
+    .chap-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      opacity: 0.7;
+      margin-right: 4px;
+    }
 
     &:hover {
       color: var(--text);
@@ -154,7 +162,7 @@ export const ChapterNav = styled.nav`
     }
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 980px) {
     display: none;
   }
 `;
@@ -172,11 +180,256 @@ export const ChapterEyebrow = styled.span`
   margin-bottom: 10px;
 `;
 
-export const StorySection = styled.section`
-  margin-bottom: 72px;
+export const ChapterDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  margin-bottom: 56px;
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--panel);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+
+  .divider-left {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .divider-right {
+    @media (max-width: 720px) {
+      display: none;
+    }
+  }
 
   @media (max-width: 640px) {
-    margin-bottom: 52px;
+    margin-bottom: 40px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+`;
+
+export const StorySection = styled.section`
+  margin-bottom: 64px;
+
+  @media (max-width: 640px) {
+    margin-bottom: 48px;
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Hero Identity Badge & Avatar                                       */
+/* ------------------------------------------------------------------ */
+
+export const IdentityStrip = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+`;
+
+export const AvatarThumb = styled.img`
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--border-strong);
+  background: var(--well);
+  flex-shrink: 0;
+`;
+
+export const PreviewImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+`;
+
+export const IdentityMeta = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  .id-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .id-coords {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+`;
+
+/* ------------------------------------------------------------------ */
+/*  Visual Showcase Gallery (JarnKet-inspired Real Work Reel)          */
+/* ------------------------------------------------------------------ */
+
+export const ShowcaseStage = styled.div`
+  margin-top: 22px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+`;
+
+export const ShowcaseMainGrid = styled.div`
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  border-bottom: 1px solid var(--border-strong);
+
+  @media (max-width: 920px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const ShowcaseViewport = styled.div`
+  background: var(--well);
+  border-right: 1px solid var(--border-strong);
+  position: relative;
+  aspect-ratio: 16 / 10;
+  max-height: 420px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  @media (max-width: 920px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border-strong);
+    max-height: 320px;
+  }
+`;
+
+export const ShowcaseCaptionPanel = styled.div`
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+
+  .showcase-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  h3 {
+    margin: 6px 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+  }
+
+  .showcase-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    padding: 4px 8px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    padding: 18px 16px;
+  }
+`;
+
+export const ShowcaseThumbRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--well);
+
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 540px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const ShowcaseThumbBtn = styled.button<{ isActive: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px;
+  min-height: 44px;
+  border-radius: 6px;
+  border: 1px solid
+    ${({ isActive }) =>
+      isActive ? 'var(--btn-primary-bg)' : 'var(--border-strong)'};
+  background: ${({ isActive }) => (isActive ? 'var(--panel)' : 'var(--well)')};
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  img {
+    width: 100%;
+    height: 48px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg);
+  }
+
+  .thumb-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: ${({ isActive }) => (isActive ? 'var(--text)' : 'var(--muted)')};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
   }
 `;
 
@@ -256,6 +509,10 @@ export const PillarCard = styled.article<{ iconColor?: string }>`
   }
 `;
 
+/* ------------------------------------------------------------------ */
+/*  Editorial Experience & Recognition Ledgers                         */
+/* ------------------------------------------------------------------ */
+
 export const TimelineWrap = styled.div`
   margin-top: 22px;
   border: 1px solid var(--border-strong);
@@ -267,13 +524,26 @@ export const TimelineWrap = styled.div`
 
 export const TimelineItem = styled.div`
   display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 20px;
+  grid-template-columns: 56px 210px 1fr;
+  gap: 18px;
   padding: 22px 24px;
   border-bottom: 1px solid var(--border-strong);
+  align-items: start;
 
   &:last-child {
     border-bottom: none;
+  }
+
+  .time-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    padding: 4px 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--well);
+    border-radius: 5px;
+    text-align: center;
   }
 
   .time-period {
@@ -315,10 +585,69 @@ export const TimelineItem = styled.div`
     max-width: 68ch;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 820px) {
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 18px 16px;
+
+    .time-index {
+      width: fit-content;
+    }
+  }
+`;
+
+export const RecognitionGrid = styled.div`
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+
+  @media (max-width: 920px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const RecognitionCard = styled.div`
+  padding: 18px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .rec-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  .rec-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--well);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  h4 {
+    margin: 4px 0 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
   }
 `;
 
@@ -471,12 +800,12 @@ export const HeroWorkbench = styled.section`
   grid-template-columns: 7fr 5fr;
   gap: 20px;
   align-items: stretch;
-  margin-bottom: 56px;
+  margin-bottom: 48px;
 
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 `;
 
@@ -810,6 +1139,19 @@ export const ProjectCardChrome = styled.div<{ isFocused?: boolean }>`
   font-weight: 500;
   color: var(--muted);
 
+  .chrome-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .chrome-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
   .slot-status {
     font-size: 11px;
     font-weight: 600;
@@ -818,6 +1160,65 @@ export const ProjectCardChrome = styled.div<{ isFocused?: boolean }>`
     border: 1px solid var(--border-strong);
     background: var(--panel);
     color: var(--text);
+  }
+`;
+
+/* Real Project Screenshot Frame inside Card */
+export const ProjectPreviewFrame = styled.div`
+  position: relative;
+  width: 100%;
+  height: 205px;
+  background: var(--well);
+  border-bottom: 1px solid var(--border-strong);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+
+  ${ProjectCard}:hover & img {
+    transform: scale(1.02);
+  }
+`;
+
+export const PreviewGalleryBar = styled.div`
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: rgba(9, 9, 11, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 2;
+
+  button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #d4d4d8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.active-slide {
+      background: #fafafa;
+      color: #09090b;
+    }
   }
 `;
 
