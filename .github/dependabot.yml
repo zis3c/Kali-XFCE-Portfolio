@@ -1,17 +1,19 @@
 version: 2
 updates:
+  # Security updates stay enabled through repository settings. Routine npm
+  # version updates are disabled because the grouped major toolchain bumps are
+  # not safe to merge automatically and fail lint, typecheck, and tests.
   - package-ecosystem: npm
     directory: '/'
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-    groups:
-      dev-dependencies:
-        dependency-type: development
-      production-dependencies:
-        dependency-type: production
+      interval: monthly
+    open-pull-requests-limit: 0
 
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
-      interval: weekly
+      interval: monthly
+    open-pull-requests-limit: 2
+    groups:
+      github-actions:
+        patterns: ['*']
