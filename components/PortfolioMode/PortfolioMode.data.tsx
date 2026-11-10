@@ -508,7 +508,7 @@ export interface CtfCompetition {
   year: number;
   position: number;
   level: 'National' | 'International';
-  type: 'Team (Dot Zero)' | 'Individual';
+  type: 'Dot Zero' | 'Solo';
 }
 
 export const ctfCompetitions: CtfCompetition[] = [
@@ -519,7 +519,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 4,
     level: 'National',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-2',
@@ -527,7 +527,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2025,
     position: 5,
     level: 'National',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-3',
@@ -535,7 +535,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 12,
     level: 'National',
-    type: 'Individual',
+    type: 'Solo',
   },
   {
     id: 'c-4',
@@ -543,7 +543,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2025,
     position: 18,
     level: 'National',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-5',
@@ -551,7 +551,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2025,
     position: 21,
     level: 'National',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
 
   // International (CTFtime)
@@ -561,7 +561,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 39,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-7',
@@ -569,7 +569,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 57,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-8',
@@ -577,7 +577,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 80,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-9',
@@ -585,7 +585,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 88,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-10',
@@ -593,7 +593,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 93,
     level: 'International',
-    type: 'Individual',
+    type: 'Solo',
   },
   {
     id: 'c-11',
@@ -601,7 +601,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 100,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-12',
@@ -609,7 +609,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 107,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-13',
@@ -617,7 +617,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 124,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-14',
@@ -625,7 +625,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 133,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-15',
@@ -633,7 +633,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 141,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-16',
@@ -641,7 +641,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 147,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-17',
@@ -649,7 +649,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 154,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-18',
@@ -657,7 +657,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 155,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-19',
@@ -665,7 +665,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 164,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-20',
@@ -673,7 +673,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 190,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-21',
@@ -681,7 +681,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 203,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-22',
@@ -689,7 +689,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 217,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-23',
@@ -697,7 +697,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 222,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-24',
@@ -705,7 +705,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 249,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
   {
     id: 'c-25',
@@ -713,7 +713,7 @@ export const ctfCompetitions: CtfCompetition[] = [
     year: 2026,
     position: 554,
     level: 'International',
-    type: 'Team (Dot Zero)',
+    type: 'Dot Zero',
   },
 ];
 

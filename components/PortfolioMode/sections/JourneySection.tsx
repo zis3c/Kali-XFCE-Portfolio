@@ -12,8 +12,8 @@ const JourneySection = (): JSX.Element => {
   const filteredCompetitions = ctfCompetitions.filter((c: CtfCompetition) => {
     if (filter === 'National') return c.level === 'National';
     if (filter === 'International') return c.level === 'International';
-    if (filter === 'Team') return c.type === 'Team (Dot Zero)';
-    if (filter === 'Solo') return c.type === 'Individual';
+    if (filter === 'Team') return c.type === 'Dot Zero';
+    if (filter === 'Solo') return c.type === 'Solo';
     return true;
   });
 
@@ -106,8 +106,7 @@ const JourneySection = (): JSX.Element => {
               <span>Team Dot Zero</span>
             </div>
             <div className="team-roster">
-              Radzi Zamri · Mohamad Idham bin Hussein · Ahmad Khairuddin bin
-              Mohamad Azmin
+              Radzi Zamri, Idham Hussein, Khairuddin Azmin
             </div>
           </div>
           <div className="team-stats">
