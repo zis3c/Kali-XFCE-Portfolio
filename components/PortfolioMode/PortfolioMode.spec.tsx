@@ -49,13 +49,37 @@ describe('PortfolioMode', () => {
     );
   });
 
-  it('returns to the boot chooser', () => {
+  it('returns to the boot chooser after confirmation', () => {
     const onBackToChooser = jest.fn();
     const wrap = mount(<PortfolioMode onBackToChooser={onBackToChooser} />);
 
     wrap.find(Styled.BackButton).simulate('click');
+    wrap.update();
+
+    expect(wrap.find('[role="dialog"]').hostNodes()).toHaveLength(1);
+
+    wrap
+      .find('button')
+      .filterWhere((node) => node.text().includes('Return to Boot Menu'))
+      .simulate('click');
 
     expect(onBackToChooser).toHaveBeenCalledTimes(1);
+  });
+
+  it('cancels the exit confirmation', () => {
+    const onBackToChooser = jest.fn();
+    const wrap = mount(<PortfolioMode onBackToChooser={onBackToChooser} />);
+
+    wrap.find(Styled.BackButton).simulate('click');
+    wrap.update();
+    wrap
+      .find('button')
+      .filterWhere((node) => node.text() === 'Cancel')
+      .simulate('click');
+    wrap.update();
+
+    expect(onBackToChooser).not.toHaveBeenCalled();
+    expect(wrap.find('[role="dialog"]').hostNodes()).toHaveLength(0);
   });
 
   it('opens and closes the command palette with the keyboard', () => {
