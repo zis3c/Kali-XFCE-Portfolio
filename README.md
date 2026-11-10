@@ -147,34 +147,9 @@ boot menu.
 
 ## Architecture
 
-The application is split into a Pages Router shell, a Redux state layer, and a
-simulated desktop UI.
-
-```text
-pages/
-  index.tsx              boot chooser, login, desktop, portfolio modes
-  api/contact            validated, rate-limited contact endpoint
-  api/health             MongoDB status and uptime
-
-components/
-  Desktop, SystemTray    desktop shell and panel
-  Apps/                  Terminal, FileManager, TextViewer, browser
-  PortfolioMode/         minimal portfolio experience
-  Widgets, Windows       desktop widgets and window manager
-
-store/                   Redux reducers and thunks
-backend/                 Mongoose models, controllers, DB helpers
-middleware/              rate limit, errors, request IDs, security headers
-utils/                   virtual filesystem, logger, retry, env validation
-hooks/                   reusable React hooks
-types/                   shared TypeScript types
-design-system/           theme tokens and global styles
-test/                    test helpers and mock store
-docs/                    testing and quality documentation
-e2e/                     Playwright smoke spec (manual run)
-.github/                 CI, CodeQL, Dependabot, issue templates
-public/                  images, icons, wallpapers, manifest
-```
+The Pages Router owns routing and API routes. Redux holds desktop state, the
+component folders render the simulated XFCE shell and Portfolio Mode, and the
+backend folder contains Mongoose models and the SendGrid controller.
 
 | Folder           | Responsibility                                 |
 | ---------------- | ---------------------------------------------- |
