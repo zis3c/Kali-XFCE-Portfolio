@@ -1,5 +1,5 @@
 {
-  "reviewBy": "2027-01-31",
-  "reason": "Deferred major upgrades: Next.js 16 and @sendgrid/mail 8",
-  "allow": ["next", "postcss", "@sendgrid/mail", "@sendgrid/client", "axios"]
+  "reviewBy": "2027-06-30",
+  "reason": "No current exceptions. Add packages only with a documented review date.",
+  "allow": []
 }

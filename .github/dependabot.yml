@@ -10,11 +10,6 @@ updates:
         dependency-type: development
       production-dependencies:
         dependency-type: production
-    ignore:
-      - dependency-name: next
-        update-types: ['version-update:semver-major']
-      - dependency-name: '@sendgrid/mail'
-        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directory: '/'
