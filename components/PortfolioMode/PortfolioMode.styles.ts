@@ -1605,10 +1605,10 @@ export const Footer = styled.footer`
   z-index: 2;
   border-top: 1px solid var(--border-strong);
   background: var(--panel);
-  padding: 44px 36px 32px;
+  padding: 24px 36px;
 
   @media (max-width: 900px) {
-    padding: 36px 20px 24px;
+    padding: 20px 20px;
   }
 `;
 
@@ -1717,8 +1717,8 @@ export const FooterBottom = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-subtle);
+  padding-top: 0;
+  border-top: none;
   font-size: 12.5px;
   color: var(--muted);
 `;

@@ -240,7 +240,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
         <ContactSection />
       </Styled.Main>
 
-      <PortfolioFooter jumpTo={jumpTo} />
+      <PortfolioFooter />
 
       <CommandPalette
         isOpen={isPaletteOpen}
