@@ -359,9 +359,10 @@ export const BackButton = styled.button`
 /* ------------------------------------------------------------------ */
 
 export const Main = styled.main`
-  max-width: 1060px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 24px 96px;
+  padding: 64px 32px 96px;
 
   @media (max-width: 900px) {
     padding: 44px 20px 72px;
@@ -383,6 +384,7 @@ export const StorySection = styled.section`
 export const SectionHeader = styled.div`
   text-align: left;
   margin-bottom: 28px;
+  width: 100%;
 `;
 
 export const SectionTitle = styled.h2`
@@ -400,8 +402,8 @@ export const SectionSubtitle = styled.p`
   margin: 0;
   font-size: 15px;
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 64ch;
+  line-height: 1.65;
+  width: 100%;
 `;
 
 /* ------------------------------------------------------------------ */
@@ -420,7 +422,7 @@ export const HeroSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
-  max-width: 780px;
+  width: 100%;
 `;
 
 export const HeroTitle = styled.h1`
@@ -442,9 +444,9 @@ export const HeroRoleSub = styled.p`
 export const HeroText = styled.p`
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: clamp(15px, 1.6vw, 16.5px);
+  font-size: clamp(15.5px, 1.6vw, 17px);
   line-height: 1.75;
-  max-width: 66ch;
+  width: 100%;
 `;
 
 export const SocialGrid = styled.div`
@@ -1023,7 +1025,7 @@ export const TimelineItem = styled.div`
     font-size: 14.5px;
     line-height: 1.7;
     color: var(--muted);
-    max-width: 66ch;
+    width: 100%;
   }
 
   @media (max-width: 760px) {
@@ -1214,7 +1216,8 @@ export const CommsBody = styled.div`
 `;
 
 export const CommsInfo = styled.div`
-  max-width: 58ch;
+  flex: 1;
+  min-width: 280px;
 
   h3 {
     margin: 0 0 8px 0;
