@@ -65,17 +65,18 @@ const JourneySection = (): JSX.Element => {
 
         <Styled.TimelineItem>
           <div className="time-period">
-            <span>2024 - 2026</span>
-            <span className="time-sub">Campus &amp; Open Source</span>
+            <span>2025 - 2026</span>
+            <span className="time-sub">STEM USAS</span>
           </div>
           <div className="time-content">
             <h3 className="time-title">
-              Building Web Platforms &amp; Student Tools
+              Head of Special Unit &amp; Digital Logistics
             </h3>
             <p className="time-desc">
-              Created and launched web apps and Telegram bots for university
-              students, including the STEM-USAS portal, Class Timetable builder,
-              Assignment Notifier, and JanjiCare clinic system.
+              Leading the digital systems team and managing digital logistics,
+              data architecture, cloud services, and student platforms including
+              the official STEM-USAS web portal, Class Timetable, and Assignment
+              Notifier bot.
             </p>
           </div>
         </Styled.TimelineItem>

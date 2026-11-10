@@ -36,10 +36,12 @@ const HeroSection = (): JSX.Element => (
       </Styled.HeroText>
 
       <Styled.HeroText>
-        Outside of building projects, I serve as Secretary and Reverse
-        Engineering Trainer for our university Capture The Flag (CTF) team, Dot
-        Zero, where I help run workshops and compete in cybersecurity
-        competitions.
+        Outside of building projects, I serve as Head of Special Unit &amp;
+        Digital Logistics for our university society, STEM USAS, leading digital
+        systems, web portals, and student bot automations. I also serve as
+        Secretary and Reverse Engineering Trainer for our university Capture The
+        Flag (CTF) team, Dot Zero, where I help run workshops and compete in
+        cybersecurity competitions.
       </Styled.HeroText>
 
       <Styled.SocialGrid>
