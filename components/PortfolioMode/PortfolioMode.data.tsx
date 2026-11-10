@@ -100,6 +100,8 @@ const featuredProjects: FeaturedProject[] = [
       'A cloud-based SSH honeypot that detects automated login attacks in real time, blocks malicious IPs within a second, and visualizes attack patterns on a live web dashboard.',
     tags: ['Security', 'Web', 'Research'],
     link: 'https://github.com/zis3c/CloudSentinel',
+    demoLink: 'https://dashboard-six-mu-20.vercel.app',
+    demoLabel: 'Live Dashboard',
   },
   {
     id: '02',
@@ -171,6 +173,9 @@ const featuredProjects: FeaturedProject[] = [
       'A lightweight VS Code extension that plays an audio alert and shows a banner notification whenever background AI coding tasks finish.',
     tags: ['Automation', 'Web'],
     link: 'https://github.com/zis3c/Codex-notifier-vscode',
+    demoLink:
+      'https://marketplace.visualstudio.com/items?itemName=zis3c.codex-notifier',
+    demoLabel: 'VS Code Marketplace',
   },
   {
     id: '06',
@@ -227,6 +232,8 @@ const featuredProjects: FeaturedProject[] = [
       'A Telegram bot for the STEM student society that verifies student memberships, generates digital ID cards, and syncs records with Google Sheets.',
     tags: ['Bot', 'Automation'],
     link: 'https://github.com/zis3c/STEM-Telebot',
+    demoLink: 'https://t.me/stemusasbot',
+    demoLabel: '@stemusasbot',
   },
   {
     id: '09',
@@ -263,6 +270,8 @@ const featuredProjects: FeaturedProject[] = [
       'An automated tracker that checks university course portals for new assignments and sends deadline reminders straight to Telegram.',
     tags: ['Automation', 'Bot'],
     link: 'https://github.com/zis3c/USAS-Assignment-Notifier',
+    demoLink: 'https://t.me/usas_duebot',
+    demoLabel: '@usas_duebot',
   },
   {
     id: '11',
@@ -298,6 +307,8 @@ const featuredProjects: FeaturedProject[] = [
       'A browser playground for testing prompts and API responses across OpenAI, Anthropic, Mistral, and OpenRouter without any complex setup.',
     tags: ['Web', 'Research'],
     link: 'https://github.com/zis3c/LLM-API-Lab',
+    demoLink: 'https://zis3c.github.io/LLM-API-Lab/',
+    demoLabel: 'Live Demo',
   },
   {
     id: '13',
@@ -332,6 +343,8 @@ const featuredProjects: FeaturedProject[] = [
       'A Telegram bot that generates and scans QR codes for links, Wi-Fi login details, contact cards, and map locations.',
     tags: ['Bot', 'Security', 'Automation'],
     link: 'https://github.com/zis3c/QRBot',
+    demoLink: 'https://t.me/PautQRBot',
+    demoLabel: '@PautQRBot',
   },
   {
     id: '15',
