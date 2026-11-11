@@ -19,17 +19,15 @@ const GlitchText: React.FC<GlitchTextProps> = ({ words }) => {
   useEffect(() => {
     if (!words || words.length === 0) return;
 
-    const currentWord = words[wordIndex % words.length] || '';
     const nextWord = words[(wordIndex + 1) % words.length] || '';
-    const maxLength = Math.max(currentWord.length, nextWord.length);
     let glitchInterval: number | undefined;
 
     const startTimer = window.setTimeout(() => {
       let revealProgress = 0;
 
       glitchInterval = window.setInterval(() => {
-        const rendered = Array.from({ length: maxLength }, (_, index) => {
-          if (index < revealProgress) {
+        const rendered = Array.from({ length: nextWord.length }, (_, index) => {
+          if (index < revealProgress || nextWord[index] === ' ') {
             return nextWord[index] || '';
           }
           return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];

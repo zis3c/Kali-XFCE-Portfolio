@@ -1,12 +1,13 @@
 import React from 'react';
 import { FcLinux } from 'react-icons/fc';
-import { FiCode, FiCpu, FiTerminal } from 'react-icons/fi';
+import { FiCpu, FiTerminal } from 'react-icons/fi';
 import {
   SiCplusplus,
   SiDigitalocean,
   SiDocker,
   SiDotnet,
   SiGithubactions,
+  SiGnu,
   SiGnubash,
   SiJavascript,
   SiKalilinux,
@@ -24,6 +25,13 @@ import {
   SiWireshark,
 } from 'react-icons/si';
 import { FaMicrochip, FaShieldAlt } from 'react-icons/fa';
+import {
+  BinaryNinjaIcon,
+  FridaIcon,
+  GhidraIcon,
+  IdaProIcon,
+  X64dbgIcon,
+} from '../ReversingIcons';
 import * as Styled from '../PortfolioMode.styles';
 
 const SkillsSection = (): JSX.Element => (
@@ -49,39 +57,39 @@ const SkillsSection = (): JSX.Element => (
           </span>
         </Styled.ArsenalRowMeta>
         <Styled.ArsenalBadgeList>
-          <Styled.ArsenalBadge iconColor="#EF4444">
+          <Styled.ArsenalBadge iconColor="#E2231A">
             <span className="badge-icon">
-              <SiKalilinux />
+              <GhidraIcon />
             </span>
             <span>Ghidra</span>
           </Styled.ArsenalBadge>
           <Styled.ArsenalBadge iconColor="#38BDF8">
             <span className="badge-icon">
-              <FiCode />
+              <IdaProIcon />
             </span>
             <span>IDA Pro</span>
           </Styled.ArsenalBadge>
-          <Styled.ArsenalBadge iconColor="#10B981">
+          <Styled.ArsenalBadge iconColor="#E03E2D">
             <span className="badge-icon">
-              <FiCpu />
+              <BinaryNinjaIcon />
             </span>
             <span>Binary Ninja</span>
           </Styled.ArsenalBadge>
-          <Styled.ArsenalBadge iconColor="#EF4444">
+          <Styled.ArsenalBadge iconColor="#4CB4E8">
             <span className="badge-icon">
-              <FiTerminal />
+              <X64dbgIcon />
             </span>
             <span>x64dbg</span>
           </Styled.ArsenalBadge>
-          <Styled.ArsenalBadge iconColor="#38BDF8">
+          <Styled.ArsenalBadge iconColor="#A855F7">
             <span className="badge-icon">
-              <FiTerminal />
+              <SiGnu />
             </span>
             <span>GDB</span>
           </Styled.ArsenalBadge>
           <Styled.ArsenalBadge iconColor="#F97316">
             <span className="badge-icon">
-              <SiPython />
+              <FridaIcon />
             </span>
             <span>Frida</span>
           </Styled.ArsenalBadge>

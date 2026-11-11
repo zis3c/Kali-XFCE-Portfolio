@@ -32,6 +32,7 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   const [repoStats, setRepoStats] = useState<Record<string, GithubRepoStat>>(
     {}
   );
+  const [asciiBurstCount, setAsciiBurstCount] = useState(0);
 
   const filteredProjects = featuredProjects.filter((project) => {
     if (projectFilter === 'All') return true;
@@ -41,6 +42,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   const jumpTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
+  const handleToggleTheme = useCallback(() => {
+    setSimpleTheme((prev) => (prev === 'terminal' ? 'paper' : 'terminal'));
+    setAsciiBurstCount((prev) => prev + 1);
   }, []);
 
   const paletteActions = useMemo(
@@ -59,13 +65,10 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
       },
       {
         label: 'Toggle Theme',
-        run: () =>
-          setSimpleTheme((prev) =>
-            prev === 'terminal' ? 'paper' : 'terminal'
-          ),
+        run: handleToggleTheme,
       },
     ],
-    [jumpTo]
+    [jumpTo, handleToggleTheme]
   );
 
   useEffect(() => {
@@ -225,13 +228,11 @@ const PortfolioMode = ({ onBackToChooser }: Props): JSX.Element => {
   return (
     <Styled.Wrapper themeMode={simpleTheme}>
       <Styled.PortfolioGlobalScrollbar themeMode={simpleTheme} />
-      <AsciiWaveBg themeMode={simpleTheme} />
+      <AsciiWaveBg themeMode={simpleTheme} scrambleTrigger={asciiBurstCount} />
 
       <PortfolioNav
         simpleTheme={simpleTheme}
-        onToggleTheme={() =>
-          setSimpleTheme((prev) => (prev === 'terminal' ? 'paper' : 'terminal'))
-        }
+        onToggleTheme={handleToggleTheme}
         onOpenPalette={() => setIsPaletteOpen(true)}
         onBackToChooser={() => setIsExitConfirmOpen(true)}
         jumpTo={jumpTo}

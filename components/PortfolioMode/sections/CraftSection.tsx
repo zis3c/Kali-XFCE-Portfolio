@@ -14,7 +14,7 @@ const CraftSection = (): JSX.Element => (
     </Styled.SectionHeader>
 
     <Styled.PillarGrid>
-      <Styled.PillarCard iconColor="#EF4444">
+      <Styled.PillarCard>
         <div className="pillar-icon">
           <FaShieldAlt />
         </div>
@@ -31,7 +31,7 @@ const CraftSection = (): JSX.Element => (
         </div>
       </Styled.PillarCard>
 
-      <Styled.PillarCard iconColor="#8B5CF6">
+      <Styled.PillarCard>
         <div className="pillar-icon">
           <FiTerminal />
         </div>
@@ -48,7 +48,7 @@ const CraftSection = (): JSX.Element => (
         </div>
       </Styled.PillarCard>
 
-      <Styled.PillarCard iconColor="#06B6D4">
+      <Styled.PillarCard>
         <div className="pillar-icon">
           <FaDesktop />
         </div>

@@ -68,7 +68,6 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
     sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 
   ::selection,
   *::selection {
@@ -473,11 +472,17 @@ export const HeroSection = styled.div`
 
 export const HeroTitle = styled.h1`
   margin: 0;
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: clamp(28px, 5vw, 52px);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -1.5px;
   color: var(--text);
+
+  @media (max-width: 640px) {
+    font-size: clamp(24px, 6.2vw, 30px);
+    letter-spacing: -0.9px;
+    line-height: 1.15;
+  }
 `;
 
 export const HeroRoleSub = styled.p`
@@ -759,9 +764,11 @@ export const FilterChip = styled.button<{ isActive: boolean }>`
 
   @media (max-width: 640px) {
     flex: 1 1 calc(33.333% - 6px);
-    padding: 8px 10px;
-    font-size: 12.5px;
+    min-height: 38px;
+    padding: 7px 8px;
+    font-size: 12px;
     text-align: center;
+    white-space: nowrap;
   }
 `;
 
@@ -789,6 +796,7 @@ export const ProjectCard = styled.article<{
   box-shadow: ${({ isFocused }) =>
     isFocused ? '0 8px 30px rgba(0, 0, 0, 0.45)' : 'var(--card-shadow)'};
   padding: 28px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -809,7 +817,8 @@ export const ProjectCard = styled.article<{
   }
 
   @media (max-width: 640px) {
-    padding: 22px 18px;
+    padding: 18px 16px;
+    gap: 14px;
   }
 `;
 
@@ -817,6 +826,11 @@ export const ProjectHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
+
+  @media (max-width: 640px) {
+    gap: 12px;
+  }
 `;
 
 export const ProjectTopBar = styled.div`
@@ -824,12 +838,20 @@ export const ProjectTopBar = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 `;
 
 export const ProjectIdentity = styled.div`
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
+  flex: 1;
+
+  @media (max-width: 640px) {
+    gap: 10px;
+    align-items: flex-start;
+  }
 `;
 
 export const ProjectAvatar = styled.div<{ iconColor?: string }>`
@@ -848,12 +870,20 @@ export const ProjectAvatar = styled.div<{ iconColor?: string }>`
       iconColor ? `${iconColor}33` : 'var(--border-strong)'};
   flex-shrink: 0;
   transition: transform 0.2s ease, border-color 0.2s ease;
+
+  @media (max-width: 640px) {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
 `;
 
 export const ProjectMetaInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  flex: 1;
 `;
 
 export const ProjectName = styled.h3`
@@ -861,7 +891,15 @@ export const ProjectName = styled.h3`
   color: var(--text);
   font-size: 18px;
   font-weight: 700;
+  line-height: 1.3;
   letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 640px) {
+    font-size: 16px;
+  }
 `;
 
 export const ProjectMetaRow = styled.div`
@@ -871,11 +909,25 @@ export const ProjectMetaRow = styled.div`
   gap: 10px;
   font-size: 13px;
   color: var(--muted);
+  min-width: 0;
 
   .repo-tag {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
+    line-height: 1.35;
+    min-width: 0;
+    max-width: 100%;
+
+    svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    gap: 6px 8px;
+    font-size: 12px;
   }
 `;
 
@@ -903,6 +955,10 @@ export const ProjectQuickGithub = styled.a`
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 export const ProjectSummary = styled.p`
@@ -910,12 +966,22 @@ export const ProjectSummary = styled.p`
   color: var(--muted);
   line-height: 1.7;
   font-size: 14.5px;
+  overflow-wrap: break-word;
+
+  @media (max-width: 640px) {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
 `;
 
 export const ProjectStackWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+
+  @media (max-width: 640px) {
+    gap: 6px;
+  }
 `;
 
 export const TechBadge = styled.span<{ iconColor?: string }>`
@@ -940,6 +1006,19 @@ export const TechBadge = styled.span<{ iconColor?: string }>`
   .tech-name {
     font-size: 12.5px;
   }
+
+  @media (max-width: 640px) {
+    padding: 4px 9px;
+    gap: 5px;
+
+    .tech-icon {
+      font-size: 13px;
+    }
+
+    .tech-name {
+      font-size: 11.5px;
+    }
+  }
 `;
 
 export const ProjectActionRow = styled.div`
@@ -950,6 +1029,10 @@ export const ProjectActionRow = styled.div`
   padding-top: 16px;
   border-top: 1px solid var(--border-subtle);
   flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    padding-top: 12px;
+  }
 `;
 
 export const ProjectButtonGroup = styled.div`
@@ -958,6 +1041,10 @@ export const ProjectButtonGroup = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
+
+  @media (max-width: 640px) {
+    gap: 8px;
+  }
 `;
 
 export const ProjectOpenLink = styled.a`
@@ -974,6 +1061,7 @@ export const ProjectOpenLink = styled.a`
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
   transition: background 0.15s ease;
 
   &:hover {
@@ -986,7 +1074,11 @@ export const ProjectOpenLink = styled.a`
   }
 
   @media (max-width: 640px) {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 38px;
+    padding: 7px 12px;
+    font-size: 12.5px;
   }
 `;
 
@@ -1057,6 +1149,7 @@ export const ProjectDemoLink = styled.a`
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
+  white-space: nowrap;
   transition: border-color 0.15s ease, background 0.15s ease;
 
   &:hover {
@@ -1070,7 +1163,11 @@ export const ProjectDemoLink = styled.a`
   }
 
   @media (max-width: 640px) {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 38px;
+    padding: 7px 12px;
+    font-size: 12.5px;
   }
 `;
 
@@ -1340,20 +1437,54 @@ export const CtfTabButton = styled.button<{ isActive: boolean }>`
   }
 `;
 
+export const CtfGridWrap = styled.div`
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+`;
+
 export const CtfGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  max-height: 380px;
-  overflow-y: auto;
-  padding-right: 4px;
+  padding: 14px;
 
-  &::-webkit-scrollbar {
-    width: 6px;
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(2, 1fr);
   }
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-hover);
-    border-radius: 4px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 8px;
+  }
+`;
+
+export const CtfGridFooter = styled.div`
+  padding: 10px 16px;
+  background: var(--well);
+  border-top: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--muted);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -1710,13 +1841,19 @@ export const GlitchGhost = styled.span`
 
   @media (max-width: 700px) {
     white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 2.3em;
   }
 `;
 
 export const GlitchLive = styled.span`
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   white-space: nowrap;
 
   &::after {
@@ -1744,8 +1881,7 @@ export const GlitchLive = styled.span`
 
   @media (max-width: 700px) {
     white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: break-word;
   }
 `;
 
@@ -1933,6 +2069,12 @@ export const PortfolioGlobalScrollbar = createGlobalStyle<{
       themeMode === 'terminal'
         ? 'rgba(255, 255, 255, 0.5)'
         : 'rgba(0, 0, 0, 0.5)'};
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
   }
 `;
 

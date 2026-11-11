@@ -103,7 +103,9 @@ const ProjectsSection = ({
                         {project.icon}
                       </Styled.ProjectAvatar>
                       <Styled.ProjectMetaInfo>
-                        <Styled.ProjectName>{project.name}</Styled.ProjectName>
+                        <Styled.ProjectName title={project.name}>
+                          {project.name}
+                        </Styled.ProjectName>
                         <Styled.ProjectMetaRow>
                           <span className="repo-tag">
                             {project.isPrivate ? <FaLock /> : <FaFolder />}{' '}

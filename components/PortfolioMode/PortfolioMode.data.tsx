@@ -17,6 +17,7 @@ import {
   FaQrcode,
   FaServer,
   FaShieldAlt,
+  FaTerminal,
   FaWifi,
 } from 'react-icons/fa';
 import {
@@ -28,8 +29,9 @@ import {
   SiDocker,
   SiDotnet,
   SiEclipsemosquitto,
+  SiEspressif,
   SiGnubash,
-  SiGoogle,
+  SiGooglesheets,
   SiHtml5,
   SiJavascript,
   SiKalilinux,
@@ -50,6 +52,7 @@ import {
   SiWebrtc,
   SiWireshark,
 } from 'react-icons/si';
+import { GoogleFormsIcon } from './ReversingIcons';
 
 type TechItem = {
   name: string;
@@ -121,7 +124,7 @@ const featuredProjects: FeaturedProject[] = [
   },
   {
     id: '03',
-    name: 'Clinic-Web-Appointment (JanjiCare)',
+    name: 'JanjiCare',
     year: '2026',
     icon: <FaHospital />,
     iconColor: '#0D9488',
@@ -148,8 +151,8 @@ const featuredProjects: FeaturedProject[] = [
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'AsyncIO', icon: <SiPython />, color: '#FFD43B' },
-      { name: 'Google Forms', icon: <SiGoogle />, color: '#4285F4' },
-      { name: 'CLI', icon: <SiGnubash />, color: '#4EAA25' },
+      { name: 'Google Forms', icon: <GoogleFormsIcon />, color: '#7248B9' },
+      { name: 'CLI', icon: <FaTerminal />, color: '#4EAA25' },
     ],
     summary:
       'A fast command-line tool built with asynchronous Python to test how Google Forms handle high-volume concurrent submissions.',
@@ -224,7 +227,7 @@ const featuredProjects: FeaturedProject[] = [
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Telegram Bot', icon: <SiTelegram />, color: '#26A5E4' },
-      { name: 'Google Sheets', icon: <SiGoogle />, color: '#34A853' },
+      { name: 'Google Sheets', icon: <SiGooglesheets />, color: '#34A853' },
     ],
     summary:
       'A Telegram bot for the STEM student society that verifies student memberships, generates digital ID cards, and syncs records with Google Sheets.',
@@ -318,7 +321,7 @@ const featuredProjects: FeaturedProject[] = [
     stack: [
       { name: 'C', icon: <SiC />, color: '#A8B9CC' },
       { name: 'Arduino', icon: <SiArduino />, color: '#00979D' },
-      { name: 'ESP32-S3', icon: <SiCplusplus />, color: '#00599C' },
+      { name: 'ESP32-S3', icon: <SiEspressif />, color: '#E7352C' },
     ],
     summary:
       'Base firmware, flashing scripts, and hardware test tools for the LilyGO T-Dongle-S3 microcontroller board.',
@@ -443,7 +446,7 @@ const featuredProjects: FeaturedProject[] = [
     stack: [
       { name: 'Python', icon: <SiPython />, color: '#3776AB' },
       { name: 'Linux', icon: <FcLinux />, color: 'inherit' },
-      { name: 'CLI', icon: <SiGnubash />, color: '#4EAA25' },
+      { name: 'CLI', icon: <FaTerminal />, color: '#4EAA25' },
     ],
     summary:
       'A security research tool that combines two valid file formats (such as JPEG and PDF) into a single file to test upload filters.',

@@ -8,7 +8,6 @@ import { GlobalStyles } from '../design-system/globalStyle';
 import '../design-system/index.css';
 import Head from 'next/head';
 import { useSystemDesign } from '../design-system/useSystemDesign';
-import CRTEffect from '../components/CRTEffect/CRTEffect';
 import { validateEnv } from '../utils/env';
 import { logger } from '../utils/logger';
 
@@ -41,7 +40,6 @@ const AppContent: FC<AppProps> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <GlobalStyles />
-      <CRTEffect />
       <Component {...pageProps} />
     </ThemeProvider>
   );

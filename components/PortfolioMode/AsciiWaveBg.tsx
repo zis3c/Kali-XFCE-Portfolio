@@ -1,11 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
   themeMode: 'terminal' | 'paper';
+  scrambleTrigger?: number;
 }
 
-const CanvasWrapper = styled.div<{ themeMode: 'terminal' | 'paper' }>`
+const CanvasWrapper = styled.div<{
+  themeMode: 'terminal' | 'paper';
+  $isSurging: boolean;
+}>`
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -13,8 +17,11 @@ const CanvasWrapper = styled.div<{ themeMode: 'terminal' | 'paper' }>`
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  opacity: ${({ themeMode }) => (themeMode === 'terminal' ? 0.32 : 0.38)};
-  transition: opacity 0.3s ease;
+  opacity: ${({ themeMode, $isSurging }) => {
+    if ($isSurging) return 0.48;
+    return themeMode === 'terminal' ? 0.32 : 0.38;
+  }};
+  transition: opacity 0.45s ease;
 `;
 
 const StyledCanvas = styled.canvas`
@@ -47,13 +54,40 @@ const ASCII_RAMP = [
   '@',
 ];
 
+const SCRAMBLE_CHARS = '0123456789ABCDEF#$%&@*+=-/<>[]{}';
+const SURGE_DURATION_MS = 1600;
+
 /**
  * Animated Interactive ASCII Wave Background.
  * Waves continuously undulate across the viewport and dynamically disperse / ripple
  * whenever the user moves their cursor across the screen.
  */
-const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
+const AsciiWaveBg = ({
+  themeMode,
+  scrambleTrigger = 0,
+}: Props): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const themeModeRef = useRef<'terminal' | 'paper'>(themeMode);
+  const scrambleStartTimeRef = useRef<number>(0);
+  const [isSurging, setIsSurging] = useState(false);
+
+  useEffect(() => {
+    themeModeRef.current = themeMode;
+  }, [themeMode]);
+
+  useEffect(() => {
+    if (scrambleTrigger <= 0) return;
+
+    scrambleStartTimeRef.current = Date.now();
+    setIsSurging(true);
+    const timerId = window.setTimeout(() => {
+      setIsSurging(false);
+    }, 1250);
+
+    return () => {
+      window.clearTimeout(timerId);
+    };
+  }, [scrambleTrigger]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -153,15 +187,32 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
 
       ctx.font = '8.5px "JetBrains Mono", Consolas, monospace';
       // Darker tone for paper (light) mode (#3f3f46) for clear, crisp contrast
-      ctx.fillStyle = themeMode === 'terminal' ? '#a1a1aa' : '#3f3f46';
+      ctx.fillStyle =
+        themeModeRef.current === 'terminal' ? '#a1a1aa' : '#3f3f46';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
+
+      let scrambleBurst = 0;
+      if (scrambleStartTimeRef.current > 0) {
+        const elapsed = Date.now() - scrambleStartTimeRef.current;
+        if (elapsed < SURGE_DURATION_MS) {
+          const progress = elapsed / SURGE_DURATION_MS;
+          scrambleBurst = Math.pow(1 - progress, 1.3);
+        } else {
+          scrambleStartTimeRef.current = 0;
+        }
+      }
 
       const W = window.innerWidth;
       const H = window.innerHeight;
       const cursorRadius = 80 + momentum * 260;
 
       for (let r = 0; r < rows; r++) {
+        const rowTearX =
+          scrambleBurst > 0.03 && Math.random() < scrambleBurst * 0.42
+            ? (Math.random() - 0.5) * scrambleBurst * 28
+            : 0;
+
         for (let c = 0; c < cols; c++) {
           const x = c * charWidth + charWidth / 2;
           const y = r * charHeight + charHeight / 2;
@@ -169,7 +220,7 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
           const wave1 =
             Math.sin(c * 0.14 + time * 1.1) * Math.cos(r * 0.14 + time * 0.9);
           const wave2 = Math.sin(c * 0.08 + r * 0.08 - time * 0.7) * 0.8;
-          let val = (wave1 + wave2) * 1.6;
+          let val = (wave1 + wave2) * (1.6 + scrambleBurst * 1.4);
 
           if (momentum > 0.01) {
             const dx = x - mouse.x;
@@ -215,10 +266,20 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
             0,
             Math.min(ASCII_RAMP.length - 1, charIndex)
           );
-          const char = ASCII_RAMP[clampedIdx];
+          let char = ASCII_RAMP[clampedIdx];
+
+          if (
+            (scrambleBurst > 0.03 && Math.random() < scrambleBurst * 0.68) ||
+            (momentum > 0.25 &&
+              clampedIdx > 12 &&
+              Math.random() < momentum * 0.15)
+          ) {
+            char =
+              SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+          }
 
           if (char) {
-            ctx.fillText(char, x, y);
+            ctx.fillText(char, x + rowTearX, y);
           }
         }
       }
@@ -234,10 +295,14 @@ const AsciiWaveBg = ({ themeMode }: Props): JSX.Element => {
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
     };
-  }, [themeMode]);
+  }, []);
 
   return (
-    <CanvasWrapper themeMode={themeMode} aria-hidden="true">
+    <CanvasWrapper
+      themeMode={themeMode}
+      $isSurging={isSurging}
+      aria-hidden="true"
+    >
       <StyledCanvas ref={canvasRef} />
     </CanvasWrapper>
   );

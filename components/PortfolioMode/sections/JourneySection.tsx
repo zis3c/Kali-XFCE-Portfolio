@@ -168,28 +168,43 @@ const JourneySection = (): JSX.Element => {
           </a>
         </Styled.CtfTabsRow>
 
-        <Styled.CtfGrid>
-          {filteredCompetitions.map((comp) => {
-            const isTopTen = comp.position <= 10;
-            return (
-              <Styled.CtfCard key={comp.id} isTopTen={isTopTen}>
-                <div className="ctf-left">
-                  <div className="ctf-info">
-                    <span className="ctf-name" title={comp.name}>
-                      {comp.name}
-                    </span>
-                    <span className="ctf-meta">
-                      {comp.year} · {comp.level} · {comp.type}
-                    </span>
+        <Styled.CtfGridWrap>
+          <Styled.CtfGrid>
+            {filteredCompetitions.map((comp) => {
+              const isTopTen = comp.position <= 10;
+              return (
+                <Styled.CtfCard key={comp.id} isTopTen={isTopTen}>
+                  <div className="ctf-left">
+                    <div className="ctf-info">
+                      <span className="ctf-name" title={comp.name}>
+                        {comp.name}
+                      </span>
+                      <span className="ctf-meta">
+                        {comp.year} · {comp.level} · {comp.type}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="ctf-rank" title={`Ranked #${comp.position}`}>
-                  #{comp.position}
-                </div>
-              </Styled.CtfCard>
-            );
-          })}
-        </Styled.CtfGrid>
+                  <div className="ctf-rank" title={`Ranked #${comp.position}`}>
+                    #{comp.position}
+                  </div>
+                </Styled.CtfCard>
+              );
+            })}
+          </Styled.CtfGrid>
+          <Styled.CtfGridFooter>
+            <span>
+              Showing {filteredCompetitions.length} of {ctfCompetitions.length}{' '}
+              competitions
+            </span>
+            <a
+              href="https://ctftime.org/team/421634"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dot Zero on CTFtime <FaExternalLinkAlt size={10} />
+            </a>
+          </Styled.CtfGridFooter>
+        </Styled.CtfGridWrap>
       </Styled.CtfShowcaseWrap>
 
       <Styled.RecognitionGrid>
