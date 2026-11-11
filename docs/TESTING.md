@@ -37,13 +37,13 @@ fails CI, while small refactors do not.
 | Area       | Suites | Focus                                                                         |
 | ---------- | ------ | ----------------------------------------------------------------------------- |
 | Components | 58     | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
-| Redux      | 10     | reducers and action creators (UI, windows, todos)                             |
+| Redux      | 8      | reducers and action creators (UI, windows)                                    |
 | Utilities  | 5      | filesystem, logging, env, notifications                                       |
 | Hooks      | 3      | hover, mouse coordinates, reduced motion                                      |
 | Pages      | 4      | home flow, error page, health                                                 |
 | Design     | 1      | global styles                                                                 |
 
-The current suite is 81 files and 446 tests.
+The current suite is 79 files and 438 tests.
 
 Run a single suite with `npx jest <path>`.
 
