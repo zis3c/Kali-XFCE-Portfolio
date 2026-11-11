@@ -3,7 +3,7 @@ import * as Styled from './AppContextMenu.styles';
 import ContextMenuItem from '../ContextMenuItem/ContextMenuItem';
 import { useAppContextMenuConfig } from './AppContextMenu.config';
 
-export interface Props {
+interface Props {
   appName: string;
   willOpenWindowWith: ReactNode | null;
   iconSrc: string;

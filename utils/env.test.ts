@@ -1,10 +1,6 @@
 import { validateEnv } from './env';
 
-const OPTIONAL_VARS = [
-  'NEWS_API_KEY',
-  'NEWS_URL_QUERY',
-  'NEXT_PUBLIC_DEMO_PASSWORD',
-];
+const OPTIONAL_VARS = ['NEXT_PUBLIC_DEMO_PASSWORD'];
 
 describe('validateEnv', () => {
   const originalEnv = process.env;

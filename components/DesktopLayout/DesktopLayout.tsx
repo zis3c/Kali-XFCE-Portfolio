@@ -6,7 +6,7 @@ import OpenedWindows from '../OpenedWindows/OpenedWindows';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import NotificationDaemon from '../NotificationDaemon/NotificationDaemon';
 
-export interface Props {
+interface Props {
   title: string;
   entranceAnimationDelay: number;
   children?: ReactNode;

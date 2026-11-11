@@ -44,4 +44,3 @@ export const UL = styled.ul`
   margin: 0;
   padding: 0;
 `;
-export const LI = styled.li``;

@@ -18,7 +18,7 @@ Do not open a public issue for a vulnerability. Reports are reviewed on a best-e
 
 In scope:
 
-- the Next.js application, API routes, middleware, and build configuration in this repository
+- the Next.js application, API routes, and build configuration in this repository
 - dependency vulnerabilities that affect the production bundle
 
 Out of scope:

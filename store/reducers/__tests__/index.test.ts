@@ -8,7 +8,6 @@ describe('root reducer', () => {
 
     expect(state.ui.theme).toBe('dark');
     expect(state.windows.activeWorkspace).toBe(1);
-    expect(state.todos.todos).toEqual([]);
   });
 
   it('merges the hydrated server state', () => {

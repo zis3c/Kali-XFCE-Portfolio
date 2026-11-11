@@ -8,13 +8,9 @@ import { uiReducer } from '../uiReducer';
 const initialState: UIstate = {
   theme: 'dark',
   screenBrightness: '100',
-  isWidgetOpen: false,
   isAppCenterOpen: false,
-  areSettingsOpen: false,
-  isSearchOpen: false,
   isInNightLightMode: false,
   shouldIntroBeShown: true,
-  isCalendarOpen: false,
   isContextMenuOpen: false,
   contextMenuCoords: { x: 0, y: 0 },
   sortDesktopIconsBy: 'size',
@@ -66,33 +62,8 @@ describe('Brightness', () => {
   });
 });
 
-describe('correctly controls widgets sliding modal', () => {
-  test('should open widget modal and close all other modals on OPEN_WIDGETS_MODAL', () => {
-    const newState = uiReducer(initialState, {
-      type: UIactionTypes.OPEN_WIDGETS_MODAL,
-    });
-    expect(newState).toStrictEqual({
-      ...initialState,
-      isWidgetOpen: true,
-      isAppCenterOpen: false,
-      areSettingsOpen: false,
-      isSearchOpen: false,
-    });
-  });
-
-  test('close widget modal on CLOSE_WIDGETS_MODAL', () => {
-    const newState = uiReducer(initialState, {
-      type: UIactionTypes.CLOSE_WIDGETS_MODAL,
-    });
-    expect(newState).toStrictEqual({
-      ...initialState,
-      isWidgetOpen: false,
-    });
-  });
-});
-
 describe('correctly controls APP_CENTER sliding modal', () => {
-  test('should open APP_CENTER modal and close all other modals on OPEN_APP_CENTER_MODAL', () => {
+  test('should open APP_CENTER modal on OPEN_APP_CENTER_MODAL', () => {
     const newState = uiReducer(initialState, {
       type: UIactionTypes.OPEN_APP_CENTER_MODAL,
     });
@@ -104,33 +75,11 @@ describe('correctly controls APP_CENTER sliding modal', () => {
 
   test('close APP_CENTER modal on CLOSE_APP_CENTER_MODAL', () => {
     const newState = uiReducer(initialState, {
-      type: UIactionTypes.CLOSE_WIDGETS_MODAL,
+      type: UIactionTypes.CLOSE_APP_CENTER_MODAL,
     });
     expect(newState).toStrictEqual({
       ...initialState,
       isAppCenterOpen: false,
-    });
-  });
-});
-
-describe('correctly controls APP_CENTER sliding modal', () => {
-  test('should open SETTINGS modal and close all other modals on OPEN_SEARCH_MODAL', () => {
-    const newState = uiReducer(initialState, {
-      type: UIactionTypes.OPEN_SETTINGS_MODAL,
-    });
-    expect(newState).toStrictEqual({
-      ...initialState,
-      areSettingsOpen: true,
-    });
-  });
-
-  test('close APP_CENTER modal on CLOSE_SETTINGS_MODAL', () => {
-    const newState = uiReducer(initialState, {
-      type: UIactionTypes.CLOSE_WIDGETS_MODAL,
-    });
-    expect(newState).toStrictEqual({
-      ...initialState,
-      areSettingsOpen: false,
     });
   });
 });

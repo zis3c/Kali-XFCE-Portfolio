@@ -1,9 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const blink = keyframes`
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-`;
+import styled from 'styled-components';
 
 export const TerminalWrapper = styled.div`
   display: flex;
@@ -171,14 +166,6 @@ export const Input = styled.input<{ isMasked?: boolean }>`
     text-shadow: none;
   `
       : ''}
-`;
-
-export const Cursor = styled.span`
-  width: 7px;
-  height: 14px;
-  margin-left: 1px;
-  background: var(--terminal-cursor, #55cc55);
-  animation: ${blink} 1s steps(1, end) infinite;
 `;
 
 export const StatusBar = styled.div`

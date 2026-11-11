@@ -18,7 +18,7 @@ const BOOT_SEQUENCE = [
   'Starting display manager...',
 ];
 
-export interface Props {
+interface Props {
   isOnScreen: boolean;
   loadingDuration: number;
   onBootComplete: () => void;

@@ -24,30 +24,6 @@ export const changeTheme = (): ((
 };
 /**
  *@UI async action creator, will dispatch action to open/close sliding modal
- *@function toggleWidgetsModal
- *@returns {function} - Redux thunk function
- */
-export const toggleWidgetsModal = () => {
-  return async (
-    dispatch: Dispatch<UIaction>,
-    getState: () => State
-  ): Promise<void> => {
-    const { isWidgetOpen } = getState().ui;
-
-    if (isWidgetOpen === false) {
-      dispatch({ type: UIactionTypes.OPEN_WIDGETS_MODAL });
-    } else {
-      dispatch({ type: UIactionTypes.CLOSE_WIDGETS_MODAL });
-    }
-  };
-};
-
-export const closeWidgetsModal = (): UIaction => ({
-  type: UIactionTypes.CLOSE_WIDGETS_MODAL,
-});
-
-/**
- *@UI async action creator, will dispatch action to open/close sliding modal
  *@function toggleAppCenterModal
  *@returns {function} - Redux thunk function
  */
@@ -67,81 +43,6 @@ export const toggleAppCenterModal = () => {
 };
 export const closeAppCenterModal = (): UIaction => ({
   type: UIactionTypes.CLOSE_APP_CENTER_MODAL,
-});
-
-/**
- *@UI async action creator, will dispatch action to open/close sliding modal
- *@function toggleSettingsModal
- *@returns {function} - Redux thunk function
- */
-export const toggleSettingsModal = () => {
-  return async (
-    dispatch: Dispatch<UIaction>,
-    getState: () => State
-  ): Promise<void> => {
-    const { areSettingsOpen } = getState().ui;
-
-    if (areSettingsOpen === false) {
-      dispatch({ type: UIactionTypes.OPEN_SETTINGS_MODAL });
-    } else {
-      dispatch({ type: UIactionTypes.CLOSE_SETTINGS_MODAL });
-    }
-  };
-};
-
-export const closeSettingsModal = (): UIaction => ({
-  type: UIactionTypes.CLOSE_SETTINGS_MODAL,
-});
-
-/**
- *@UI async action creator, will dispatch action to open/close sliding modal
- *@function toggleSearchModal
- *@returns {function} - Redux thunk function
- */
-export const toggleSearchModal = () => {
-  return async (
-    dispatch: Dispatch<UIaction>,
-    getState: () => State
-  ): Promise<void> => {
-    const { isSearchOpen } = getState().ui;
-
-    if (isSearchOpen === false) {
-      dispatch({ type: UIactionTypes.OPEN_SEARCH_MODAL });
-    } else {
-      dispatch({ type: UIactionTypes.CLOSE_SEARCH_MODAL });
-    }
-  };
-};
-
-export const closeSearchModal = (): UIaction => ({
-  type: UIactionTypes.CLOSE_SEARCH_MODAL,
-});
-
-/**
- *@UI async action creator, will dispatch action to open/close calendar modal
- *@function toggleCalendarModal
- *@returns {function} - Redux thunk function
- */
-export const toggleCalendarModal = () => {
-  return async (
-    dispatch: Dispatch<UIaction>,
-    getState: () => State
-  ): Promise<void> => {
-    const { isCalendarOpen } = getState().ui;
-
-    if (isCalendarOpen === false) {
-      dispatch({ type: UIactionTypes.OPEN_CALENDAR_MODAL });
-    } else {
-      dispatch({ type: UIactionTypes.CLOSE_CALENDAR_MODAL });
-    }
-  };
-};
-
-export const openCalendarModal = (): UIaction => ({
-  type: UIactionTypes.OPEN_CALENDAR_MODAL,
-});
-export const closeCalendarModal = (): UIaction => ({
-  type: UIactionTypes.CLOSE_CALENDAR_MODAL,
 });
 
 /**

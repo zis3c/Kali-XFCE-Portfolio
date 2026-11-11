@@ -1,8 +1,4 @@
-const OPTIONAL_VARS = [
-  'NEWS_API_KEY',
-  'NEWS_URL_QUERY',
-  'NEXT_PUBLIC_DEMO_PASSWORD',
-] as const;
+const OPTIONAL_VARS = ['NEXT_PUBLIC_DEMO_PASSWORD'] as const;
 
 interface EnvValidationResult {
   valid: boolean;

@@ -16,9 +16,6 @@ declare module 'redux' {
   }
 }
 
-// store for tests
-export const store = createStore(reducer);
-
 const makeStore: MakeStore<RootState> = () =>
   createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 

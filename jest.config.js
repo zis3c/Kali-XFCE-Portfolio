@@ -3,9 +3,7 @@ module.exports = {
   collectCoverageFrom: [
     'components/**/*.{ts,tsx}',
     'design-system/**/*.{ts,tsx}',
-    'frontend-rest-client/**/*.{ts,tsx}',
     'hooks/**/*.{ts,tsx}',
-    'middleware/**/*.{ts,tsx}',
     'pages/**/*.{ts,tsx}',
     'store/**/*.{ts,tsx}',
     'utils/**/*.{ts,tsx}',

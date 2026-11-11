@@ -4,11 +4,7 @@ import { UIactionTypes, UIstate } from '../../../types/redux/ui-reducer-types';
 const defaultState: UIstate = {
   theme: 'dark',
   screenBrightness: '100',
-  isWidgetOpen: false,
   isAppCenterOpen: false,
-  areSettingsOpen: false,
-  isSearchOpen: false,
-  isCalendarOpen: false,
   isInNightLightMode: false,
   shouldIntroBeShown: true,
   isContextMenuOpen: false,
@@ -36,25 +32,16 @@ describe('uiReducer', () => {
     expect(state.theme).toBe('dark');
   });
 
-  it('opens and closes widgets modal', () => {
+  it('opens and closes the app center modal', () => {
     const opened = uiReducer(defaultState, {
-      type: UIactionTypes.OPEN_WIDGETS_MODAL,
+      type: UIactionTypes.OPEN_APP_CENTER_MODAL,
     });
-    expect(opened.isWidgetOpen).toBe(true);
+    expect(opened.isAppCenterOpen).toBe(true);
 
     const closed = uiReducer(opened, {
-      type: UIactionTypes.CLOSE_WIDGETS_MODAL,
+      type: UIactionTypes.CLOSE_APP_CENTER_MODAL,
     });
-    expect(closed.isWidgetOpen).toBe(false);
-  });
-
-  it('opens one modal closes others', () => {
-    const state = uiReducer(defaultState, {
-      type: UIactionTypes.OPEN_SETTINGS_MODAL,
-    });
-    expect(state.areSettingsOpen).toBe(true);
-    expect(state.isWidgetOpen).toBe(false);
-    expect(state.isAppCenterOpen).toBe(false);
+    expect(closed.isAppCenterOpen).toBe(false);
   });
 
   it('opens context menu at coordinates', () => {

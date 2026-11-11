@@ -83,11 +83,9 @@ Open `http://localhost:3000`.
 | Variable                    | Required | Purpose                            |
 | --------------------------- | -------- | ---------------------------------- |
 | `NEXT_PUBLIC_DEMO_PASSWORD` | No       | Login password, defaults to `1234` |
-| `NEWS_API_KEY`              | No       | Enables the news widget            |
-| `NEWS_URL_QUERY`            | No       | News API URL without the key       |
 
 All variables are optional. The app still boots without them, but the related
-widgets and features stay disabled.
+features stay disabled.
 
 ## Scripts
 
@@ -200,7 +198,7 @@ npm run audit
 npm run build
 ```
 
-The Jest suite covers API routes, middleware, Redux, utilities, hooks, and UI
+The Jest suite covers API routes, Redux, utilities, hooks, and UI
 components. Coverage thresholds are enforced at 92% statements, 94% lines, 91%
 functions, and 82% branches. See `docs/TESTING.md` for the full test inventory.
 
@@ -210,7 +208,7 @@ Playwright.
 
 ## Security
 
-- Security headers are configured in `next.config.js` and the API middleware.
+- Security headers are configured in `next.config.js`.
 - Contact requests are validated, rate-limited, and checked for allowed origins.
 - `npm run audit` fails on unapproved high or critical production findings.
 - CodeQL and Dependabot run in GitHub Actions.

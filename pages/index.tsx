@@ -1,10 +1,8 @@
 import type { NextPage } from 'next';
 import React, { useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import Desktop from '../components/Desktop/Desktop';
 import DesktopLayout from '../components/DesktopLayout/DesktopLayout';
 import { wrapper } from '../store';
-import { loadLatestNews } from '../store/action-creators/news-action-creators';
 import Loader from '../components/Loader/Loader';
 import LoginScreen from '../components/LoginScreen/LoginScreen';
 import { SESSION_ACTION_EVENT, SessionAction } from '../utils/session-actions';
@@ -28,16 +26,11 @@ type ExperienceMode = 'chooser' | 'kali' | 'portfolio';
 /* ------------------------------------------------------------------ */
 
 const Home: NextPage<ServerProps> = ({ title }) => {
-  const dispatch = useDispatch();
   const [mode, setMode] = useState<ExperienceMode>('chooser');
   const [phase, setPhase] = useState<AppPhase>('boot');
   const [bootCycle, setBootCycle] = useState(0);
   const [selectedBootIndex, setSelectedBootIndex] = useState(0);
   const [bootHint, setBootHint] = useState('Use up/down and Enter to choose.');
-
-  useEffect(() => {
-    void dispatch(loadLatestNews());
-  }, [dispatch]);
 
   const handleBootComplete = useCallback(() => {
     setPhase('login');
