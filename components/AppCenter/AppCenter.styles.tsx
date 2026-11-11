@@ -187,12 +187,3 @@ export const FooterButton = styled.button`
     background: linear-gradient(180deg, #475061 0%, #394150 100%);
   }
 `;
-
-/* Legacy exports for backward compat */
-export const AllApps = styled.div``;
-export const SectionHeader = styled.div``;
-export const Footer = styled.footer``;
-export const PowerOff = styled.button``;
-export const SearchBarForm = styled.form``;
-export const InitialScreen = styled.div``;
-export const AllAppsList = styled.div``;

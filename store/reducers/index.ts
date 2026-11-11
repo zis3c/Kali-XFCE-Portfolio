@@ -6,8 +6,6 @@ import { todosReducer } from './todosReducer';
 import { TodosState } from '../../types/redux/todos-reducer-types';
 import { windowsReducer } from './windowsReducer';
 import { WindowsState } from '../../types/redux/windows-reducer-types';
-import { contactReducer } from './contactReducer';
-import { ContactState } from '../../types/redux/contact-reducer-types';
 import { newsReducer } from './newsReducer';
 import { NewsReducerState } from '../../types/redux/news-reducer-types';
 
@@ -15,7 +13,6 @@ export const rootReducer = combineReducers({
   ui: uiReducer,
   todos: todosReducer,
   windows: windowsReducer,
-  contact: contactReducer,
   news: newsReducer,
 });
 
@@ -23,7 +20,6 @@ export type State = {
   ui: UIstate;
   todos: TodosState;
   windows: WindowsState;
-  contact: ContactState;
   news: NewsReducerState;
 };
 

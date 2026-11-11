@@ -1,20 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import type { SimpleTheme } from '../PortfolioMode.data';
-
-const spin = keyframes`
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const pulseBar = keyframes`
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(250%);
-  }
-`;
 
 /* ------------------------------------------------------------------ */
 /*  Next.js Minimalist Monochrome Palette (Black / Zinc / Crisp White) */
@@ -75,79 +60,6 @@ export const Wrapper = styled.section<{ themeMode: SimpleTheme }>`
         ? 'rgba(96, 165, 250, 0.35)'
         : 'rgba(59, 130, 246, 0.25)'};
     color: inherit;
-  }
-`;
-
-/* ------------------------------------------------------------------ */
-/*  Mock Boot Load Spinner Overlay                                     */
-/* ------------------------------------------------------------------ */
-
-export const BootLoaderOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  background: rgba(5, 5, 5, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-`;
-
-export const BootLoaderCard = styled.div`
-  width: min(420px, 100%);
-  background: #0a0a0a;
-  border: 1px solid #262626;
-  border-radius: 12px;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-
-  .spinner-ring {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 3px solid #262626;
-    border-top-color: #fafafa;
-    animation: ${spin} 0.7s linear infinite;
-  }
-
-  .spinner-title {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-    color: #fafafa;
-  }
-
-  .spinner-sub {
-    margin: 0;
-    font-size: 12.5px;
-    color: #a1a1aa;
-  }
-
-  .spinner-bar {
-    width: 100%;
-    height: 4px;
-    background: #1a1a1a;
-    border-radius: 999px;
-    overflow: hidden;
-    position: relative;
-    margin-top: 4px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 45%;
-      height: 100%;
-      background: #fafafa;
-      border-radius: 999px;
-      animation: ${pulseBar} 1s ease-in-out infinite;
-    }
   }
 `;
 

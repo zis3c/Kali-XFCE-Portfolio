@@ -28,14 +28,14 @@ describe('makeRequest', () => {
 
   it('forwards the request configuration', async () => {
     await makeRequest({
-      url: '/api/contact',
+      url: '/api/echo',
       method: 'POST',
       data: { name: 'Radzi' },
       headers: { 'Content-Type': 'application/json' },
     });
 
     expect(axiosMock).toHaveBeenCalledWith({
-      url: '/api/contact',
+      url: '/api/echo',
       method: 'POST',
       params: {},
       data: { name: 'Radzi' },

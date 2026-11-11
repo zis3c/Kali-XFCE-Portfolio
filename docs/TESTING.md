@@ -36,16 +36,15 @@ fails CI, while small refactors do not.
 
 | Area       | Suites | Focus                                                                         |
 | ---------- | ------ | ----------------------------------------------------------------------------- |
-| API routes | 3      | contact form validation, CORS, rate limiting, health endpoint                 |
-| Backend    | 3      | Mongo connection helpers, SendGrid controller, Contact model                  |
-| Middleware | 5      | error mapping, correlation IDs, security headers, rate limiting               |
-| Redux      | 12     | reducers and action creators (news, contact, UI, windows, todos)              |
-| Utilities  | 13     | filesystem, retry, logging, env, API features, notifications                  |
-| Hooks      | 9      | hover, outside click, mouse coordinates, reduced motion, observer             |
-| Components | 75+    | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
-| Pages      | 4      | home flow, error page, health, contact                                        |
+| Components | 76     | boot, login, desktop, taskbar, terminal, file manager, editor, portfolio mode |
+| Redux      | 12     | reducers and action creators (news, UI, windows, todos)                       |
+| Utilities  | 8      | filesystem, retry, logging, env, notifications                                |
+| Hooks      | 3      | hover, mouse coordinates, reduced motion                                      |
+| Pages      | 4      | home flow, error page, health                                                 |
+| REST       | 2      | request helper, news client                                                   |
+| Design     | 1      | global styles                                                                 |
 
-The current suite is 131 files and 655 tests.
+The current suite is 106 files and 551 tests.
 
 Run a single suite with `npx jest <path>`.
 
@@ -55,17 +54,14 @@ Run a single suite with `npx jest <path>`.
 vulnerabilities. `audit-allowlist.json` holds temporary exceptions with a
 reason and a review date; it is currently empty.
 
-The production tree is on Next.js 16.4.6 and `@sendgrid/mail` 8.1.6. Overrides
-pin Next's nested `postcss` to the patched 8.5.x line, `minimatch` under
-TypeScript ESLint to 11.0.1, and `@tootallnate/once` to 2.0.1.
+The production tree is on Next.js 16.4.6. Overrides pin Next's nested `postcss`
+to the patched 8.5.x line, `minimatch` under TypeScript ESLint to 11.0.1, and
+`@tootallnate/once` to 2.0.1.
 
 Storybook 6 was removed because it was not used by the app, CI, or deployment
 and pulled in the vulnerable webpack/tar/postcss toolchain.
 
-No high, critical, or moderate production advisories remain. The only
-remaining finding is low-severity `deepmerge` (through SendGrid), which has no
-patched version yet; the corresponding Dependabot alert is dismissed as
-"no patch available".
+No high, critical, or moderate production advisories remain.
 
 When the review date passes, the audit script fails until the allowlist is
 reviewed and renewed.

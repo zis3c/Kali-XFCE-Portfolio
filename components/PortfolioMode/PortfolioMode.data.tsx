@@ -732,10 +732,4 @@ export const ctfCompetitions: CtfCompetition[] = [
 ];
 
 export { featuredProjects, PROJECT_FILTERS };
-export type {
-  TechItem,
-  FeaturedProject,
-  GithubRepoStat,
-  ProjectFilter,
-  SimpleTheme,
-};
+export type { FeaturedProject, GithubRepoStat, ProjectFilter, SimpleTheme };

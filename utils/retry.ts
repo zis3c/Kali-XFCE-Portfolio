@@ -3,7 +3,7 @@
  * Retries an async operation with increasing delay between attempts.
  */
 
-export interface RetryOptions {
+interface RetryOptions {
   maxRetries?: number;
   baseDelayMs?: number;
   maxDelayMs?: number;

@@ -1,7 +1,6 @@
 module.exports = {
   clearMocks: true,
   collectCoverageFrom: [
-    'backend/**/*.{ts,tsx}',
     'components/**/*.{ts,tsx}',
     'design-system/**/*.{ts,tsx}',
     'frontend-rest-client/**/*.{ts,tsx}',

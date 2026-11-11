@@ -55,7 +55,3 @@ export const Tooltip = styled.div`
     color: rgba(175, 184, 194, 0.94);
   }
 `;
-
-/* Legacy exports kept for backward compatibility */
-export const Tray = styled.div``;
-export const Settings = styled.div``;

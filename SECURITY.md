@@ -25,4 +25,4 @@ Out of scope:
 
 - the simulated Kali desktop acting like a real operating system
 - content injection through the portfolio's own static data files
-- vulnerabilities in third-party services such as SendGrid, MongoDB Atlas, or Vercel
+- vulnerabilities in third-party services such as MongoDB Atlas or Vercel

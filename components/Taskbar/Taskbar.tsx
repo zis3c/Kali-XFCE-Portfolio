@@ -11,7 +11,7 @@ import {
 } from '../../utils/session-actions';
 import { notifyDesktop } from '../../utils/notifications';
 
-export interface TaskbarProps {
+interface TaskbarProps {
   activeWorkspace: number;
   onWorkspaceChange: (workspace: number) => void;
 }

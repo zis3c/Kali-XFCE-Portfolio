@@ -42,9 +42,8 @@ launcher, plus a minimal Portfolio Mode for quick reading.
 - Chrome-style in-app browser shell with history navigation
 - Command palette, keyboard shortcuts, and reduced-motion support
 - Portfolio sections for about, projects, experience, skills, and contact
-- Contact API with validation, rate limiting, and SendGrid delivery
 - Health endpoint with MongoDB status
-- Security headers, request correlation IDs, and structured logging
+- Structured logging
 
 ## Tech stack
 
@@ -54,9 +53,8 @@ launcher, plus a minimal Portfolio Mode for quick reading.
 | Language   | TypeScript 5.4 (strict)                              |
 | UI         | React 18, styled-components 5                        |
 | State      | Redux 4, Redux Thunk, next-redux-wrapper             |
-| API        | Next.js API routes with next-connect                 |
+| API        | Next.js API routes                                   |
 | Database   | MongoDB with Mongoose                                |
-| Email      | SendGrid                                             |
 | Testing    | Jest, Enzyme, React Test Utils                       |
 | Tooling    | ESLint, Prettier, Husky, lint-staged, Commitizen     |
 | Security   | npm audit gate, CodeQL, Dependabot, security headers |
@@ -66,8 +64,7 @@ launcher, plus a minimal Portfolio Mode for quick reading.
 
 - Node.js **20.9 or newer**
 - npm 10 or newer
-- MongoDB connection string for the contact and health endpoints
-- SendGrid API key for email delivery
+- MongoDB connection string for the health endpoint
 
 ## Getting started
 
@@ -83,18 +80,14 @@ Open `http://localhost:3000`.
 
 ### Environment variables
 
-| Variable                    | Required | Purpose                                       |
-| --------------------------- | -------- | --------------------------------------------- |
-| `DB_URI`                    | Yes      | MongoDB connection string                     |
-| `SENDGRID_API_KEY`          | Yes      | SendGrid API key                              |
-| `GOOGLE_EMAIL_ADDRESS`      | Yes      | Recipient and sender address for contact mail |
-| `NEXT_PUBLIC_DEMO_PASSWORD` | No       | Login password, defaults to `1234`            |
-| `NEWS_API_KEY`              | No       | Enables the news widget                       |
-| `NEWS_URL_QUERY`            | No       | News API URL without the key                  |
+| Variable                    | Required | Purpose                            |
+| --------------------------- | -------- | ---------------------------------- |
+| `NEXT_PUBLIC_DEMO_PASSWORD` | No       | Login password, defaults to `1234` |
+| `NEWS_API_KEY`              | No       | Enables the news widget            |
+| `NEWS_URL_QUERY`            | No       | News API URL without the key       |
 
-`DB_URI`, `SENDGRID_API_KEY`, and `GOOGLE_EMAIL_ADDRESS` are required at runtime.
-The app still boots without the optional variables, but the related widgets and
-features stay disabled.
+All variables are optional. The app still boots without them, but the related
+widgets and features stay disabled.
 
 ## Scripts
 
@@ -147,17 +140,14 @@ boot menu.
 
 ## Architecture
 
-The Pages Router owns routing and API routes. Redux holds desktop state, the
-component folders render the simulated XFCE shell and Portfolio Mode, and the
-backend folder contains Mongoose models and the SendGrid controller.
+The Pages Router owns routing and API routes. Redux holds desktop state and the
+component folders render the simulated XFCE shell and Portfolio Mode.
 
 | Folder           | Responsibility                                 |
 | ---------------- | ---------------------------------------------- |
 | `pages/`         | Routing, server-side data fetching, API routes |
 | `components/`    | Desktop, apps, widgets, Portfolio Mode         |
 | `store/`         | Redux reducers and action creators             |
-| `backend/`       | Database models and email controller           |
-| `middleware/`    | API security and error handling                |
 | `utils/`         | Pure helpers, filesystem simulation, logging   |
 | `hooks/`         | React hooks for UI behaviour                   |
 | `design-system/` | Theme tokens and global CSS                    |
@@ -171,7 +161,6 @@ backend folder contains Mongoose models and the SendGrid controller.
 
 ```text
 Kali-XFCE-Portfolio/
-├── backend/                 # Controllers, models, DB helpers
 ├── components/              # Desktop, apps, widgets, portfolio UI
 │   ├── Apps/                # Terminal, FileManager, TextViewer, browser
 │   ├── PortfolioMode/       # Portfolio sections and modals
@@ -180,7 +169,6 @@ Kali-XFCE-Portfolio/
 ├── docs/                    # Testing and quality documentation
 ├── e2e/                     # Playwright smoke spec (manual run)
 ├── hooks/                   # Custom React hooks
-├── middleware/              # API middleware
 ├── pages/                   # Next.js pages and API routes
 ├── public/                  # Images, icons, wallpapers, manifest
 ├── store/                   # Redux reducers and action creators

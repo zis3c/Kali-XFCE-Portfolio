@@ -319,64 +319,6 @@ export const PdfFileIcon: React.FC<IconProps> = ({
   </svg>
 );
 
-/* ===== Kali Dragon Silhouette (for wallpaper/branding) ===== */
-export const KaliDragonIcon: React.FC<IconProps> = ({
-  size = 48,
-  color = defaultColor,
-  className,
-}) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 48 48"
-    fill="none"
-    stroke={color}
-    strokeWidth="1"
-    className={className}
-    opacity="0.15"
-  >
-    <path
-      d="M24 4C14 4 8 12 8 20c0 6 3 10 6 13l2 3c1 2 3 4 8 4s7-2 8-4l2-3c3-3 6-7 6-13 0-8-6-16-16-16z"
-      fill={color}
-      stroke="none"
-    />
-    <path
-      d="M18 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"
-      fill="#0d0d17"
-      stroke="none"
-    />
-    <path
-      d="M26 18c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"
-      fill="#0d0d17"
-      stroke="none"
-    />
-  </svg>
-);
-
-/* ===== Workspace / Virtual Desktop Icon ===== */
-export const WorkspaceIcon: React.FC<IconProps> = ({
-  size = 24,
-  color = defaultColor,
-  className,
-}) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <rect x="2" y="2" width="9" height="9" rx="1" />
-    <rect x="13" y="2" width="9" height="9" rx="1" opacity="0.3" />
-    <rect x="2" y="13" width="9" height="9" rx="1" opacity="0.3" />
-    <rect x="13" y="13" width="9" height="9" rx="1" opacity="0.3" />
-  </svg>
-);
-
 /* ===== Power / Shutdown Icon ===== */
 export const PowerIcon: React.FC<IconProps> = ({
   size = 24,
@@ -587,26 +529,6 @@ export const ArrowLeftIcon: React.FC<IconProps> = ({
     className={className}
   >
     <polyline points="15 18 9 12 15 6" />
-  </svg>
-);
-
-export const ArrowRightIcon: React.FC<IconProps> = ({
-  size = 18,
-  color = defaultColor,
-  className,
-}) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <polyline points="9 18 15 12 9 6" />
   </svg>
 );
 

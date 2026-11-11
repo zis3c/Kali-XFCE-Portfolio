@@ -256,7 +256,7 @@ Basic IoT cloud infrastructure for KSC6493. Automated lab setup featuring Traefi
 - Mosquitto MQTT`;
 
 /** The full virtual filesystem tree */
-export const fsTree: FsNode = {
+const fsTree: FsNode = {
   name: '/',
   type: 'dir',
   children: [

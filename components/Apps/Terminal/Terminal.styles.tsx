@@ -110,11 +110,6 @@ export const Line = styled.div`
   flex-wrap: wrap;
 `;
 
-export const Prompt = styled.span`
-  color: rgba(180, 190, 200, 0.85);
-  white-space: pre;
-`;
-
 /* Colored prompt parts */
 export const PromptUser = styled.span`
   color: var(--terminal-prompt-user, #55cc55);

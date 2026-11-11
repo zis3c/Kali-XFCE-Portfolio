@@ -111,9 +111,3 @@ export const Content = styled.div`
   overflow-x: hidden;
   background: #1a1a2a;
 `;
-
-/* Legacy exports for backward compatibility */
-export const Navigation = styled.div``;
-export const WindowInfo = styled.div``;
-export const ButtonWrapper = styled.div``;
-export const NavButton = styled.div``;

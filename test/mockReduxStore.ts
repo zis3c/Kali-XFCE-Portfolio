@@ -27,11 +27,6 @@ export const mockReduxStore: LocalRootState = {
     activeWindowName: null,
     activeWorkspace: 1,
   },
-  contact: {
-    isEmailSending: false,
-    isEmailSent: false,
-    error: null,
-  },
 
   news: {
     newsArticles: [],
